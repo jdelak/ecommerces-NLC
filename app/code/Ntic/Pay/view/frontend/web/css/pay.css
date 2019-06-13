@@ -1,0 +1,113 @@
+.transparent
+{
+    opacity:.2
+}
+
+.ifError
+{
+    color:red
+}
+
+.fieldset > .field:not(.choice) > .label
+{
+    color:#000
+}
+
+.fieldset > .field.choice .label,.fieldset > .fields > .field.choice .label
+{
+    color:#000
+}
+
+.fieldset > .field > .label,.fieldset > .fields > .field > .label
+{
+    color:#000
+}
+
+input[type="text"],input[type="password"],input[type="url"],input[type="tel"],input[type="search"],input[type="number"],input[type="datetime"],input[type="email"]
+{
+    height:46px;
+    padding:10px 16px;
+    font-size:18px;
+    line-height:1.3333333;
+    border-radius:6px
+}
+
+.minicart-wrapper .action.showcart:before
+{
+    font-size:30px;
+    line-height:30px
+}
+
+.rdv
+{
+    font-size:30px;
+    padding:20px
+}
+
+.label
+{
+    color:#000!important
+}
+
+.label span
+{
+    color:#000!important
+}
+
+select
+{
+    height:42px
+}
+
+.checkout-payment-method .ccard .type .select
+{
+    width:250px;
+    float:left
+}
+
+.checkout-payment-method .ccard .cvv .input-text
+{
+    width:80px
+}
+
+.form-pay-header
+{
+    background-color:#293c7a;
+    padding:20px;
+    color:#fff
+}
+
+.form-pay-header h2
+{
+    font-size:24px;
+    display:inline;
+    margin-left:10px
+}
+
+.form-pay-header img
+{
+    height:40px;
+    vertical-align:bottom
+}
+
+.form-pay-content
+{
+    margin-top:-20px;
+    padding:10px;
+    background-color:#fff;
+    border:1px solid #aeaeae;
+    margin-bottom:10px
+}
+
+.form-pay-footer
+{
+    background-color:#f1f1f1;
+    padding:10px;
+    margin-top:10px
+}
+
+.form-pay-footer img
+{
+    margin-left:10px;
+    opacity:.5
+}

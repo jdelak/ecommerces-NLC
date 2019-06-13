@@ -1,0 +1,67 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <head>
+        <css src="Ntic_Calendar::css/bootstrap/bootstrap.css" />
+
+        <css src="Ntic_Calendar::css/jquery.widget.css" />
+        <css src="Ntic_Calendar::css/dhtmlxscheduler.css" />
+        <css src="Ntic_Calendar::css/dhtmlxscheduler-flat.css" />
+        <css src="Ntic_Calendar::css/dhtmlx.css" />
+        <css src="Ntic_Calendar::css/dhtmlxcombo.css" />
+        <css src="Ntic_Calendar::css/dhtmlxform.css" />
+
+        <css src="Ntic_Calendar::css/scheduler.perso.css" />
+
+        <script src="Ntic_Calendar::dhtmlx/sources/dhtmlxscheduler.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/dhtmlxcommon.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/dhtmlxcontainer.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/dhtmlxlayout.js"></script>
+
+
+        <script src="Ntic_Calendar::dhtmlx/sources/locale/locale_fr.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/ext/dhtmlxscheduler_editors.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/ext/dhtmlxscheduler_minical.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/ext/dhtmlxscheduler_recurring.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/locale/recurring/locale_recurring_fr.js"></script>
+
+        <script src="Ntic_Calendar::dhtmlx/codebase/api.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/ext/dhtmlxscheduler_limit.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/ext/dhtmlxscheduler_tooltip.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/sources/ext/dhtmlxscheduler_collision.js"></script>
+
+
+        <script src="Ntic_Calendar::dhtmlx/codebase/dhtmlx.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/codebase/dhtmlxform.js"></script>
+        <script src="Ntic_Calendar::dhtmlx/codebase/dhtmlxcombo.js"></script>
+    </head>
+    <body>
+        <referenceContainer name="page.top">
+            <block class="Magento\Framework\View\Element\Template" name="nav" template="Ntic_Calendar::nav.phtml" before="-"/>
+        </referenceContainer>
+        <!-- FILS D'ARIANE -->
+        <referenceBlock name="breadcrumbs">
+
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Accueil</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Accueil</item>
+                    <item name="label" xsi:type="string">Accueil</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Agenda</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Agenda</item>
+                    <item name="label" xsi:type="string">Agenda</item>
+                </argument>
+            </action>
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="calendarmodal" template="Ntic_Calendar::modal.phtml" />
+
+            <block class="Magento\Framework\View\Element\Template" name="calendar" template="Ntic_Calendar::index.phtml" />
+            <block class="Ntic\Calendar\Block\Contact\Edit" name="contact"  />
+        </referenceContainer>
+    </body>
+</page>

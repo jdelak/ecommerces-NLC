@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+/**
+ * @vendor      SolideWebservices
+ * @module      Flexslider
+ * @version     2.0.0
+ */
+-->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+	<container name="root" label="Root">
+		<block class="SolideWebservices\Flexslider\Block\Adminhtml\Group\Edit\Tab\Slides" name="flexslider_group_slides_edit_tab_slides" />
+	</container>
+</layout>

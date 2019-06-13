@@ -1,0 +1,119 @@
+
+<!-- MODAL -->
+<div class="modal fade bd-example-modal-lg" id="contact-modal" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Attribuer l'événement à un contact</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" id="search-contact" placeholder="Nom/Prénom/Code" />
+                            <div id="contact-box"></div>
+                        </div>
+                        <div class="col-md-8">
+                            <div id="my-select-contact" style="height:80px;">
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button id="contact-btn" title="Ajouter Nouveau Contact" data-toggle="modal" data-target="#modalSaveContact"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row hide">
+                        <div class="col-md-8">
+                            <div id="my-select-client" style="height:80px;"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <button id="client-btn" title="Séléctionner" ><i class="fa fa-check" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="attribuer_action">Attribuer</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+            <!--                FIN COUPER-->
+        </div>
+    </div>
+</div>
+<!-- POPUP Enregistrment  -->
+<div class="modal fade" id="modalSaveContact"  tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Ajouter un prospect</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="contact_form" class="form-group" method="POST" action="">
+                        <div class="col-md-6">
+                            <div class='col-md-4 form-group'><label for="contact_civ">Civ</label><input type='text' class='form-control' id="contact_civ" name='contact_civ' placeholder='Mr/Mme ...'></div>
+                            <div class='col-md-4 form-group'><label for="contact_nom">Nom</label><input type='text' class='form-control' id="contact_nom" name='contact_nom' required placeholder='Nom' id='nameContact'></div>
+                            <div class='col-md-4 form-group'><label for="contact_prenom">Prénom</label><input type='text' class='form-control' id="contact_prenom" name='contact_prenom' placeholder='Prénom'></div>
+                            <div class='col-md-12 form-group'>
+                                <label for="datetimepicker">Date de naiss</label><input type='date' id='datetimepicker' class='form-control' name='contact_birthday'>
+                            </div>
+                            <div class='col-md-12 form-group'><label for="contact_mail">Mail </label><input type='email' class='form-control' id="contact_mail" name='contact_mail' required placeholder='Email'></div>
+                            <div class='col-md-4 form-group'><label for="contact_tel1">Téléphone 1 </label><input type='text' class='form-control' id="contact_tel1"  name='contact_tel1' placeholder='Tel1'></div>
+                            <div class='col-md-4 form-group'><label for="contact_tel2">Téléphone 2</label><input type='text' class='form-control' id="contact_tel2"  name='contact_tel2' placeholder='Tel2'></div>
+                            <div class='col-md-4 form-group'><label for="contact_tel3">Téléphone 3</label><input type='text' class='form-control' id="contact_tel3"  name='contact_tel3' placeholder='Tel3'></div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class='col-md-12 form-group'><label for="contact_adr1">Adresse </label>
+                                <input type='text' class='form-control' id="contact_adr1" name='contact_adr1' placeholder='Adresse1'><br>
+                                <input type='text' class='form-control' id="contact_adr2" name='contact_adr2' placeholder='Adresse2'><br>
+                                <input type='text' class='form-control' id="contact_adr3" name='contact_adr3' placeholder='Adresse3'>
+                            </div>
+                            <div class='col-md-6 form-group'><label for="contact_cp">Code Postal</label><input type='number' pattern = "[0-9]{1,5}" class='form-control' id="contact_cp" name='contact_cp' placeholder='CP'></div>
+                            <div class='col-md-6 form-group'><label for="contact_ville">Ville</label><input type='text' class='form-control' id="contact_ville" name='contact_ville' placeholder='Ville'></div>
+                            <div class='col-md-6 form-group'><label for="contact_pays">Pays</label><input type='text' class='form-control' id="contact_pays" name='contact_pays' placeholder='Pays'></div>
+
+                        </div>
+                        <div class="row">
+                            <div class='col-md-12 form-group'>
+                                <button id="update_contact" value="update" name="update" class="col-md-12 btn btn-primary">Modifier les informations contact</button>
+                            </div>
+
+                            <div class='col-md-12 form-group'>
+                                <button id="save_contact" value="save" name="save" class="col-md-12 btn btn-primary">Enregistrer nouveau contact</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="attribuer_action">Enregistrer</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- POPUP CHANGEMENT CBT -->
+<div style="visibility: hidden;" id="changeCBT">
+    <div class="blockCBT">
+        <span class="title">
+            <h4>Affecter le rendez-vous a une autre CBT</h4>
+        </span>
+        <div class="body">
+            <input type="hidden" name="event_id" id="hidden_ev">
+            <div id="new_cbt" style="min-height:50px;" class="col-md-12"></div>
+            <br>
+            <button  id="changeCBT_save" lass="btn btn-primary"> Valider</button>
+            <button  id="changeCBT_close" class="btn btn-alert"> Annuler</button>
+        </div>
+    </div>
+</div>

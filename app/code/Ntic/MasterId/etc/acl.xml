@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Ntic_MasterId::MasterCode" sortOrder="10" title="MasterCode">
+					<resource id="Ntic_MasterId::MasterCode_save" sortOrder="10" title="Save MasterCode"/>
+					<resource id="Ntic_MasterId::MasterCode_delete" sortOrder="20" title="Delete MasterCode"/>
+					<resource id="Ntic_MasterId::MasterCode_update" sortOrder="30" title="Update MasterCode"/>
+					<resource id="Ntic_MasterId::MasterCode_view" sortOrder="40" title="View MasterCode"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

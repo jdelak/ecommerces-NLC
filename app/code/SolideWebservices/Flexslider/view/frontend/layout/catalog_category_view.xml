@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="content">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_content_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">content_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_content_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">content_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="left">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_left_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">left_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_left_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">left_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="right">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_right_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">right_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_right_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">right_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="footer">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_footer_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">footer_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_footer_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">footer_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

@@ -1,0 +1,21 @@
+{
+    "name": "ntic/module-zeus",
+    "description": "custom administration",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Ntic\\Zeus\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

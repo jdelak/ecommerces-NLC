@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route frontName="ntic_portfoliocustomer" id="ntic_portfoliocustomer">
+			<module before="Magento_Backend" name="Ntic_PortfolioCustomer"/>
+		</route>
+		<route frontName="ajaxyvane" id="ajaxyvane">
+			<module before="Magento_Backend" name="Ntic_PortfolioCustomer"/>
+		</route>
+	</router>
+</config>

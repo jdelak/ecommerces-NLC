@@ -1,0 +1,107 @@
+<!-- MODAL CHECK -->
+<div class="form-horizontal step_check modali" style="display:none">
+    <div class="col-md-10 col-md-offset-1 modal-payment modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Paiement Chèque</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-form">
+            <div class="form-group check-number-field">
+                <label class="col-sm-3 control-label" for="number-check">Number of check</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control number-check" name="check[number_check]" placeholder="Number of check">
+                    <span class="ifError"></span>
+                </div>
+            </div>
+            <div class="form-group check-owner-field">
+                <label class="col-sm-3 control-label" for="owner-check">Owner of check</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control owner-check" name="check[owner_check]" placeholder="Owner of check">
+                    <span class="ifError"></span>
+                </div>
+            </div>
+            <div class="form-group check-name-bank-field">
+                <label class="col-sm-3 control-label" for="name-bank">Name of your bank</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control name-bank" name="check[name_bank]" placeholder="Name of your bank">
+                    <span class="ifError"></span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="submit-payment text-right" id="payment-check">
+                <button type="button" class="btn btn-lg btn-default submit-check disabled"><?php echo __('Save'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['jquery'], function ($) {
+        var numberCheck         = $("input[name='check[number_check]']");
+        var ownerCheck            = $("input[name='check[owner_check]']");
+        var nameBank         = $("input[name='check[name_bank]']");
+
+        var checkNumberField    = $('.check-number-field');
+        var ownerCheckField       = $('.check-owner-field');
+        var nameBankField    = $('.check-name-bank-field');
+
+        var button              = $(".submit-check");
+
+        numberCheck.keyup(function(){
+            var reg = new RegExp("[0-9]{2}","g");
+
+            if(!reg.test(numberCheck.val())){
+                checkNumberField.removeClass('has-success');
+                checkNumberField.addClass('has-error');
+            } else {
+                checkNumberField.removeClass('has-error');
+                checkNumberField.addClass('has-success');
+            }
+
+            hasError()
+
+        });
+
+        ownerCheck.keyup(function(){
+            var reg = new RegExp("[A-Za-z0-9]{2}","g");
+
+            if(!reg.test(ownerCheck.val())){
+                ownerCheckField.removeClass('has-success');
+                ownerCheckField.addClass('has-error');
+            } else {
+                ownerCheckField.removeClass('has-error');
+                ownerCheckField.addClass('has-success');
+            }
+
+            hasError()
+
+        });
+
+        nameBank.keyup(function(){
+            var reg = new RegExp("[A-Za-z0-9]{2}","g");
+
+            if(!reg.test(nameBank.val())){
+                nameBankField.removeClass('has-success');
+                nameBankField.addClass('has-error');
+            } else {
+                nameBankField.removeClass('has-error');
+                nameBankField.addClass('has-success');
+            }
+
+            hasError()
+
+        });
+
+        // permet de désactiver le bouton de validation
+        function hasError(){
+            if($('.has-error').length || numberCheck.val()=='' || ownerCheck.val()==''|| nameBank.val()=='' ){
+                button.addClass('disabled');
+            } else {
+                button.removeClass('disabled');
+            }
+        }
+
+    });
+</script>

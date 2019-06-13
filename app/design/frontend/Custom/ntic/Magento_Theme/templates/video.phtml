@@ -1,0 +1,173 @@
+<?php
+function getPlaylistVideos($playlistId, $offset = 1, $maxResults = 50)
+{
+    return xmlYoutubeToArray(getYoutubeVideosFromPlaylist($playlistId, $offset, $maxResults));
+}
+function getPlaylistChannel($arrayStock = array()){
+    $playlists = xmlYoutubeToArrayGategorie(getYoutubePlaylistFromChannel('UCKtXUM8xS6AEDJVDM-M8_mg'));
+    krsort($playlists);
+    //dd($playlists);
+    foreach ($playlists as $key => $playlist) {
+        $arrayPure = array_reverse(explode(' | ',$playlist['name']));
+        $arrayNewAgencment = array('id'=>$playlist['id'],'name'=>$arrayPure[0],'thumb'=>$playlist['thumbnails']['high']['url'],'date'=>$playlist['date']);
+        foreach($arrayPure as $k => $v){
+            $arrayNewAgencment = array($v => $arrayNewAgencment);
+        }
+        $arrayStock = array_merge_recursive($arrayStock,$arrayNewAgencment );
+    }
+    return $arrayStock;
+}
+function getYoutubePlaylistFromChannel($channelId){
+    try {
+        return file_get_contents('https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId='. $channelId.'&maxResults=50&key=' . 'AIzaSyDgST2llROmepKH4Az7aEH3OlnBtBKF2Lc');
+    } catch (Exception $e) {
+        return null;
+    }
+}
+function xmlYoutubeToArray($json)
+{
+    if($json){
+        $videos = array();
+        $arrjson = json_decode($json, true);
+        $arrjson = array_reverse($arrjson['items']);
+        $cpt = 0;
+        //var_dump($arrjson);exit();
+        foreach ($arrjson as $item) {
+            $videos[$cpt]['name'] = $item['snippet']['title'];
+            $videos[$cpt]['code'] = $item['snippet']['resourceId']['videoId'];
+            $videos[$cpt]['date'] = strtotime($item['snippet']['publishedAt']);
+            $videos[$cpt]['dateUS'] = strtotime($item['snippet']['publishedAt']);
+            //$videos[$cpt]['check_view'] = getCheckViewUser(Sentry::getUser()->id,$item['snippet']['resourceId']['videoId']);
+            $videos[$cpt]['img'] = $item['snippet']['thumbnails']['high']['url'];
+            $cpt++;
+        }
+        return $videos;
+    }else
+        return NULL;
+}
+function xmlYoutubeToArrayGategorie($json){
+    $playlists = array();
+    $json = file_get_contents("http://ep.lexel-paris.com/video.json");
+    $arrjson = json_decode($json, true);
+    $arrjson = array_reverse($arrjson['items']);
+    $cpt = 0;
+
+    foreach ($arrjson as $item) {
+        $code_videos = xmlYoutubeToArray(getYoutubeVideosFromPlaylist($item['id'], 1, 50));
+        $playlists[$cpt]['name'] = $item['snippet']['title'];
+        $playlists[$cpt]['date'] = strtotime($item['snippet']['publishedAt']);
+        if(count($code_videos) > 0)
+            $code = $code_videos[0]["code"];
+        else
+            $code = "";
+        $playlists[$cpt]['thumbnails']['high']['url'] = $code;
+        $playlists[$cpt]['id'] = $item['id'];
+        $cpt++;
+    }
+    return $playlists;
+}
+function getYoutubeVideosFromPlaylist($playlistId, $offset = 1, $maxResults = 50){
+    try {
+        $content = @file_get_contents('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults='.$maxResults.'&playlistId=' . $playlistId . '&key=' . 'AIzaSyDgST2llROmepKH4Az7aEH3OlnBtBKF2Lc');
+        if($content === FALSE){
+            return null;
+        }else{
+            return $content;
+        }
+    } catch (Exception $e) {
+        return null;
+    }
+}
+$arrayFormation = getPlaylistChannel();
+$arrayLEXEL30 = getPlaylistVideos('PLAcsgdCOwh_-NnzWcJ9PQvu4zeq91Cj73');
+?>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalEcran" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Preview</h4>
+            </div>
+            <div class="modal-body text-center">
+                <div id="ecranSpe">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"  data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="myTabs">
+        <li role="presentation" class="active col-sm-4"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">LEXEL30</a></li>
+        <li role="presentation" class="col-sm-4"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">FORMATION</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <?php foreach($arrayLEXEL30 as $lexel30): ?>
+                <a href="#" class="col-md-6" data-toggle="modal" data-list='0' data-code="<?php echo $lexel30['code']; ?>" data-name="<?php echo $lexel30['name']; ?>"  data-img="<?php echo $lexel30['img']; ?>" data-target="#myModalEcran">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading toogle_panel text-center">
+                            <?php echo $lexel30['name']; ?>
+                        </div>
+                        <div class="panel-body nomargin">
+                            <img src="<?php echo $lexel30['img']; ?>" width="100%" />
+
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <?php foreach($arrayFormation['Lexel Paris Academy'] as $k=>$vignette): ?>
+                <div class="panel panel-primary">
+                    <div class="panel-heading toogle_panel text-center">
+                        <?php echo $k; ?>
+                    </div>
+                    <div class="panel-body nomargin">
+                        <?php foreach($vignette as $key=>$value): ?>
+                            <a href="#" data-toggle="modal"  data-list="<?php echo $value['id']; ?>" data-name="<?php echo $key; ?>" data-code="0" data-target="#myModalEcran">
+                                <div class="col-md-6">
+                                    <h3><?php echo $key; ?></h3>
+                                    <img src="https://i.ytimg.com/vi/<?php echo $value['thumb']; ?>/sddefault.jpg" width="100%" />
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['jquery', 'jquery.bootstrap'], function ($) {
+        $('#myTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+        $('#myModalEcran').on('show.bs.modal', function (e) {
+            var code        = $(e.relatedTarget).data('code');
+            var name        = $(e.relatedTarget).data('name');
+            var playlist    = $(e.relatedTarget).data('list');
+            $('#myModalLabel').text(name);
+            if(playlist.length){
+                $('#ecranSpe').html('<iframe id="ytplayer" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/'+code+'?list='+playlist+'&autoplay=1" frameborder="0"  webkitAllowFullScreen mozallowfullscreen allowFullScreen/></iframe>');
+            }else{
+                $('#ecranSpe').html('<iframe id="ytplayer" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/'+code+'?autoplay=1" frameborder="0"  webkitAllowFullScreen mozallowfullscreen allowFullScreen/></iframe>');
+            }
+        });
+        $('#myModalEcran').on('hidden.bs.modal', function (e) {
+            $('#ecranSpe').html('');
+        })
+
+    });
+
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Ntic\AccessPermission\Api\AccessPermissionRepositoryInterface" type="Ntic\AccessPermission\Model\AccessPermissionRepository"/>
+	<preference for="Ntic\AccessPermission\Api\Data\AccessPermissionInterface" type="Ntic\AccessPermission\Model\AccessPermission"/>
+	<preference for="Ntic\AccessPermission\Api\Data\AccessPermissionSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Ntic\AccessPermission\Model\ResourceModel\AccessPermission\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ntic_accesspermission</argument>
+			<argument name="resourceModel" xsi:type="string">Ntic\AccessPermission\Model\ResourceModel\AccessPermission\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="ntic_accesspermission_grid_data_source" xsi:type="string">Ntic\AccessPermission\Model\ResourceModel\AccessPermission\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="SolideWebservices_Flexslider::flexslider" title="Flexslider" module="SolideWebservices_Flexslider" sortOrder="50" parent="Magento_Backend::content" resource="SolideWebservices_Flexslider::flexslider" />
+		<add id="SolideWebservices_Flexslider::group" title="Manage Groups" module="SolideWebservices_Flexslider" sortOrder="51" parent="SolideWebservices_Flexslider::flexslider" action="flexslider/group" resource="SolideWebservices_Flexslider::group" />
+		<add id="SolideWebservices_Flexslider::slide" title="Manage Slides" module="SolideWebservices_Flexslider" sortOrder="52" parent="SolideWebservices_Flexslider::flexslider" action="flexslider/slide" resource="SolideWebservices_Flexslider::slide" />
+		<add id="SolideWebservices_Flexslider::settings" title="Flexslider Settings" module="SolideWebservices_Flexslider" sortOrder="53" parent="SolideWebservices_Flexslider::flexslider" action="adminhtml/system_config/edit/section/flexslider" resource="SolideWebservices_Flexslider::settings" />
+	</menu>
+</config>

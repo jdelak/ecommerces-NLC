@@ -1,0 +1,956 @@
+<?php
+
+//session_start();
+/**
+ * Configuration landing
+ */
+// Data Mail sended
+$mailCore                   = array();
+$mailCore['from']           = "vip@time-nutrition.com" ;
+$mailCore['from_name']      = "TIME NUTRITION";
+$mailCore['replyto']        = "vip@time-nutrition.com";
+$mailCore['replyto_name']   = "TIME NUTRITION";
+$mailCore['preheader']      = "Félicitation nous avons reçu votre inscription" ;
+$mailCore['subject']        = "" ;
+$mailCore['img_logo']       = "http://img.mailinblue.com/1003971/images/rnb/original/576128bc8bc34e232d8be66d.jpg?t=1470232355995";
+/**
+ * img lexel            http://img.mailinblue.com/1003971/images/rnb/original/575963508bc34eb8258b74f9.jpg
+ * img time nutrition   http://img.mailinblue.com/1003971/images/rnb/original/576128bc8bc34e232d8be66d.jpg?t=1470232355995
+ */
+$mailCore['message_html_from'] = "<p></p>" ;
+$mailCore['message_html'] = "" ;
+$mailCore['dear']           = "Bonjour";
+$mailCore['politesse']      = "A très bientôt !";
+$mailCore['signature']      = "L’équipe Lexel Paris";
+
+
+// Data formulaire html
+$largeur_input  = 'lg'; // large = 'lg' | normal = '' | small = 'sm' | xtra-small = 'xs'
+
+// RAJOUTER LES LIGNES QUE VOUS VOULEZ AVEC LE MEME MODELE OU DESACTIVER LES EN METTANT 'visible'=>0
+// LA GENERATION DES CHAMPS SERA AUTOMATIQUE
+// [ATTENTTION] L EMAIL EST OBLIGATOIRE
+$formulaire = array(
+
+    'civility'		=> ['type'=>'radio','required'=>0,'placeholder'=>'Civ','label'=>'Civ','value'=>['M','Mme'],'visible'=>0],
+    'last_name'		=> ['type'=>'text','required'=>1,'placeholder'=>'','label'=>'Votre nom*','visible'=>1, 'value'=>''],
+    'first_name'	=> ['type'=>'text','required'=>1,'placeholder'=>'','label'=>'Votre prénom*','visible'=>1, 'value'=>''],
+    'email'			=> ['type'=>'email2','required'=>1,'placeholder'=>'','label'=>'Votre adresse email*','visible'=>1, 'value'=>''],
+    'tel'			=> ['type'=>'text','required'=>0,'placeholder'=>'Téléphone*','label'=>'Téléphone','visible'=>0, 'value'=>''],
+    'tel2'			=> ['type'=>'text','required'=>0,'placeholder'=>'Téléphone','label'=>'Téléphone port','visible'=>0, 'value'=>''],
+    'tel3'			=> ['type'=>'text','required'=>0,'placeholder'=>'Téléphone','label'=>'Téléphone pro','visible'=>0, 'value'=>''],
+    'zip_code'		=> ['type'=>'text','required'=>0,'placeholder'=>'Code Postal*','label'=>'CP','visible'=>0, 'value'=>''],
+    'district'		=> ['type'=>'text','required'=>0,'placeholder'=>'Ville','label'=>'Ville','visible'=>0, 'value'=>''],
+    'country'		=> ['type'=>'text','required'=>0,'placeholder'=>'Pays','label'=>'Pays','visible'=>0, 'value'=>''],
+    'address1'		=> ['type'=>'text','required'=>0,'placeholder'=>'Addresse','label'=>'Adresse','visible'=>0, 'value'=>''],
+    'address2'		=> ['type'=>'text','required'=>0,'placeholder'=>'Addresse2','label'=>'Adresse2','visible'=>0, 'value'=>''],
+    'address3'		=> ['type'=>'text','required'=>0,'placeholder'=>'Addresse3','label'=>'Adresse3','visible'=>0, 'value'=>''],
+    'message'		=> ['type'=>'textarea','required'=>0,'placeholder'=>'Message','label'=>'Message','visible'=>0],
+    'email2'		=> ['type'=>'email','required'=>0,'placeholder'=>'Email de votre ami(e)*','label'=>'Email de votre ami(e)','visible'=>0, 'value'=>''],
+    'news'		    => ['type'=>'checkbox','required'=>0,'placeholder'=>'newsletter','label'=>['S\'inscrire à la Newsletter'],'value'=>['on'],'visible'=>1],
+    'gender'        => ['type'=>'radio2','required'=>0,'placeholder'=>'Gender','label'=>'Vous êtes','value'=>['Un homme','Une femme'],'visible'=>0],
+    'age'           => ['type'=>'radio2','required'=>0,'placeholder'=>'Age','label'=>'Vous avez?','value'=>['- de 20 ans','entre 20 ans et 40 ans', '+ de 40 ans'],'visible'=>1],
+   );
+
+
+// load Model
+require '/var/www/landing/_config/sender/landingModel.php';
+// load Controller
+require '/var/www/landing/_config/sender/landingController.php';
+// INIT
+$landingModel       = new \landingModel();
+$landingController  = new \landingController($landingModel);
+// ECOUTEUR POST
+$landingController->post($mailCore);
+?>
+
+<div class="row">
+    <div class="calculateur">
+        <div class="formulaire">
+            <form id="morphotype" name="morphotype" method="POST" novalidate action="<?php echo $this->getUrl('timescan/index/result'); ?>">
+
+                <div class="fenetre etape0" id="step0">
+
+                    <div class="form row no-margin form-horizontal">
+
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-9 text-center">
+                            <div class="col-md-12">
+                                <div class="calc-title">
+                                    <div class="sub-title-calc">
+                                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo TN.png"); ?>">
+                                    </div>
+                                    <div class="sub-title-calc text-center">
+                                        <h3>Analysez votre silhouette avec TIME Scan !</h3>
+                                        <small class="calc-small">Munissez-vous d'un mêtre ruban...</small>
+                                    </div>
+                                </div>
+                                <img class="img-responsive" style="margin:0 auto;" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/img_etape0.jpg"); ?>">
+                                <div class="col-md-12 text-center">
+
+                                    <input type="button" class="bouton-calc bouton step0" data-step="0" value="> C'est Parti">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="fenetre etape1 hide" id="step1">
+
+
+                    <div class="form row no-margin form-horizontal">
+
+                        <div class="col-md-3">
+                        </div>
+
+                        <div class="col-md-9 text-center">
+                            <div class="calc-title">
+                                <h2><?php echo __("Votre Silhouette"); ?></h2>
+                                <img class="img-responsive img-etape1" style="margin:0 auto;" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/header_etape1.png"); ?>" />
+                                <h3 style="margin-top:-20px;">Découvrez votre silhouette Time Nutrition</h3>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="genre"><?php echo __("Je suis :"); ?> </label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="radio">
+                                        <label for="femme">
+                                            <input class="radio" type="radio" name="genre" id="femme" value="F"/>
+                                            <?php echo __('Une femme'); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="homme">
+                                            <input class="radio" type="radio" name="genre" id="homme" value="H" />
+                                            <?php echo __('Un homme'); ?>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="hauteur_cm"><?php echo __('Taille') ?></label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <input class="hauteur_cm form-control" id="hauteur_cm" name="hauteur_cm" type="text" required />
+                                    <span id="hauteur-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="poids"><?php echo __('Poids') ?></label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <input class="required-entry requis form-control" name="poids" id="poids" type="text" required />
+                                    <span id="poids-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="poignet"><?php echo __('Largeur de poignet') ?></label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <input class="required-entry requis poignet form-control" id="poignet" name="poignet" type="text" required />
+                                    <span id="poignet-error"></span>
+                                    <span class="help-block"><?php echo __("Attention ! Renseigner la LARGEUR de poignet et non le tour complet."); ?></span>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="poitrine"><?php echo __('Tour de poitrine') ?></label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <input class="required-entry requis poitrine form-control" id="poitrine" name="poitrine" type="text" required />
+                                    <span id="poitrine-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="taille"><?php echo __('Tour de taille') ?></label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <input class="required-entry requis taille form-control" id="taille" name="taille" type="text" required />
+                                    <span id="taille-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-6 col-md-6 control-label" for="hanches"><?php echo __('Tour de hanches') ?></label>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <input class="required-entry requis hanches form-control" id="hanches" name="hanches" type="text" required />
+                                    <span id="hanches-error"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-4 col-md-6 control-label" for="cuisse"><?php echo __('Tour de cuisse') ?></label>
+                                <div class="col-xs-12 col-sm-8 col-md-6">
+                                    <input class="required-entry requis cuisses form-control" id="cuisse" name="cuisse" type="text" required />
+                                    <span id="cuisse-error"></span>
+                                </div>
+                            </div>
+
+                            <input type="button" class="bouton step1" data-step="0" value="Etape 2 >">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="fenetre etape2 hide" id="step2">
+
+
+                    <div class="form row no-margin form-horizontal">
+
+                        <div class="col-md-3">
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="calc-title text-center">
+                                <h2><?php echo __("Votre Profil"); ?></h2>
+                                <img class="img-responsive img-etape2" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/header_etape2.png"); ?>" />
+                            </div>
+
+
+                            <label><?php echo __('Votre situation'); ?></label>
+                            <div class="form-group">
+
+                                <div class="radio">
+                                    <label for="situation_enceinte">
+                                        <input type="radio" name="situation" id="situation_enceinte" value="enceinte" />
+                                        <?php echo __("Vous êtes enceinte ou en cours d'allaitement"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="situation_sport">
+                                        <input type="radio" name="situation" id="situation_sport" value="sport intensif" />
+                                        <?php echo __("Vous pratiquez un sport de façon intensive"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="situation_traitement">
+                                        <input type="radio" name="situation" id="situation_traitement" value="traitement ou anomalie" />
+                                        <?php echo __("Vous suivez un traitement médical ou avez des analyses biologiques anormales"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="situation_">
+                                        <input type="radio" name="situation" id="situation_ras" value="rien a signaler" />
+                                        <?php echo __("Rien à signaler"); ?>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <label><?php echo __("Votre niveau d'activité"); ?></label>
+                            <div class="form-group">
+
+                                <div class="radio">
+                                    <label for="activite_inactif">
+                                        <input type="radio" name="activite" value="inactif" id="activite_inactif" />
+                                        <?php echo __("Retraité"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="activite_sedentaire">
+                                        <input type="radio" name="activite" value="sedentaire" id="activite_sedentaire" />
+                                        <?php echo __("Métier sédentaire (bureau, assis), retraité actif"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="activite_actif">
+                                        <input type="radio" name="activite" value="actif" id="activite_actif" />
+                                        <?php echo __("Travail actif (en intérieur)"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="activite_manuel">
+                                        <input type="radio" name="activite" value="manuel" id="activite_manuel" />
+                                        <?php echo __("Travail physique intensif (en extérieur, debout), sportif régulier (plus de trois fois par semaine)"); ?>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <label><?php echo __("Votre profil alimentaire actuel"); ?></label>
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label for="tendance_rapide">
+                                        <input type="radio" name="tendance" value="rapide" id="tendance_rapide" />
+                                        <?php echo __("Alimentation en collectivité et restauration rapide"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="tendance_sucre">
+                                        <input type="radio" name="tendance" value="sucre" id="tendance_sucre" />
+                                        <?php echo __("Tendance sucre (confiseries, gâteaux, sodas…)"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="tendance_grignotage">
+                                        <input type="radio" name="tendance" value="grignotage" id="tendance_grignotage" />
+                                        <?php echo __("Tendance grignotage (aliments entre les repas)"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="tendance_vegetarienne">
+                                        <input type="radio" name="tendance" value="vegetarienne" id="tendance_vegetarienne" />
+                                        <?php echo __("Tendance végétarienne (céréales, légumes…)"); ?>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="tendance">
+                                        <input type="radio" name="tendance" value="sans" id="tendance" />
+                                        <?php echo __("Pas de tendance"); ?>
+                                    </label>
+                                </div>
+
+                            </div>
+                            <input style="float:left;" type="button" class="bouton step2 back" data-etape="0" value="< Etape 1">
+                            <input type="button" class="bouton step2" data-etape="0" value="Etape 3 >">
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="fenetre etape3 hide" id="step3">
+
+
+                    <div class="form row no-margin form-horizontal">
+
+                        <div class="col-md-4">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="calc-title">
+                                <h2><?php echo __("Votre Profil Emotionnel"); ?></h2>
+                                <img class="img-responsive img-etape2" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/header_etape3.png"); ?>" />
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label" for="radios"><?php echo __('Êtes-vous angoissé ?'); ?></label>
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label for="angoisse_jamais">
+                                            <input type="radio" name="angoisse" id="angoisse_jamais" value="jamais" />
+                                            <?php echo __("jamais"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="angoisse_parfois">
+                                            <input type="radio" name="angoisse" value="parfois" id="angoisse_parfois" />
+                                            <?php echo __("parfois"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="angoisse_souvent">
+                                            <input type="radio" name="angoisse" value="souvent" id="angoisse_souvent" />
+                                            <?php echo __("souvent"); ?>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label" for="radios"><?php echo __('Êtes-vous déprimé ?'); ?></label>
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label for="motivation_jamais">
+                                            <input type="radio" name="motivation" value="jamais" id="motivation_jamais" />
+                                            <?php echo __("jamais"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="motivation_parfois">
+                                            <input type="radio" name="motivation" value="parfois" id="motivation_parfois" />
+                                            <?php echo __("parfois"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="motivation_souvent">
+                                            <input type="radio" name="motivation" value="souvent" id="motivation_souvent" />
+                                            <?php echo __("souvent"); ?>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 control-label" for="radios"><?php echo __('Êtes-vous irritable, agressif ?'); ?></label>
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label for="irritabilite_jamais">
+                                            <input type="radio" name="irritabilite" value="jamais" id="irritabilite_jamais" />
+                                            <?php echo __("jamais"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="irritabilite_parfois">
+                                            <input type="radio" name="irritabilite" value="parfois" id="irritabilite_parfois" />
+                                            <?php echo __("parfois"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="irritabilite_souvent">
+                                            <input type="radio" name="irritabilite" value="souvent" id="irritabilite_souvent" />
+                                            <?php echo __("souvent"); ?>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 control-label" for="radios"><?php echo __('Vous vous réveillez la nuit (insomnies) ?'); ?></label>
+                                <div class="col-md-12">
+                                    <div class="radio">
+                                        <label for="insomnie_jamais">
+                                            <input type="radio" name="insomnie" value="jamais" id="insomnie_jamais" />
+                                            <?php echo __("jamais"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="insomnie_parfois">
+                                            <input type="radio" name="insomnie" value="parfois" id="insomnie_parfois" />
+                                            <?php echo __("parfois"); ?>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="insomnie_souvent">
+                                            <input type="radio" name="insomnie" value="souvent" id="insomnie_souvent" />
+                                            <?php echo __("souvent"); ?>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <input style="float:left;" type="button" class="bouton step3 back" data-etape="0" value="< Etape 2">
+                            <input type="button" class="bouton step3" data-etape="0" value="Etape 4 >">
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="fenetre etape4 hide" id="step4">
+
+
+                    <div class="form row no-margin form-horizontal">
+
+                        <div class="col-md-4">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="calc-title">
+                                <h2><?php echo __("Votre Profil Génétique et Intestinal"); ?></h2>
+                                <img class="img-responsive img-etape2" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/header_etape4.png"); ?>" />
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="col-md-12 control-label" for="checkboxes"><?php echo __("Votre profil génétique : "); ?> <span class="label-rose"><?php echo __('Vos parents ont ou ont eu :'); ?></span></label>
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        <label for="diabete">
+                                            <input type="checkbox" name="genetique[]" value="diabète" id="diabete">
+                                            <?php echo __('Diabète'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="cholesterol">
+                                            <input type="checkbox" name="genetique[]" value="cholestérol" id="cholesterol">
+                                            <?php echo __('Cholestérol'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="surpoids">
+                                            <input type="checkbox" name="genetique[]" value="surpoids" id="surpoids">
+                                            <?php echo __('Surpoids'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="goutte">
+                                            <input type="checkbox" name="genetique[]" value="goutte" id="goutte">
+                                            <?php echo __('Goutte'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="avc">
+                                            <input type="checkbox" name="genetique[]" value="AVC" id="avc">
+                                            <?php echo __('AVC (Accident Vasculaire Cérébral)'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="hta">
+                                            <input type="checkbox" name="genetique[]" value="HTA" id="hta">
+                                            <?php echo __('HTA (HyperTension Artérielle)'); ?>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label for="hta">
+                                            <input type="checkbox" name="genetique[]" value="Rien à Signaler" id="ras">
+                                            <?php echo __('Rien à signaler'); ?>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-12 control-label" for="checkboxes"><?php echo __("Votre profil intestinal : ");?> <span class="label-rose"><?php echo __('Vous êtes sujet à '); ?></span></label>
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        <label for="constipation">
+                                            <input type="checkbox" name="intestin[]" value="constipation" id="constipation">
+                                            <?php echo __('Constipation'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="diarrhee">
+                                            <input type="checkbox" name="intestin[]" value="diarrhée" id="diarrhee">
+                                            <?php echo __('Diarrhée'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="ballonnements">
+                                            <input type="checkbox" name="intestin[]" value="ballonnements" id="ballonnements">
+                                            <?php echo __('Ballonnements'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="somnolence">
+                                            <input type="checkbox" name="intestin[]" value="somnolence" id="somnolence">
+                                            <?php echo __('Somnolence après repas'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="haleine">
+                                            <input type="checkbox" name="intestin[]" value="haleine" id="haleine">
+                                            <?php echo __('Mauvaise haleine'); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="migraine">
+                                            <input type="checkbox" name="intestin[]" value="migraine" id="migraine">
+                                            <?php echo __('Migraine'); ?>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label for="migraine">
+                                            <input type="checkbox" name="intestin[]" value="Rien à Signaler" id="ras2">
+                                            <?php echo __('Rien à signaler'); ?>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input style="float:left;" type="button" class="bouton step4 back" data-etape="0" value="< Etape 3">
+                            <input type="button" class="bouton step4" data-etape="0" value="Etape 5 >">
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="fenetre etape5 hide" id="step5">
+
+
+                    <div class="form row no-margin form-horizontal">
+
+                        <div class="col-md-4">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="calc-title">
+                                <h2><?php echo __("Vos Informations"); ?></h2>
+                                <img class="img-responsive img-etape2" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/header_etape5.png"); ?>" />
+                            </div>
+
+                            <h3><?php echo __('Vos informations personnelles'); ?></h3>
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="nom"><?php echo __('Nom') ?></label>
+                                <div class="col-md-6">
+                                    <input name="nom" type="text" id="nom" value="" class="form-control input-md required-entry" required />
+                                    <span id="nom-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="prenom"><?php echo __('Prénom') ?></label>
+                                <div class="col-md-6">
+                                    <input name="prenom" type="text" id="prenom" value="" class="form-control input-md required-entry" required />
+                                    <span id="prenom-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="neen"><?php echo __('Année de naissance') ?></label>
+                                <div class="col-md-6">
+                                    <input name="neen" type="text" id="neen" placeholder="Ex. : 1980"  value="" class="form-control input-md required-entry" required />
+                                    <span id="neen-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="departement"><?php echo __('Département') ?></label>
+                                <div class="col-md-6">
+                                    <input name="departement" type="text" id="departement" class="form-control input-md required-entry">
+                                    <span id="departement-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="telephone"><?php echo __('Téléphone (portable)') ?></label>
+                                <div class="col-md-6">
+                                    <input name="telephone" type="text" value="" class="form-control input-md required-entry" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="email"><?php echo __('Email') ?></label>
+                                <div class="col-md-6">
+                                    <input id="email" name="email" type="email" value="" class="form-control input-md required-entry validate-email large" required />
+                                </div>
+                            </div>
+
+
+                            <div class="infos_mail left">
+                                <div id="reponse_mail" class="reponse">
+                                </div>
+                            </div>
+
+                            <h3><?php echo __('Avez-vous un code promo ?'); ?></h3>
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="textinput"><?php echo __('Renseignez votre code PROMO ci-dessous :') ?></label>
+                                <div class="col-md-6">
+                                    <input value="" name="codepromo" type="text" onkeyup="verifie_code_promo()" onblur="verifie_code_promo()" id="codepromo" class="form-control input-md">
+                                </div>
+                                <!--                            --><?php //if($code_promo): ?>
+                                <!--                                <script> verifie_code_promo(); </script>-->
+                                <!--                            --><?php //endif; ?>
+                                <div id="reponse" class="reponse left">
+                                </div>
+                            </div>
+                            <input style="float:left;" type="button" class="bouton step5 back" data-etape="0" value="< Etape 4">
+                            <input type="submit" class="bouton step5" data-etape="0" value="<?php echo __('Decouvrez votre TIME Silhouette'); ?> >>>">
+                        </div>
+
+
+                    </div>
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript" rel="script">
+    require(['jquery'], function ($) {
+
+
+        $( document ).ready(function($) {
+
+            var hauteur_cm              = $('#hauteur_cm');
+            var poids                   = $('#poids');
+            var poignet                 = $('#poignet');
+            var poitrine                = $('#poitrine');
+            var taille                  = $('#taille');
+            var hanches                 = $('#hanches');
+            var cuisse                  = $('#cuisse');
+            var situation               = $('#situation');
+            var activite                = $('#activite');
+            var tendance                = $('#tendance');
+            var angoisse                = $('#angoisse');
+            var motivation              = $('#motivation');
+            var irritabilite            = $('#irritabilite');
+            var insomnie                = $('#insomnie');
+            var genetique               = $('#genetique');
+            var intestin                = $('#intestin');
+            var nom                     = $('#nom');
+            var prenom                  = $('#prenom');
+            var neen                    = $('#neen');
+            var departement             = $('#departement');
+            var telephone               = $('#telephone');
+            var email                   = $('#email');
+            var hauteurError            = $('#hauteur-error');
+            var poidsError              = $('#poids-error');
+            var poignetError            = $('#poignet-error');
+            var poitrineError           = $('#poitrine-error');
+            var tailleError             = $('#taille-error');
+            var hanchesError            = $('#hanches-error');
+            var cuisseError             = $('#cuisse-error');
+            var nomError                = $('#nom-error');
+            var prenomError             = $('#prenom-error');
+            var neenError               = $('#neen-error');
+            var departementError        = $('#departement-error');
+
+            var has_error = 0;
+
+            jQuery(".btn-group > .btn").click(function () {
+                $(this).addClass("active").siblings().removeClass("active");
+            });
+
+
+            jQuery('.step0').click(function (event) {
+                $("#step1").removeClass('hide');
+                $("#step0").addClass('hide');
+
+            });
+
+
+            jQuery('.step1').click(function (event) {
+
+                if($('input[name=genre]:checked').length<=0){
+                    alert('Veuillez choisir votre sexe');
+                    has_error = 1;
+                }
+                if(hauteur_cm.val().length < 2){
+                    alert('Le champs Taille requiert 2 caractères minimum');
+                    has_error = 1;
+                }
+                if(poids.val().length < 2){
+                    alert('Le champs Poids requiert 2 caractères minimum');
+                    has_error = 1;
+                }
+                if(poignet.val().length < 1){
+                    alert('Le champs Largeur de poignet requiert 1 caractère minimum');
+                    has_error = 1;
+                }
+                if(poitrine.val().length < 2){
+                    alert('Le champs Tour de Poitrine requiert 2 caractères minimum');
+                    has_error = 1;
+                }
+                if(taille.val().length < 2){
+                    alert('Le champs Tour de taille requiert 2 caractères minimum');
+                    has_error = 1;
+                }
+                if(hanches.val().length < 2){
+                    alert('Le champs Tour de hanches requiert 2 caractères minimum');
+                    has_error = 1;
+                }
+                if(cuisse.val().length < 2){
+                    alert('Le champs Tour de cuisse requiert 2 caractères minimum');
+                    has_error = 1;
+                }
+                if(has_error == 0){
+                    $("#step2").removeClass('hide');
+                    $("#step0").addClass('hide');
+                    $("#step1").addClass('hide');
+                }
+
+
+
+            });
+
+            jQuery('.step2').click(function (event) {
+
+                if($('input[name=situation]:checked').length<=0){
+                    alert('Veuillez préciser votre situation');
+                    has_error = 1;
+                }
+                if($('input[name=activite]:checked').length<=0){
+                    alert('Veuillez préciser votre niveau d\'activité');
+                    has_error = 1;
+                }
+                if($('input[name=tendance]:checked').length<=0){
+                    alert('Veuillez préciser votre profil alimentaire');
+                    has_error = 1;
+                }
+
+                if(has_error == 0){
+                    $("#step3").removeClass('hide');
+                    $("#step0").addClass('hide');
+                    $("#step1").addClass('hide');
+                    $("#step2").addClass('hide');
+                }
+
+            });
+
+            jQuery('.step2.back').click(function (event) {
+                $("#step1").removeClass('hide');
+                $("#step0").addClass('hide');
+                $("#step2").addClass('hide');
+                $("#step3").addClass('hide');
+
+
+            });
+
+            jQuery('.step3').click(function (event) {
+
+                if($('input[name=angoisse]:checked').length<=0){
+                    alert('Veuillez préciser si vous êtes angoissé');
+                    has_error = 1;
+                }
+                if($('input[name=motivation]:checked').length<=0){
+                    alert('Veuillez préciser si vous êtes déprimé');
+                    has_error = 1;
+                }
+                if($('input[name=irritabilite]:checked').length<=0){
+                    alert('Veuillez préciser si vous êtes agressif');
+                    has_error = 1;
+                }
+                if($('input[name=insomnie]:checked').length<=0){
+                    alert('Veuillez préciser si vous faîtes des insomnies');
+                    has_error = 1;
+                }
+
+                if(has_error == 0) {
+                    $("#step4").removeClass('hide');
+                    $("#step0").addClass('hide');
+                    $("#step1").addClass('hide');
+                    $("#step2").addClass('hide');
+                    $("#step3").addClass('hide');
+                }
+
+            });
+
+            jQuery('.step3.back').click(function (event) {
+                $("#step2").removeClass('hide');
+                $("#step0").addClass('hide');
+                $("#step1").addClass('hide');
+                $("#step3").addClass('hide');
+                $("#step4").addClass('hide');
+
+
+            });
+
+            jQuery('.step4').click(function (event) {
+                    $("#step5").removeClass('hide');
+                    $("#step0").addClass('hide');
+                    $("#step1").addClass('hide');
+                    $("#step2").addClass('hide');
+                    $("#step3").addClass('hide');
+                    $("#step4").addClass('hide');
+            });
+
+            jQuery('.step4.back').click(function (event) {
+                $("#step3").removeClass('hide');
+                $("#step0").addClass('hide');
+                $("#step1").addClass('hide');
+                $("#step2").addClass('hide');
+                $("#step4").addClass('hide');
+                $("#step5").addClass('hide');
+            });
+
+            jQuery('.step5.back').click(function (event) {
+                $("#step4").removeClass('hide');
+                $("#step0").addClass('hide');
+                $("#step1").addClass('hide');
+                $("#step2").addClass('hide');
+                $("#step3").addClass('hide');
+                $("#step5").addClass('hide');
+            });
+
+            jQuery("#validation").click(function (event) {
+
+                $(this).closest("form").attr("action", document.location.origin + '/timescan/index/result');
+
+            });
+
+            hauteur_cm.keyup(function(){
+                if(hauteur_cm.val().length < 2) {
+                    hauteurError.html("2 caractères minimum");
+                }else{
+                    hauteurError.html("");
+                }
+            });
+
+            poids.keyup(function(){
+                if(poids.val().length < 2) {
+                    poidsError.html("2 caractères minimum");
+                }else{
+                    poidsError.html("");
+                }
+            });
+
+            poignet.keyup(function(){
+                if(poignet.val().length < 1) {
+                    poignetError.html("1 caractères minimum");
+                }else{
+                    poignetError.html("");
+                }
+            });
+
+            poitrine.keyup(function(){
+                if(poitrine.val().length < 2) {
+                    poitrineError.html("2 caractères minimum");
+                }else{
+                    poitrineError.html("");
+                }
+            });
+
+            taille.keyup(function(){
+                if(taille.val().length < 2) {
+                    tailleError.html("2 caractères minimum");
+                }else{
+                    tailleError.html("");
+                }
+            });
+
+            hanches.keyup(function(){
+                if(hanches.val().length < 2) {
+                    hanchesError.html("2 caractères minimum");
+                }else{
+                    hanchesError.html("");
+                }
+            });
+
+            cuisse.keyup(function(){
+                if(cuisse.val().length < 2) {
+                    cuisseError.html("2 caractères minimum");
+                }else{
+                    cuisseError.html("");
+                }
+            });
+
+            nom.keyup(function(){
+                if(nom.val().length < 2) {
+                    nomError.html("2 caractères minimum");
+                }else{
+                    nomError.html("");
+                }
+            });
+
+            prenom.keyup(function(){
+                if(prenom.val().length < 2) {
+                    prenomError.html("2 caractères minimum");
+                }else{
+                    prenomError.html("");
+                }
+            });
+
+            neen.keyup(function(){
+                if(neen.val().length < 4) {
+                    neenError.html("4 caractères minimum");
+                }else{
+                    neenError.html("");
+                }
+            });
+
+            departement.keyup(function(){
+                if(departement.val().length < 2) {
+                    departementError.html("2 caractères minimum");
+                }else{
+                    departementError.html("");
+                }
+            });
+        });
+
+    });
+
+
+</script>

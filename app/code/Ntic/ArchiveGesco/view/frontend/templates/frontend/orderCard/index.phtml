@@ -1,0 +1,149 @@
+<?php
+    // Appel du block Gesco
+    $block = $block->getLayout()->createBlock('Ntic\ArchiveGesco\Block\Gesco');
+?>
+
+<div class="row">
+    <div class="order-card-wrapper panel panel-default col-md-10 col-md-offset-1">
+        <div class="panel-heading">
+            <div class="order-card-panel-title">
+                <h3 class="panel-title">DÉTAILS DE LA COMMANDE / <?php echo $block->orderData()['order']['order_id']; ?></h3>
+                <a class="customer-card-link btn btn-info" href="<?php echo $this->getUrl(); ?>archivegesco/customercard?id=<?php echo $block->orderData()['order']['client_id']; ?>">Retour</a>
+            </div>
+        </div>
+        <!-- INFOS COMMANDE -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="panel panel-default col-md-12">
+                    <div class="panel-body">
+                        <!-- ORDER -->
+                        <div class="order-card-data">
+                            <div class="more-data">
+                                <div class="number-bill">Numéro de facture : <span><?php echo $block->orderData()['order']['number_bill']; ?></span></div>
+                                <div class="order-date">Date de la commande : <span><?php echo $block->dateFormat($block->orderData()['order']['order_date']); ?></span></div>
+                                <div class="amount-ttc">Montant total (TTC) de la commande : <span><?php echo str_replace('.', ',', $block->orderData()['order']['amount_ttc']); ?> €</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- INFOS ADRESSE -->
+            <div class="block-order flex-between">
+                <div class="address-panel panel panel-default col-md-4">
+                    <div class="panel-heading flex-between">
+                        <h3 class="panel-title">Adresse(s) de livraison / expédition</h3>
+                    </div>
+                    <div class="panel-body flex-between">
+                        <!-- LIVRAISON -->
+                        <div class="address-shipping">
+                            <h4>Adresse de livraison</h4>
+                            <hr>
+                            <?php
+                                if(!empty($block->orderData()['shipping'])) {
+                                    ?>
+                                    <div class="client-name">
+                                        <?php echo $block->orderData()['shipping']['gender']; ?>
+                                        <span><?php echo $block->orderData()['shipping']['lastname']; ?></span>
+                                        <?php echo $block->orderData()['shipping']['firstname']; ?>
+                                    </div>
+                                    <div class="street">
+                                        <?php echo !empty($block->orderData()['shipping']['addr1']) ? trim($block->orderData()['shipping']['addr1']) : ''; ?>
+                                        <br>
+                                        <?php echo !empty($block->orderData()['shipping']['addr2']) ? trim($block->orderData()['shipping']['addr2']) : ''; ?>
+                                        <br>
+                                        <?php echo !empty($block->orderData()['shipping']['addr3']) ? trim($block->orderData()['shipping']['addr3']) : ''; ?>
+                                    </div>
+                                    <div class="city">
+                                        <?php echo $block->orderData()['shipping']['zip_code']; ?>
+                                        <?php echo $block->orderData()['shipping']['city']; ?>
+                                    </div>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <div class="customer-name">
+                                        <?php echo $block->indexData()['customer']['gender']; ?>
+                                        <span><?php echo $block->indexData()['customer']['lastname']; ?></span>
+                                        <?php echo $block->indexData()['customer']['firstname']; ?>
+                                    </div>
+                                    <div class="street">
+                                        <?php echo !empty($block->indexData()['customer']['addr1']) ? trim($block->indexData()['customer']['addr1']) : ''; ?>
+                                        <br>
+                                        <?php echo !empty($block->indexData()['customer']['addr2']) ? trim($block->indexData()['customer']['addr2']) : ''; ?>
+                                        <br>
+                                        <?php echo !empty($block->indexData()['customer']['addr3']) ? trim($block->indexData()['customer']['addr3']) : ''; ?>
+                                    </div>
+                                    <div class="city">
+                                        <?php echo $block->indexData()['customer']['zip_code']; ?>
+                                        <?php echo $block->indexData()['customer']['city']; ?>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                        <!-- EXPEDITION -->
+                        <div class="address-delivery">
+                            <h4>Informations d'expédition</h4>
+                            <hr>
+                            <?php
+                            if(!empty($block->orderData()['delivery'])) {
+                                ?>
+                                <div class="wish-date">Date souhaitée : <?php echo $block->dateFormat($block->orderData()['delivery']['wish_date']); ?></div>
+                                <div class="shipping-name">Nom de livraison : <?php echo $block->orderData()['delivery']['shipping_name']; ?></div>
+                                <div class="transport-mode">Mode de transport : <?php echo $block->orderData()['delivery']['transport_mode']; ?></div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUIT(S) -->
+                <div class="products-panel panel panel-warning col-md-7 col-md-offset-1">
+                    <div class="panel-heading flex-between">
+                        <h3 class="panel-title">Produit(s) de la commande</h3>
+                        <div class="total-order">Nombre total de produit(s) commande : <span><?php echo count($block->orderData()['products']); ?></span></div>
+                    </div>
+                    <div class="panel-body">
+                        <?php
+                            if(!empty($block->orderData()['products'])) {
+                                foreach ($block->orderData()['products'] as $row) {
+                                    ?>
+                                    <div class="row-product">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="data-products flex-between">
+                                                    <div
+                                                        class="number-contract"><?php echo $row['products_name']; ?></div>
+                                                    <div
+                                                        class="ref-contract"><?php echo str_replace('.', ',', $row['products_price']); ?>
+                                                        €
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <div class="no-products">Oups, aucun produit trouvé(s) pour cet abonnement</div>
+                                <?php
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery', 'jquery.bootstrap'], function ($) {
+        $( document ).ready(function() {
+            var href = $('.fiche-client a').attr("href");
+            var new_href = href + "?id=<?php echo $block->getClientIdByOrder() ;?>";
+
+            $('.fiche-client a').attr("href", new_href);
+        });
+    });
+</script>

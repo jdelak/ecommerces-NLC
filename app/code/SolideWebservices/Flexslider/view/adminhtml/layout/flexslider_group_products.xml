@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+	<container name="root" label="Root" output="1">
+		<block class="SolideWebservices\Flexslider\Block\Adminhtml\Group\Edit\Tab\Product" name="flexslider_group_product_edit_tab_product" />
+		<block class="Magento\Backend\Block\Widget\Grid\Serializer" name="related_grid_serializer">
+			<arguments>
+				<argument name="grid_block" xsi:type="string">flexslider_group_product_edit_tab_product</argument>
+				<argument name="callback" xsi:type="string">getSelectedProducts</argument>
+				<argument name="input_element_name" xsi:type="string">products</argument>
+				<argument name="reload_param_name" xsi:type="string">group_products</argument>
+			</arguments>
+		</block>
+	</container>
+</layout>

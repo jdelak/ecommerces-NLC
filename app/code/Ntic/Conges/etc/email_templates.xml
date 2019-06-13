@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="demande_cp" label="demande_cp" file="demande_cp.phtml" type="html" module="Ntic_Conges" area="frontend"/>
+    <template id="reponse_cp" label="reponse_cp" file="reponse_cp.phtml" type="html" module="Ntic_Conges" area="adminhtml"/>
+    <template id="confirmation_Rh" label="confirmation_Rh" file="confirmation_Rh.phtml" type="html" module="Ntic_Conges" area="adminhtml"/>
+
+</config>

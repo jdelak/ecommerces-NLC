@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="synchro">
+        <job instance="Gesco\Import\Cron\Import" method="execute" name="gesco_import_import">
+            <schedule>0 4 * * *</schedule>
+        </job>
+    </group>
+</config>

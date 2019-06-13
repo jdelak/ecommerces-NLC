@@ -1,0 +1,25 @@
+{
+	"name": "solidewebservices/flexslider",
+	"description": "A fully responsive image and video slider for Magento2, that can be easily managed from the backend",
+	"require": {
+		"php": "~5.6.0|~7.0.0|~7.1.0"
+	},
+	"autoload": {
+		"files": [ "registration.php" ],
+		"psr-4": {
+			 "SolideWebservices\\Flexslider\\": ""
+		}
+	},
+	"type": "magento2-module",
+	"version": "2.2.7",
+	"license": [
+			"OSL-3.0"
+	],
+	"authors": [
+		{
+			"name": "Solide Webservices",
+			"homepage": "https://solidewebservices.com/",
+			"role": "Developer"
+		}
+	]
+}

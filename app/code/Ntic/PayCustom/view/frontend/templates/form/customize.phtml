@@ -1,0 +1,31 @@
+<div class="row select-payment">
+    <div class="col-xs-12 text-center">
+        <div class="btn-group col-xs-12 " role="group" aria-label="choose-payment" id="choose-payment">
+            <?php
+                // ABO
+                if ($block->getTypeOrder() == 'subscription') {
+                    ?>
+                    <button class="hidden-button" data-choose="subscription"></button>
+                    <?php
+                } else {
+                    // ORDER
+                    if($block->getGrandTotal() > 60) {
+                        ?>
+                        <legend><?php echo __('Payment method'); ?></legend>
+                        <button type="button" class="btn btn-lg btn-default col-xs-6" data-choose="cash">
+                            <?php echo __('Cash'); ?>
+                        </button>
+                        <button type="button" class="btn btn-lg btn-default col-xs-6" data-choose="multi">
+                            <?php echo __('Multi'); ?>
+                        </button>
+                        <?php
+                    } else {
+                        ?>
+                        <button class="hidden-button" data-choose="cash-only"></button>
+                        <?php
+                    }
+                }
+            ?>
+        </div>
+    </div>
+</div>

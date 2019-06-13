@@ -1,0 +1,21 @@
+{
+    "name": "ntic/module-paycustom",
+    "description": "permet de payer avec un formulaire personnalis\u00e9 [ABO,Prosuit simple] avec diff\u00e9rent mode de paiement + possibilit\u00e9 de fractionner",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ntic\\PayCustom\\": ""
+        }
+    }
+}

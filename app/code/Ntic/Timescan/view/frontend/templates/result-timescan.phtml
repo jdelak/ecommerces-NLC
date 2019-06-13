@@ -1,0 +1,2388 @@
+<?php
+
+
+
+$jour = date('Y-m-d');
+$genre = $_POST['genre'];
+$hauteur = $_POST['hauteur_cm'];
+$poids = $_POST['poids'];
+$poignet = $_POST['poignet'];
+$poitrine = $_POST['poitrine'];
+$tour_taille = $_POST['taille'];
+$hanches = $_POST['hanches'];
+$cuisse = $_POST['cuisse'];
+$situation = $_POST['situation'];
+$activite = $_POST['activite'];
+$tendance = $_POST['tendance'];
+$angoisse = $_POST['angoisse'];
+$motivation = $_POST['motivation'];
+$irritabilite = $_POST['irritabilite'];
+$insomnie = $_POST['insomnie'];
+$genetique = $_POST['genetique'];
+$intestin = $_POST['intestin'];
+$name = $_POST['nom'];
+$firstname = $_POST['prenom'];
+$email = $_POST['email'];
+$dob = $_POST['neen'];
+$departement = $_POST['departement'];
+$telephone = $_POST['telephone'];
+$codepromo = $_POST['codepromo'];
+
+$convertion_longueur_hauteur = 1;
+$convertion_longueur = 1;
+$convertion_poids = 1;
+
+$age_determin = date('Y') - $dob;
+
+$imc=round(($poids/(($hauteur)*($hauteur)*0.0001)),2); //taille en m
+$imc_mod=round(($poids/(($hauteur)*($hauteur)*0.0001)),2); //taille en m
+
+$poids = ($_POST['poids'] / $convertion_poids);
+$poignet = ($_POST['poignet'] / $convertion_longueur);
+$poitrine = ($_POST['poitrine'] / $convertion_longueur);
+$taille = ($_POST['taille'] / $convertion_longueur);
+$hanches = ($_POST['hanches'] / $convertion_longueur);
+$cuisses = ($_POST['cuisse'] / $convertion_longueur);
+$etat = $_POST['situation'];
+
+$emotion = "angoisse:$angoisse|dépression:$motivation|irritabilite:$irritabilite|insomnie:$insomnie";
+
+$tab_genetique = $_POST['genetique'];
+$tab_intestin = $_POST['intestin'];
+
+
+
+$genetique = "";
+foreach($tab_genetique as $label){
+    $genetique .= $label.'|';
+}
+$intestin = "";
+foreach($tab_intestin as $label){
+    $intestin .= $label.'|';
+}
+
+$tour_poitrine_theorique=($hauteur-70);
+$tour_hanches_theorique=($hauteur-70);
+
+if ($genre == "H") {
+    $larg_poignet_theorique = ($hauteur - 100) / 10;
+    $tour_taille_theorique = $tour_poitrine_theorique - 20;
+}else if ($genre == "F") {
+    $larg_poignet_theorique=(($hauteur-100)/10)-1;
+    $tour_taille_theorique=$tour_poitrine_theorique-30;
+}
+
+
+$tmp=$larg_poignet_theorique-$poignet;
+if ($tmp<0) $tmp=0-$tmp;
+$correcteur=round(4*$tmp,0);
+
+
+$poids_ideal=$larg_poignet_theorique*10;
+
+$tmp=$larg_poignet_theorique-$poignet;
+if ($tmp<0) $tmp=0-$tmp;
+$correcteur=round(4*$tmp,0);
+
+if ($poignet>$larg_poignet_theorique) {
+    $tour_hanches_theorique+=$correcteur;
+    $tour_poitrine_theorique+=$correcteur;
+    $tour_taille_theorique+=$correcteur;
+    $poids_ideal+=$correcteur;
+}
+else {
+    $tour_hanches_theorique-=$correcteur;
+    $tour_poitrine_theorique-=$correcteur;
+    $tour_taille_theorique-=$correcteur;
+    $poids_ideal-=$correcteur;
+}
+
+$diff_tour_poitrine = $poitrine - $tour_poitrine_theorique;
+$diff_tour_taille = $taille - $tour_taille_theorique;
+$diff_tour_hanches = $hanches - $tour_hanches_theorique;
+$diff_poids = $poids - $poids_ideal;
+/* ********************** */
+
+
+
+/****** GENERE MORPHO ******/
+if (($diff_tour_poitrine >= 10) && ($diff_tour_taille >= 10)
+    && ($diff_tour_poitrine+$diff_tour_taille+$diff_tour_hanches >= 30)) {
+    $detype="M";
+    $detendance_mere = "TRONC D\'ARBRE";
+    $complements="<b>- Morphotype M : </b>visage augmenté de volume, trop de poitrine, taille trop épaisse (on ne la voit plus), hanches trop larges, membres épais. Carences : -. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie, arthrose, rhumatismes, goutte.
+	<br><br>Morpho-complément® M : CLA, extraits végétaux et marins anti-inflammatoires, diurétiques, cholagogues, cholérétiques, chrome, zinc, magnésium, vit. B6, ginseng.";
+}
+
+if (($diff_tour_poitrine >= 10) && ($diff_tour_taille >= 10) && ($diff_tour_hanches >= 8)
+    && ($diff_tour_taille > ($diff_tour_poitrine+4)) && ($diff_tour_poitrine >= ($diff_tour_hanches+4))) {
+    $detype="T";
+    $detendance_mere = "TRONC D\'ARBRE";
+    $detendance="Don Camillo";
+    $detendancesilh="doncamillo";
+    $complements="<b>- Morphotype T : </b>visage augmenté de volume, trop de poitrine, taille trop épaisse (on ne la voit plus), hanches trop larges, membres épais. Carences : -. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie, arthrose, rhumatismes, goutte.
+	<br><br>Morpho-complément® TRONC D\'ARBRE : CLA, extraits végétaux et marins anti-inflammatoires, diurétiques, cholagogues, cholérétiques, chrome, zinc, magnésium, vit. B6, ginseng.";
+}
+
+if (($diff_tour_poitrine >= 10) && ($diff_tour_taille >= 10) && ($diff_tour_hanches >= 10)
+    && ($diff_tour_hanches >= ($diff_tour_poitrine+3)) && ($diff_tour_taille >= ($diff_tour_hanches-2))) {
+    $detype="I";
+    $detendance_mere = "TRONC D\'ARBRE";
+    $detendance="Rubens";
+    $detendancesilh="rubens";
+    $complements="<b>- Morphotype I : </b>visage augmenté de volume, trop de poitrine, taille trop épaisse (on ne la voit plus), hanches trop larges, membres épais. Carences : -. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie, arthrose, rhumatismes, goutte.
+	<br><br>Morpho-complément® I : CLA, extraits végétaux et marins anti-inflammatoires, diurétiques, cholagogues, cholérétiques, chrome, zinc, magnésium, vit. B6, ginseng.";
+}
+
+if (($diff_tour_poitrine > 10) && ($diff_tour_hanches >= 10)
+    && ($diff_tour_taille >= ($diff_tour_poitrine+$diff_tour_hanches-6))) {
+    $detype="T";
+    $detendance_mere = "TRONC D\'ARBRE";
+    $detendance="Monastique";
+    $detendancesilh="monastique";
+    $complements="<b>- Morphotype T : </b>visage augmenté de volume, trop de poitrine, taille trop épaisse (on ne la voit plus), hanches trop larges, membres épais. Carences : -. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie, arthrose, rhumatismes, goutte.
+	<br><br>Morpho-complément® T : CLA, extraits végétaux et marins anti-inflammatoires, diurétiques, cholagogues, cholérétiques, chrome, zinc, magnésium, vit. B6, ginseng.";
+}
+
+if (($diff_tour_poitrine >= 10) && ($diff_tour_hanches >= 10)
+    && (($diff_tour_taille > $diff_tour_poitrine) || ($diff_tour_taille > $diff_tour_hanches))
+    && (abs($diff_tour_poitrine-$diff_tour_taille) <= 2) && (abs($diff_tour_poitrine-$diff_tour_hanches) <= 2)
+    && (abs($diff_tour_taille-$diff_tour_hanches) <= 2)) {
+    $detype="M";
+    $detendance_mere = "TRONC D\'ARBRE";
+    $detendance="Athlétique";
+    $detendancesilh="athletique";
+    $complements="<b>- Morphotype M : </b>visage augmenté de volume, trop de poitrine, taille trop épaisse (on ne la voit plus), hanches trop larges, membres épais. Carences : -. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie, arthrose, rhumatismes, goutte.
+	<br><br>Morpho-complément® M : CLA, extraits végétaux et marins anti-inflammatoires, diurétiques, cholagogues, cholérétiques, chrome, zinc, magnésium, vit. B6, ginseng.";
+}
+
+if (($diff_tour_poitrine >= 10) && ($diff_tour_taille > ($diff_tour_poitrine+5))
+    && ($diff_tour_hanches > ($diff_tour_taille+5))) {
+    $detype="M";
+    $detendance_mere = "TRONC D\'ARBRE";
+    $detendance="Maya";
+    $detendancesilh="maya";
+    $complements="<b>- Morphotype TRONC D\'ARBRE : </b>visage augmenté de volume, trop de poitrine, taille trop épaisse (on ne la voi  s?.?U??º?t plus), hanches trop larges, membres épais. Carences : -. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie, arthrose, rhumatismes, goutte.
+	<br><br>Morpho-complément® TRONC D\'ARBRE : CLA, extraits végétaux et marins anti-inflammatoires, diurétiques, cholagogues, cholérétiques, chrome, zinc, magnésium, vit. B6, ginseng.";
+}
+
+if (($diff_tour_poitrine >= -10) && ($diff_tour_poitrine <= -2) && ($diff_tour_taille >= 6)
+    && ($diff_tour_hanches >= 6) && ($diff_tour_hanches >= ($diff_tour_taille/2)) && (($diff_tour_taille+1) >= $diff_tour_hanches)) {
+    $detype="I";
+    $detendance_mere = "RUBENS";
+    $detendance="Ascétique";
+    $detendancesilh="ascetique";
+    $complements="<b>- Morphotype I : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if (($diff_tour_poitrine < 10) && ($diff_tour_poitrine >= 4) && ($diff_tour_taille >= 4)
+    && ($diff_tour_hanches >= 6) && ($diff_tour_taille > $diff_tour_poitrine) && ($diff_tour_hanches > ($diff_tour_poitrine+2))) {
+    $detype="M";
+    $detendance_mere = "RUBENS";
+    $detendance="Tronc d\'arbre";
+    $detendancesilh="tronc-darbre";
+    $complements="<b>- Morphotype M : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>M</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if (($diff_tour_poitrine >= -8) && ($diff_tour_poitrine <= -3) && ($diff_tour_taille >= 6)
+    && ($diff_tour_hanches >= 6) && (($diff_tour_taille+4) > $diff_tour_hanches) && ($diff_tour_hanches >= $diff_tour_taille)) {
+    $detype="I";
+    $detendance_mere = "RUBENS";
+    $detendance="Chéops";
+    $detendancesilh="cheops";
+    $complements="<b>- Morphotype I : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if (($diff_tour_poitrine > -3) && ($diff_tour_poitrine <= 9) && ($diff_tour_taille > 0)
+    && ($diff_tour_hanches > 0) && ($diff_tour_taille > ($diff_tour_poitrine+2))
+    && (($diff_tour_taille+2) >= $diff_tour_hanches) && ($diff_tour_hanches >= ($diff_tour_taille-2))) {
+    $detype="I";
+    $detendance_mere = "RUBENS";
+    $complements="<b>- Morphotype I : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if (($diff_tour_poitrine > 0) && ($diff_tour_poitrine <= 2) && ($diff_tour_taille > 0)
+    && ($diff_tour_hanches > 0) && (abs($diff_tour_hanches-$diff_tour_taille) <= 2)
+    && ($diff_tour_hanches > $diff_tour_poitrine) && ($diff_tour_taille > ($diff_tour_poitrine+2))) {
+    $detype="I";
+    $detendance_mere = "RUBENS";
+    $detendance="Athlétique";
+    $detendancesilh="athletique";
+    $complements="<b>- Morphotype I : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if (($diff_tour_poitrine > -3) && ($diff_tour_poitrine < 5) && ($diff_tour_taille > 0)
+    && ($diff_tour_taille > ($diff_tour_poitrine+2)) && ($diff_tour_hanches > 0)
+    && (($diff_tour_taille-3) >= $diff_tour_hanches) && ($diff_tour_hanches >= ($diff_tour_taille-12))) {
+    $detype="M";
+    $detendance_mere = "RUBENS";
+    $detendance="Monastique";
+    $detendancesilh="monastique";
+    $complements="<b>- Morphotype M : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>M</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if ((abs($diff_tour_poitrine) <= 4) && ($diff_tour_taille > 0) && ($diff_tour_hanches > 0)
+    && ($diff_tour_taille > ($diff_tour_poitrine+2)) && ($diff_tour_hanches >= ($diff_tour_taille+3))) {
+    $detype="I";
+    $detendance_mere = "RUBENS";
+    $detendance="Maya";
+    $detendancesilh="maya";
+    $complements="<b>- Morphotype I : </b>poitrine normale, seins un peu lourds, bras et avant-bras dodus, taille trop épaisse, hanches trop larges, fesses dodues, cuisses larges avec cellulite, jambes dodues. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, sucres rapides, lactose. Risques : vieillissement accéléré du corps, rides, diabète, fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, chrome, CLA, acides aminés soufrés, crèmes et gels nourrissants.";
+}
+
+if (($diff_tour_poitrine >= -8) && ($diff_tour_poitrine < -4) && ($diff_tour_hanches >= 6)
+    && (abs($diff_tour_hanches) > abs($diff_tour_taille))
+    && (abs(abs($diff_tour_hanches)-abs($diff_tour_taille)) >= 4)) {
+    $detype="I";
+    $detendance_mere = "CHEOPS";
+    $complements="<b>- Morphotype I : </b>pas assez de poitrine, seins petits, taille trop épaisse, hanches trop fortes (cellulite), fesses pas très musclées, trop de cuisse, culotte de cheval. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides. Excès : sucres lents, minéraux. Risques : fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, rides, déséquilibre esthétique, arthrose, ostéoporose. 
+	<br><br>Morpho-complément® <b>I</b> : extraits végétaux et marins anti-inflammatoires et riches en calcium, silice, magnésium, cuivre. Vitamines C et D. Crèmes et gels nourrissants, hydratants et anticellulite. ";
+}
+
+if (($diff_tour_poitrine < -4) && ($diff_tour_hanches >= 6)
+    && (abs($diff_tour_poitrine) > abs($diff_tour_taille)) && (abs($diff_tour_poitrine) > abs($diff_tour_hanches))) {
+    $detype="I";
+    $detendance_mere = "CHEOPS";
+    $detendance="Ascétique";
+    $detendancesilh="ascetique";
+    $complements="<b>- Morphotype I : </b>pas assez de poitrine, seins petits, taille trop épaisse, hanches trop fortes (cellulite), fesses pas très musclées, trop de cuisse, culotte de cheval. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides. Excès : sucres lents, minéraux. Risques : fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, rides, déséquilibre esthétique, arthrose, ostéoporose. 
+	<br><br>Morpho-complément® <b>I</b> : extraits végétaux et marins anti-inflammatoires et riches en calcium, silice, magnésium, cuivre. Vitamines C et D. Crèmes et gels nourrissants, hydratants et anticellulite. ";
+}
+
+if (($diff_tour_poitrine >= -8) && ($diff_tour_poitrine < -4) && ($diff_tour_hanches >= 6)
+    && (abs($diff_tour_poitrine) > abs($diff_tour_taille)) && ($diff_tour_taille > 6)
+    && ($diff_tour_hanches >= ($diff_tour_taille+1)) && (($diff_tour_taille+1) >= ($diff_tour_hanches/2))
+    && ($diff_tour_hanches > 8)) {
+    $detype="I";
+    $detendance_mere = "CHEOPS";
+    $detendance="Rubens";
+    $detendancesilh="rubens";
+    $complements="<b>- Morphotype I : </b>pas assez de poitrine, seins petits, taille trop épaisse, hanches trop fortes (cellulite), fesses pas très musclées, trop de cuisse, culotte de cheval. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides. Excès : sucres lents, minéraux. Risques : fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, rides, déséquilibre esthétique, arthrose, ostéoporose. 
+	<br><br>Morpho-complément® <b>I</b> : extraits végétaux et marins anti-inflammatoires et riches en calcium, silice, magnésium, cuivre. Vitamines C et D. Crèmes et gels nourrissants, hydratants et anticellulite. ";
+}
+
+if (($diff_tour_poitrine >= -8) && ($diff_tour_poitrine < -4) && ($diff_tour_hanches >= 6)
+    && (abs($diff_tour_poitrine) > abs($diff_tour_taille)) && (abs($diff_tour_hanches) > abs($diff_tour_poitrine))
+    && (($diff_tour_hanches/2) > $diff_tour_taille)) {
+    $detype="I";
+    $detendance_mere = "CHEOPS";
+    $detendance="Maya";
+    $detendancesilh="maya";
+    $complements="<b>- Morphotype I : </b>pas assez de poitrine, seins petits, taille trop épaisse, hanches trop fortes (cellulite), fesses pas très musclées, trop de cuisse, culotte de cheval. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides. Excès : sucres lents, minéraux. Risques : fatigue, sommeil, stress, immunodéprimé, peau sèche, cellulite, rides, déséquilibre esthétique, arthrose, ostéoporose. 
+	<br><br>Morpho-complément® <b>I</b> : extraits végétaux et marins anti-inflammatoires et riches en calcium, silice, magnésium, cuivre. Vitamines C et D. Crèmes et gels nourrissants, hydratants et anticellulite. ";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_taille < -5) && ($diff_tour_hanches <= 4)
+    && (abs($diff_tour_poitrine)-abs($diff_tour_taille) >= 0) && (abs($diff_tour_poitrine)-abs($diff_tour_taille) <= 2)
+    && (abs($diff_tour_taille)-abs($diff_tour_hanches) >= 0) && (abs($diff_tour_taille)-abs($diff_tour_hanches) <= 5)) {
+    $detype="I";
+    $detendance_mere = "ASCETIQUE";
+    $detendance="Chéops";
+    $detendancesilh="cheops";
+    $complements="<b>- Morphotype I : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>I</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_taille < -6) && ($diff_tour_hanches <= 0)
+    && ($diff_tour_hanches >= -2) && (abs($diff_tour_poitrine) > abs($diff_tour_taille))
+    && (abs($diff_tour_taille) > abs($diff_tour_hanches))) {
+    $detype="T";
+    $detendance_mere = "ASCETIQUE";
+    $detendance="Cachectique";
+    $detendancesilh="cachectique";
+    $complements="<b>- Morphotype ASCETIQUE : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>ASCETIQUE</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_taille < -6) && ($diff_tour_hanches < -3)
+    && (abs($diff_tour_poitrine) > abs($diff_tour_taille)) && (abs($diff_tour_taille) > abs($diff_tour_hanches))) {
+    $detype="T";
+    $detendance_mere = "ASCETIQUE";
+    $detendance="Anorexique";
+    $detendancesilh="anorexique";
+    $complements="<b>- Morphotype ASCETIQUE : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>ASCETIQUE</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_hanches <= 2) && (abs(abs($diff_tour_poitrine)-abs($diff_tour_hanches)) <= 3)
+    && (abs(abs($diff_tour_taille)-abs($diff_tour_hanches)) <= 3) && (abs(abs($diff_tour_poitrine)-abs($diff_tour_taille)) <= 3)) {
+    $detype="E";
+    $detendance_mere = "ASCETIQUE";
+    $complements="<b>- Morphotype E : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>E</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_taille > 0) && ($diff_tour_hanches < 8)
+    && (abs($diff_tour_poitrine) > $diff_tour_taille)) {
+    $detype="I";
+    $detendance_mere = "ASCETIQUE";
+    $detendance="Rubens";
+    $detendancesilh="rubens";
+    $complements="<b>- Morphotype I : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>I</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_hanches <= 0) && (abs($diff_tour_taille) < abs($diff_tour_poitrine))) {
+    $detype="T";
+    $detendance_mere = "ASCETIQUE";
+    $detendance="Monastique";
+    $detendancesilh="monastique";
+    $complements="<b>- Morphotype T : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine < -2) && ($diff_tour_hanches < -2) && (abs($diff_tour_hanches) >= (abs($diff_tour_taille)+2))
+    && (abs(abs($diff_tour_poitrine)-abs($diff_tour_taille)) <= 2)) {
+    $detype="T";
+    $detendance_mere = "ASCETIQUE";
+    $detendance="Don Camillo";
+    $detendancesilh="doncamillo";
+    $complements="<b>- Morphotype T : </b>peu de seins, pas assez de poitrine, taille trop fine, pas assez de hanches, pas de fesses, pas de cuisses. Carences : protéines, acides aminés, neurotransmetteurs, acides gras insaturés, lipides, minéraux, eau. Excès : -. Risques : Vieillissement accéléré du visage, fatigue, sommeil, stress, immunodéprimé, peau sèche, rides, ostéoporose, dépression.
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline et dopamine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, rubidium, potassium), oméga 3 et 6, extraits végétaux ciblés peau, crèmes et gels anti-âge et nourrissants.";
+}
+
+if (($diff_tour_poitrine >= 6) && (abs($diff_tour_taille) >= 3) && (abs($diff_tour_taille) <= 5)
+    && (abs($diff_tour_hanches) <= 2)) {
+    $detype="T";
+    $detendance_mere = "MAE WEST";
+    $complements="<b>- Morphotype T : </b>poitrine trop opulente, seins volumineux, taille fine en proportion, hanches et cuisses normales. Carences : protéines. Excès : sucres lents et rapides. Risques : vieillissement accéléré du corps, rides, ostéoporose. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, vitamines (B6, B9, B12) et minéraux (zinc, manganèse, calcium, magnésium, silicium), oméga 3 et 6, extraits végétaux anti-âge ciblés peau, crèmes et gels anti-âge et nourrissants";
+}
+
+if ((abs($diff_tour_poitrine) <= 2) && ($diff_tour_taille <= 2) && (abs($diff_tour_hanches) <= 2)) {
+    $detype="E";
+    $detendance_mere = "GALILEE";
+}
+
+if (($diff_tour_poitrine >= 3) && ($diff_tour_poitrine < 10) && ($diff_tour_taille >= 6)
+    && ($diff_tour_poitrine > ($diff_tour_hanches+2))) {
+    $detype="T";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Don Camillo";
+    $detendancesilh="doncamillo";
+    $complements="<b>- Morphotype T : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine >= -15) && ($diff_tour_poitrine <= 5) && ($diff_tour_taille >= 6)
+    && ($diff_tour_hanches >= 0) && ((($diff_tour_taille/2)+3) >= $diff_tour_hanches)) {
+    $detype="M";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Rubens";
+    $detendancesilh="rubens";
+    $complements="<b>- Morphotype M : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>M</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine > 4) && ($diff_tour_poitrine <= 10) && ($diff_tour_taille >= 10)
+    && ($diff_tour_hanches >= 0) && ($diff_tour_poitrine >= ($diff_tour_hanches-3))
+    && ($diff_tour_taille > $diff_tour_poitrine) && ($diff_tour_taille > $diff_tour_hanches)) {
+    $detype="M";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Tronc d\'arbre";
+    $detendancesilh="tronc-darbre";
+    $complements="<b>- Morphotype M : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>M</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine >= 1) && ($diff_tour_poitrine <= 4) && ($diff_tour_taille >= 6)
+    && ($diff_tour_taille <= 14) && ($diff_tour_hanches > 2) && ($diff_tour_hanches < 10)
+    && (($diff_tour_taille-3) > $diff_tour_hanches)) {
+    $detype="T";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Athlétique";
+    $detendancesilh="athletique";
+    $complements="<b>- Morphotype T : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine >= -6) && ($diff_tour_poitrine <= 3) && ($diff_tour_taille >= 3)
+    && ($diff_tour_hanches >= -6) && ($diff_tour_hanches <= 5) && (abs(abs($diff_tour_poitrine)-abs($diff_tour_hanches)) <= 2)) {
+    $detype="T";
+    $detendance_mere = "MONASTIQUE";
+    $complements="<b>- Morphotype T : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine > -16) && ($diff_tour_poitrine < -2) && ($diff_tour_taille >= 3) && (abs($diff_tour_hanches) <= 2)) {
+    $detype="T";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Ascétique variante 1";
+    $complements="<b>- Morphotype T : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine > -16) && ($diff_tour_poitrine < -2) && ($diff_tour_taille >= 3)
+    && ($diff_tour_hanches >= -22) && ($diff_tour_hanches < -2)) {
+    $detype="T";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Ascétique variante 2";
+    $complements="<b>- Morphotype T : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if ((abs($diff_tour_poitrine) <= 2) && ($diff_tour_taille >= 3) && ($diff_tour_hanches > -16) && ($diff_tour_hanches < -2)) {
+    $detype="T";
+    $detendance_mere = "MONASTIQUE";
+    $detendance="Ascétique variante 3";
+    $complements="<b>- Morphotype T : </b>poitrine normale ou amaigrie, seins normaux, taille trop épaisse, ventre proéminent, trop de hanches, cuisses fines, jambes normales ou maigres. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres lents, lipides. Risques : diabète, maladies métaboliques, hypertension, hyperlipidémie. 
+	<br><br>Morpho-complément® <b>T</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, chrome, zinc, magnésium, potassium, vit. B6,  ginseng, crèmes et gels raffermissants.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_poitrine < 10) && ($diff_tour_taille >= 6)
+    && ($diff_tour_taille < 10) && ($diff_tour_hanches >= 6) && ($diff_tour_hanches < 10)
+    && (abs($diff_tour_poitrine-$diff_tour_taille) <= 2) && (abs($diff_tour_taille-$diff_tour_hanches) <= 2)) {
+    $detype="T";
+    $detendance_mere = "ATHLETIQUE";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_poitrine < 10) && ($diff_tour_taille >= 6)
+    && ($diff_tour_taille < 10) && ($diff_tour_hanches >= 6) && ($diff_tour_hanches < 10)
+    && ($diff_tour_taille > $diff_tour_poitrine) && ($diff_tour_poitrine > ($diff_tour_taille/2))
+    && (abs($diff_tour_taille-$diff_tour_hanches) <= 2)) {
+    $detype="T";
+    $detendance_mere = "ATHLETIQUE";
+    $detendance="Rubens";
+    $detendancesilh="rubens";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_poitrine < 10) && ($diff_tour_taille >= 6)
+    && ($diff_tour_taille < 10) && ($diff_tour_hanches >= 6) && ($diff_tour_hanches < 10)
+    && (abs($diff_tour_poitrine-$diff_tour_hanches) <= 2) && ($diff_tour_taille > $diff_tour_poitrine)
+    && ($diff_tour_taille > $diff_tour_hanches)) {
+    $detype="M";
+    $detendance_mere = "ATHLETIQUE";
+    $detendance="Tronc d\'arbre";
+    $detendancesilh="tronc-darbre";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_poitrine < 10) && ($diff_tour_taille >= 6)
+    && ($diff_tour_taille < 10) && ($diff_tour_hanches >= 6) && ($diff_tour_hanches < 10)
+    && (abs($diff_tour_poitrine-$diff_tour_taille) <= 2) && ($diff_tour_taille > $diff_tour_hanches)) {
+    $detype="T";
+    $detendance_mere = "ATHLETIQUE";
+    $detendance="Don Camillo";
+    $detendancesilh="doncamillo";
+
+}
+
+if ((abs($diff_tour_poitrine) <= 3) && ($diff_tour_taille >= 6) && ($diff_tour_hanches >= 6)
+    && ($diff_tour_hanches > $diff_tour_taille) && ($diff_tour_taille > ($diff_tour_hanches/2))) {
+    $detype="I";
+    $detendance_mere = "MAYA";
+    $detendance="Rubens";
+    $detendancesilh="rubens";
+    $complements="<b>- Morphotype I : </b>poitrine et seins normaux, épaules et bras menus, taille trop épaisse, hanches trop forte, cellulite sur les fesses, culotte de cheval, cuisses et jambes beaucoup trop grosses. Carences :-. Excès : sucres lents, minéraux, acides gras. Risques : constipation, déshydratation, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : CLA, crèmes et gels hydratants, extraits végétaux cholagogues, cholérétiques et anti-uinflammatoires.";
+}
+
+if ((abs($diff_tour_poitrine) <= 2) && ($diff_tour_taille >= 6) && ($diff_tour_hanches >= 6)
+    && (abs(($diff_tour_hanches/2)-$diff_tour_taille) <= 3)) {
+    $detype="I";
+    $detendance_mere = "MAYA";
+    $complements="<b>- Morphotype I : </b>poitrine et seins normaux, épaules et bras menus, taille trop épaisse, hanches trop forte, cellulite sur les fesses, culotte de cheval, cuisses et jambes beaucoup trop grosses. Carences :-. Excès : sucres lents, minéraux, acides gras. Risques : constipation, déshydratation, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : CLA, crèmes et gels hydratants, extraits végétaux cholagogues, cholérétiques et anti-uinflammatoires.";
+}
+
+if (($diff_tour_poitrine > 2) && ($diff_tour_taille >= 6) && ($diff_tour_hanches > 10)
+    && ($diff_tour_hanches > $diff_tour_taille) && ($diff_tour_taille > (($diff_tour_hanches/2)-2))) {
+    $detype="I";
+    $detendance_mere = "MAYA";
+    $detendance="tendance Tronc d\'arbre";
+    $complements="<b>- Morphotype I : </b>poitrine et seins normaux, épaules et bras menus, taille trop épaisse, hanches trop forte, cellulite sur les fesses, culotte de cheval, cuisses et jambes beaucoup trop grosses. Carences :-. Excès : sucres lents, minéraux, acides gras. Risques : constipation, déshydratation, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : CLA, crèmes et gels hydratants, extraits végétaux cholagogues, cholérétiques et anti-uinflammatoires.";
+}
+
+if (($diff_tour_poitrine <= 0) && ($diff_tour_poitrine >= -2) && ($diff_tour_taille > 0)
+    && ($diff_tour_hanches >= 6) && (($diff_tour_hanches/2) > $diff_tour_taille)) {
+    $detype="I";
+    $detendance_mere = "MAYA";
+    $detendance="Chéops";
+    $detendancesilh="cheops";
+    $complements="<b>- Morphotype I : </b>poitrine et seins normaux, épaules et bras menus, taille trop épaisse, hanches trop forte, cellulite sur les fesses, culotte de cheval, cuisses et jambes beaucoup trop grosses. Carences :-. Excès : sucres lents, minéraux, acides gras. Risques : constipation, déshydratation, peau sèche, cellulite, arthrose. 
+		<br><br>Morpho-complément® <B>I</B> : CLA, crèmes et gels hydratants, extraits végétaux cholagogues, cholérétiques et anti-uinflammatoires.";
+}
+
+if (($diff_tour_poitrine >= 4) && ($diff_tour_taille >= 4) && ($diff_tour_hanches <= 2) && ($diff_tour_hanches >= -6) //&& (abs($diff_tour_hanches) <= 2)
+    && (abs($diff_tour_poitrine-$diff_tour_taille) <= 2)) {
+    $detype="T";
+    $detendance_mere = "DON CAMILLO";
+    $complements="<b>- Morphotype T : </b>torse trop développé, seins anormalement développés chez l\'homme, augmentation du volume global tronc/bras, avant-bras dodus, taille trop épaisse, pas assez de hanches, fesses peu musclées. Carences : minéraux, eau, acides gras insaturés. Excès : protéines, sucres lents, lipides. Risques : maladies métaboliques, hypertension, artériosclérose, athérome, arthrose, rhumatismes. 
+	<br><br>Morpho-complément® <b>T</b> : extraits végétaux anti-inflammatoires et diurétiques, oméga 3 et 6, vit. C, crèmes et gels hydratants.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_taille >= 4) && (abs($diff_tour_hanches) <= 2)
+    && ($diff_tour_poitrine > $diff_tour_taille) && (abs($diff_tour_poitrine-$diff_tour_taille) <= 2)) {
+    $detype="T";
+    $detendance_mere = "DON CAMILLO";
+    $detendance="Schwarzy";
+    $detendancesilh="schwarzy";
+    $complements="<b>- Morphotype DON CAMILLO : </b>torse trop développé, seins anormalement développés chez l\'homme, augmentation du volume global tronc/bras, avant-bras dodus, taille trop épaisse, pas assez de hanches, fesses peu musclées. Carences : minéraux, eau, acides gras insaturés. Excès : protéines, sucres lents, lipides. Risques : maladies métaboliques, hypertension, artériosclérose, athérome, arthrose, rhumatismes. 
+	<br><br>Morpho-complément® <b>DON CAMILLO</b> : extraits végétaux anti-inflammatoires et diurétiques, oméga 3 et 6, vit. C, crèmes et gels hydratants.";
+}
+
+if (($diff_tour_poitrine >= 4) && ($diff_tour_taille >= 6) && (abs($diff_tour_hanches) <= 2)
+    && ($diff_tour_taille > $diff_tour_poitrine) && (abs($diff_tour_poitrine-$diff_tour_taille) <= 8)) {
+    $detype="T";
+    $detendance_mere = "DON CAMILLO";
+    $detendance="Monastique";
+    $detendancesilh="monastique";
+    $complements="<b>- Morphotype T : </b>torse trop développé, seins anormalement développés chez l\'homme, augmentation du volume global tronc/bras, avant-bras dodus, taille trop épaisse, pas assez de hanches, fesses peu musclées. Carences : minéraux, eau, acides gras insaturés. Excès : protéines, sucres lents, lipides. Risques : maladies métaboliques, hypertension, artériosclérose, athérome, arthrose, rhumatismes. 
+	<br><br>Morpho-complément® <b>T</b> : extraits végétaux anti-inflammatoires et diurétiques, oméga 3 et 6, vit. C, crèmes et gels hydratants.";
+}
+
+if (($diff_tour_poitrine >= 4) && ($diff_tour_taille >= 4) && ($diff_tour_hanches > 0)
+    && ($diff_tour_hanches <= 2)
+    && (($diff_tour_poitrine > $diff_tour_hanches) || ($diff_tour_taille > $diff_tour_hanches))
+    && (abs($diff_tour_poitrine-$diff_tour_taille) <= 2)) {
+    $detype="T";
+    $detendance_mere = "DON CAMILLO";
+    $detendance="Athlétique";
+    $detendancesilh="athletique";
+    $complements="<b>- Morphotype T : </b>torse trop développé, seins anormalement développés chez l\'homme, augmentation du volume global tronc/bras, avant-bras dodus, taille trop épaisse, pas assez de hanches, fesses peu musclées. Carences : minéraux, eau, acides gras insaturés. Excès : protéines, sucres lents, lipides. Risques : maladies métaboliques, hypertension, artériosclérose, athérome, arthrose, rhumatismes. 
+	<br><br>Morpho-complément® <b>DON CAMILLO</b> : extraits végétaux anti-inflammatoires et diurétiques, oméga 3 et 6, vit. C, crèmes et gels hydratants.";
+}
+
+if (($diff_tour_poitrine > 8) && ($diff_tour_poitrine < 10) && ($diff_tour_taille > 8) && ($diff_tour_taille < 10)
+    && ($diff_tour_hanches >= 0) && ($diff_tour_hanches < 8)) {
+    $detype="M";
+    $detendance_mere = "DON CAMILLO";
+    $detendance="Tronc d\'arbre";
+    $detendancesilh="tronc-darbre";
+    $complements="<b>- Morphotype DON CAMILLO : </b>torse trop développé, seins anormalement développés chez l\'homme, augmentation du volume global tronc/bras, avant-bras dodus, taille trop épaisse, pas assez de hanches, fesses peu musclées. Carences : minéraux, eau, acides gras insaturés. Excès : protéines, sucres lents, lipides. Risques : maladies métaboliques, hypertension, artériosclérose, athérome, arthrose, rhumatismes. 
+	<br><br>Morpho-complément® <b>DON CAMILLO</b> : extraits végétaux anti-inflammatoires et diurétiques, oméga 3 et 6, vit. C, crèmes et gels hydratants.";
+}
+
+if (($diff_tour_poitrine >= 6) && (abs($diff_tour_taille) <= 2) && ($diff_tour_hanches >= 6)) {
+    $detype="I";
+    $detendance_mere = "SABLIER";
+    $complements="<b>- Morphotype I : </b>cou fin, trop de poitrine et de hanches, seins opulents, bras minces, taille de guêpe trop fine, hanches arrondies, fesses très rondes, cuisses et jambes fines. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres. Risques : vieillissement accéléré du corps, diabète, fatigue, immunodéprimé.
+	<br><br>Morpho-complément® <b>I</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, crèmes et gels anti-âge, chrome, magnésium.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_taille >= 0) && ($diff_tour_taille <= 5) && ($diff_tour_hanches >= 6)) {
+    $detype="M";
+    $detendance_mere = "SABLIER";
+    $detendance="Tronc d\'arbre";
+    $detendancesilh="tronc-darbre";
+    $complements="<b>- Morphotype SABLIER : </b>cou fin, trop de poitrine et de hanches, seins opulents, bras minces, taille de guêpe trop fine, hanches arrondies, fesses très rondes, cuisses et jambes fines. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres. Risques : vieillissement accéléré du corps, diabète, fatigue, immunodéprimé.
+	<br><br>Morpho-complément® <b>SABLIER</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, crèmes et gels anti-âge, chrome, magnésium.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_taille >= 0) && ($diff_tour_taille <= 5)
+    && ($diff_tour_hanches >= 6) && ($diff_tour_hanches > ($diff_tour_poitrine+2))) {
+    $detype="I";
+    $detendance_mere = "SABLIER";
+    $detendance="Maya";
+    $detendancesilh="maya";
+    $complements="<b>- Morphotype SABLIER : </b>cou fin, trop de poitrine et de hanches, seins opulents, bras minces, taille de guêpe trop fine, hanches arrondies, fesses très rondes, cuisses et jambes fines. Carences : protéines, acides aminés, neurotransmetteurs. Excès : sucres. Risques : vieillissement accéléré du corps, diabète, fatigue, immunodéprimé.
+	<br><br>Morpho-complément® <b>SABLIER</b> : acides aminés précurseurs de noradrénaline, adrénaline, dopamine et sérotonine, CLA, crèmes et gels anti-âge, chrome, magnésium.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_taille >= 0) && ($diff_tour_taille <= 2)
+    && ($diff_tour_hanches <= 0) && ($diff_tour_hanches >= -2) && (abs($diff_tour_poitrine) > abs($diff_tour_taille))) {
+    $detype="T";
+    $detendance_mere = "SCHWARZY";
+    $complements.="<b>- Morphotype T : </b>pectoraux hyper développés, peu de seins, taille et hanches normales, ventre plat et musclé, fesses maigres et musclées, hanches creuses, jambes normales ou fines. Carences : minéraux, acides gras, lipides, minéraux, Excès : protéines animales. Risques : vieillissement accéléré du corps et du cerveau, fatigue, stress, fatigue rénale, goutte. 
+	<br><br>Morpho-complément® <b>T</b> : oméga3 et 6, potassium, extrait végétaux détoxifiants et anti-âge, magnésium, vit. B6, crèmes et gels hydratants, acides aminés soufrés.";
+}
+
+if (($diff_tour_poitrine >= 6) && (abs($diff_tour_taille) <= 2) && ($diff_tour_hanches <= -3)
+    && (abs(abs($diff_tour_poitrine)-abs($diff_tour_hanches)) <= 2)) {
+    $detype="T";
+    $detendance_mere = "SCHWARZY";
+    $detendance="Ascétique";
+    $detendancesilh="ascetique";
+    $complements.="<b>- Morphotype SCHWARZY : </b>pectoraux hyper développés, peu de seins, taille et hanches normales, ventre plat et musclé, fesses maigres et musclées, hanches creuses, jambes normales ou fines. Carences : minéraux, acides gras, lipides, minéraux, Excès : protéines animales. Risques : vieillissement accéléré du corps et du cerveau, fatigue, stress, fatigue rénale, goutte. 
+	<br><br>Morpho-complément® <b>SCHWARZY</b> : oméga3 et 6, potassium, extrait végétaux détoxifiants et anti-âge, magnésium, vit. B6, crèmes et gels hydratants, acides aminés soufrés.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_taille >= 6) && ($diff_tour_hanches <= 0)
+    && ($diff_tour_hanches >= -4) && ($diff_tour_taille >= $diff_tour_poitrine) && (($diff_tour_taille-$diff_tour_poitrine) <= 2)) {
+    $detype="T";
+    $detendance_mere = "SCHWARZY";
+    $detendance="Monastique";
+    $detendancesilh="monastique";
+    $complements.="<b>- Morphotype SCHWARZY : </b>pectoraux hyper développés, peu de seins, taille et hanches normales, ventre plat et musclé, fesses maigres et musclées, hanches creuses, jambes normales ou fines. Carences : minéraux, acides gras, lipides, minéraux, Excès : protéines animales. Risques : vieillissement accéléré du corps et du cerveau, fatigue, stress, fatigue rénale, goutte. 
+	<br><br>Morpho-complément® <b>SCHWARZY</b> : oméga3 et 6, potassium, extrait végétaux détoxifiants et anti-âge, magnésium, vit. B6, crèmes et gels hydratants, acides aminés soufrés.";
+}
+
+if (($diff_tour_poitrine >= 6) && ($diff_tour_taille >= 6) && ($diff_tour_hanches <= 0)
+    && ($diff_tour_hanches >= -4) && ($diff_tour_poitrine >= $diff_tour_taille) && (($diff_tour_poitrine-$diff_tour_taille) <= 2)) {
+    $detype="T";
+    $detendance_mere = "SCHWARZY";
+    $detendance="Don Camillo";
+    $detendancesilh="doncamillo";
+    $complements.="<b>- Morphotype SCHWARZY : </b>pectoraux hyper développés, peu de seins, taille et hanches normales, ventre plat et musclé, fesses maigres et musclées, hanches creuses, jambes normales ou fines. Carences : minéraux, acides gras, lipides, minéraux, Excès : protéines animales. Risques : vieillissement accéléré du corps et du cerveau, fatigue, stress, fatigue rénale, goutte. 
+	<br><br>Morpho-complément® <b>SCHWARZY</b> : oméga3 et 6, potassium, extrait végétaux détoxifiants et anti-âge, magnésium, vit. B6, crèmes et gels hydratants, acides aminés soufrés.";
+}
+
+$tourcuisse_ideal = $hanches - 50;
+$tourcuisse_reel = $cuisses;
+$tourcuisse_algo = $tourcuisse_reel - $tourcuisse_ideal;
+
+if($tourcuisse_algo >= -5 &&  $tourcuisse_algo <= 5){ $detailZoom_cuisses = 1; $phrase_tourcuisse = 'parfait'; }
+else if($tourcuisse_algo < -5){ $detailZoom_cuisses = 2; $phrase_tourcuisse = 'trop petit'; }
+else if($tourcuisse_algo > 5){ $detailZoom_cuisses = 3; $phrase_tourcuisse = 'trop important'; }
+
+//Objectif final
+if ($diff_tour_poitrine>0){ $objectif_poitrine="$diff_tour_poitrine cm à perdre "; $detailZoom_torse = 3; }
+else if ($diff_tour_poitrine<0){ $objectif_poitrine=($diff_tour_poitrine*-1)." cm à gagner "; $detailZoom_torse = 2; }
+else{ $objectif_poitrine= 'une mesure idéale'; $detailZoom_torse = 1; }
+
+if ($diff_tour_taille>0){ $objectif_taille= "$diff_tour_taille cm à perdre "; $detailZoom_ventre = 3; }
+else if ($diff_tour_taille<0){ $objectif_taille=(-1*$diff_tour_taille)." cm à gagner "; $detailZoom_ventre = 2; }
+else{ $objectif_taille= 'une mesure idéale'; $detailZoom_ventre = 1; }
+
+if ($diff_tour_hanches>0){ $objectif_hanches="$diff_tour_hanches cm à perdre "; $detailZoom_hanches = 3; }
+else if ($diff_tour_hanches<0){ $objectif_hanches=(-1*$diff_tour_hanches)." cm à gagner "; $detailZoom_hanches = 2; }
+else{ $objectif_hanches= 'une mesure idéale'; $detailZoom_hanches = 1; }
+
+if ($diff_poids>0){ $objectif_poids="$diff_poids kg à perdre "; }
+else if ($diff_poids<0){ $objectif_poids=(-1*$diff_poids)." kg à gagner "; }
+else{ $objectif_poids= 'un poids idéal'; }
+
+
+if ($detype=="ATHLETIQUE"){ $detendance_mere = "ATHLETIQUE"; $detype="M"; }
+
+if(empty($detype)){ $detype = 'M'; }
+
+
+function imagelinethick($image, $x1, $y1, $x2, $y2, $color, $thick = 1) {
+    /* de cette manière, ca ne marche bien que pour les lignes orthogonales
+    imagesetthickness($image, $thick);
+    return imageline($image, $x1, $y1, $x2, $y2, $color);
+    */
+    if ($thick == 1) {
+        return imageline($image, $x1, $y1, $x2, $y2, $color);
+    }
+    $t = $thick / 2 - 0.5;
+    if ($x1 == $x2 || $y1 == $y2) {
+        return imagefilledrectangle($image, round(min($x1, $x2) - $t), round(min($y1, $y2) - $t), round(max($x1, $x2) + $t), round(max($y1, $y2) + $t), $color);
+    }
+    $k = ($y2 - $y1) / ($x2 - $x1); //y = kx + q
+    $a = $t / sqrt(1 + pow($k, 2));
+    $points = array(
+        round($x1 - (1+$k)*$a), round($y1 + (1-$k)*$a),
+        round($x1 - (1-$k)*$a), round($y1 - (1+$k)*$a),
+        round($x2 + (1+$k)*$a), round($y2 - (1-$k)*$a),
+        round($x2 + (1-$k)*$a), round($y2 + (1+$k)*$a),
+    );
+    imagefilledpolygon($image, $points, 4, $color);
+    return imagepolygon($image, $points, 4, $color);
+}
+
+$P = intval($diff_tour_poitrine)*5;
+$T = intval($diff_tour_taille)*5;
+$H = intval($diff_tour_hanches)*5;
+
+$p = intval($diff_tour_poitrine);
+$t = intval($diff_tour_taille);
+$h = intval($diff_tour_hanches);
+
+$detendance_silhouette = $detendancesilh;
+
+$p_g = explode('-',intval($diff_tour_poitrine));
+$t_g = explode('-',intval($diff_tour_taille));
+$h_g = explode('-',intval($diff_tour_hanches));
+
+$morphotype = $detype;
+
+$date = $jour;
+
+
+$image = imagecreatetruecolor(380,410);
+
+$blanc = imagecolorallocate($image,255,255,255);
+$noir = imagecolorallocate($image,0,0,0);
+$rouge = imagecolorallocate($image,189,0,24);
+$vert = imagecolorallocate($image,132,186,16);
+$bleue = imagecolorallocate($image,0,158,206);
+
+$ligne = imagecolorallocate($image,49,101,156);
+$grille = imagecolorallocate($image,200,200,200);
+
+imagefill($image,0,0,$blanc);
+
+//Echelle de l'image
+$echelle = 1;
+if (((101-$P)<0) || ((101-$T)<0) || ((101-$H)<0)) $echelle = 1;
+
+//Traçage de la grille
+/*for ($i = 0; $i < 430; $i+=(10/$echelle)) {
+  imageline($image, ($i+1), 0, ($i+1), 300, $grille);
+}*/
+
+//Background image
+//Homme - Femme - Type
+if($genre == 'H'){
+    //Silhouettes
+    if($morphotype == 'T'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/T/silhouette-homme-t-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/T/silhouette-homme-t.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/T/silhouette-homme-t.jpg"));
+        }
+    }
+    else if($morphotype == 'I'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/I/silhouette-homme-i-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/I/silhouette-homme-i.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/I/silhouette-homme-i.jpg"));
+        }
+    }
+    else if($morphotype == 'M'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/M/silhouette-homme-m-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/M/silhouette-homme-m.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/M/silhouette-homme-m.jpg"));
+        }
+    }
+    else if($morphotype == 'E'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-homme-e-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-homme-e.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-homme-e.jpg"));
+        }
+    }
+    else if($morphotype == ''){
+        $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-homme-e.jpg"));
+    }
+    //Zoom
+    //Torse
+    if($detailZoom_torse == '1'){
+        $insert_image_detail_torse = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/torse-homme-1.jpg"));
+    }else if($detailZoom_torse == '2'){
+        $insert_image_detail_torse = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/torse-homme-2.jpg"));
+    }else if($detailZoom_torse == '3'){
+        $insert_image_detail_torse = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/torse-homme-3.jpg"));
+    }
+    //Ventre
+    if($detailZoom_ventre == '1'){
+        $insert_image_detail_ventre = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/ventre-homme-1.jpg"));
+    }else if($detailZoom_ventre == '2'){
+        $insert_image_detail_ventre = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/ventre-homme-2.jpg"));
+    }else if($detailZoom_ventre == '3'){
+        $insert_image_detail_ventre = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/ventre-homme-3.jpg"));
+    }
+    //Hanches
+    if($detailZoom_hanches == '1'){
+        $insert_image_detail_hanches = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/hanches-homme-1.jpg"));
+    }else if($detailZoom_hanches == '2'){
+        $insert_image_detail_hanches = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/hanches-homme-2.jpg"));
+    }else if($detailZoom_hanches == '3'){
+        $insert_image_detail_hanches = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/hanches-homme-3.jpg"));
+    }
+    //Cuisses
+    if($detailZoom_cuisses == '1'){
+        $insert_image_detail_cuisses = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/cuisses-homme-1.jpg"));
+    }else if($detailZoom_cuisses == '2'){
+        $insert_image_detail_cuisses = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/cuisses-homme-2.jpg"));
+    }else if($detailZoom_cuisses == '3'){
+        $insert_image_detail_cuisses = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/cuisses-homme-3.jpg"));
+    }
+}
+else if($genre == 'F'){
+    if($morphotype == 'T'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/T/silhouette-femme-t-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/T/silhouette-femme-t.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/T/silhouette-femme-t.jpg"));
+        }
+    }
+    else if($morphotype == 'I'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/I/silhouette-femme-i-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/I/silhouette-femme-i.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg("http://www.time-nutrition.com/k2d512z2a345/calculateur/morpho/silhouettes/I/silhouette-femme-i.jpg");
+        }
+    }
+    else if($morphotype == 'M'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/M/silhouette-femme-m-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/M/silhouette-femme-m.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/M/silhouette-femme-m.jpg"));
+        }
+    }
+    else if($morphotype == 'E'){
+        if(!empty($detendance_silhouette)){
+            $img_sil = $this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-femme-e-".$detendance_silhouette.".jpg");
+            if(file_exists($img_sil)){
+                $insert_image = imagecreatefromjpeg($img_sil);
+            }else{
+                $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-femme-e.jpg"));
+            }
+        }else{
+            $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-femme-e.jpg"));
+        }
+    }
+    else if($morphotype == ''){
+        $insert_image = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/E/silhouette-femme-e.jpg"));
+    }
+    //Zoom
+    //Poitrine
+    if($detailZoom_torse == '1'){
+        $insert_image_detail_torse = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/poitrine-femme-1.jpg"));
+    }else if($detailZoom_torse == '2'){
+        $insert_image_detail_torse = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/poitrine-femme-2.jpg"));
+    }else if($detailZoom_torse == '3'){
+        $insert_image_detail_torse = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/poitrine-femme-3.jpg"));
+    }
+    //Ventre
+    if($detailZoom_ventre == '1'){
+        $insert_image_detail_ventre = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/ventre-femme-1.jpg"));
+    }else if($detailZoom_ventre == '2'){
+        $insert_image_detail_ventre = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/ventre-femme-2.jpg"));
+    }else if($detailZoom_ventre == '3'){
+        $insert_image_detail_ventre = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/ventre-femme-3.jpg"));
+    }
+    //Hanches
+    if($detailZoom_hanches == '1'){
+        $insert_image_detail_hanches = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/hanches-femme-1.jpg"));
+    }else if($detailZoom_hanches == '2'){
+        $insert_image_detail_hanches = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/hanches-femme-2.jpg"));
+    }else if($detailZoom_hanches == '3'){
+        $insert_image_detail_hanches = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/hanches-femme-3.jpg"));
+    }
+    //Cuisses
+    if($detailZoom_cuisses == '1'){
+        $insert_image_detail_cuisses = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/cuisses-femme-1.jpg"));
+    }else if($detailZoom_cuisses == '2'){
+        $insert_image_detail_cuisses = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/cuisses-femme-2.jpg"));
+    }else if($detailZoom_cuisses == '3'){
+        $insert_image_detail_cuisses = imagecreatefromjpeg($this->getViewFileUrl("Ntic_Timescan::images/morpho/silhouettes/DETAILS/cuisses-femme-3.jpg"));
+    }
+}
+
+$background_image = imagecolortransparent($insert_image,imagecolorat($insert_image,0,0));
+
+$insert_imagex = imagesx($insert_image);
+$insert_imagey = imagesy($insert_image);
+
+imagecopymerge($image,$insert_image,5,5,0,0,$insert_imagex,$insert_imagey,100);
+
+//Image detail
+imagecopymerge($image,$insert_image_detail_torse,205,10,0,0,167,90,100);
+imagecopymerge($image,$insert_image_detail_ventre,205,107,0,0,167,89,100);
+imagecopymerge($image,$insert_image_detail_hanches,205,202,0,0,167,95,100);
+imagecopymerge($image,$insert_image_detail_cuisses,205,303,0,0,167,100,100);
+
+//Image fleches
+if($genre == 'H'){
+    $img_fleche_1 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-1.gif"));
+    imagecolortransparent($img_fleche_1,imagecolorat($img_fleche_1,0,0));
+    imagecopymerge($image,$img_fleche_1,120,50,0,0,125,72,100);
+
+    $img_fleche_2 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-2.gif"));
+    imagecolortransparent($img_fleche_2,imagecolorat($img_fleche_2,0,0));
+    imagecopymerge($image,$img_fleche_2,120,145,0,0,125,41,100);
+
+    $img_fleche_3 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-3.gif"));
+    imagecolortransparent($img_fleche_3,imagecolorat($img_fleche_3,0,0));
+    imagecopymerge($image,$img_fleche_3,115,190,0,0,125,71,100);
+
+    $img_fleche_4 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-4.gif"));
+    imagecolortransparent($img_fleche_4,imagecolorat($img_fleche_4,0,0));
+    imagecopymerge($image,$img_fleche_4,110,225,0,0,125,116,100);
+
+}else if($genre == 'F'){
+    $img_fleche_1 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-1.gif"));
+    imagecolortransparent($img_fleche_1,imagecolorat($img_fleche_1,0,0));
+    imagecopymerge($image,$img_fleche_1,120,50,0,0,125,72,100);
+
+    $img_fleche_2 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-2.gif"));
+    imagecolortransparent($img_fleche_2,imagecolorat($img_fleche_2,0,0));
+    imagecopymerge($image,$img_fleche_2,120,130,0,0,125,41,100);
+
+    $img_fleche_3 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-3.gif"));
+    imagecolortransparent($img_fleche_3,imagecolorat($img_fleche_3,0,0));
+    imagecopymerge($image,$img_fleche_3,115,180,0,0,125,71,100);
+
+    $img_fleche_4 = imagecreatefromgif($this->getViewFileUrl("Ntic_Timescan::images/morpho/elements/fleche-illus-silh-4.gif"));
+    imagecolortransparent($img_fleche_4,imagecolorat($img_fleche_4,0,0));
+    imagecopymerge($image,$img_fleche_4,115,220,0,0,125,116,100);
+}
+
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//
+$fileSystem = $objectManager->create('\Magento\Framework\Filesystem');
+$mediaPath=$fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
+
+$filePath = '/diagimg';
+$fileName = $firstname."-".$name."-".$date.".png";
+
+imagepng($image,$mediaPath."/diagimg/".$firstname."-".$name."-".$date.".png");
+
+$is_paid = 0;
+require('connect.php');
+$bdd = new PDO('mysql:dbname='.$database.';host=localhost', $username, $password);
+
+ $stmt = $bdd->prepare("INSERT INTO timescan_diag
+ (nom,prenom,email,telephone,genre,hauteur,poids,poignet,poitrine,tour_taille,hanches,cuisses,neen,etat,activite,tendance,emotion,genetique,intestin,departement,jour,imc,detype,detendance_mere,detendance,is_paid,code_promo)
+ VALUES(:nom,:prenom,:email,:telephone,:genre,:hauteur,:poids,:poignet,:poitrine,:tour_taille,:hanches,:cuisses,:neen,:etat,:activite,:tendance,:emotion,:genetique,:intestin,:departement,:jour,:imc,:detype,:detendance_mere,:detendance,:is_paid,:code_promo)");
+$stmt->bindParam(':nom', $name);
+$stmt->bindParam(':prenom', $firstname);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':telephone', $telephone);
+$stmt->bindParam(':genre', $genre);
+$stmt->bindParam(':hauteur', $hauteur);
+$stmt->bindParam(':poids', $poids);
+$stmt->bindParam(':poignet', $poignet);
+$stmt->bindParam(':poitrine', $poitrine);
+$stmt->bindParam(':tour_taille', $tour_taille);
+$stmt->bindParam(':hanches', $hanches);
+$stmt->bindParam(':cuisses', $cuisses);
+$stmt->bindParam(':neen', $dob);
+$stmt->bindParam(':etat', $etat);
+$stmt->bindParam(':activite', $activite);
+$stmt->bindParam(':tendance', $tendance);
+$stmt->bindParam(':emotion', $emotion);
+$stmt->bindParam(':genetique', $genetique);
+$stmt->bindParam(':intestin', $intestin);
+$stmt->bindParam(':departement', $departement);
+$stmt->bindParam(':jour', $jour);
+$stmt->bindParam(':imc', $imc);
+$stmt->bindParam(':detype', $detype);
+$stmt->bindParam(':detendance_mere', $detendance_mere);
+$stmt->bindParam(':detendance', $detendance);
+$stmt->bindParam(':is_paid', $is_paid);
+$stmt->bindParam(':code_promo', $codepromo);
+$stmt->execute();
+
+
+?>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tab" role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs calculateur">
+                <li class="active">
+                    <a href="#page1" data-toggle="tab">Page 1</a>
+                </li>
+                <li>
+                    <a href="#page2" data-toggle="tab">Page 2</a>
+                </li>
+                <li>
+                    <a href="#page3" data-toggle="tab">Page 3</a>
+                </li>
+                <li>
+                    <a href="#page4" data-toggle="tab">Page 4</a>
+                </li>
+                <li>
+                    <a href="#page5" data-toggle="tab">Page 5</a>
+                </li>
+                <li>
+                    <a href="#page6" data-toggle="tab">Page 6</a>
+                </li>
+                <li>
+                    <a href="#page7" data-toggle="tab">Page 7</a>
+                </li>
+                <li>
+                    <a href="#page8" data-toggle="tab">Page 8</a>
+                </li>
+                <li>
+                    <a href="#page9" data-toggle="tab">Page 9</a>
+                </li>
+                <li>
+                    <a href="#page10" data-toggle="tab">Page 10</a>
+                </li>
+                <li>
+                    <a href="#page11" data-toggle="tab">Page 11</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="page1">
+                    <div class="titre-page-bilan">
+                        <h2>TIME EXPERTISE </h2>
+                        <h4 class="text-center"><?php echo $firstname.' '.$name; ?></h4>
+                    </div>
+                    <div class="cadre-noir-light">
+                        <div class="cadre-noir-time-expertise">
+                            <div class="raw">
+                                <ul>
+                                    <li><?php echo $firstname.' '.$name; ?></li>
+                                    <li>Âge : <?php echo (date('Y') - $dob); ?> ans</li>
+                                    <li>Poids : <?php echo $poids; ?> kg</li>
+                                    <li>Taille : <?php echo $hauteur; ?> cm</li>
+                                    <li>Tour de poitrine : <?php echo $poitrine; ?> cm</li>
+                                    <li>Tour de taille : <?php echo $tour_taille; ?> cm</li>
+                                    <li>Tour de hanches : <?php echo $hanches; ?> cm</li>
+                                    <li>Tour de cuisse : <?php echo $cuisses; ?> cm</li>
+                                    <li>Largeur du poignet : <?php echo $poignet; ?> cm</li>
+                                    <li>Votre situation : <?php echo $etat; ?></li>
+                                    <li>Votre niveau d'activité : <?php echo $activite; ?></li>
+                                    <li>Votre profil alimentaire actuel : <?php echo $tendance; ?></li>
+                                    <?php
+                                    $estVide = true;
+                                    $liste = explode('|',$emotion);
+                                    $str = '';
+                                    $cpt = 0;
+                                    foreach($liste as $item){
+                                        $ligne = explode(':',$item);
+                                        if($ligne[1] != ' ' && $ligne[1] != ''){
+                                            $estVide = false;
+                                            $str[$cpt] = $ligne[0].': '.$ligne[1];
+                                            $cpt++;
+                                        }
+                                    }
+                                    ?>
+                                    <?php if($estVide): ?>
+                                        <li>Votre profil émotionnel : non renseigné</li>
+                                    <?php else: ?>
+                                        <li>Votre profil émotionnel : <ul><?php foreach($str as $item){if($item){echo '<li class="liste">'.$item.'</li>';}} ?></ul></li>
+                                    <?php endif; ?>
+                                    <?php if($genetique): ?>
+                                        <li>Votre profil génétique : <ul><?php $liste = explode('|',$genetique); foreach($liste as $item){if($item){echo '<li class="liste">'.$item.'</li>';}} ?></ul></li>
+                                    <?php else: ?>
+                                        <li>Votre profil génétique : non renseigné</li>
+                                    <?php endif; ?>
+                                    <?php if($intestin): ?>
+                                        <li>Votre profil intestinal : <ul><?php $liste = explode('|',$intestin); foreach($liste as $item){if($item){echo '<li class="liste">'.$item.'</li>';}} ?></ul></li>
+                                    <?php else: ?>
+                                        <li>Votre profil intestinal : non renseigné</li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane" id="page2">
+
+                    <?php
+                    $tourcuisse_ideal = $hanches - 50;
+                    $tourcuisse_reel = $cuisses;
+                    $tourcuisse_algo = $tourcuisse_reel - $tourcuisse_ideal;
+
+                    if($tourcuisse_algo >= -5 &&  $tourcuisse_algo <= 5){ $detailZoom_cuisses = 1; $phrase_tourcuisse = 'parfait'; }
+                    else if($tourcuisse_algo < -5){ $detailZoom_cuisses = 2; $phrase_tourcuisse = 'trop petit'; }
+                    else if($tourcuisse_algo > 5){ $detailZoom_cuisses = 3; $phrase_tourcuisse = 'trop important'; }
+                    //Objectif final
+                    if ($diff_tour_poitrine>0){ $objectif_poitrine="$diff_tour_poitrine ".'cm à perdre '; $detailZoom_torse = 3; }
+                    else if ($diff_tour_poitrine<0){ $objectif_poitrine=($diff_tour_poitrine*-1)." ".'cm à gagner '; $detailZoom_torse = 2; }
+                    else{ $objectif_poitrine= 'une mesure idéale'; $detailZoom_torse = 1; }
+
+                    if ($diff_tour_taille>0){ $objectif_taille="$diff_tour_taille ".'cm à perdre '; $detailZoom_ventre = 3; }
+                    else if ($diff_tour_taille<0){ $objectif_taille=(-1*$diff_tour_taille)." ".'cm à gagner '; $detailZoom_ventre = 2; }
+                    else{ $objectif_taille= 'une mesure idéale'; $detailZoom_ventre = 1; }
+
+                    if ($diff_tour_hanches>0){ $objectif_hanches="$diff_tour_hanches ".'cm à perdre '; $detailZoom_hanches = 3; }
+                    else if ($diff_tour_hanches<0){ $objectif_hanches=(-1*$diff_tour_hanches)." ".'cm à gagner '; $detailZoom_hanches = 2; }
+                    else{ $objectif_hanches= 'une mesure idéale'; $detailZoom_hanches = 1; }
+
+                    if ($diff_poids>0){ $objectif_poids="$diff_poids ".'kg à perdre '; }
+                    else if ($diff_poids<0){ $objectif_poids=(-1*$diff_poids)." ".'kg à gagner '; }
+                    else{ $objectif_poids= 'un poids idéal '; }
+                    ?>
+
+                    <div class="titre-page-bilan">
+                        <h2>Votre BILAN PERSONNALISÉ TIME Nutrition</h2>
+                        <h4 class="text-center"><?php echo $firstname.' '.$name; ?></h4>
+                    </div>
+                    <div class="intro">
+                        <p><strong>A l'étude de vos réponses, il apparaît que votre morphotype est <?php echo $detype; ?> et que votre IMC est de <?php echo $imc; ?></strong></p>
+                        <div>
+                            <ul>
+                                <?php if($detype == 'T'): ?>
+                                    <li>Votre TIME Silhouette <?php echo $detype; ?> révèle que vous avez tendance à prendre du poids au niveau de la taille et du ventre.</li>
+                                <?php elseif($detype == 'I'): ?>
+                                    <li>Votre TIME Silhouette <?php echo $detype; ?> révèle que vous avez tendance à prendre du poids au niveau des Parties inférieures du corps.</li>
+                                <?php elseif($detype == 'M'): ?>
+                                    <li>Votre TIME Silhouette <?php echo $detype; ?> révèle que vous avez tendance à prendre du poids de façon massive.</li>
+                                <?php else: ?>
+                                    <li>Votre TIME Silhouette <?php echo $detype; ?> révèle que vous avez une silhouette bien équilibrée</li>
+                                <?php endif; ?>
+                                <li>
+                                    Votre IMC <?php echo $imc.' '; ?>
+                                    <?php if($imc >= 15 && $imc <= 18.5): ?>
+                                        <?php echo 'correspond à un état de maigreur.' ?>
+                                    <?php elseif($imc > 18.5 && $imc <= 21.5): ?>
+                                        <?php echo 'correspond à une corpulence normale.' ?>
+                                    <?php elseif($imc > 21.5 && $imc <= 25): ?>
+                                        <?php echo 'correspond à une corpulence subnormale.' ?>
+                                    <?php elseif($imc > 25 && $imc <= 30): ?>
+                                        <?php echo 'correspond à un état de surpoids modéré.' ?>
+                                    <?php elseif($imc > 30 && $imc <= 40): ?>
+                                        <?php echo 'correspond à un état de surpoids élevé.' ?>
+                                    <?php elseif($imc > 40 && $imc <= 45): ?>
+                                        <?php echo 'correspond à un état de surpoids sévère.' ?>
+                                    <?php endif; ?>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="regle-imc">
+                                <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/regle-imc-fr.jpg") ?>" alt="Legende IMC"/>
+                            </div>
+                            <div class="trait-regle-imc"></div>
+                            <div class="curseur-regle-imc">
+                                <img style="margin-left:<?php echo round($imc * 8.8 - 147) ?>px" src="<?php echo $this->getViewFileUrl('Ntic_Timescan::images/curseur-regle.png'); ?>"/>
+                                <br />
+                                <span class="texte-regle-imc" style="margin-left:<?php echo round($imc * 8.8 - 151) ?>px"><?php echo $imc ?></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="titre-page-bilan">
+                        <h2>VOS OBJECTIFS</h2>
+                        <h4 class="text-center"><?php echo $firstname.' '.$name; ?></h4>
+                    </div>
+                    <?php
+
+                    if($imc>15 && $imc<18.5) {
+                        $etat="un état de maigreur"; //E89D26
+                        $cur="2";
+                    }
+                    else if($imc>18.5 && $imc<21.5) $etat="une corpulence normale"; //91F3A3
+                    else if($imc>21.5 && $imc<25) $etat="une corpulence subnormale"; //63B175
+                    else if($imc>25 && $imc<30) $etat="un état de surpoids"; //6763B1
+                    else if($imc>30 && $imc<40) $etat="un état de franche obésité"; //F2BAD5*/
+                    else if($imc>=40) {
+                        $etat="une véritable et importante obésité";
+                        $cur="2";
+                    }
+                    ?>
+
+                    <div class="content-objectif-time">
+                        <div class="diagramme">
+
+                            <img src="<?php echo $objectManager->get('Magento\Store\Model\StoreManagerInterface')
+                                ->getStore()
+                                ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);?>/diagimg/<?php echo $firstname."-".$name."-".$date.".png"?>">
+
+                        </div>
+
+                        <div class="diagramme-detail">
+                            <ul>
+                                <li>Tour de poitrine idéal : <strong><?php echo $tour_poitrine_theorique; ?> cm <br /><span style="margin-left:16px;" class="green-text-fonce"> soit <?php echo $objectif_poitrine; ?></span></strong></li>
+                                <li>Tour de taille idéal : <strong><?php echo $tour_taille_theorique; ?> cm <br /><span style="margin-left:16px;" class="green-text-fonce"> soit <?php echo $objectif_taille; ?></span></strong></li>
+                                <li>Tour de hanches idéal : <strong><?php echo $tour_hanches_theorique; ?> cm <br /><span style="margin-left:16px;" class="green-text-fonce"> soit <?php echo $objectif_hanches; ?></span></strong></li>
+                                <li>Votre tour de cuisse : <strong><?php echo $tourcuisse_reel; ?> cm <br /><span style="margin-left:16px;" class="green-text-fonce"> est <?php echo $phrase_tourcuisse; ?></span></strong></li>
+                            </ul>
+                        </div>
+                        <div class="diagramme-conclu">
+                            <ul>
+                            <li>Poids idéal : <strong><?php echo $poids_ideal; ?> kg<span class="green-text-fonce"> soit <?php echo $objectif_poids; ?></span></strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane" id="page3">
+                    <div class="titre-page-bilan">
+                        <h2>VOTRE PROFIL</h2>
+                        <h4 class="text-center"><?php echo $firstname.' '.$name; ?></h4>
+                    </div>
+
+                    <div class="content-page-bilan">
+
+                        <?php
+
+                        if ($detype == 'E'){
+                            echo file_get_contents($this->getViewFileUrl('Ntic_Timescan::images/profil/'.$detype.'/'.$genre.'/categorie_1.php'));
+                        }elseif($detendance_mere = "TRONC D\'ARBRE"){
+                            echo file_get_contents($this->getViewFileUrl('Ntic_Timescan::images/profil/'.$detype.'/'.$genre.'/TRONC_D_ARBRE.php'));
+                        }else{
+                            echo file_get_contents($this->getViewFileUrl('Ntic_Timescan::images/profil/'.$detype.'/'.$genre.'/'.$detendance_mere.'.php'));
+                        }
+
+                        ?>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="page4">
+                    <?php
+                    if($detype == 'T'){
+                        $offre_b = 56;
+                        $offre_c = 57;
+                    }
+                    if($detype == 'I'){
+                        $offre_b = 54;
+                        $offre_c = 58;
+                    }
+                    if($detype == 'M'){
+                        $offre_b = 55;
+                        $offre_c = 59;
+                    }
+                    if($detype == 'E'){
+                        $offre_b = 53;
+                        $offre_c = 62;
+                    }
+
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+                    $product = $objectManager->create('Magento\Catalog\Model\Product')->load(14889);
+
+                    if($detype == 'T'){
+                        $product2 = $objectManager->create('Magento\Catalog\Model\Product')->load(14817);
+                        $product3 = $objectManager->create('Magento\Catalog\Model\Product')->load(14831);
+                    }
+                    if($detype == 'I'){
+                        $product2 = $objectManager->create('Magento\Catalog\Model\Product')->load(14818);
+                        $product3 = $objectManager->create('Magento\Catalog\Model\Product')->load(14832);
+                    }
+                    if($detype == 'M'){
+                        $product2 = $objectManager->create('Magento\Catalog\Model\Product')->load(14819);
+                        $product3 = $objectManager->create('Magento\Catalog\Model\Product')->load(14833);
+                    }
+                    if($detype == 'E'){
+                        $product2 = $objectManager->create('Magento\Catalog\Model\Product')->load(14820);
+                        $product3 = $objectManager->create('Magento\Catalog\Model\Product')->load(14834);
+                    }
+
+                    $addToCartUrl =  $listBlock->getAddToCartUrl($product);
+                    $addToCartUrl2 =  $listBlock->getAddToCartUrl($product2);
+                    $addToCartUrl3 =  $listBlock->getAddToCartUrl($product3);
+
+                    ?>
+                    <div class="titre-page-bilan">
+                        <h2>Plus de temps à perdre, prenez votre silhouette et votre santé en main !</h2>
+                        <h4 class="text-center"><?php echo $firstname.' '.$name; ?></h4>
+
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <br />
+                        <p>Comme vous avez pu le constater votre silhouette vous trahit ! Connaître votre TIME Silhouette, c’est connaître vos erreurs alimentaires.</p>
+                        <p>TIME Nutrition vous propose donc un programme personnalisé qui vous permettra de corriger votre silhouette et de restaurer votre bien-être en synchronisant votre alimentation avec votre physiologie. C’est ce que l’on appelle la chronobiologie alimentaire.</p>
+                        <p>TIME Nutrition n’est pas un régime, c’est une nouvelle philosophie alimentaire, un nouveau mode de vie. L’objectif de TIME Nutrition n’est pas de vous faire maigrir à toute vitesse mais d’acquérir une silhouette idéale, optimale pour votre santé, de façon durable. Pour y arriver, TIME Nutrition utilise toutes les solutions apportées par la chronobiologie alimentaire : prendre les bonnes choses aux bons moments pour obtenir des résultats performants sur la silhouette et le bien-être général !</p>
+                        <br />
+                        <div class="onglet">
+                            <div class="titre-page-bilan left petit_titre"><h3>TIME Nutrition en 1 minute</h3></div>
+                            <div class="left"><img class="on-minute-img" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/one-minute.jpg"); ?>" title="TIME Nutrition en 1 minute"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> est GLOBAL</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Il comprend des recommandations alimentaires adaptées à votre TIME Silhouette, une prescription de compléments alimentaires dont votre corps a besoin et des conseils pour suivre TIME Nutrition sans contrainte au quotidien !</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> est PERSONNALISÉ</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Le programme alimentaire et la prescription de produits ont été définis en fonction de l’étude de vos paramètres individuels.</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> est ÉVOLUTIF</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>La TIME Expertise a été établie en fonction de votre TIME Silhouette actuelle et évoluera avec celle-ci. Pour être efficace, le programme doit être suivi en associant programme alimentaire, synchroniseurs alimentaires et activité physique régulière (au moins 2 heures de sport par semaine).</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> N'EST PAS PRIVATIF</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Pour mincir durablement, il ne faut pas supprimer l’une ou l’autre des catégories d’aliments que vous avez l’habitude de consommer, mais plutôt apprendre à les consommer à la bonne heure. TIME Nutrition, c’est l’assurance et le plaisir de pouvoir manger de tout, sans frustration et sans risque d’effet rebond ou « yoyo » une fois la silhouette idéale atteinte.</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> EST CHRONOBIOLOGIQUE</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Le but est de vous apprendre à organiser vos repas, à les harmoniser avec vos rythmes biologiques (hormonaux, enzymatiques) et avec vos horaires de stockage et de déstockage pour éviter la prise de poids.</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> EST PHYSIOLOGIQUE</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Établi à partir des notions scientifiques de la chronobiologie alimentaire, le programme TIME Nutrition convient à tous : à ceux qui veulent mincir, à ceux qui désirent prendre du poids, ou encore à ceux qui veulent se maintenir durablement en bonne santé. Quelque soit votre âge, votre situation et vos objectifs, TIME Nutrition vous permettra d'acquérir une silhouette santé, équilibrée et harmonieuse, et de la conserver durablement.</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> N'EST PAS CONTRAIGNANT</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Les repas TIME Free inscrits dans le programme sont l’occasion de profiter des invitations et autres repas de fêtes.</p>
+                        </div>
+                        <div class="raw">
+                            <div class="titre">
+                                <img class="left" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-spe-4.jpg"); ?>" title="TIME Nutrition® est GLOBAL">
+                                <span class="left vert">TIME Nutrition<sup>®</sup> EST UN MODE DE VIE</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <p>Il ne s’agit pas d’un régime mais d’un véritable apprentissage de nouvelles habitudes de vie. Cette méthode peut être suivie en continu tout au long de la vie et toute la famille peut en profiter !</p>
+                        </div>
+
+                    </div>
+
+                    <div class="titre-page-bilan">
+                        <h2>Découvrez sans plus attendre votre programme
+                            <br>
+                            TIME Nutrition Personnalisé !
+                        </h2>
+                    </div>
+
+                    <div class="option-prod-payant-container">
+                        <div class="option">
+                            <div class="titre">
+                                <div class="texte left"><h3>OPTION A : </h3><h3>Achetez votre programme TIME Nutrition personnalisé</h3></div>
+                                <div class="img right"><img class="option-img" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/prix-option-a-fr.jpg"); ?>" title="Prix Option A"></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="offre">
+                                <div class="ajout_panier">
+                                    <form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post">
+                                        <?php echo $block->getBlockHtml('formkey')?>
+                                        <div class="btn">
+                                            <button type="submit" title="Acheter OPTION A : programme TIME Nutrition personnalisé" class="action tocart primary">
+                                                <span>Ajouter au panier</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="description">
+                                    <div class="texte">
+                                        Programme personnalisé de 7 pages comprenant des recommandations alimentaires, les quantités d’aliments adaptées à votre silhouette, des conseils pour gérer votre quotidien, des idées recettes...
+                                    </div>
+                                    <div class="image">
+                                        <img src="<?php echo $this->getViewFileUrl('Ntic_Timescan::images/pages-option.jpg') ?>" title="Pages Option A" />
+                                    </div>
+                                </div>
+                                <div class="annonce">
+                                    Et recevez en cadeau
+                                </div>
+                                <div class="cadeau1">
+                                    <div class="image left">
+                                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/livre-fr.jpg") ?>" alt="logo_livre" />
+                                    </div>
+                                    <div class="texte left">
+                                        <div>Le livre TIME Nutrition « Faites de l’aliment votre Médicament</div>
+                                        <div style="font-weight:normal; font-size:12px;">Les bases de la chronobiologie du corps et de la peau</div>
+                                    </div>
+                                    <div class="prix left">
+                                        <img class="prix-livre-option-a" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/prix-livre-option-a-fr.jpg") ?>" title="Cadeau Option A">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <div class="titre">
+                                <div class="texte left"><h3>OPTION B : CURE DE 1 MOIS : </h3><h3>Achetez les produits adaptés à votre silhouette <br/>et recevez votre programme personnalisé en cadeau</h3></div>
+                                <div class="img right"><img class="option-img" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/prix-option-b-fr.jpg"); ?>" title="Prix Option B"></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="offre">
+                                <div class="ajout_panier">
+                                    <form data-role="tocart-form" action="<?php echo $addToCartUrl2; ?>" method="post">
+                                        <?php echo $block->getBlockHtml('formkey')?>
+                                        <div class="btn">
+                                            <button type="submit" title="Acheter OPTION B : CURE DE 1 MOIS" class="action tocart primary">
+                                                <span>Ajouter au panier</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="description">
+                                    <div class="texte">
+                                        Cure comprenant 7 compléments alimentaires adaptés à votre silhouette et dont votre corps à besoin pour rééquilibrer ses mécanismes physiologiques. Cette cure à renouveler régulièrement est nécessaire à la réussite du programme TIME Nutrition et est indispensable pour entretenir votre santé.
+                                    </div>
+                                    <div class="liste left">
+                                        <ul>
+                                            <li><span class="w350"><strong>TIME Tyrosine</strong><br />Régule les prises alimentaires et stimule le tonus</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI TYROSINE.png") ?>" alt="time tyrosine" /></li>
+                                            <li><span class="w350"><strong>TIME Probiotic</strong><br />Restaure la flore intestinale et lutte contre les troubles digestifs</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI PROBIOTIC.png") ?>" alt="time probiotic" /></li>
+                                            <li><span class="w350"><strong>TIME Magnesium</strong><br />Maintient l'équilibre nerveux</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI MAGNESIUM.png") ?>" alt="time magnesium" /></li>
+                                            <li><span class="w350"><strong>TIME Tryptophan</strong><br />Contrôle les pulsions alimentaires et régule le sommeil</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI TRYPTOPHAN.png") ?>" alt="time tryptophan" /></li>
+                                            <li><span class="w350"><strong>TIME Omega</strong><br />Lutte contre les troubles de la mémoire, de la concentration et les affections visuelles</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI OMEGA.png") ?>" alt="time omega" /></li>
+                                            <li><span class="w350"><strong>TIME Fat Burner</strong><br />Draine vos zones de stockage spécifiques : taille et ventre</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/time-fat-burner.png") ?>" alt="time fat burner" /></li>
+                                            <li><span class="w350"><strong>Synchroniseur TIME Silhouette <?php echo $detype; ?> </strong><br />Brûle les graisses superflues et détoxifie l'organisme</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/DRAINEUR-".$detype.".png") ?>" alt="time silhouette <?php echo $detype; ?>" /></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="annonce">
+                                    Et recevez en cadeau
+                                </div>
+                                <div class="cadeau2">
+                                    <div class="texte">
+                                        <div>Votre programme TIME Nutrition personnalisé</div>
+                                        <div>7 pages comprenant des recommandations alimentaires, les quantités d’aliments adaptées à votre silhouette, des conseils pour gérer votre quotidien, des idées recettes...</div>
+                                    </div>
+                                    <div class="image">
+                                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/pages-option.jpg") ?>" title="Pages Option B">
+                                    </div>
+                                    <div class="livre">
+                                        <div class="left"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/livre-option-b.jpg") ?>" title="Cadeau Option B">
+                                            <div class="cadeau">Valeur du cadeau<br>48.90 €</div>
+                                        </div>
+
+                                        <div class="texte left">
+                                            <p><span>Le livre TIME Nutrition « Faites de l’aliment votre Médicament »</span><br /><span style="font-weight:normal">Les bases de la chronobiologie du corps et de la peau</span></p>
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <div class="titre">
+                                <div class="texte left"><h3>OPTION C : CURE DE 2 MOIS :</h3><h3>Achetez la cure 2 mois et recevez en cadeau votre programme <br/>TIME Nutrition personnalisé ainsi que des produits diététiques complémentaires</h3></div>
+                                <div class="img right"><img class="option-img" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/prix-option-c-fr.jpg"); ?>" title="Prix Option C"></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="offre">
+                                <div class="ajout_panier">
+                                    <form data-role="tocart-form" action="<?php echo $addToCartUrl3; ?>" method="post">
+                                        <?php echo $block->getBlockHtml('formkey')?>
+                                        <div class="btn">
+                                            <button type="submit" title="Acheter OPTION C : CURE DE 2 MOIS" class="action tocart primary">
+                                                <span>Ajouter au panier</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="description">
+                                    <div class="texte">
+                                        Cure comprenant 7 compléments alimentaires adaptés à votre silhouette et dont votre corps à besoin pour rééquilibrer ses mécanismes physiologiques. En choisissant cette cure de 2 mois vous pouvez être sûr(e) de bien réussir le démarrage du programme TIME Nutrition et d’amorcer un remodelage rapide de votre silhouette tout en préservant votre santé.
+                                    </div>
+                                    <div class="liste left">
+                                        <ul>
+                                            <li><span class="w350"><strong>TIME Tyrosine X2</strong><br />Régule les prises alimentaires et stimule le tonus</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI TYROSINE.png") ?>" alt="time tyrosine" /></li>
+                                            <li><span class="w350"><strong>TIME Probiotic X2</strong><br />Restaure la flore intestinale et lutte contre les troubles digestifs</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI PROBIOTIC.png") ?>" alt="time probiotic" /></li>
+                                            <li><span class="w350"><strong>TIME Magnesium X2</strong><br />Maintient l'équilibre nerveux</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI MAGNESIUM.png") ?>" alt="time magnesium" /></li>
+                                            <li><span class="w350"><strong>TIME Tryptophan X2</strong><br />Contrôle les pulsions alimentaires et régule le sommeil</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI TRYPTOPHAN.png") ?>" alt="time tryptophan" /></li>
+                                            <li><span class="w350"><strong>TIME Omega X2</strong><br />Lutte contre les troubles de la mémoire, de la concentration et les affections visuelles</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI OMEGA.png") ?>" alt="time omega" /></li>
+                                            <li><span class="w350"><strong>Synchroniseur TIME Fat Burner X2</strong><br />Draine vos zones de stockage spécifiques : taille et ventre</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/time-fat-burner.png") ?>" alt="time fat burner" /></li>
+                                            <li><span class="w350"><strong>Synchroniseur TIME Silhouette <?php echo $detype; ?> X2</strong><br />Brûle les graisses superflues et détoxifie l'organisme</span><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/DRAINEUR-".$detype.".png") ?>" alt="time silhouette $detype" /></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="annonce">
+                                    Et recevez en cadeau
+                                </div>
+                                <div class="cadeau3">
+                                    <div class="texte">
+                                        <div>Votre programme TIME Nutrition personnalisé</div>
+                                        <div>7 pages comprenant des recommandations alimentaires, les quantités d’aliments adaptées à votre silhouette, des conseils pour gérer votre quotidien, des idées recettes...</div>
+                                    </div>
+                                    <div class="image">
+                                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/pages-option.jpg") ?>" title="Pages Option C">
+                                    </div>
+                                    <div class="livre">
+                                        <div class="left"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/livre-option-b.jpg") ?>" title="Cadeau Option B">
+                                            <div class="cadeau">Valeur du cadeau<br>48.90 €</div>
+                                        </div>
+
+                                        <div class="texte left">
+                                            <p><span>Le livre TIME Nutrition « Faites de l’aliment votre Médicament »</span><br /><span style="font-weight:normal">'Les bases de la chronobiologie du corps et de la peau</span></p>
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Fin étape 4-->
+                <div class="tab-pane" id="page5">
+                    <?php
+                    function round5($valeur) { //Arrondir à 5g près
+                        return round(($valeur)*0.2)*5;
+                    }
+                    function round9($valeur) { //Arrondir à la moitié près (oeufs)
+                        return round(($valeur)*2)/2;
+                    }
+
+                    $hauteur_prescrip = $hauteur;
+                    $morphoactivite_prescip= $activite;
+                    /* Quantité Fromage*/
+                    if (($morphoactivite_prescip=="inactif")or($morphoactivite_prescip=="sedentaire")) $vptitdej['fromage']=round5(($hauteur_prescrip-135)*2);
+                    if (($morphoactivite_prescip=="actif")or($morphoactivite_prescip=="manuel")) $vptitdej['fromage']=round5(($hauteur_prescrip-120)*2);
+                    /*******************/
+
+                    /* Quantité Pain*/
+                    if (($morphoactivite_prescip=="inactif")or($morphoactivite_prescip=="sedentaire")) $vptitdej['pain']=round5($hauteur_prescrip-120);
+                    if (($morphoactivite_prescip=="actif")or($morphoactivite_prescip=="manuel")) $vptitdej['pain']=round5($hauteur_prescrip-100);
+                    ?>
+                    <div class="header-content-bilan">
+                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+                    </div>
+                    <div class="titre-page-bilan">
+                        <h1 class="jaune">PETIT-DÉJEUNER : DES PROTÉINES ET DE L’ÉNERGIE</h1>
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <div class="intro">
+                            <div class="texte left">
+                                <div><strong>Le premier moment fort de la journée !</strong></div>
+                                <div>À l’heure du petit déjeuner, la moindre quantité de sucre apportée par l’alimentation va augmenter la sécrétion d’insuline et provoquer l’hypoglycémie réactionnelle génératrice de fringales<br/><br/>Pour éviter le coup de pompe et la fringale de fin de matinée, il faut donc éviter d’apporter à l’organisme des sucres en trop grande quantité. Il faut en apporter mais en quantité limitée et en les accompagnants d’aliments gras afin que les sucres deviennent lents et soient progressivement assimilés pour apporter à l’organisme la juste quantité d’énergie nécessaire.</div>
+                            </div>
+                            <div class="left"><img class="horloge" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/petit-dejeuner-horloge-fr.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-jaune border-all"><strong>PETIT-DÉJEUNER</strong></td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Tyrosine</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Probiotic</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Magnesium</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Fat Burner</td>
+                                    <td class="border-semi-last">10 ml</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Fromage (de préférence non allégé, au lait entier et cru, non pasteurisé)</td>
+                                    <td class="border-semi-last"><?php echo $vptitdej['fromage'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Pain</td>
+                                    <td class="border-semi-last"><?php echo $vptitdej['pain'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Beurre</td>
+                                    <td class="border-semi-last">10 à 15 g</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="bloc">
+                            <div class="right"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/img-bottom-left-p-5.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les nutriments apportés par le petit-déjeuner ?</strong></div>
+                                <div class="texte">Le petit-déjeuner TIME Nutrition® doit apporter des protéines, des lipides, des vitamines liposolubles(A et D), du calcium et le minimum nécessaire de sucres.</div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments préconisés ?</strong></div>
+                                <div class="texte">
+                                    Les aliments recommandés pour le petit-déjeuner doivent renfermer une forte proportion de protéines riches en acides aminés tels que la tyrosine, mais aussi tous les acides gras saturés et insaturés permettant la régulation de la synthèse des triglycérides.
+                                    <ul>
+                                        <li class="valid"><strong>Le beurre et le fromage :</strong> ces aliments contiennent d’une part des protéines de qualité et d’autre part des acides gras utiles le matin pour fournir de l’énergie et éviter un stockage de triglycérides.</li>
+                                        <li class="valid"><strong>Le pain :</strong> il apporte des vitamines et minéraux, des protéines, des fibres et un complément de sucres qui seront «ralentis» par le beurre. Evitez les pains industriels, choisissez du bon pain confectionné par votre artisan boulanger et si possible du pain au levain.</li>
+                                        <li class="valid">La présence d'œuf, de charcuterie ou de poisson est acceptable occasionnellement.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments à éviter ?</strong></div>
+                                <div class="texte">
+                                    <ul>
+                                        <li class="interdit"><strong>Les yaourts et le fromage blanc :</strong> il faut éviter ces aliments car ils contiennent du lactose. Beaucoup de personnes ne le digèrent pas et ce sucre du lait, constitué de galactose et de glucose, est en plus un excellent facteur de croissance capable de faire rapidement prendre du poids ! Il vaut donc mieux éviter les aliments qui en sont riches, d’autant plus s’ils ne contiennent pas assez de protéines et d’acides gras. C’est une des raisons pour lesquelles on ne peut pas remplacer le fromage par des yaourts ou du fromage blanc.</li>
+                                        <li class="interdit"><strong>Les gâteaux et autres produits sucrés :</strong> les sucres rapides sont à éviter car ils seraient directement transformés en triglycérides et mis en réserve entraînant ainsi une prise de poids. Par ailleurs, si le petit déjeuner n’était composé que de sucres rapides, cela constituerait un apport trop important de sucre. En arrivant d’un coup dans le sang, le sucre entraînerait la sécrétion d’une grande quantité d’insuline et après un très bref « coup de fouet », l’organisme serait de nouveau en manque de sucre. C’est l’hypoglycémie réactionnelle. Pour un apport d’énergie en continu toute la matinée, il vaut mieux oublier les petits déjeuners sucrés.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quelle boisson consommer au petit-déjeuner ?</strong></div>
+                                <div class="texte">La boisson peut être du café ou du thé. Il faut éviter le lait et le sucre.</div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Est-ce que je peux rajouter un fruit à mon petit-déjeuner ?</strong></div>
+                                <div class="texte">Un fruit pourra être ajouté quand le poids et la silhouette seront stabilisés.</div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quelle est l’action des synchroniseurs alimentaires ?</strong></div>
+                                <div class="texte">Les synchroniseurs alimentaires font partis du programme TIME Nutrition et permettent de relancer le rythme de l’horloge biologique. Les 3 synchroniseurs à prendre au petit-déjeuner agissent en synergie pour remettre de l’ordre dans l’assimilation des aliments aux niveaux :</div>
+                                <div>
+                                    <ul>
+                                        <li class="rond">Intestinal : <strong>TIME Probiotic</strong> purifie la flore intestinale et réduit les troubles digestifs. <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan/images/ETUI PROBIOTIC.png") ?>" alt="time probiotic" /></li>
+                                        <li class="rond">Cérébral : <strong>TIME Tyrosine</strong> stimule le tonus et le dynamisme tout en régulant les prises alimentaires. <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan/images/ETUI TYROSINE.png") ?>" alt="time tyrosine" /></li>
+                                        <li class="rond">Organique : <strong>TIME Magnesium</strong> maintient l’équilibre nerveux et participe au bon fonctionnement de l’organisme. <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan/images/ETUI MAGNESIUM.png") ?>" alt="time magnesium" /></li>
+                                        <li class="rond"><strong>TIME Fat Burner</strong> complète l’action des 3 synchroniseurs en agissant sur l’élimination des graisses superflues et sur le transit intestinal. <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan/images/time-fat-burner.png") ?>" alt="time fat burner" /></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin étape 5 -->
+                <div class="tab-pane" id="page6">
+                    <?php
+                    if ($morphoactivite_prescip=="inactif")
+                    {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+40);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+20);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-140)/10);
+                    }
+                    if ($morphoactivite_prescip=="sedentaire") {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip+20);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+65);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+40);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-135)/10);
+                    }
+                    if ($morphoactivite_prescip=="actif") {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip+60);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+105);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+80);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-130)/10);
+                    }
+                    if ($morphoactivite_prescip=="manuel") {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip+100);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+145);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+120);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-120)/10);
+                    }
+
+                    $vdejeuner['poisson']=round5($hauteur_prescrip+100);
+                    $vdejeuner['feculents']=round5(round(($hauteur_prescrip-130)*0.625))*10;
+
+                    $vdiner['poissons']=round5($hauteur_prescrip+100);
+                    $vdiner['viandes']=round5($hauteur_prescrip-40);
+                    $vdiner['legumes']=round5(($hauteur_prescrip-130)*0.625)*10;
+
+                    $vdejeuner_fec_pot = round9($vdejeuner['feculents']/125);
+                    $vdiner_leg_pot = round($vdiner['legumes']/125,1);
+                    ?>
+
+                    <div class="header-content-bilan">
+                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+                    </div>
+                    <div class="titre-page-bilan">
+                        <h1 class="rouge">DÉJEUNER : PROTÉINES ET COMPLÉMENT D’ÉNERGIE</h1>
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <div class="intro">
+                            <div class="texte left">
+                                <div><strong>Midi : l’heure de l’assimilation des protéines ! C’est le moment ou jamais d’en faire le plein.</strong></div>
+                                <div>À midi, on privilégiera un plat unique riche en protéines, et si ce dernier est trop peu fourni en viande (cas de la restauration rapide ou en collectivités) on rajoutera une entrée riche en protéines ou une boisson TIME Protein.</div>
+                            </div>
+                            <div class="left"><img class="horloge" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/dejeuner-horloge-fr.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-rouge border-all"><strong>DÉJEUNER</strong></td>
+                                </tr>
+                                <tr class="fond-rouge-clair">
+                                    <td class="border-semi">Synchroniseur TIME Silhouette <?php echo $detype; ?></td>
+                                    <?php if($detype == 'E') {
+
+                                        ?>
+                                        <td class="border-semi-last">2 comprimés</td>
+                                    <?php }else{ ?>
+
+                                        <td class="border-semi-last">10 ml</td>
+                                    <?php } ?>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Viande rouge (agneau, boeuf, cheval, mouton)<br />OU Viande blanche (porc, lapin, veau, volaille)<br />OU Charcuterie et Abats</td>
+                                    <td class="border-semi-last">Pesée crue :<br /><?php echo $vdejeuner['charcuterie_abats'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Au choix (panachage possible) :<br />Féculents : pâtes, riz, pommes de terre, céréales...<br />Légumes secs : lentilles, flageolet, fèves haricots cocos, petits pois...<br />Avec éventuellement : légumes verts crus (salade) ou cuits</td>
+                                    <td class="border-semi-last">Mesurés cuits :<br/><?php echo $vdejeuner_fec_pot." "; if($vdejeuner_fec_pot > 1){echo "pots de yaourt en verre";} else{echo "pot de yaourt en verre";} ?><br/>(<?php echo "soit".' '.$vdiner['legumes'].' '?>ml)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les nutriments apportés par le déjeuner ?</strong></div>
+                                <div class="texte">Au déjeuner, TIME Nutrition préconise un plat riche en protéines, et équilibré en glucides et lipides. Le déjeuner doit apporter des vitamines hydrosolubles, du fer, du zinc et du sélénium.</div>
+                            </div>
+                            <div class="right"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan/images/img-bottom-left-p-6.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments préconisés ?</strong></div>
+                                <div class="texte">
+                                    <ul>
+                                        <li class="valid"><strong>La viande :</strong> au déjeuner il faut choisir des aliments ayant le meilleur profil possible en acides aminés, avec des protéines « lourdes », plus longue à digérer et permettant la diffusion continue d’acides aminés tout l’après-midi afin d’éviter l’apparition d’une sensation de faim prématurée.</li>
+                                    </ul>
+                                    Si vous ne mangez pas de viande il est possible éventuellement de la remplacer en partie ou en totalité par des œufs ou du poisson voire par une association légumes/céréales mais seulement de façon exceptionnelle et adaptée. Dans tous les cas, les personnes ne mangeant pas la quantité de viande indiquée devront compléter leur apport en protéines par une boisson TIME Protein, sinon elles courront le risque de ne plus maîtriser leur faim ni au goûter, ni au dîner.
+                                    <ul>
+                                        <li class="valid"><strong>Les féculents, céréales, légumes :</strong> ces aliments vont vous apporter des glucides, des fibres, des minéraux et aussi des protéines.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments à éviter ?</strong></div>
+                                <div class="texte">
+                                   Si vous ne voulez pas «faire du gras» et avoir faim très vite, évitez de consommer des sucres rapides au déjeuner (gâteaux, glaces, salades de fruits, crèmes-dessert...). <br/>
+                                    Attention ! Les glucides lents (légumes, pâtes ou féculents) peuvent devenir rapides en fonction de la température de cuisson et du mode de cuisson. Par exemple, les pommes de terre cuites à l’eau avec leur pelure sont des sucres plus lents que les pommes de terre épluchées cuites à l’eau ou en purée, en frites, etc.
+                                </div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Est-ce que je peux boire du vin au déjeuner ?</strong></div>
+                                <div class="texte">Lorsque le poids sera stabilisé, vous pourrez vous accorder un verre de vin, cela n’altèrera pas la silhouette.</div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Est-ce que je peux rajouter un fruit à mon déjeuner ?</strong></div>
+                                <div class="texte">Un fruit pourra être ajouté quand le poids et la silhouette seront stabilisés.</div>
+                            </div>
+                            <div class="raw">
+                                <div class="right"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/DRAINEUR-".$detype.".png") ?>" alt="time silhouette $detype" style="width:100px;" /></div>
+                                <div class="green-text"><strong>Quelle est l’action du Synchroniseur TIME Silhouette <?php echo ' '.$detype ;?> ?</strong></div>
+                                <div class="texte">Adapté à votre silhouette, le <strong>Synchroniseur TIME Silhouette <?php echo $detype; ?></strong> corrige vos tendances métaboliques et prévient leurs effets néfastes sur l’organisme. Le Synchroniseur TIME Silhouette <?php echo $detype; ?> va drainer vos zones de stockage spécifiques (taille et ventre) et détoxifier votre organisme. Il vous aidera à atteindre les objectifs fixés et participera à leur maintien.</div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="cadre">
+                            <div><u>Conseils pratiques :</u></div>
+                            <div>Unités de mesure : 1 pot de yaourt en verre = 125 ml = 12.5 cl.</div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Fin étape 6 -->
+                <div class="tab-pane" id="page7">
+                    <div class="header-content-bilan">
+                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+                    </div>
+                    <div class="titre-page-bilan">
+                        <h1 class="orange">GOÛTER : DOUCEUR ET PLAISIR</h1>
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <div class="intro">
+                            <div class="texte left">
+                                <div><strong>Toujours avant 18 heures, un véritable moment de plaisir à ne pas négliger !</strong></div>
+                                <div>À partir de 17h les récepteurs à insuline deviennent progressivement résistants, c’est le début de l’insulinorésistance physiologique, autrement dit c’est le bon moment pour vous faire plaisir et apporter le dernier supplément d’énergie qui vous permettra de tenir jusqu’à l’heure du coucher sans risque pour votre ligne.</div>
+                                <div>Le goûter est destiné à défatiguer l'organisme et à relaxer le cerveau fatigué par le travail de la journée. Ne le sautez surtout pas ! En même temps qu’un repas « plaisir » énergétique, cette collation constitue un excellent coupe-faim destiné à vous éviter de faire un repas trop abondant le soir.</div>
+                            </div>
+                            <div class="left"><img class="horloge" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/gouter-horloge-fr.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-orange border-all"><strong>GOÛTER</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Oléagineux</td>
+                                    <td class="border-semi-last">1 pot de yaourt en verre de graines<br/>OU 2 carrés de chocolat noir</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Fruit ou pâtisserie</td>
+                                    <td class="border-semi-last">1 fruit frais (sauf banane)<br />OU 1 fruit sec OU<br />un gâteau (pas trop gros !)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les nutriments apportés par le goûter ?</strong></div>
+                                <div class="texte">Au goûter, TIME Nutrition conseille des aliments végétaux. L’aliment de choix doit contenir des protéines, un peu de gras insaturé, des vitamines, des minéraux et un peu de sucre.</div>
+                            </div>
+                            <div class="right"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/img-bottom-left-p-7.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments préconisés ?</strong></div>
+                                <div class="texte">
+                                    <ul>
+                                        <li class="valid"><strong>Des graines oléagineuses :</strong> amandes, noix ...</li>
+                                        <li class="valid"><strong>Du chocolat :</strong> choisissez du chocolat noir car il est fabriqué à partir de la fève de cacao, une graine oléagineuse, et ne contient pas trop de lait ni de sucre.</li>
+                                        <li class="valid"><strong>Des fruits :</strong> consommez si possible des fruits frais ou alors tout frais pressés. Les jus préparés à l’avance ou en bouteille (même conservés au frais) libèrent du fructose pur qui gênera l’utilisation du glucose dans l’organisme et favorisera la prise de poids.</li>
+                                        <li class="valid"><strong>Des gâteaux :</strong> attention aux gâteaux industriels contenant du fructose. On trouve dans la liste de leurs ingrédients la mention « sirop de glucose-fructose » ou du « sirop de maïs hydrolysé » ou « sucre inverti »... Ils sont trop riches en fructose pur.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quelles boissons choisir pour le goûter ?</strong></div>
+                                <div class="texte">
+                                    Le mieux est de boire de l’eau. Si vous souhaitez consommer une boisson sucrée ou énergétique, préférez-la sans édulcorant et dans ce cas ne prenez que les graines ou le chocolat au goûter. <br/>
+                                    <i>Rappel : il faut éviter jus de fruits industriels qui contiennent du fructose (mention : « glucose-fructose » ou « sirop de maïs hydrolysé »...).</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cadre">
+                            <div><u>Conseils pratiques :</u></div>
+                            <div>Unités de mesure : 1 pot de yaourt en verre = 125 ml = 12.5 cl.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin page 7 -->
+                <div class="tab-pane" id="page8">
+                    <?php
+                    if ($morphoactivite_prescip=="inactif")
+                    {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+40);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+20);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-140)/10);
+                    }
+                    if ($morphoactivite_prescip=="sedentaire") {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip+20);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+65);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+40);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-135)/10);
+                    }
+                    if ($morphoactivite_prescip=="actif") {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip+60);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+105);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+80);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-130)/10);
+                    }
+                    if ($morphoactivite_prescip=="manuel") {
+                    $vdejeuner['viande_rouge']=round5($hauteur_prescrip+100);
+                    $vdejeuner['viande_blanche']=round5($hauteur_prescrip+145);
+                    $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+120);
+                    $vdejeuner['oeufs']=round9(($hauteur_prescrip-120)/10);
+                    }
+
+                    $vdejeuner['poisson']=round5($hauteur_prescrip+100);
+                    $vdejeuner['feculents']=round5(round(($hauteur_prescrip-130)*0.625))*10;
+
+                    $vdiner['poissons']=round5($hauteur_prescrip+100);
+                    $vdiner['viandes']=round5($hauteur_prescrip-40);
+                    $vdiner['legumes']=round5(($hauteur_prescrip-130)*0.625)*10;
+
+                    $vdejeuner_fec_pot = round9($vdejeuner['feculents']/125);
+                    $vdiner_leg_pot = round9($vdiner['legumes']/125,1);
+                    ?>
+
+                    <div class="header-content-bilan">
+                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+                    </div>
+                    <div class="titre-page-bilan">
+                        <h1 class="bleu">DÎNER : PROTÉINES LÉGERES, FIBRES et OMÉGA-3 DE QUALITÉ</h1>
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <div class="intro">
+                            <div class="texte left">
+                                <div><strong>Un repas léger et performant !</strong></div>
+                                <div>En prenant aux bonnes heures et aux justes quantités, les aliments prescrits pour toute la journée, vous avez « brûlé » les sources d’énergie nécessaires à vos activités de la journée et vous avez constitué des réserves pour que s’accomplisse le travail réparateur de la nuit. Le soir il faut donc apporter des aliments favorisant la reconstruction cellulaire.</div>
+                            </div>
+                            <div class="left"><img class="horloge" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/diner-horloge-fr.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-bleu border-all"><strong>DÎNER</strong></td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Tryptophan</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Omega</td>
+                                    <td class="border-semi-last">1 capsule</td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Magnesium</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Produits de la mer<br/>Poissons (maquereaux, morue, saumon, etc.)<br />Crustacés<br/>Mollusques</td>
+                                    <td class="border-semi-last"><?php echo "MAX ".$vdiner['poissons']." g" ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">OU Viandes blanches (= viandes jeunes : volailles, lapin, veau, porcelet, dinde, agneau...)</td>
+                                    <td class="border-semi-last"><?php echo "MAX ".$vdiner['viandes']." g" ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Légumes verts (en salade ou cuits), assaisonnés avec un peu d'huile riche en précurseur d'Oméga-3 (huile de colza par exemple)</td>
+                                    <td class="border-semi-last">MAX <?php echo $vdiner_leg_pot.' ';  if($vdejeuner_fec_pot > 1){echo "pots de yaourt en verre";} else{echo "pot de yaourt en verre";} ?><br/>(<?php echo "soit".' '.$vdejeuner['feculents'].' '?>ml)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les nutriments apportés par le dîner ?</strong></div>
+                                <div class="texte">Le soir, TIME Nutrition recommande un dîner de qualité avec des aliments associant des protéines digestes (courtes et légères) à des acides gras polyinsaturés, des fibres et un minimum de glucides.</div>
+                                <div class="texte">Attention, les fibres sont nécessaires au bon fonctionnement du colon et de ses germes mais il faut les apporter en petite quantité, pour éviter d’entraîner gonflements et malaises digestifs.</div>
+                            </div>
+                            <div class="right"><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/img-bottom-left-p-8.jpg") ?>" alt="TIME NUTRITION"></div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments préconisés pour le dîner ?</strong></div>
+                                <div class="texte">
+                                    <ul>
+                                        <li class="valid"><strong>Poissons, crustacés ou mollusques :</strong> ces aliments apporteront des protéines faciles à digérer, des bons acides gras polyinsaturés (oméga-3), des vitamines et des minéraux.</li>
+                                        <li class="valid"><strong>Légumes verts :</strong> ces aliments sont recommandés pour le diner car ils n’apporteront pas de sucres mais des fibres bonnes pour le transit ainsi que des minéraux.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bloc">
+                            <div class="raw">
+                                <div class="green-text"><strong>Quels sont les aliments à éviter ?</strong></div>
+                                <div class="texte">
+                                    Le soir, il faut éviter les sucres et les graisses. Evitez donc les pizzas, les plats roboratifs (choucroute, petit salé aux lentilles, viandes cuisinées en sauce...), les soupes aux pommes de terre, le riz, les pâtes, le pain...
+                                </div>
+                            </div>
+                            <div class="raw">
+                                <div class="green-text"><strong>Quelle est l’action des synchroniseurs alimentaires ?</strong></div>
+                                <div class="texte">Les synchroniseurs alimentaires du soir agissent en synergie pour gérer la période de jeune nocturne et favoriser le fonctionnement, la multiplication et les échanges cellulaires de la nuit aux niveaux :</div>
+                                <div>
+                                    <ul>
+                                        <li class="rond">Cérébral : <strong>TIME Tryptophan</strong> favorise la sérénité, la détente et le bon sommeil tout en contrôlant les pulsions prises alimentaires.") ?><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI TRYPTOPHAN.png") ?>" alt="time tryptophan" /></li>
+                                        <li class="rond">Cérébral : <strong>TIME Omega</strong> prévient le vieillissement cérébral (mémoire, concentration) et rétinien (fatigue visuelle, oeil sec,...).") ?><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI OMEGA.png") ?>" alt="time omega" /></li>
+                                        <li class="rond">Organique : <strong>TIME Magnesium</strong> maintient l’équilibre nerveux et participe au bon fonctionnement de l’organisme.") ?><img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/ETUI MAGNESIUM.png") ?>" alt="time magnesium" /></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="cadre">
+                            <div><u>Conseils pratiques :</u></div>
+                            <div>Boissons : boire un litre et demi d’eau par jour, une tasse de café, de thé ou d’infusion sans sucre.</div>
+                            <div>Unités de mesure : 1 pot de yaourt en verre = 125 ml = 12.5 cl.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- FIn page8 -->
+                <div class="tab-pane" id="page9">
+                    <div class="header-content-bilan">
+                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+                    </div>
+                    <div class="titre-page-bilan">
+                        <h1 class="vert">DEUX FOIS PAR SEMAINE<br/>NON OBLIGATOIRE MAIS NÉCESSAIRE,<br/>LE REPAS TIME Free</h1>
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <div class="cadre-vert-bottom">
+                            <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 1"><strong>Nécessaire pour le plaisir de vivre</strong></div>
+                            <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 2"><strong>Nécessaire pour éviter l’expression des gènes de disette</strong></div>
+                            <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 3"><strong>Nécessaire pour éviter toute reprise de poids au moindre écart</strong></div>
+                        </div>
+                        <div class="texte">
+                            <p>Toutes les semaines, TIME Nutrition® vous invite à remplacer deux de vos repas au choix - petit-déjeuner, déjeuner, goûter ou dîner - par un repas « TIME Free », où vous pourrez manger ce dont vous avez envie ou ce que vos hôtes mettront sur la table.</p>
+                            <p><strong>Ce n’est pas seulement « bon » pour le moral et « bon » pour votre vie sociale, c’est aussi « bon pour votre ligne ».</strong></p>
+                            <p>Avec les repas « TIME Free » on prévient les fatales reprises de poids que connaissent tous les régimes classiques « à la mode » lors d’un retour alimentaire anarchique.</p>
+                            <p>D’ailleurs avec TIME Nutrition® il n’y a pas de raison de retourner à son alimentation précédente car on ne devrait jamais arrêter !</p>
+                            <p>Pas question par conséquent de se priver de manger la journée quand on prévoit un repas de fête le soir. En effet, le goûter permettra de calmer un peu votre appétit et vous ne vous jetterez pas sur l’apéritif et le dîner. Et pas question non plus de se priver d’un bon petit-déjeuner le lendemain matin sinon vous casseriez tout ! En effet vous devez reprendre normalement votre plan alimentaire pour que votre organisme enregistre le message : « inutile de stocker ».</p>
+                        </div>
+                        <div class="enjoy">À vous de jouer !</div>
+                    </div>
+                </div>
+                <!-- Fin page9 -->
+                <div class="tab-pane" id="page10">
+                    <?php
+
+                    /* Quantité Fromage*/
+                    if (($morphoactivite_prescip=="inactif")or($morphoactivite_prescip=="sedentaire")) $vptitdej['fromage']=round5(($hauteur_prescrip-135)*2);
+                    if (($morphoactivite_prescip=="actif")or($morphoactivite_prescip=="manuel")) $vptitdej['fromage']=round5(($hauteur_prescrip-120)*2);
+                    /*******************/
+
+                    /* Quantité Pain*/
+                    if (($morphoactivite_prescip=="inactif")or($morphoactivite_prescip=="sedentaire")) $vptitdej['pain']=round5($hauteur_prescrip-120);
+                    if (($morphoactivite_prescip=="actif")or($morphoactivite_prescip=="manuel")) $vptitdej['pain']=round5($hauteur_prescrip-100);
+                    /*******************/
+
+                    if ($morphoactivite_prescip=="inactif")
+                    {
+                        $vdejeuner['viande_rouge']=round5($hauteur_prescrip);
+                        $vdejeuner['viande_blanche']=round5($hauteur_prescrip+40);
+                        $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+20);
+                        $vdejeuner['oeufs']=round9(($hauteur_prescrip-140)/10);
+                    }
+                    if ($morphoactivite_prescip=="sedentaire") {
+                        $vdejeuner['viande_rouge']=round5($hauteur_prescrip+20);
+                        $vdejeuner['viande_blanche']=round5($hauteur_prescrip+65);
+                        $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+40);
+                        $vdejeuner['oeufs']=round9(($hauteur_prescrip-135)/10);
+                    }
+                    if ($morphoactivite_prescip=="actif") {
+                        $vdejeuner['viande_rouge']=round5($hauteur_prescrip+60);
+                        $vdejeuner['viande_blanche']=round5($hauteur_prescrip+105);
+                        $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+80);
+                        $vdejeuner['oeufs']=round9(($hauteur_prescrip-130)/10);
+                    }
+                    if ($morphoactivite_prescip=="manuel") {
+                        $vdejeuner['viande_rouge']=round5($hauteur_prescrip+100);
+                        $vdejeuner['viande_blanche']=round5($hauteur_prescrip+145);
+                        $vdejeuner['charcuterie_abats']=round5($hauteur_prescrip+120);
+                        $vdejeuner['oeufs']=round9(($hauteur_prescrip-120)/10);
+                    }
+
+                    $vdejeuner['poisson']=round5($hauteur_prescrip+100);
+                    $vdejeuner['feculents']=round5(round(($hauteur_prescrip-130)*0.625))*10;
+
+                    $vdiner['poissons']=round5($hauteur_prescrip+100);
+                    $vdiner['viandes']=round5($hauteur_prescrip-40);
+                    $vdiner['legumes']=round5(($hauteur_prescrip-130)*0.625)*10;
+
+                    $vdejeuner_fec_pot = round9($vdejeuner['feculents']/125);
+                    $vdiner_leg_pot = round9($vdiner['legumes']/125,1);
+                    ?>
+
+                    <div class="header-content-bilan">
+                        <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+                    </div>
+                    <div class="titre-page-bilan">
+                        <h1 class="vert">SYNTHÈSE DU PROGRAMME ALIMENTAIRE TIME Nutrition®</h1>
+                    </div>
+
+                    <div class="content-page-bilan">
+                        <br /><br/>
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-jaune border-all"><strong>PETIT-DÉJEUNER</strong></td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Tyrosine</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Probiotic</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Magnesium</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Fat Burner</td>
+                                    <td class="border-semi-last">10 ml</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Fromage (de préférence non allégé, au lait entier et cru, non pasteurisé)</td>
+                                    <td class="border-semi-last"><?php echo $vptitdej['fromage'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Pain</td>
+                                    <td class="border-semi-last"><?php echo $vptitdej['pain'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Beurre</td>
+                                    <td class="border-semi-last">10 à 15 g</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-rouge border-all"><strong>DÉJEUNER</strong></td>
+                                </tr>
+                                <tr class="fond-rouge-clair">
+                                    <td class="border-semi">Synchroniseur TIME Silhouette <?php echo $detype; ?></td>
+                                    <?php if($detype == 'E') {
+
+                                        ?>
+                                        <td class="border-semi-last">2 comprimés</td>
+                                    <?php }else{ ?>
+
+                                        <td class="border-semi-last">10 ml</td>
+                                    <?php } ?>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Viande rouge (agneau, boeuf, cheval, mouton)<br />OU Viande blanche (porc, lapin, veau, volaille)<br />OU Charcuterie et Abats</td>
+                                    <td class="border-semi-last">Pesée crue :<br /><?php echo $vdejeuner['charcuterie_abats'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Au choix (panachage possible) :<br />Féculents : pâtes, riz, pommes de terre, céréales...<br />Légumes secs : lentilles, flageolet, fèves haricots cocos, petits pois...<br />Avec éventuellement : légumes verts crus (salade) ou cuits</td>
+                                    <td class="border-semi-last">Mesurés cuits :<br/><?php echo $vdejeuner_fec_pot." "; if($vdejeuner_fec_pot > 1){echo "pots de yaourt en verre";} else{echo "pot de yaourt en verre";} ?><br/>(soit) <?php echo ' '.$vdiner['legumes'].' ';?>ml</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-orange border-all"><strong>GOÛTER</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Oléagineux</td>
+                                    <td class="border-semi-last">1 pot de yaourt en verre de graine<br/>OU 2 carrés de chocolat noir</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Fruit ou pâtisserie</td>
+                                    <td class="border-semi-last">1 fruit frais (sauf banane)<br />OU 1 fruit sec OU<br />un gâteau (pas trop gros !)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-bleu border-all"><strong>DÎNER</strong></td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Tryptophan</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Omega</td>
+                                    <td class="border-semi-last">1 capsule</td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Magnesium</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Produits de la mer<br/>Poissons (maquereaux, morue, saumon, etc.)<br />Crustacés<br/>Mollusques</td>
+                                    <td class="border-semi-last"><?php echo "MAX ".$vdiner['poissons']." g" ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">OU Viandes blanches (= viandes jeunes : volailles, lapin, veau, porcelet, dinde, agneau...)</td>
+                                    <td class="border-semi-last"><?php echo "MAX ".$vdiner['viandes']." g" ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Légumes verts (en salade ou cuits), assaisonnés avec un peu d'huile riche en précurseur d'Oméga-3 (huile de colza par exemple)</td>
+                                    <td class="border-semi-last">MAX <?php echo $vdiner_leg_pot.' ';  if($vdejeuner_fec_pot > 1){echo "pots de yaourt en verre";} else{echo "pot de yaourt en verre";} ?><br/>(soit<?php echo ' '.$vdejeuner['feculents'].' ';?>ml)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin page10-->
+                <div class="tab-pane" id="page11">
+                    <?php
+                    $fromage = round5($hauteur_prescrip-100);
+                    if (($morphoactivite_prescip=="inactif")or($morphoactivite_prescip=="sedentaire")) $vptitdej['pain']=round5(($hauteur_prescrip-120)/2);
+                    if (($morphoactivite_prescip=="actif")or($morphoactivite_prescip=="manuel")) $vptitdej['pain']=round5(($hauteur_prescrip-100)/2);
+                    $viande = round5($hauteur);
+                    $poisson = round5($hauteur_prescrip);
+                    $viande_blanche = round5($hauteur_prescrip - 60);
+
+
+                    /* fonction qui retourne le nombre de pot de yaourt de feculant que l'on peut manger
+                    On ne peut pas traduire avec $this->__(" ") directement depuis la fonction
+                    je retourne donc un tableau avec en [0] la quantité à manger (ex : 1 + 1/3)
+                    et en [1] la phrase qui doit être traduite. Elle change suivant le nombre de pots (ajout du "s" ou non). */
+                    $str = "";
+                    if($hauteur_prescrip <= 154){
+                        $str .= '1/3';
+                        $qt = 40;
+                        $txt = "pot de yaourt en verre";
+                    }
+                    else{
+                        $nb = ((int)(($hauteur_prescrip - 155)/10) + 2);
+                        $pot_entier = (int)($nb/3);
+                        $reste = $nb - (3 * $pot_entier);
+                        if($pot_entier > 0){$str .= "$pot_entier";}
+                        if($pot_entier > 0 && $reste > 0){$str .= " + ";}
+                        if($reste > 0){$str .= "$reste/3";}
+                        if($pot_entier > 1 || ($pot_entier == 1 && $reste > 0)){$txt = "pots de yaourt en verre";}
+                        else{$txt = "pot de yaourt en verre";}
+                        $qt = $pot_entier * 125 + ($reste * 125 / 3);
+                        $qt = round(($qt)*0.1)*10;
+                    }
+                    $feculant = array($str,$qt,$txt);
+                    ?>
+
+                    <div class="header-content-bilan">
+			            <img src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/logo-top-left-payant-fr.jpg") ?>" alt="Votre programme Time Nutrition pérsonalisé">
+		            </div>
+                    <br />
+                    <div class="titre-page-bilan">
+                        <h1 class="vert">Phase TIME Booster – 15 jours</h1>
+                    </div>
+                    <br /><br />
+                    <div class="content-page-bilan">
+                        <div class="texte">
+                            <p><strong>Pour atteindre au mieux vos objectifs, vous devez commencer votre programme TIME Nutrition® par une courte période d'accélération métabolique personnalisée de 15 jours, la phase TIME Booster.</strong></p>
+                        </div>
+                        <div class="green-text"><strong>Buts de la phase TIME Booster :</strong></div>
+                        <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 1">Déclencher rapidement une perte de poids significative</div>
+                        <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 2">Provoquer un réflexe de déstockage des réserves inutiles</div>
+                        <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 3">Compenser les carences et déséquilibres internes constatés</div>
+                        <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 3">Remettre à l'heure l'horloge biologique perturbée par le stress de la vie courante</div>
+                        <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 3">Resynchroniser les neuromédiateurs</div>
+                        <div><img class="puce-fleche" src="<?php echo $this->getViewFileUrl("Ntic_Timescan::images/fleche-v.jpg") ?>" alt="Point 3">Préparer la stabilisation durable de votre silhouette idéale</div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-jaune border-all"><strong>PETIT-DÉJEUNER</strong></td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Tyrosine</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Probiotic</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Magnesium</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-jaune-clair">
+                                    <td class="border-semi">TIME Fat Burner</td>
+                                    <td class="border-semi-last">10 ml</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Fromage (de préférence non allégé, au lait entier et cru, non pasteurisé)</td>
+                                    <td class="border-semi-last"><?php echo $fromage ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Pain</td>
+                                    <td class="border-semi-last"><?php echo $vptitdej['pain'] ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Beurre</td>
+                                    <td class="border-semi-last">10 à 15 g</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-rouge border-all"><strong>DÉJEUNER</strong></td>
+                                </tr>
+                                <tr class="fond-rouge-clair">
+                                    <td class="border-semi">Synchroniseur TIME Silhouette <?php echo $detype ;?></td>
+                                    <?php if($detype == 'E') {
+
+                                        ?>
+                                        <td class="border-semi-last">2 comprimés</td>
+                                    <?php }else{ ?>
+
+                                        <td class="border-semi-last">10 ml</td>
+                                    <?php } ?>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Viande</td>
+                                    <td class="border-semi-last">Pesée crue :<br /><?php echo $viande ?> g</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Au choix (panachage possible) :<br />Féculents : pâtes, riz, pommes de terre, céréales...<br />Légumes secs : lentilles, flageolet, fèves haricots cocos, petits pois...<br />Avec éventuellement : légumes verts crus (salade) ou cuits")</td>
+                                    <td class="border-semi-last">Mesurés cuits :<br/><?php echo $feculant[0].' '.$feculant[2]  ?><br/>(<?php echo 'soit '.$feculant[1].' '?>ml)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-orange border-all"><strong>GOÛTER</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Fruit</td>
+                                    <td class="border-semi-last">2 fruits frais (sauf banane)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="tableau">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="fond-bleu border-all"><strong>DÎNER</strong></td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Tryptophan</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Omega</td>
+                                    <td class="border-semi-last">1 capsule</td>
+                                </tr>
+                                <tr class="fond-bleu-clair">
+                                    <td class="border-semi">TIME Magnesium</td>
+                                    <td class="border-semi-last">1 gélule</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Produits de la mer<br/>Poissons (maquereaux, morue, saumon, etc.)<br />Crustacés<br/>Mollusques</td>
+                                    <td class="border-semi-last"><?php echo "MAX ".$poisson." g" ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">OU Viandes blanches<br />(= viandes jeunes : volailles, lapin, veau, porcelet, dinde, agneau...)</td>
+                                    <td class="border-semi-last"><?php echo "MAX ".$viande_blanche." g" ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-semi">Légumes verts (en salade ou cuits)</td>
+                                    <td class="border-semi-last">MAX <?php echo $feculant[0].' '.$feculant[2]  ?><br/>(<?php echo 'soit '.$feculant[1].' '?>ml)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="texte">
+                            <p>En suivant les recommandations TIME Nutrition vous vous séparerez rapidement de l’eau et des graisses stockées inutilement dans les adipocytes (ventre, culotte de cheval...) tout en préservant votre musculature. Immédiatement soulagé de quelques kilos, votre organisme fonctionnera mieux et votre moral sera prêt pour continuer TIME Nutrition avec entrain et plaisir !</p>
+                            <p><strong>Attention ! Pendant la phase TIME Booster UN seul repas TIME Free par semaine.</strong></p>
+                            <p>Le renouvellement régulier de cette phase confortera la réussite durable de votre programme TIME Nutrition® en continuant d'agir sur votre silhouette et sur votre satiété.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin page 11-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require(['jquery','Ves_All/lib/bootstrap/js/bootstrap.min'], function ($) {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            e.target // newly activated tab
+            e.relatedTarget // previous active tab
+        })
+    });
+</script>

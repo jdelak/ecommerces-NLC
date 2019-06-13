@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="Magento\Catalog\Block\Product\View" name="composition.tab" as="composition" template="composition.phtml" group="detailed_info" before="-">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Composition</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="conseils.tab" as="conseils" template="conseils.phtml" group="detailed_info" >
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Conseils d'Utilisation</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="resultat.tab" as="resultat" template="resultat.phtml" group="detailed_info" >
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Résultats</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="analyse.tab" as="analyse" template="analyse_nutrition.phtml" group="detailed_info" >
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Analyse nutritionnelle</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="duree.tab" as="duree" template="duree_utilisation.phtml" group="detailed_info" >
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Durée d'utilisation</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <move element="page.main.title" destination="content" before="-"/>
+        <move element="product.info.review" destination="content" after="page.main.title"/>
+        <referenceBlock name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View" name="contenance" as="contenance" template="contenance.phtml" before="product.info"/>
+        </referenceBlock>
+        <move element="product.info.mailto" destination="product.info.main" after="product.info.overview"/>
+    </body>
+</page>

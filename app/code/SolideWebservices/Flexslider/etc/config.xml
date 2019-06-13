@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<flexslider>
+			<general>
+				<enabled>1</enabled>
+				<enable_easing>1</enable_easing>
+				<thumbnail_upload_width>200</thumbnail_upload_width>
+			</general>
+			<advanced_settings>
+				<enable_selected_positions>1</enable_selected_positions>
+				<enable_global_positions>0</enable_global_positions>
+				<enable_customer_positions>0</enable_customer_positions>
+				<enable_checkout_positions>0</enable_checkout_positions>
+			</advanced_settings>
+		</flexslider>
+	</default>
+</config>

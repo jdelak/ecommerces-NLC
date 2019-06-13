@@ -1,0 +1,164 @@
+<?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    // INITIALISATION
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $customerSession = $objectManager->create('\Magento\Customer\Model\Session');
+    $urlInterface = $objectManager->get('\Magento\Framework\UrlInterface');
+    $request = $objectManager->get('Magento\Framework\App\Request\Http');
+    $customerGroupsCollection = $objectManager->get('\Magento\Customer\Model\ResourceModel\Group\Collection');
+    // Your code
+    $url = $urlInterface->getUrl('customer/account/logout');
+
+    // IF IS LOGGED
+    if(!$customerSession->isLoggedIn()) {
+        header('Location:'.$url );die();
+    }
+
+    // CHECK VENDEUR IF GROUP IS SELLER OR SUPERSELLER
+    $customerGroups = $customerGroupsCollection->toOptionArray();
+    $checkGroup = array_search($customerSession->getCustomer()->getGroupId(),array_column($customerGroups, 'value'));
+    // GET NAME OF GROUP
+    $nameOfGroup = $customerGroups[$checkGroup]['label'];
+
+    if( !in_array($nameOfGroup,array('seller','super_seller'))){
+        header('Location:'.$url );die();
+    }
+
+    /* INITIALISATION VARIABLE SESSION VENDEUR */
+    $customerObj = $objectManager->create('Magento\Customer\Model\Customer')->getCollection();
+    $portfoliocustomer = $objectManager->create('Ntic\PortfolioCustomer\Model\PortfolioCustomer')->getCollection();
+
+    // IF SELLER
+    $list_special_seller = $portfoliocustomer
+        ->addFieldToFilter('seller_id', ['eq' => $_SESSION['ntic_user']])
+        ->join(
+            array('c' => $customerObj->getMainTable()),
+            'main_table.customer_id = c.'.$customerObj->getIdFieldName(),
+            array('lastname'=>'c.lastname','firstname'=>'c.firstname')
+        );
+
+
+//    var_dump($list_special_seller->getSelect().'');
+?>
+<div class="col-lg-9 col-lg-offset-1 text-center" style="margin-bottom:25px">
+    <a href="<?php echo $block->getUrl('create-customer', ['_secure' => true]);?>" class="btn btn-lg btn-primary "><i class="fa fa-plus fa-6" aria-hidden="true"></i>
+         Nouveau Client</a>
+</div>
+
+<div class="col-lg-9 col-lg-offset-1">
+    <form id="formdatatable" class="form-horizontal" method="post" action="<?php echo $block->getUrl('', ['_secure' => true]);?>">
+        <input type="hidden" name="selectbasic" id="selectbasic" value="">
+        <input type="hidden" name="listing-customer" value="1">
+    </form>
+
+    <table id="datatable" class="text-center">
+            <thead>
+            <tr>
+                <td>ID_CLIENT</td>
+                <td>ID_GESCO</td>
+                <td>Prenom</td>
+                <td>Nom</td>
+                <td>Email</td>
+
+                <td>Choisir</td>
+            </tr>
+            </thead>
+            <tbody>
+                <!-- APPEND DATATABLE DATA-->
+            </tbody>
+    </table>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+<!--        <form class="form-horizontal" method="post" action="--><?php //echo $block->getUrl('', ['_secure' => true]);?><!--">-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-lg-3 control-label" for="select-customer">Clients</label>-->
+<!--                <div class="col-lg-6 ">-->
+<!--                   <input type="hidden" id="selectbasic" name="selectbasic">-->
+<!--                    <select id="selectbasic" name="selectbasic" class="form-control input-lg">-->
+<!--                        <option value="">Sélectionnez un client</option>-->
+<!--                        --><?php //foreach ($list_special_seller as $thecustomer)/*($customerObj as $customer)*/{
+//                            ?>
+<!--                            <option value="--><?php //echo $thecustomer->getCustomerId(); ?><!--">--><?php //echo strtoupper($thecustomer->getData('lastname')); ?><!--</option>-->
+<!--                        --><?php //} ?>
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input type="hidden" name="listing-customer" value="1">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <div class="col-lg-6 text-center">-->
+<!--                    <a href="--><?php //echo $block->getUrl('create-customer', ['_secure' => true]);?><!--" class="btn btn-default big-btn btn-block">Nouveau Client</a>-->
+<!--                </div>-->
+<!--                <div class="col-lg-6 text-center">-->
+<!--                    <input type="submit" class="btn btn-default big-btn btn-block">-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--        </form>-->
+    </div>
+
+</div>
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'datatable',
+            'bootstrap',
+        ],
+        function($) {
+                $(document).ready( function (){
+                       var table = $('#datatable').DataTable({
+                           "language": {
+                               "sProcessing": "Traitement en cours...",
+                               "sSearch": "Rechercher&nbsp;:",
+                               "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                               "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                               "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                               "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                               "sInfoPostFix": "",
+                               "sLoadingRecords": "Chargement en cours...",
+                               "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                               "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+                               "oPaginate": {
+                                   "sFirst": "Premier",
+                                   "sPrevious": "Pr&eacute;c&eacute;dent",
+                                   "sNext": "Suivant",
+                                   "sLast": "Dernier"
+                               },
+                           },
+                           "bProcessing": true,
+                           "bServerSide": true,
+                           "sAjaxSource": '<?php echo $this->getUrl('portfolio/index/ajax'); ?>',
+                           "fnServerParams": function (aoData) {
+                           },
+                           "columnDefs": [
+                               {
+                                   "targets":5,
+                                   "data":null,
+                                   "defaultContent":  '<button class="btn btn-primary send" > Séléctionner</button>',
+                               },
+                           ],
+                       });
+
+                       $('#datatable tbody').on( 'click', '.send', function (e) {
+                           e.preventDefault();
+                           var data = table.row( $(this).parents('tr') ).data();
+                           var customer_id = data[0]; // Premier tr de chaque ligne du tableau tableau, soit l'id du customer
+                           $('#selectbasic').val(customer_id);
+                           $('#formdatatable').submit();
+                       });
+
+                });
+
+
+
+        });
+
+</script>

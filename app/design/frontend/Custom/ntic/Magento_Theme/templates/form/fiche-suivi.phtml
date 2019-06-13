@@ -1,0 +1,109 @@
+<div class="row">
+    <form class="form-horizontal" method="post" action="<?php echo $block->getUrl('common/additionalinfo/save', ['_secure' => true]);?>">
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Height') ?></label>
+            <div class="col-lg-8">
+                <input id="height" name="height" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Weight') ?></label>
+            <div class="col-lg-8">
+                <input id="weight" name="weight" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Desired weight') ?></label>
+            <div class="col-lg-8">
+                <input id="desired_weight" name="desired_weight" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('BMI') ?></label>
+            <div class="col-lg-8">
+                <input id="BMI" name="BMI" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Belly') ?></label>
+            <div class="col-lg-8">
+                <input id="belly" name="belly" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Haunch') ?></label>
+            <div class="col-lg-8">
+                <input id="haunch" name="haunch" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Chest') ?></label>
+            <div class="col-lg-8">
+                <input id="chest" name="chest" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Thigh') ?></label>
+            <div class="col-lg-8">
+                <input id="thigh" name="thigh" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Sport') ?></label>
+            <div class="col-lg-8">
+                <textarea id="sport" name="sport" class="form-control input-lg required"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Disease') ?></label>
+            <div class="col-lg-8">
+                <textarea id="disease" name="disease" class="form-control input-lg required"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Problem') ?></label>
+            <div class="col-lg-8">
+                <textarea id="problem" name="problem" class="form-control input-lg required"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Allergy') ?></label>
+            <div class="col-lg-8">
+                <textarea id="allergy" name="allergy" class="form-control input-lg required"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Observation') ?></label>
+            <div class="col-lg-8">
+                <textarea id="observation" name="observation" class="form-control input-lg required"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <div class="col-lg-6">
+                <div class="secondary">
+                    <a class="btn btn-default" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Back') ?></span></a>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

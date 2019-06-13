@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="title-divider-home">
+        <span><?php echo __('VOS AVANTAGES') ?></span>
+    </div>
+    <div class="footeron">
+        <div class="footeron-part col-xs-12 col-sm-6 col-md-3 text-center">
+            <div class="footeron-content footeron-img ">
+                <div class="footeron-picture" id="footeron-truck"></div>
+
+            </div>
+            <div class="footeron-content footeron-text">
+                <strong class="pink">Livraison offerte</strong>
+                <br>à partir de 60€
+            </div>
+        </div>
+
+
+        <div class="footeron-part col-xs-12 col-sm-6 col-md-3 text-center">
+            <div class="footeron-content footeron-img">
+                <div class="footeron-picture" id="footeron-padlock"></div>
+
+            </div>
+            <div class="footeron-content footeron-text">
+                <strong class="pink">Paiement sécurisé</strong><br> <img class="text-center" src="<?php echo $this->getViewFileUrl('images/payment_secure.png');?>" alt="paiement sécurisé">
+            </div>
+        </div>
+
+        <div class="footeron-part col-xs-12 col-sm-6 col-md-3 text-center">
+            <div class="footeron-content footeron-img">
+                <div class="footeron-picture" id="footeron-lexel"></div>
+
+            </div>
+            <div class="footeron-content footeron-text">
+                <strong class="pink">Notre engagement</strong><br>professionnel
+            </div>
+        </div>
+
+        <div class="footeron-part col-xs-12 col-sm-6 col-md-3 text-center">
+            <div class="footeron-content footeron-img">
+                <div class="footeron-picture" id="footeron-headphone"></div>
+
+            </div>
+            <div class="footeron-content footeron-text">
+                <strong class="pink">Service Client</strong><br> <a href="tel:04 99 13 36 24">04 99 13 36 24</a><br>du lundi au vendredi<br> de 9h à 13h et de 14h à 17h
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row newsletter-container">
+    <div class="title-divider-home">
+        <span><?php echo __('Newsletter') ?></span>
+    </div>
+    <div class="col-md-12">
+        <div class="title-newsletter col-md-4 col-lg-4 text-center">
+            Suivez toute notre actualité<br>
+            et recevez des offres privilèges
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <div class="form-horizontal">
+                <form class="form-inline" method="POST" action="<?php echo $block->getUrl('newsletter/subscriber/new/', ['_secure' => true]);?>">
+                    <div class="form-newsletter input-group input-group-lg col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input class="form-control input-lg" name="email" type="email" id="newsletter"
+                               placeholder="<?php /* @escapeNotVerified */ echo __('Enter your email address') ?>"
+                               data-validate="{required:true, 'validate-email':true}"/>
+                        <button type="submit" class="btn btn-default btn-lg custom-button"><?php echo __('Subscribe'); ?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

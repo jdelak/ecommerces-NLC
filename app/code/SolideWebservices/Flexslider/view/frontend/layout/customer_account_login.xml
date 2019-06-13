@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="content">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_account_login_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_customer_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">account_login_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">customer</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_account_login_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_customer_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">account_login_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">customer</argument></action>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

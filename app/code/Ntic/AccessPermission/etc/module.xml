@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+	<module name="Ntic_AccessPermission" setup_version="1.0.0"/>
+</config>
+		<!--
+                    ################################################################
+                    ################## 	   MODULE ACCESSPERMISSION  		####################
+                    ################################################################
+
+                    Permet de gérer les permissions des vendeurs/super vendeurs et
+                    le contenu à afficher en fonction de leur role
+
+                    ===		V1.0.0 		===
+
+
+
+                -->

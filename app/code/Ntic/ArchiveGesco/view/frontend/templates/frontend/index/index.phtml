@@ -1,0 +1,171 @@
+<div class="container">
+    <div class="row">
+        <table id="customer-archive-dataTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Date de naissance</th>
+                    <th scope="col">Dernière commande</th>
+                    <th scope="col">Fiche client</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ajax DataTables Requests -->
+            </tbody>
+        </table>
+    </div>
+    <div class="div-export">
+        <a href="#" class="btn btn-info export">Export de la <span>recherche</span> dans Excel (CSV)</a>
+        <a href="<?php echo $this->getUrl(); ?>archivegesco/export" class="btn btn-warning export-all">Export de <span>tout les clients</span> dans Excel (CSV)</a>
+    </div>
+</div>
+
+
+<!-- DATATABLE -->
+<script type="text/javascript">
+    require(['jquery', 'datatable'], function ($) {
+        $(document).ready(function () {
+            $('#customer-archive-dataTable').DataTable({
+                "iDisplayLength" : 10,
+                "lengthMenu": [[10, 25, 50], [10, 25, 50]],
+                "bProcessing" : true,
+                "bServerSide" : true,
+                "sAjaxSource" : '<?php echo $block->getUrl('archivegesco/Ajax/ajax') . 'ajax.php'; ?>',
+                "aoColumns": [
+                    { "sClass" : "row-dataTable" },
+                    { "sClass" : "row-dataTable" },
+                    { "sClass" : "row-dataTable" },
+                    { "sClass" : "row-date", "sType": "date" },
+                    { "sClass" : "row-date", "sType": "date" },
+                ],
+                // Change format de la date sur les entrée 3 et 4
+                "aoColumnDefs" : [
+                    {
+                        "aTargets" : [3, 4],
+                        "mRender": function (date) {
+                            // TODO : Tester les perf avec un split plutot qu'un new Date !!!!
+                            var date    = new Date(date),
+                                year    = date.getFullYear(),
+                                month   = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth(),
+                                day     = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate(),
+                                newDate = day + '/' + month + '/' + year;
+
+                            if(isNaN(date) && isNaN(month) && isNaN(year)) {
+                                return 'Aucune date renseignée';
+                            } else {
+                                return newDate;
+                            }
+                        }
+                    },
+                    {
+                        "targets": 5,
+                        "orderable": false,
+                        "mRender" : function(data, type, row) {
+                            return '<a href="<?php echo $this->getUrl(); ?>archivegesco/customercard?id='+ row[0] +'" class="button-archive-gesco btn btn-primary">+ Détails</a>';
+                        }
+                    }
+                ],
+                'language': {
+                    "sProcessing":     "Traitement en cours...",
+                    "sSearch":         "<p>Rechercher&nbsp;:</p>",
+                    "sLengthMenu":     "Nombre d'éléments _MENU_ ",
+                    "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix":    "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                    "oPaginate": {
+                        "sFirst":      "Premier",
+                        "sPrevious":   "Pr&eacute;c&eacute;dent",
+                        "sNext":       "Suivant",
+                        "sLast":       "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    require(['jquery', 'jquery.bootstrap'], function ($) {
+        function exportTableToCSV($table, filename) {
+            var $rows = $table.find('tr:has(td)'),
+                tmpColDelim = String.fromCharCode(11),
+                tmpRowDelim = String.fromCharCode(0),
+
+            // actual delimiter characters for CSV format
+            colDelim = '";"',
+            rowDelim = '"\r\n"',
+
+            // Grab text from table into CSV formatted string
+            csv = '"' + $rows.map(function(i, row) {
+                    var $row = $(row),
+                        $cols = $row.find('td');
+
+                    return $cols.map(function(j, col) {
+                        var $col = $(col),
+                            text = $col.text();
+
+                        return text.replace(/"/g, '""');
+
+                    }).get().join(tmpColDelim);
+
+                }).get().join(tmpRowDelim)
+                    .split(tmpRowDelim).join(rowDelim)
+                    .split(tmpColDelim).join(colDelim) + '"';
+
+            // Deliberate 'false'
+            if (false && window.navigator.msSaveBlob) {
+
+                var blob = new Blob([decodeURIComponent(csv)], {
+                    type: 'text/csv;charset=utf8'
+                });
+
+                window.navigator.msSaveBlob(blob, filename);
+
+            } else if (window.Blob && window.URL) {
+                // HTML5
+                var blob = new Blob([csv], {
+                    type: 'text/csv;charset=utf-8'
+                });
+                var csvUrl = URL.createObjectURL(blob);
+
+                $(this)
+                    .attr({
+                        'download': filename,
+                        'href': csvUrl
+                    });
+            } else {
+                // Data URI
+                var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+                $(this)
+                    .attr({
+                        'download': filename,
+                        'href': csvData,
+                        'target': '_blank'
+                    });
+            }
+        }
+
+        $(document).ready(function () {
+            $(".export").on('click', function() {
+                var length_menu = $('#customer-archive-dataTable_info').html();
+                var get_number_paginate = length_menu.split(' ');
+
+                // CSV
+                var args = [$('#customer-archive-dataTable'), 'export-'+ get_number_paginate[3] +'-'+ get_number_paginate[5] +'-archive-gesco.csv'];
+
+                exportTableToCSV.apply(this, args);
+            });
+        });
+    });
+</script>

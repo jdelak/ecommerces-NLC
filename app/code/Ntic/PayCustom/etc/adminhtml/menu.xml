@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add action="ntic_paycustom/configpaymentabo/index" id="Ntic::ntic_config_payment_abo" module="Ntic_PayCustom" parent="Ntic::top_level" resource="Magento_Backend::content" sortOrder="9999" title="config payment abo"/>
+		<add action="ntic_paycustom/configpaymentfraction/index" id="Ntic::ntic_config_payment_fraction" module="Ntic_PayCustom" parent="Ntic::top_level" resource="Magento_Backend::content" sortOrder="9999" title="config payment fraction"/>
+	</menu>
+</config>

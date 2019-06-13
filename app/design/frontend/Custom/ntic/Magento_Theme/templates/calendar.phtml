@@ -1,0 +1,240 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+
+?>
+<!doctype html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Calendar NTIC</title>
+</head>
+<script src="../calendar/js/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="../calendar/css/dhtmlxscheduler-flat.css" type="text/css" charset="utf-8">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="../calendar/sources/locale/locale_fr.js" type="text/javascript"></script>
+<script src="../calendar/sources/locale/recurring/locale_recurring_fr.js" ></script>
+<script src="../calendar/sources/ext/dhtmlxscheduler_editors.js" type="text/javascript" charset="utf-8"></script>
+<script src="../calendar/sources/ext/dhtmlxscheduler_minical.js" type="text/javascript" charset="utf-8"></script>
+<script src="../calendar/sources/ext/dhtmlxscheduler_recurring.js" type="text/javascript" charset="utf-8"></script>
+<script src="//export.dhtmlx.com/scheduler/api.js" type="text/javascript" charset="utf-8"></script>
+<script src="../calendar/sources/ext/dhtmlxscheduler_limit.js" type="text/javascript" charset="utf-8"></script>
+<script src="../calendar/sources/ext/dhtmlxscheduler_tooltip.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css" >
+    table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td{padding:0}
+    html, body{ height:100%; padding:0px; margin:0px; }
+    .well {
+        text-align: right;
+    }
+    .container-fluid #scheduler_here {
+        height: 700px;
+        width: 100%;
+        border: 1px solid #cecece;
+    }
+    #scheduler_here {
+        border-radius: 4px;
+    }
+    .dhx_scale_bar{line-height: 15px;}
+    .dhx_cal_event div.dhx_footer,
+    .dhx_cal_event.past_event div.dhx_footer,
+    .dhx_cal_event.event_1 div.dhx_footer,
+    .dhx_cal_event.event_2 div.dhx_footer,
+    .dhx_cal_event.event_3 div.dhx_footer{
+        background-color: transparent !important;
+    }
+    .dhx_cal_event .dhx_body{
+        -webkit-transition: opacity 0.1s;
+        transition: opacity 0.1s;
+        opacity: 0.7;
+    }
+    .dhx_cal_event .dhx_title{
+        line-height: 12px;
+    }
+    .dhx_cal_event_line:hover,
+    .dhx_cal_event:hover .dhx_body,
+    .dhx_cal_event.selected .dhx_body,
+    .dhx_cal_event.dhx_cal_select_menu .dhx_body{
+        opacity: 1;
+    }
+
+    .dhx_cal_event.event_1 div, .dhx_cal_event_line.event_1{
+        background-color: orange !important;
+        border-color: #a36800 !important;
+    }
+    .dhx_cal_event_clear.event_1{
+        color:orange !important;
+    }
+
+    .dhx_cal_event.event_2 div, .dhx_cal_event_line.event_2{
+        background-color: #36BD14 !important;
+        border-color: #698490 !important;
+    }
+    .dhx_cal_event_clear.event_2{
+        color:#36BD14 !important;
+    }
+
+    .dhx_cal_event.event_3 div, .dhx_cal_event_line.event_3{
+        background-color: #FC5BD5 !important;
+        border-color: #839595 !important;
+    }
+    .dhx_cal_event_clear.event_3{
+        color:#B82594 !important;
+    }
+    .dhtmlXTooltip.tooltip{
+        z-index:99999;
+    }
+</style>
+<script type="text/javascript" charset="utf-8">
+    var listType = scheduler.serverList("type");
+    function init() {
+        // CONFIGURATION
+        scheduler.config.xml_date="%Y-%m-%d %H:%i";
+        scheduler.config.time_step = 30;
+        scheduler.config.first_hour = 6;
+        //
+        scheduler.config.prevent_cache = true;
+        scheduler.config.occurrence_timestamp_in_utc = true;
+        scheduler.config.include_end_by = true;
+        scheduler.config.repeat_precise = true;
+        scheduler.config.multi_day = true;
+        scheduler.config.limit_time_select = true;
+        scheduler.config.className = 'dhtmlXTooltip tooltip';
+        scheduler.config.timeout_to_display = 5;
+        scheduler.config.delta_x = 15;
+        scheduler.config.delta_y = -20;
+
+        scheduler.templates.hour_scale = function(date){
+            var t=date.getMinutes();t=10>t?"0"+t:t;
+            var i="<span class='dhx_scale_h'>"+date.getHours()+"</span><span class='dhx_scale_m'>&nbsp;"+t+"</span>";
+            return i;
+        };
+        scheduler.templates.tooltip_text = function(start,end,ev){
+            if(listType[ev.type] != undefined){
+                return  "<b>Détails:</b> "+ev.details+"<br/>" +
+                    "<b>Type:</b> "+listType[ev.type].label +"<br/>" +
+                    "<b>Start date:</b> "+scheduler.templates.tooltip_date_format(start)+
+                    "<br/><b>End date:</b> "+scheduler.templates.tooltip_date_format(end);
+            }
+        };
+        scheduler.templates.event_text=scheduler.templates.event_bar_text = function(start,end,event){
+            if(listType[event.type] != undefined) {
+                return listType[event.type].label + ' ' + event.text  ;
+            }
+        };
+
+        // CUSTOM COLOR EVENT TYPE
+        scheduler.templates.event_class=function(start, end, event){
+            var css = "";
+            if(event.type) // if event has subject property then special class should be assigned
+                css += "event_"+event.type;
+
+            if(event.id == scheduler.getState().select_id){
+                css += " selected";
+            }
+            return css; // default return
+        };
+        scheduler.form_blocks["my_editor"] = {
+            render:function(sns) {
+                var html =
+                    "<div class='dhx_cal_ltext row' style='' id='customY'>" +
+                    "<div class='col-md-12'>Identité</div>" +
+                    "<span class='hidden'>Code contact&nbsp;<input type='hidden'  ><br/></span>"+
+                    "<div class='col-md-12'><input type='text' class='form-control ' name='code_client' placeholder='Code client'></div>" +
+                    "<div class='col-md-2'><input type='text' class='form-control ' name='contact_civ' placeholder='Civilité'></div>" +
+                    "<div class='col-md-5'><input type='text' class='form-control ' name='contact_nom' placeholder='Nom' id='nameContact'></div>" +
+                    "<div class='col-md-5'><input type='text' class='form-control ' name='contact_prenom' placeholder='Prénom'></div>" +
+                    "<div class='col-md-12'>Adresse</div>" +
+                    "<div class='col-md-6'><input type='text' class='form-control ' name='contact_adr1' placeholder='Adresse1'></div>" +
+                    "<div class='col-md-6'><input type='text' class='form-control ' name='contact_cp' placeholder='CP'></div>" +
+                    "<div class='col-md-6'><input type='text' class='form-control ' name='contact_adr2' placeholder='Adresse2'></div>" +
+                    "<div class='col-md-6'><input type='text' class='form-control ' name='contact_ville' placeholder='Ville'></div>" +
+                    "<div class='col-md-6'><input type='text' class='form-control ' name='contact_adr3' placeholder='Adresse3'></div>" +
+                    "<div class='col-md-12'>Coordonnées</div>" +
+                    "<div class='col-md-12'><input type='text' class='form-control ' name='contact_mail' placeholder='Email'></div>" +
+                    "<div class='col-md-4'><input type='text' class='form-control '  name='contact_tel1' placeholder='Tel1'></div>" +
+                    "<div class='col-md-4'><input type='text' class='form-control '  name='contact_tel2' placeholder='Tel2'></div>" +
+                    "<div class='col-md-4'><input type='text' class='form-control '  name='contact_tel3' placeholder='Tel3'></div>" +
+                    "</div>";
+                return html;
+            },
+            // TAF PRESENTATION QUAND ON VEUT VISUALISER LE CONTACT
+            set_value:function(node, value, ev) {
+                /*$.post( "calendar/ajax/contact.php", { id: value })
+                 .done(function( data ) {
+                 console.log(data);
+                 //alert( "Data Loaded: " + data );
+                 });*/
+                node.childNodes[1].value = "1";
+                console.log('set value');
+                /*$('#nameContact').on('blur',function () {
+                    var string_insert = $(this).val();
+                    if(string_insert.length > 2){
+                        var id_event_name = scheduler.config.lightbox.sections[0].inputId;
+                        $('#'+id_event_name).val(string_insert);
+                    }
+                });*/
+                node.childNodes[4].value = "";
+            },
+            // ENREGISTREMENT TAF
+            get_value:function(node, ev){
+                //console.log($('input[name="contact_nom"]').val());
+                ev.details = node.childNodes[4].value;
+                return node.childNodes[1].value;
+            },
+            focus:function(node){
+                var a = node.childNodes[1];
+                a.select();
+                a.focus();
+            }
+        };
+
+        //CREATE FORM
+        scheduler.config.lightbox.sections=[
+            {name:"title", height:30, map_to:"text", type:"textarea" },
+            {name: "type", height: 25, map_to: "type", type: "select",
+                options: scheduler.serverList("type")},
+            {name:"contact", height:200, map_to:"contact", type:"my_editor"},
+            {name:"description", height:100, map_to:"details", type:"textarea" },
+
+            {name: "recurring", type: "recurring", map_to: "rec_type", button: "recurring"},
+            {name: "time", height: 72, type: "time", map_to: "auto"}
+        ];
+
+        scheduler.config.full_day = true;
+        scheduler.locale.labels.section_location="Location";
+        scheduler.config.details_on_create=true;
+        scheduler.config.details_on_dblclick=true;
+
+        // CREATE SCHEDULER
+        scheduler.init('scheduler_here',new Date(2017,10,1),"month");
+        scheduler.setLoadMode("month");
+        scheduler.load("../calendar/data/events_shared.php");
+
+        var dp = new dataProcessor("../calendar/data/events_shared.php");
+        dp.enableDebug(true);
+        dp.init(scheduler);
+        dp.enableDebug(true);
+        dp.attachEvent("onAfterUpdate", function(id, action, tid, response){
+            //console.log('onAfterUpdate');
+        })
+    }
+
+</script>
+
+<body onload="init();">
+<div class="container-fluid">
+    <div class="dhx_cal_container panel" id="scheduler_here">
+        <div class="dhx_cal_navline">
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_today_button"></div>
+            <div class="dhx_cal_date"></div>
+            <div class="dhx_cal_tab" name="day_tab"></div>
+            <div class="dhx_cal_tab" name="week_tab"></div>
+            <div class="dhx_cal_tab" name="month_tab"></div>
+        </div>
+        <div class="dhx_cal_header"></div>
+        <div class="dhx_cal_data"></div>
+    </div>
+</div>
+</body>

@@ -1,0 +1,35 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl();
+?>
+
+<div class="row">
+    <div class="col-md-12 col-lg 12 recettes">
+        <div class="col-lg-12">
+            <h2><?php echo __('RECETTES DE DEJEUNER');?></h2>
+            <ul>
+                <li><a href="<?php echo $baseUrl.'andouillettes_gratinees';?>">Andouillettes Gratinees</a></li>
+                <li><a href="<?php echo $baseUrl.'boeuf_epices';?>">Bœuf Aux Epices</a></li>
+                <li><a href="<?php echo $baseUrl.'canard_olives';?>">Canard Aux Olives</a></li>
+                <li><a href="<?php echo $baseUrl.'cannellonis_italienne';?>">Cannellonis A L’italienne</a></li>
+                <li><a href="<?php echo $baseUrl.'cote_boeuf';?>">Cote De Bœuf Grillee</a></li>
+                <li><a href="<?php echo $baseUrl.'epaule_agneau_aromates';?>">Épaule D'agneau Aux Aromates</a></li>
+                <li><a href="<?php echo $baseUrl.'epaule_agneau_pistache';?>">Épaule D'agneau Croustillante A La Pistache</a></li>
+                <li><a href="<?php echo $baseUrl.'escalopes_veau_napolitaine';?>">Escalopes De Veau Napolitaines</a></li>
+                <li><a href="<?php echo $baseUrl.'gigot_agneau_herbes';?>">Gigot D’agneau Aux Herbes</a></li>
+                <li><a href="<?php echo $baseUrl.'grenadins_veau_rossini';?>">Grenadins De Veau Facon Rossini</a></li>
+                <li><a href="<?php echo $baseUrl.'hachis_parmentier';?>">Hachis Parmentier Revisite</a></li>
+                <li><a href="<?php echo $baseUrl.'lapin_moutarde';?>">Lapin A La Moutarde</a></li>
+                <li><a href="<?php echo $baseUrl.'magret_canard_figues';?>">Magret De Canard Aux Figues</a></li>
+                <li><a href="<?php echo $baseUrl.'paves_rumsteck_cognac';?>">Paves De Rumsteck Au Cognac</a></li>
+                <li><a href="<?php echo $baseUrl.'pigeon_roti_lard';?>">Pigeon Roti Enroules De Lard</a></li>
+                <li><a href="<?php echo $baseUrl.'pot_feu_carmen';?>">Pot Au Feu De Carmen</a></li>
+                <li><a href="<?php echo $baseUrl.'potee_grand_mere';?>">Potee De Grand-Mere</a></li>
+                <li><a href="<?php echo $baseUrl.'roti_veau_morilles';?>">Roti De Veau Aux Morilles</a></li>
+                <li><a href="<?php echo $baseUrl.'saute_veau_orange';?>">Saute De Veau A L’orange</a></li>
+                <li><a href="<?php echo $baseUrl.'tajine_mouton';?>">Tajine De Mouton</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="recruit_lexel" label="Recruit Lexel" file="recruit_mail.phtml" type="html" module="Ntic_LexelRecruit" area="frontend"/>
+</config>

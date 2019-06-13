@@ -1,0 +1,52 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+<div class="container-fluid">
+    <div class="row" style="border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 25px; padding-bottom:15px; background-color: #337ab7; color: white">
+            <h2 class="text-center">Détail de la dotation</h2>
+
+    </div>
+
+    <?php if(isset($block->getRequest()->getParams()['dotation'])){
+        $dota                   = $block->getRequest()->getParams()['dotation'];
+        $objectManager          = \Magento\Framework\App\ObjectManager::getInstance();
+        $resource           = $objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection         = $resource->getConnection();
+        $sql = "SELECT sales_order_item.*
+                FROM `sales_order` 
+                INNER JOIN sales_order_item 
+                ON sales_order_item.order_id = sales_order.entity_id 
+                WHERE sales_order_item.order_id = " .$dota." 
+                AND parent_item_id IS NOT NULL;";
+        $all_dotation = $connection->fetchAll($sql);
+        ?>
+        <table class="data table-order-items" summary="<?php /* @escapeNotVerified */ echo __('Items Ordered') ?>" >
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Items Ordered') ?></caption>
+            <thead>
+            <tr>
+                <th class="col name bg-info"><?php echo __('Product Name') ?></th>
+                <th class="col sku bg-info"><?php echo __('SKU') ?></th>
+                <th class="col price bg-info"><?php echo __('Price') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($all_dotation as $dotation){ ?>
+                <tr>
+                    <td class="col name" data-th="Product Name">
+                        <?php  echo $dotation['name']; ?>
+                    </td>
+                    <td class="col sku" data-th="SKU">
+                        <?php echo $dotation['sku']; ?>
+                    </td>
+                    <td class="col price" data-th="Price">
+                        <?php echo $dotation['price']; ?>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    <?php } ?>
+</div>
+<a href="<?php echo $block->getUrl('', ['_secure' => true]); ?>" class="btn btn-link pull-right">Retour</a>

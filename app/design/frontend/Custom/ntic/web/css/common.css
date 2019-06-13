@@ -1,0 +1,257 @@
+/* GENERAL */
+header, .page-header{margin:0;}
+body{font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+/* END GENERAL */
+
+input, .input-group-addon, .btn, .btn-lg, .btn-block{border-radius: 0 !important;}
+.part-customer{ font-size: 11px}
+.page-header{background: #001941;}
+.header.content{text-align:center;padding: 10px 0 0;}
+.logo{float:none;}
+.logo img{display:inline-block;}
+.big-btn{padding:40px;font-size:30px;}
+
+.bg_mauve{}
+.panel.header,.panel.wrapper,.minicart-wrapper,.block-search .block-content,.footer.content,.section-items.nav-sections-items,.product-slider-wrapper,.page-title-wrapper{
+    display: none;}
+.navigation, .breadcrumbs, .page-header .header.panel, .header.content, .footer.content, .page-wrapper > .widget, .page-wrapper > .page-bottom, .block.category.event, .top-container, .page-main{ max-width: inherit !important}
+.btn-logout{
+    color: #FFF !important;
+    font-size: 30px;
+    padding: 7px 0 !important;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    overflow: hidden;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: color, background-color;
+    transition-property: color, background-color;
+}
+.btn-logout:hover{
+    background: rgba(208, 208, 208, 0.1411764705882353);
+}
+.vendeur-last{
+    font-size: 25px;
+}
+.vendeur-first{
+}
+/* PART LOGIN */
+.customer-account-login .page-header{display: none}
+.customer-account-login .page-title-wrapper{display: none}
+.cms-home, .customer-account-login{
+    background: #001941;
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+}
+.login-container .login-row{padding-top: 25px; padding-bottom: 25px;background: rgb(255, 255, 255); -webkit-box-shadow: 0px -3px 29px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -3px 29px 0px rgba(0,0,0,0.75);box-shadow: 0px -3px 29px 0px rgba(0,0,0,0.75);}
+.customer-account-login .fieldset.login .label span{color:#000}
+.customer-account-login .customer-macaron-login img {
+    border-radius: 50%;
+    background: #d0d0d0;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    padding: 8px;
+}
+.customer-account-login .page-wrapper>.nav-sections{display: none}
+.customer-account-login .secondary{ margin-top:30px}
+.customer-account-login .login-container .fieldset:after{ display: none}
+.customer-account-login .fieldset > .field.required > .label:after{ display:none}
+/* END LOGIN */
+.modali{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.54);
+    z-index: 150;
+}
+.modali_content{
+    position: fixed;
+    width: 100%;
+    background: #FFF;
+    z-index: 151;
+    margin-top: 30px;
+    padding: 20px;
+}
+.check-box{
+    border: 1px solid #DDD;
+    padding: 10px;
+}
+.box-y{
+    overflow-y: scroll;
+    max-height: 340px;
+}
+.w70{
+    width: 70px !important;
+}
+.pad3{
+    padding: 3px !important;
+}
+
+.post-list-item{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #e8e8e8;
+    margin-bottom:20px !important;
+}
+
+.post-item-wraper{
+    border: none !important;
+}
+
+.guides-pdf a{
+    display:block;
+    width:100%;
+    font-size: 20px;
+}
+
+.post-image.col-sm-4 img{
+    max-width:200px;
+    max-height:200px;
+}
+
+.post-image.col-xs-12 img{
+    max-height:300px;
+    max-width:300px;
+    margin:0 auto;
+}
+
+.response-search {
+     display: none;
+     border: 1px solid #006bb4;
+}
+
+.response-search span {
+    line-height: 27px;
+    min-height: 30px;
+    cursor: pointer;
+    padding: 0 10px;
+    display: block;
+    width: 100%;
+}
+
+.response-search span:hover {
+    background-color: #006bb4;
+    color: #FFF;
+}
+
+.table-striped th, .table-striped tr{
+    text-align: center;
+}
+
+/**
+HOME
+*/
+.tools-right-top{
+    padding-right: 20px !important;
+    padding-top: 10px !important;
+    z-index: 20;
+    color: #FFF;
+}
+
+.cms-home .bg{
+    padding: 10px;
+    color: #FFF;
+    opacity: 1;
+    transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+}
+.cms-home a:focus, a:hover{
+    text-decoration: none;
+}
+.cms-home .bg:hover{
+    opacity: .8;
+}
+.cms-home .bg-orange{
+    background: #da522c;
+}
+.cms-home .bg-violet{
+    background: #5937b2;
+}
+.cms-home .bg-bleu{
+    background: #018bd3;
+}
+.cms-home .bg-rose{
+    background: #a800a2;
+}
+.cms-home .bg-vert{
+    background: #009e01;
+}
+.cms-home .bg-bleu-f{
+    background: #0b58c2;
+}
+
+.cms-home .page-header{
+    background: none;
+    border: none;
+}
+
+.logo img{
+    border-radius: 50%;
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.cms-home .nav-sections{
+    margin: 0;
+}
+.cms-home #maincontent .row{
+    padding-bottom: 10px;
+}
+.cms-home .col-lg-1,.cms-home .col-lg-10, .cms-home .col-lg-11, .cms-home .col-lg-12, .cms-home .col-lg-2, .cms-home .col-lg-3, .cms-home .col-lg-4, .cms-home .col-lg-5, .cms-home .col-lg-6, .cms-home .col-lg-7, .cms-home .col-lg-8, .cms-home .col-lg-9, .cms-home .col-md-1, .cms-home .col-md-10, .cms-home .col-md-11, .cms-home .col-md-12, .cms-home .col-md-2, .cms-home .col-md-3, .cms-home .col-md-4, .cms-home .col-md-5, .cms-home .col-md-6, .cms-home .col-md-7, .cms-home .col-md-8, .cms-home .col-md-9, .cms-home .col-sm-1, .cms-home .col-sm-10, .cms-home .col-sm-11, .cms-home .col-sm-12, .cms-home .col-sm-2, .cms-home .col-sm-3, .cms-home .col-sm-4, .cms-home .col-sm-5, .cms-home .col-sm-6, .cms-home .col-sm-7, .cms-home .col-sm-8, .cms-home .col-sm-9, .cms-home .col-xs-1, .cms-home .col-xs-10, .cms-home .col-xs-11, .cms-home .col-xs-12, .cms-home .col-xs-2, .cms-home .col-xs-3, .cms-home .col-xs-4, .cms-home .col-xs-5, .cms-home .col-xs-6, .cms-home .col-xs-7, .cms-home .col-xs-8, .cms-home .col-xs-9 {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.ico-bdc{
+    font-size: 80px !important;
+    padding: 25px;
+}
+.l-2{
+    padding: 115px 10px 115px;
+}
+
+.btn-primary {
+    color: #FFF !important;
+}
+
+/* PART CUSTOMER */
+.part-customer a {
+    color: #FFF;
+}
+
+/*------------------------ CREATE CUSTOMER ----------------------------------*/
+.contact_calendar button {
+    margin-left: 10px;
+}
+
+/* MODAL DATATABLE HOME */
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 1000px;
+        margin: 30px auto;
+    }
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    }
+    .modal-sm {
+        width: 300px;
+    }
+}
+.paypal-express-in-context-mini-cart-container, .paypal-express-in-context-mini-cart-container{
+    display: none !important;
+}
+
+.dhx_cal_lsection label i {
+    font-size: 20px;
+    cursor: pointer;
+}

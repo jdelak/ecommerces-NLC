@@ -1,0 +1,46 @@
+<div id="contactslist">
+    ma liste de contact
+    <?php
+        $objetmanager = \Magento\Framework\App\ObjectManager::getInstance();
+        $portfolio = $objetmanager->create('Ntic\PortfolioCustomer\Model\PortfolioCustomer')->getCollection();
+        $customer = $objetmanager->create('Magento\Customer\Model\Customer')->getCollection();
+        $list_customer = $portfolio
+            ->addFieldToFilter('seller_id', 1)
+            ->join(
+                array('c' => $customer->getMainTable()),
+                'main_table.customer_id = c.'.$customer->getIdFieldName(),
+                array('lastname'=>'c.lastname','firstname'=>'c.firstname')
+        );
+    //var_dump($list_customer->getSelect().'');
+    foreach ($list_customer as $onecustomer){
+        //var_dump($onecustomer->getData('lastname'));
+    }
+    $portfolio2 = $objetmanager->create('Ntic\PortfolioCustomer\Model\PortfolioCustomer');
+    //$portfolio2->getCollection()->addFieldToFilter('seller_id', 4)->addFieldToFilter('customer_id', 1);
+    $id_to_dislink = $portfolio2->getCollection()->addFieldToFilter('seller_id', 1)->addFieldToFilter('customer_id', 4)->getFirstItem()->getData('portfolio_customer_id');
+    $portfolio2->getPortfolioCustomerId($id_to_dislink);
+    $portfolio2->load($id_to_dislink)->get();
+    $resultat = $portfolio2->delete();
+    var_dump($resultat->isDeleted);
+    /*
+    $portfolio2->setSellerId(1);
+    $portfolio2->setCustomerId(5);
+    var_dump($portfolio2->save() );
+    */
+    die();
+
+
+    /*
+     * 'ntic_portfolio_customer'
+     $joinConditions = 'u.sku = e.sku';
+
+    $productColelction->getSelect()->join(
+        ['u' => 'user_product_table'],
+        $joinConditions,
+        []
+    );
+    */
+        //var_dump($this->listContact(2));
+    ?>
+
+</div>

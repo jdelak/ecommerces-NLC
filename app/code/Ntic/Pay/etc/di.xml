@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<virtualType name="Ntic\Pay\Model\ResourceModel\PaymentMethod\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ntic_paymentmethod</argument>
+			<argument name="resourceModel" xsi:type="string">Ntic\Pay\Model\ResourceModel\PaymentMethod\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="ntic_paymentmethod_grid_data_source" xsi:type="string">Ntic\Pay\Model\ResourceModel\PaymentMethod\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<preference for="Ntic\Pay\Api\PaymentMethodRepositoryInterface" type="Ntic\Pay\Model\PaymentMethodRepository"/>
+	<preference for="Ntic\Pay\Api\Data\PaymentMethodInterface" type="Ntic\Pay\Model\PaymentMethod"/>
+	<preference for="Ntic\Pay\Api\Data\PaymentMethodSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="Ntic\Pay\Api\CertifRepositoryInterface" type="Ntic\Pay\Model\CertifRepository"/>
+	<preference for="Ntic\Pay\Api\Data\CertifInterface" type="Ntic\Pay\Model\Certif"/>
+	<preference for="Ntic\Pay\Api\Data\CertifSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Ntic\Pay\Model\ResourceModel\Certif\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ntic_certif</argument>
+			<argument name="resourceModel" xsi:type="string">Ntic\Pay\Model\ResourceModel\Certif\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="ntic_certif_grid_data_source" xsi:type="string">Ntic\Pay\Model\ResourceModel\Certif\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

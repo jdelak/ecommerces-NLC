@@ -1,0 +1,10 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <head>
+        <css src="Ntic_Conges::css/style.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ntic\Conges\Block\Setconges" name="confirmation" template="Ntic_Conges::confirmation.phtml" />
+        </referenceContainer>
+    </body>
+</page>

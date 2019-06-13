@@ -1,0 +1,177 @@
+<!-- ######################### MODAL CHOOSE PAYMENT ############################## -->
+<div class="form-horizontal step_mode_payment modali" style="display:none;">
+    <div class="modali_content">
+        <h3><?php echo __('Payment Mode'); ?>
+            <small class="pull-right">
+                <button type="button" class="close">X</button>
+            </small>
+        </h3>
+        <hr>
+        <div class="row">
+            <!-- BUTTON PAIEMENT -->
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-group colors col-xs-12 modal-choose-payment" data-toggle="buttons">
+                        <div class="btn-group col-xs-12" data-toggle="buttons">
+                            <?php
+                                foreach($block->getListPaymentMethod() as $mode_payment) {
+                                    ?>
+                                    <label class="btn btn-lg btn-primary col-xs-4 div-<?php echo strtolower($mode_payment); ?>">
+                                        <input type="radio" class="radio-mode-payment" data-cash="cash" name="[mode_payment][<?php echo $mode_payment; ?>]" value="<?php echo $mode_payment; ?>" autocomplete="off"><?php echo $mode_payment; ?>
+                                        <input type="hidden" class="check_<?php echo $mode_payment; ?>" name="[mode_payment][<?php echo $mode_payment; ?>]" value="ko" />
+                                    </label>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL -->
+                <div class="row">
+                    <?php
+                        foreach($block->getListPaymentMethod() as $mode_payment) {
+                            include ($block->getTemplateFile('Ntic_PayCustom::modal/'.strtolower($mode_payment).'.phtml'));
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<script>
+    require(['jquery', 'payform'], function ($) {
+        var owner               = $('.owner');
+        var cardNumber          = $('.cardNumber');
+        var cardNumberField     = $('.card-number-field');
+        var cardOwnerField      = $('.card-owner-field');
+        var CCVField            = $('.card-cvv-field');
+        var expiryField         = $('.card-expiry-field');
+        var CVV                 = $(".cvv");
+        var mastercard          = $(".mastercard");
+        var visa                = $(".visa");
+        var amex                = $(".amex");
+        var discover            = $(".discover");
+        var month               = $(".expiryMonth");
+        var year                = $(".expiryYear");
+        var button              = $(".submit");
+
+        //formate les champs card number et cvv pour validation avec Payform
+        cardNumber.payform('formatCardNumber');
+        CVV.payform('formatCardCVC');
+
+        //sélectionne le type de carte en fonction du numéro de carte et vérifie si celle-ci est valide
+        cardNumber.keyup(function() {
+            amex.removeClass('transparent');
+            visa.removeClass('transparent');
+            mastercard.removeClass('transparent');
+            discover.removeClass('transparent');
+
+            if ($.payform.validateCardNumber(cardNumber.val()) == false) {
+                cardNumberField.removeClass('has-success');
+                cardNumberField.addClass('has-error');
+            } else {
+                cardNumberField.removeClass('has-error');
+                cardNumberField.addClass('has-success');
+            }
+
+            if ($.payform.parseCardType(cardNumber.val()) == 'visa') {
+                mastercard.addClass('transparent');
+                amex.addClass('transparent');
+                discover.addClass('transparent');
+                $('#cardType').val('VI').select();
+            } else if ($.payform.parseCardType(cardNumber.val()) == 'amex') {
+                mastercard.addClass('transparent');
+                visa.addClass('transparent');
+                discover.addClass('transparent');
+                $('#cardType').val('AE').select();
+            } else if ($.payform.parseCardType(cardNumber.val()) == 'mastercard') {
+                amex.addClass('transparent');
+                visa.addClass('transparent');
+                discover.addClass('transparent');
+                $('#cardType').val('MC').select();
+            } else if ($.payform.parseCardType(cardNumber.val()) == 'discover') {
+                amex.addClass('transparent');
+                visa.addClass('transparent');
+                mastercard.addClass('transparent');
+                $('#cardType').val('DI').select();
+            }
+
+            hasError();
+        });
+
+        //vérifie et valide que le champs card name contient au moins 5 caractère
+        owner.keyup(function(){
+            if(owner.val().length < 2) {
+                cardOwnerField.find("span").html("<?php echo __('2 characters minimum required'); ?>");
+                cardOwnerField.addClass('has-error');
+            } else {
+                cardOwnerField.find("span").html("");
+                cardOwnerField.removeClass('has-error');
+                cardOwnerField.addClass('has-success');
+            }
+
+            hasError();
+        });
+
+        //autorise uniquement les caractères alphanumeriques pour le champs card name
+        /*owner.keypress(function(e){
+         var regex = new RegExp("^[a-zA-Z0-9]+$");
+         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+         if (regex.test(str)) {
+         return true;
+         }
+
+         e.preventDefault();
+         return false;
+         }); */
+
+        //Vérifie et valide que le cvv contient 3 ou 4 caractères
+        CVV.keyup(function(){
+            if(CVV.val().length < 3 || CVV.val().length >4){
+                CCVField.find("span").html("<?php echo __('Invalid Security Code'); ?>");
+                CCVField.addClass('has-error');
+            } else {
+                CCVField.find("span").html("");
+                CCVField.removeClass('has-error');
+                CCVField.addClass('has-success');
+            }
+
+            hasError();
+        });
+
+        //vérifie si la date d'expiration n'est pas antérieur à la date d'aujourd'hui
+        month.on('change',function(){
+            checkDate();
+        });
+        year.on('change',function(){
+            checkDate();
+        });
+
+        // vérifie la logique des choix de la date d'expiration
+        function checkDate(){
+            var nowMonth = (new Date().getMonth()) + 1;
+            var nowYear = new Date().getFullYear();
+            if(month.val() < nowMonth && year.val() <= nowYear ){
+                expiryField.addClass('has-error');
+                expiryField.find("span").html("<?php echo __('Invalid expiration date'); ?>");
+            } else {
+                expiryField.removeClass('has-error');
+                expiryField.addClass('has-success');
+                expiryField.find("span").html("");
+            }
+
+            hasError();
+        }
+
+        // permet de désactiver le bouton de validation
+        function hasError(){
+            if($('.has-error').length){
+                button.addClass('disabled');
+            } else {
+                button.removeClass('disabled');
+            }
+        }
+    });
+</script>

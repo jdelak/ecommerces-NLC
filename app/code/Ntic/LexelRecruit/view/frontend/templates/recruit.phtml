@@ -1,0 +1,91 @@
+<div class="col-lg-12">
+    <form enctype='multipart/form-data' class="form-horizontal recruit-form" action="<?php echo $block->getFormAction() ?>" method="post">
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="civilite">Civilité</label>
+            <div class="col-md-4">
+                <select id="civilite" name="civilite" class="form-control">
+                    <option value="mme">Mme</option>
+                    <option value="mr">Mr</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="name"><?php echo __('Nom'); ?></label>
+            <div class="col-md-4">
+                <input id="name" name="name" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="firstname"><?php echo __('Prénom'); ?></label>
+            <div class="col-md-4">
+                <input id="firstname" name="firstname" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="mail3"><?php echo __('E-Mail'); ?></label>
+            <div class="col-md-4">
+                <input id="mail3" name="mail3" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="phone"><?php echo __('Téléphone'); ?></label>
+            <div class="col-md-4">
+                <input id="phone" name="phone" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="address"><?php echo __('Adresse'); ?></label>
+            <div class="col-md-4">
+                <input id="address" name="address" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="address2"><?php echo __('Complément d\'Adresse'); ?></label>
+            <div class="col-md-4">
+                <input id="address2" name="address2" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cp"><?php echo __('Code Postal'); ?></label>
+            <div class="col-md-4">
+                <input id="cp" name="cp" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="city"><?php echo __('Ville'); ?></label>
+            <div class="col-md-4">
+                <input id="city" name="city" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="subject"><?php echo __('Sujet'); ?></label>
+            <div class="col-md-4">
+                <input id="subject" name="subject" type="text" class="form-control input-md">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="message">Message</label>
+            <div class="col-md-4">
+                <textarea class="form-control" id="message" name="message"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cv"><?php echo __('Joindre votre CV'); ?></label>
+            <div class="col-md-4">
+                <input id="cv" name="cv" type="file" class="form-control input-md">
+            </div>
+
+
+        </div>
+        <div class="form-group text-center">
+            <input type="submit" value="Envoyer votre candidature" class="action tocart primary">
+        </div>
+
+    </form>
+</div>
+
+
+
+
+

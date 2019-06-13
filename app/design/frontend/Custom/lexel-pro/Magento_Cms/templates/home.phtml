@@ -1,0 +1,116 @@
+<?php
+$oM = \Magento\Framework\App\ObjectManager::getInstance();
+$productObj = $oM->create('Magento\Catalog\Model\Product');
+$res = new \PDO("mysql:host=localhost;dbname=e_keops;charset=UTF8", "root", "Kay8lWiBMQwu");
+$sql = "SELECT soi.sku, sum(soi.qty_ordered) sold
+FROM sales_order_item soi
+INNER JOIN sales_order AS s ON  s.entity_id = soi.order_id
+AND s.shipping_method != 'owsh1_dota_method'
+AND s.store_id = 3
+AND (s.status != \"canceled\" ) AND YEAR(s.created_at) = 2018
+group by soi.sku
+order by sold desc
+LIMIT 6";
+
+$res = $res->query($sql)->fetchAll();
+
+
+foreach($res as $bestproduct){
+
+}
+?>
+
+
+
+<div class="row">
+    <div class="title-divider-home">
+        <span><?php echo __('Diagnostic Beauté') ?></span>
+    </div>
+    <div id="etape0" class="row">
+        <div class="col-md-6">
+            <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/diagnostic-accueil.jpg'); ?>" />
+        </div>
+        <div class="col-md-6 text-center">
+            <h2>Innovation</h2>
+            <h3>Réalisez votre <br/> diagnostic de peau<br/> personnalisé</h3>
+            <div class="line"></div>
+            <p>Réalisé par LEXEL Paris en association avec des esthéticiennes diplômées</p>
+            <a href="<?php echo $block->getUrl('diagnostic/#etape1', ['_secure' => true]);?>" class="btn btn-valide to-etape1"> > C'EST PARTI</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="title-divider-home">
+        <span><?php echo __('SUIVEZ NOUS') ?></span>
+    </div>
+    <div class="home-social text-center">
+        <!-- FACEBOOK -->
+        <div class="home-social-block col-xs-6 col-sm-4 col-md-4">
+            <div class="header-social-block">
+                <div class="home-icons" id="home-facebook"></div>
+                <span>FACEBOOK</span>
+                <br>
+            </div>
+            <a href="https://www.facebook.com/Lexel.Paris" target="_blank">
+                <img class="img-responsive" src="<?php echo $this->getViewFileUrl('images/social-home-fb.jpg');?>" alt="facebook lexel paris">
+            </a>
+        </div>
+        <!-- INSTAGRAM -->
+        <div class="home-social-block col-xs-6 col-sm-4 col-md-4">
+            <div class="header-social-block">
+                <div class="home-icons" id="home-instagram"></div>
+                <span>INSTAGRAM</span>
+                <br>
+            </div>
+            <a href="https://www.instagram.com/lexel.paris/" target="_blank">
+                <img class="img-responsive" src="<?php echo $this->getViewFileUrl('images/social-home-insta.jpg');?>" alt="instagram lexel paris">
+            </a>
+        </div>
+        <!-- YOUTUBE -->
+        <div class="home-social-block col-xs-6 col-sm-4 col-md-4">
+            <div class="header-social-block">
+                <div class="home-icons" id="home-youtube"></div>
+                <span>YOUTUBE</span>
+                <br>
+            </div>
+            <a href="https://www.youtube.com/channel/UCKtXUM8xS6AEDJVDM-M8_mg/featured" target="_blank">
+                <img class="img-responsive" src="<?php echo $this->getViewFileUrl('images/social-home-yt.jpg');?>" alt="youtube lexel paris">
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script type="application/javascript" rel="script">
+    require(['jquery','jquery.bootstrap'], function ($) {
+
+
+        $(document).ready(function(){
+
+            $('#itemslider').carousel({ interval: 3000 });
+
+            $(".carousel-showmanymoveone .item:first").addClass("active");
+
+            $('.carousel-showmanymoveone .item').each(function(){
+                var itemToClone = $(this);
+
+
+                for (var i=1;i<4;i++) {
+                    itemToClone = itemToClone.next();
+
+                    if (!itemToClone.length) {
+                        itemToClone = $(this).siblings(':first');
+                    }
+
+                    itemToClone.children(':first-child').clone()
+                        .addClass("cloneditem-"+(i))
+                        .appendTo($(this));
+                }
+            });
+        });
+
+    });
+
+</script>
+
+

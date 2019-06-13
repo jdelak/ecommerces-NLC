@@ -1,0 +1,25 @@
+{
+    "name": "ntic/module-portfoliocustomer",
+    "description": "test de yvane customer",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        },
+        {
+            "email": "lexelparis.web@gmail.com",
+            "name": "Lexel Paris"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ntic\\PortfolioCustomer\\": ""
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Ntic_PayCustom::config_payment_abo" sortOrder="10" title="config_payment_abo">
+					<resource id="Ntic_PayCustom::config_payment_abo_save" sortOrder="10" title="Save config_payment_abo"/>
+					<resource id="Ntic_PayCustom::config_payment_abo_delete" sortOrder="20" title="Delete config_payment_abo"/>
+					<resource id="Ntic_PayCustom::config_payment_abo_update" sortOrder="30" title="Update config_payment_abo"/>
+					<resource id="Ntic_PayCustom::config_payment_abo_view" sortOrder="40" title="View config_payment_abo"/>
+				</resource>
+				<resource id="Ntic_PayCustom::config_payment_fraction" sortOrder="10" title="config_payment_fraction">
+					<resource id="Ntic_PayCustom::config_payment_fraction_save" sortOrder="10" title="Save config_payment_fraction"/>
+					<resource id="Ntic_PayCustom::config_payment_fraction_delete" sortOrder="20" title="Delete config_payment_fraction"/>
+					<resource id="Ntic_PayCustom::config_payment_fraction_update" sortOrder="30" title="Update config_payment_fraction"/>
+					<resource id="Ntic_PayCustom::config_payment_fraction_view" sortOrder="40" title="View config_payment_fraction"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

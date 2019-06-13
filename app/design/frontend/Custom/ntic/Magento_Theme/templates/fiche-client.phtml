@@ -1,0 +1,104 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// INITIALISATION
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('\Magento\Customer\Model\Session');
+$urlInterface = $objectManager->get('\Magento\Framework\UrlInterface');
+$request = $objectManager->get('Magento\Framework\App\Request\Http');
+$customerGroupsCollection = $objectManager->get('\Magento\Customer\Model\ResourceModel\Group\Collection');
+// Your code
+$url = $urlInterface->getUrl('customer/account/logout');
+
+
+// IF IS LOGGED
+if(!$customerSession->isLoggedIn()) {
+    header('Location:'.$url );die();
+}
+
+// CHECK VENDEUR IF GROUP IS SELLER OR SUPERSELLER
+$customerGroups = $customerGroupsCollection->toOptionArray();
+$checkGroup = array_search($customerSession->getCustomer()->getGroupId(),array_column($customerGroups, 'value'));
+// GET NAME OF GROUP
+$nameOfGroup = $customerGroups[$checkGroup]['label'];
+
+if( !in_array($nameOfGroup,array('seller','super_seller'))){
+    header('Location:'.$url );die();
+}
+
+// Appel du block ContactMaster
+$block = $block->getLayout()->createBlock('Ntic\Common\Block\ContactMaster');
+
+/* INITIALISATION VARIABLE SESSION VENDEUR */
+$customerObj = $objectManager->create('Magento\Customer\Model\Customer')->getCollection();
+$portfoliocustomer = $objectManager->create('Ntic\PortfolioCustomer\Model\PortfolioCustomer')->getCollection();
+
+// IF SELLER
+$list_special_seller = $portfoliocustomer
+    ->addFieldToFilter('seller_id', ['eq' => $_SESSION['ntic_user']])
+    ->join(
+        array('c' => $customerObj->getMainTable()),
+        'main_table.customer_id = c.'.$customerObj->getIdFieldName(),
+        array('lastname'=>'c.lastname','firstname'=>'c.firstname')
+    );
+
+// Sert à récupérer les infos des client dans le tableau client
+$cusRepo = $objectManager->create('Magento\Customer\Api\CustomerRepositoryInterface');
+$addressRepo = $objectManager->create('Magento\Customer\Api\AddressRepositoryInterface');
+
+?>
+<div class="row">
+    <div class="after_select">
+        <table class="table table-striped" id="exemple">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Ajax DataTables Requests           -->
+            <?php
+            foreach ($list_special_seller as $thecustomer){
+                $customerID = $thecustomer->getCustomerId();
+                $client =  $cusRepo->getById($customerID);
+                $billingAddressId = $client->getDefaultBilling();
+                $billingAddress = $addressRepo->getById($billingAddressId);
+            ?>
+
+                <tr id="<?php echo $customerID ?>">
+                    <th scope="row"><?php echo $thecustomer->getCustomerId(); ?></th>
+                    <td><?php echo strtoupper($thecustomer->getData('lastname')); ?></td>
+                    <td><?php echo strtoupper($thecustomer->getData('firstname')); ?></td>
+                    <td><?php echo $client->getEmail() ; ?></td>
+                    <td><?php echo $billingAddress->getTelephone(); ?></td>
+                    <td>
+                    <form action="<?php echo $block->getUrl('common/customer/edit/', ['_secure' => true]) ;?>" method="POST">
+                        <input type="hidden" name="customer" id="customer" value="<?php echo $customerID; ?>"/>
+                        <button type="submit"
+                                title="Editer"
+                                class="btn btn-primary">
+                            <span>Editer</span>
+                            </button>
+                    </form>
+                    </td>
+
+                </tr>
+
+            <?php
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

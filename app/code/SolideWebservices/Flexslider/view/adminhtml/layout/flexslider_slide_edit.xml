@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceBlock name="menu">
+			<action method="setActive">
+				<argument name="itemId" xsi:type="string">SolideWebservices_Flexslider::slide</argument>
+			</action>
+		</referenceBlock>
+		<referenceContainer name="content">
+			<block class="SolideWebservices\Flexslider\Block\Adminhtml\Slide\Edit" name="slide_edit"/>
+		</referenceContainer>
+		<referenceContainer name="left">
+			<block class="SolideWebservices\Flexslider\Block\Adminhtml\Slide\Edit\Tabs" name="slide_edit_tabs">
+				<block class="SolideWebservices\Flexslider\Block\Adminhtml\Slide\Edit\Tab\Slide" name="slide_edit_tab_slide" />
+				<action method="addTab">
+					<argument name="name" xsi:type="string">main_section</argument>
+					<argument name="block" xsi:type="string">slide_edit_tab_slide</argument>
+				</action>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

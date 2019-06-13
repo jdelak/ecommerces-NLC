@@ -1,0 +1,307 @@
+
+
+button{
+    color:#fff !important;
+}
+
+button.btn-valide{
+    font-family: font-button !important;
+    background-color: #a38576 !important;
+    border: 1.5px solid #7a5f52 !important;
+    border-radius: 8px !important;
+    background-image: radial-gradient(circle at top left, #d6c8c2, #a38576)!important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+}
+
+form{
+    text-align: center;
+}
+
+form h2{
+    font-size: 50px;
+    font-family: font-one;
+}
+
+#etape0 h2{
+    color:#7a5f52;
+}
+
+#etape0 h3{
+    font-family: font-two;
+    font-size: 40px;
+    font-weight: 500;
+}
+#etape0 p{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#etape2 h2{
+    margin-right: 150px;
+}
+
+#etape3 h2{
+    margin-right: 150px;
+}
+
+#etape4 h2{
+    margin-right: 150px;
+}
+
+#etape5 h2{
+    margin-right: 150px;
+}
+
+#etape2 h3{
+    color:#b37e84;
+    font-style: italic;
+    font-size: 15px;
+}
+
+#etape3 h3{
+    color:#958fa4;
+    font-style: italic;
+    font-size: 15px;
+}
+
+#etape4 h3{
+    color:#715d54;
+    font-style: italic;
+    font-size: 15px;
+}
+
+#etape5 h3{
+    color:#6b9c9e;
+    font-style: italic;
+    font-size: 15px;
+}
+
+#etape2 label{
+    font-size: 15px;
+}
+
+#etape3 label{
+    font-size: 15px;
+}
+
+#etape4 label{
+    font-size: 15px;
+}
+
+#etape5 label{
+    font-size: 15px;
+}
+
+.titre{
+    position: relative;
+    height: 50px;
+}
+
+#etape2 .titre{
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#e3cfd0));
+}
+
+#etape3 .titre{
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#c9bfd9));
+}
+
+#etape4 .titre{
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#c9beb8));
+}
+
+#etape5 .titre{
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(#cad9db));
+}
+
+.line{
+    margin: 25px 0;
+    height: 2px;
+    background: black;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, black));
+}
+
+.line-etape1{
+    margin: 10px 0;
+    background: #b37e84;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, #b37e84));
+}
+
+.line-etape2{
+    margin: 10px 0;
+    background: #958fa4;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, #958fa4));
+}
+
+.line-etape3{
+    margin: 10px 0;
+    background: #715d54;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, #715d54));
+}
+
+.line-etape4{
+    margin: 10px 0;
+    background: #6b9c9e;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, #6b9c9e));
+}
+
+.div-etape{
+    position: relative;
+    min-height: 700px;
+}
+
+.etape{
+    border-radius: 0px;
+    background-color: #ccc;
+    border: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-family: font-button-etape;
+    height: 65px;
+    width: 80px;
+    position: relative;
+    float: bottom;
+    bottom: 80px;
+}
+
+.etape span{
+    font-size: 25px;
+}
+
+.next{
+    float: right;
+}
+
+.back{
+    float: left;
+}
+
+.titre{
+    text-align: right;
+}
+
+.titre h2{
+    position: relative;
+    bottom:10px;
+}
+
+.logo-etape{
+    position: relative;
+    float: right;
+    bottom: 70px;
+    right: 50px;
+}
+
+
+.choix{
+    position:absolute;
+    bottom:50px;
+}
+
+.radio{
+    margin: auto;
+    width: 350px;
+    text-align: left;
+}
+
+.image-woman{
+    position:relative;
+    bottom:75px;
+}
+
+.form-control{
+    width: 200px!important;
+    display:block!important;
+    margin:auto;
+
+}
+
+.div-button{
+    position: absolute;
+    bottom:0;
+    width: 100%;
+}
+
+#newsletter{
+    width:100% !important;
+}
+
+.owl-stage{
+    margin-top:20px;
+}
+
+.owl-carousel-item-title{
+    height:40px;
+    margin-top:10px;
+}
+
+.owl-carousel-item-title a{
+    color:#333333;
+    text-decoration:none;
+}
+
+.owl-carousel-item-price{
+    font-size:20px;
+    font-weight:bold;
+    margin: 10px 0 15px !important;
+}
+
+.owl-carousel.owl-drag .owl-item{
+    border: 2px solid #e8e8e8;
+    padding: 10px;
+}
+
+.owl-carousel .owl-item img{
+    height: 300px;
+    width: 225px;
+    margin: 0 auto;
+}
+
+
+
+
+@media screen and (max-width: 1024px){ /*pour écrant mobile et tablete */
+    .choix{
+        position:relative !important;
+        top:10px;
+    }
+    .titre h2 {
+        position: static !important;
+    }
+
+
+}
+
+@media screen and (max-width: 480px){ /*pour écrant mobile et tablete */
+    .choix .radio {
+        padding-left:30px;
+    }
+
+    #etape5 h2{
+        margin-right:130px;
+    }
+
+
+}
+
+
+@font-face {
+    font-family: 'font-one';
+    src: url('../fonts/JustAnotherHand-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'font-two';
+    src: url('../fonts/advent-Re.otf');
+}
+
+@font-face {
+    font-family: 'font-button';
+    src: url('../fonts/Futura Book Regular.otf');
+}
+
+@font-face {
+    font-family: 'font-button-etape';
+    src: url('../fonts/advent-Bd3.otf');
+}

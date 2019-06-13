@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="SolideWebservices_Flexslider::css/flexslider.min.css"/>
+	</head>
+	<body>
+		<referenceContainer name="head.additional">
+			<block class="SolideWebservices\Flexslider\Block\Head" name="flexslider_custom_styles" template="SolideWebservices_Flexslider::custom_styles.phtml" />
+		</referenceContainer>
+		<referenceContainer name="content">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_content_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_content_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_content_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_content_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="left">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_left_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_left_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_left_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_left_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="right">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_right_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_right_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_right_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_right_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="footer">
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_footer_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_footer_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_all_footer_bottom" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_global_positions" after="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">all_footer_bottom</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">global</argument></action>
+				<action method="setGlobal"><argument name="global" xsi:type="string">true</argument></action>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

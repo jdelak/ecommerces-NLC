@@ -1,0 +1,44 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <head>
+        <css src="Ntic_ArchiveGesco::css/archive-gesco-css.css" />
+    </head>
+    <body>
+        <!-- FILS D'ARIANE -->
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Accueil</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Accueil</item>
+                    <item name="label" xsi:type="string">Accueil</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">archive-gesco</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Archive Gesco</item>
+                    <item name="label" xsi:type="string">Archive Gesco</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}archivegesco</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">fiche-client</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Fiche Client</item>
+                    <item name="label" xsi:type="string">Fiche Client</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}archivegesco/customercard</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">fiche-commande</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Fiche Commande</item>
+                    <item name="label" xsi:type="string">Fiche Commande</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="archivegesco" template="Ntic_ArchiveGesco::frontend/orderCard/index.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,257 @@
+table > thead > tr > th, table > tbody > tr > th,
+table > tfoot > tr > th, table > thead > tr > td,
+table > tbody > tr > td, table > tfoot > tr > td
+{padding:0}
+html, body
+{ height:100%; padding:0px; margin:0px; }
+.container-fluid{padding:0 !important;}
+.well{
+    text-align: right;
+}
+#maincontent{
+    max-width: 100% ;
+}
+.container-fluid #scheduler_here {
+    height: 700px;
+    width: 100%;
+    border: 1px solid #cecece;
+
+}
+#scheduler_here {
+    border-radius: 4px;
+}
+.dhx_scale_bar{line-height: 15px;}
+.dhx_cal_event div.dhx_footer,
+.dhx_cal_event.past_event div.dhx_footer,
+.dhx_cal_event.event_1 div.dhx_footer,
+.dhx_cal_event.event_2 div.dhx_footer,
+.dhx_cal_event.event_3 div.dhx_footer{
+    background-color: transparent !important;
+}
+.dhx_cal_event .dhx_body{
+    -webkit-transition: opacity 0.1s;
+    transition: opacity 0.1s;
+    opacity: 0.7;
+    color: rgba(0, 0, 0, 1);
+}
+.dhx_cal_event .dhx_title{
+    line-height: 12px;
+    color: rgba(0, 0, 0, 0.5);
+}
+.dhx_cal_event_line:hover,
+.dhx_cal_event:hover .dhx_body,
+.dhx_cal_event.selected .dhx_body,
+.dhx_cal_event.dhx_cal_select_menu .dhx_body{
+    opacity: 1;
+}
+
+.dhx_cal_event.event_1 div, .dhx_cal_event_line.event_1{
+    background-color: orange !important;
+    border-color: #a36800 !important;
+}
+.dhx_cal_event_clear.event_1{
+    color:orange !important;
+}
+.dhx_cal_event.event_2 div, .dhx_cal_event_line.event_2{
+    background-color: #36BD14 !important;
+    border-color: #698490 !important;
+}
+.dhx_cal_event_clear.event_2{
+    color:#36BD14 !important;
+}
+
+.dhx_cal_event.event_3 div, .dhx_cal_event_line.event_3{
+    background-color: #FC5BD5 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_3{
+    color:#B82594 !important;
+}
+.dhx_cal_event.event_4 div, .dhx_cal_event_line.event_4{
+    background-color: #c5e184 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_4{
+    color:#B82594 !important;
+}
+.dhx_cal_event.event_5 div, .dhx_cal_event_line.event_5{
+    background-color: #bccaf6 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_5{
+    color:#B82594 !important;
+}
+.dhx_cal_event.event_6 div, .dhx_cal_event_line.event_6{
+    background-color: #6d7bf8 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_6{
+    color:#B82594 !important;
+}
+.dhx_cal_event.event_7 div, .dhx_cal_event_line.event_7{
+    background-color: #091901 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_7{
+    color:#B82594 !important;
+}
+.dhx_cal_event.event_21 div, .dhx_cal_event_line.event_21{
+    background-color: #4ece79 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_21{
+    color:#B82594 !important;
+}
+.dhx_cal_event.event_22 div, .dhx_cal_event_line.event_22{
+    background-color: #ffa100 !important;
+    border-color: #839595 !important;
+}
+.dhx_cal_event_clear.event_22{
+    color:#B82594 !important;
+}
+.dhtmlXTooltip.tooltip{
+    z-index:99999;
+}
+.dhx_section_time{
+    min-height:80px;
+}
+
+.dhx_section_time select{
+    max-width:80px;
+}
+#light-modal-contact {
+    background-color: rgba(35,35,27,0.6);
+    padding:10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #fff;
+    font-weight: bold;
+    border-bottom-left-radius: 20px;
+}
+.icon-action{
+    cursor: pointer;
+}
+/**
+ ---------------- BLOCK MODAL DE CHANGEMENT CBT -------------------
+ */
+#changeCBT {
+    position: fixed;
+    top:0;
+    bottom:0;
+    margin-right: -15px;
+    margin-left: -20px;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0, 0.6);
+    z-index: 10000;
+}
+.blockCBT{
+    width: 600px;
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 150px;
+    margin: 0 auto;
+    margin-top:20%;
+    background-color: aliceblue;
+    padding:5px;
+}
+div.body > select{
+    padding-right: 5px ;
+    padding-left:5px ;
+}
+span.title > h4 {
+    border-bottom: 1px solid black;
+    margin-top: 5px;
+    text-align: center;
+    padding:5px;
+}
+.dhxcombolist_material.dhxform_obj_material {
+    z-index: 1500000 !important;
+}
+
+
+/**
+ ---------------- FIN BLOCK MODAL DE CHANGEMENT CBT -------------------
+ */
+
+/* WAITING CSS TRICKS */
+.sk-cube-grid {
+    width: 40px;
+    height: 40px;
+    margin: 100px auto;
+}
+
+.sk-cube-grid .sk-cube {
+    width: 33%;
+    height: 33%;
+    background-color: #001941;
+    float: left;
+    -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+.sk-cube-grid .sk-cube1 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+    0%, 70%, 100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    } 35% {
+          -webkit-transform: scale3D(0, 0, 1);
+          transform: scale3D(0, 0, 1);
+      }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+    0%, 70%, 100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    } 35% {
+          -webkit-transform: scale3D(0, 0, 1);
+          transform: scale3D(0, 0, 1);
+      }
+}
+
+#contact-list li{
+    cursor: pointer;
+    border-top: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    list-style: none;
+    margin-bottom:0;
+    height:40px;
+}
+
+#contact-list li:hover{
+    background:#e3e3e3;
+}
+
+#contact-list li button{
+    float:right;
+    font-size:12px;
+}

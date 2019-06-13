@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="export">
+		<job instance="Gesco\Export\Cron\Export" method="execute" name="gesco_export_export">
+			<schedule>30 20 * * *</schedule>
+		</job>
+	</group>
+</config>

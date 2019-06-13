@@ -1,0 +1,120 @@
+@media screen and (max-width: 767px){
+    .mobile-no-scroll {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    .panel {
+        box-shadow: none !important;
+        border: none !important;
+        display: block;
+    }
+
+    .page-header {
+        line-height: 5px;
+    }
+
+    .product.data.items > .item.title > .switch{
+        height: 50px;
+    }
+
+    .nav-sections .header.links li{
+        padding: 0 5px;
+    }
+    .nav-sections .header.links li > a{
+        display: inline-block;
+        padding: 0.8rem 5px;
+        border: none;
+    }
+
+    .uk-slideshow {
+        display: none;
+    }
+
+    .header-fixed {
+        border-bottom: 1px solid #eeeeee;
+        width: 100% !important;
+        background-color: #FFF;
+        position: absolute;
+        padding-top: 5px;
+        height: 180px;
+        z-index: 20;
+    }
+
+    .columns {
+        margin-top: -125px;
+    }
+
+    /*--------------------------------------------------------------------
+        HEADER
+    --------------------------------------------------------------------*/
+
+    .link-more {
+        display: none !important;
+    }
+
+    .link-register {
+        display: none;
+    }
+
+    .header-input-search {
+        display: none;
+    }
+
+    .header-mobile-search {
+        border-right: 1px solid #eeeeee;
+        display: block;
+        width: 35px;
+    }
+
+    .header-mobile-search a {
+        margin-left: 8px;
+        line-height: 30px;
+    }
+
+    .header-mobile-search i {
+        color: #333333;
+    }
+
+    /*--------------------------------------------------------------------
+        MENU
+    --------------------------------------------------------------------*/
+
+    .nav-sections {
+        position: relative;
+        z-index: 10;
+    }
+
+    .header-fixed {
+        position: relative !important;
+        z-index: 1;
+    }
+
+    .mobile-icon-menu-close {
+        background-color: #FFF;
+        z-index: 20;
+    }
+
+    .mobile-real-navigation-wrapper {
+        border-bottom: 1px solid #eeeeee;
+        border-right: 1px solid #eeeeee;
+        background-color: #FFF;
+        overflow-y: scroll;
+        position: fixed;
+        height: 100%;
+        z-index: 20;
+        width: 100%;
+        top: 34px;
+        left: 0;
+    }
+
+    /*--------------------------------------------------------------------
+       FOOTER
+   --------------------------------------------------------------------*/
+
+    .footer-inside {
+        text-align: center;
+        display: block;
+    }
+
+}

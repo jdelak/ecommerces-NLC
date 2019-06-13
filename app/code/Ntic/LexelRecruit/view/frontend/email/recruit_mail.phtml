@@ -1,0 +1,26 @@
+<!--@subject {{trans "Candidature Lexel Paris (site)"}}  @-->
+
+{{template config_path="design/email/header_template"}}
+
+<h1>Une nouvelle candidature via le Site Lexel Paris a été reçu :</h1>
+<br>
+<p>
+    Sujet : {{var subject}}
+</p>
+<p>
+    {{var civilite}} {{var firstname}} {{var lastname}}
+</p>
+<p>Téléphone : {{var phone}}</p>
+<p>E-Mail : {{var mail3}}</p>
+<p>
+    Adresse :<br>
+    {{var address}}<br>
+    {{var address2}}<br>
+    {{var cp}}<br>
+    {{var city}}
+</p>
+<p>
+    {{var message}}
+</p>
+
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+                <!-- FOLLOW LEXEL -->
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-information-customer-follow-lexel" after="-">
+                    <arguments>
+                        <argument name="path" xsi:type="string">informationcustomer/follow/</argument>
+                        <argument name="label" xsi:type="string">Fiche de suivi beauté</argument>
+                    </arguments>
+                </block>
+
+                <!-- FOLLOW TIME -->
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-information-customer-follow-time" after="-">
+                    <arguments>
+                        <argument name="path" xsi:type="string">informationcustomer/followtime/</argument>
+                        <argument name="label" xsi:type="string">Fiche de suivi nutrition</argument>
+                    </arguments>
+                </block>
+
+                <!-- HISTORIQUE COMMANDE (HISTORIC ORDER) -->
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-information-customer-follow-time" after="-">
+                    <arguments>
+                        <argument name="path" xsi:type="string">informationcustomer/parrainage/</argument>
+                        <argument name="label" xsi:type="string">Suivi des parrainages</argument>
+                    </arguments>
+                </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,1027 @@
+<?php
+$block = $this->getLayout()->createBlock("Ntic\Calendar\Block\Contact\Edit");
+$manager = $block->checkPermission(); // Si c'est un manager => true
+$sellerName = $block->getName(); // Nom de la personne connecté
+$user_id = $block->getId(); // Id de la personne connecter => utile dans le cas ou $manager = false
+$sellerCode = $block->getSellerCode(); // Code vendeur de la personne connecter => utile dans le cas ou $manager = false
+//var_dump($block->test());
+?>
+<style>
+    .dhxcombo_option_text, .dhxcombo_option dhxcombo_option_selected, .dhxcombolist_material, .dhxform_obj_material{
+        min-width: 400px !important;
+    }
+    .row {
+        margin-right:0 !important;
+        margin-left: 0 !important;
+        overflow-y: hidden;
+    }
+    #rendez-vous tr td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    #customY input[type="text"]:disabled{
+        background-color: transparent;
+        border: none;
+        opacity: 1;
+        box-shadow: none;
+        cursor: inherit;
+    }
+    .dhxcombo_input  {
+        min-width: 500px;
+    }
+    .dhxcombo_material{
+        min-width: 400px;
+    }
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        background-color: #000;
+    }
+    .qualif {
+        font-weight: 600;
+    }
+</style>
+
+<!-- POPUP CHANGEMENT CBT -->
+<div style="visibility: hidden;" id="changeCBT">
+    <div class="blockCBT">
+        <span class="title">
+            <h4>Affecter le rendez-vous a une autre CBT</h4>
+        </span>
+        <div class="body">
+            <input type="hidden" name="event_id" id="hidden_ev">
+            <div id="new_cbt" style="min-height:50px;" class="col-md-12"></div>
+            <br>
+            <button  id="changeCBT_save" lass="btn btn-primary"> Valider</button>
+            <button  id="changeCBT_close" class="btn btn-alert"> Annuler</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" >
+    <div class="modal fade bd-example-modal-lg" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">Attribuer l'événement à un contact</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="my-select-contact" style="height:80px;"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <button id="contact-btn" title="Ajouter Nouveau Contact"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="my-select-client" style="height:80px;"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <button id="client-btn" title="Séléctionner" ><i class="fa fa-check" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="checkbox col-md-12" >
+                                <label> <input type="checkbox" name="new_contact" id="new_contact">Nouveau contact </label>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 25px;">
+                                <button id="show-hide" class="icon-action" style="width: 100%"> + Voir détails</button>
+                            </div>
+                        </div>
+                        <div id="modal-contact" class="col-md-12">
+                            <form id="contact_form" style="display: none" class="form-group" method="POST" action="">
+                                <div class="row">
+                                    <div class='col-md-12'>Identité<hr></div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-md-12 form-group'><label for="contact_civ">Civilité</label><input type='text' class='form-control' id="contact_civ" name='contact_civ' placeholder='Mr/Mme ...'></div>
+                                    <div class='col-md-6 form-group'><label for="contact_nom">Nom</label><input type='text' class='form-control' id="contact_nom" name='contact_nom' required placeholder='Nom' id='nameContact'></div>
+                                    <div class='col-md-6 form-group'><label for="contact_prenom">Prénom</label><input type='text' class='form-control' id="contact_prenom" name='contact_prenom' placeholder='Prénom'></div>
+                                    <div class='col-md-12 form-group'>
+                                        <label for="datetimepicker">Date de naissance</label><input type='date' id='datetimepicker' class='form-control' name='contact_birthday'>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-md-12'>Adresse<hr></div>
+                                    <div class='col-md-12 form-group'><label for="contact_adr1">Adresse </label><input type='text' class='form-control' id="contact_adr1" name='contact_adr1' placeholder='Adresse1'></div>
+                                    <div class='col-md-12 form-group'><label for="contact_adr2">Adresse</label><input type='text' class='form-control' id="contact_adr2" name='contact_adr2' placeholder='Adresse2'></div>
+                                    <div class='col-md-12 form-group'><label for="contact_adr3">Adresse</label><input type='text' class='form-control' id="contact_adr3" name='contact_adr3' placeholder='Adresse3'></div>
+                                    <div class='col-md-6 form-group'><label for="contact_cp">Code Postal</label><input type='number' pattern = "[0-9]{1,5}" class='form-control' id="contact_cp" name='contact_cp' placeholder='CP'></div>
+                                    <div class='col-md-6 form-group'><label for="contact_ville">Ville</label><input type='text' class='form-control' id="contact_ville" name='contact_ville' placeholder='Ville'></div>
+                                    <div class='col-md-6 form-group'><label for="contact_pays">Pays</label><input type='text' class='form-control' id="contact_pays" name='contact_pays' placeholder='Pays'></div>
+
+                                </div>
+                                <div class="row">
+                                    <div class='col-md-12'>Coordonnées <hr></div>
+                                    <div class='col-md-12 form-group'><label for="contact_mail">Mail </label><input type='email' class='form-control' id="contact_mail" name='contact_mail' required placeholder='Email'></div>
+                                    <div class='col-md-4 form-group'><label for="contact_tel1">Téléphone 1 </label><input type='text' class='form-control' id="contact_tel1"  name='contact_tel1' placeholder='Tel1'></div>
+                                    <div class='col-md-4 form-group'><label for="contact_tel2">Téléphone 2</label><input type='text' class='form-control' id="contact_tel2"  name='contact_tel2' placeholder='Tel2'></div>
+                                    <div class='col-md-4 form-group'><label for="contact_tel3">Téléphone 3</label><input type='text' class='form-control' id="contact_tel3"  name='contact_tel3' placeholder='Tel3'></div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-md-12 form-group'>
+                                        <button id="update_contact" value="update" name="update" class="col-md-12 btn btn-primary">Modifier les informations contact</button>
+                                    </div>
+
+                                    <div class='col-md-12 form-group'>
+                                        <button id="save_contact" value="save" name="save" class="col-md-12 btn btn-primary">Enregistrer nouveau contact</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="attribuer_action">Attribuer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+<!--                FIN COUPER-->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="dhx_cal_container panel" id="scheduler_here" style="visibility: hidden">
+                <div class="dhx_cal_navline">
+                    <div class="dhx_cal_prev_button">&nbsp;</div>
+                    <div class="dhx_cal_next_button">&nbsp;</div>
+                    <div class="dhx_cal_today_button"></div>
+                    <div class="dhx_cal_date"></div>
+                    <div class="dhx_cal_tab" name="day_tab"></div>
+                    <div class="dhx_cal_tab" name="week_tab"></div>
+                    <div class="dhx_cal_tab" name="month_tab"></div>
+                </div>
+                <div class="dhx_cal_header"></div>
+                <div class="dhx_cal_data"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+        ],
+
+        function($){
+            /******************************************************************************************************************/
+            /************************************************** SCRIPT DU SCHEDULER********************************************/
+            /******************************************************************************************************************/
+            var myForm;
+            var user_id;
+            var dp;
+
+            function init() {
+                var listType = scheduler.serverList("type");
+
+                // CONFIGURATION
+                scheduler.config.xml_date="%Y-%m-%d %H:%i";
+                scheduler.config.time_step = 30;
+                scheduler.config.first_hour = 6;
+                //
+                scheduler.config.prevent_cache = true;
+                scheduler.config.occurrence_timestamp_in_utc = true;
+                scheduler.config.include_end_by = true;
+                scheduler.config.repeat_precise = true;
+                scheduler.config.multi_day = true;
+                scheduler.config.limit_time_select = true;
+                scheduler.config.className = 'dhtmlXTooltip tooltip';
+                scheduler.config.timeout_to_display = 5;
+                scheduler.config.delta_x = 15;
+                scheduler.config.delta_y = -20;
+                scheduler.config.details_on_create=true;
+                scheduler.config.details_on_dblclick = false;
+                scheduler.config.collision_limit = 1;
+
+                scheduler.config.details_on_create=true;
+                scheduler.config.details_on_dblclick=true;
+                scheduler.attachEvent("onEventLoading", function(ev){
+
+                    return scheduler.checkCollision(ev);
+                });
+
+
+                scheduler.templates.hour_scale = function(date){
+                    var t=date.getMinutes();t=10>t?"0"+t:t;
+                    var i="<span class='dhx_scale_h'>"+date.getHours()+"</span><span class='dhx_scale_m'>&nbsp;"+t+"</span>";
+                    return i;
+                };
+                scheduler.templates.tooltip_text = function(start,end,ev){
+                    var stringQualif;
+                    switch(ev.qualif) { // Définit le status de qualification en fonction de l'id dand la base Events
+                        case "0":
+                            stringQualif = "Non qualifié";
+                            break;
+                        case "1":
+                            stringQualif = "Non qualifié";
+                            break;
+                        case "2":
+                            stringQualif = "Vente effectuée";
+                            break;
+                        case "3":
+                            stringQualif = "Annulation";
+                            break;
+                        case "4":
+                            stringQualif = "Soins Pub";
+                            break;
+                        case "5":
+                            stringQualif = "Report";
+                            break;
+                        case "6":
+                            stringQualif = "Absence";
+                            break;
+                        default:
+                    }
+                    // Popup au survol d'un Event
+
+                    if(ev.type!=0){
+                        if(listType[parseInt(ev.type)] != undefined){
+                            return "<b>Type:</b> "+listType[parseInt(ev.type)-1].label +"<br/>" +
+                                   "<b>Détails:</b> "+ev.details+"<br/>" +
+                                    "<b>Qualification:</b> "+stringQualif+"<br/>" +
+                                   "<b>Début:</b> "+scheduler.templates.tooltip_date_format(start)+
+                                   "<br/><b>Fin:</b> "+scheduler.templates.tooltip_date_format(end);
+                        }
+                    }
+                };
+                scheduler.templates.event_text=scheduler.templates.event_bar_text = function(start,end,event){
+                    // l'id du type d'evenement est retourné sous forme d'un tableau (premier index 0)
+                    var idOfEvType = parseInt(event.type)-1; // Id du type moins un pour trouver l'index correspondant au type d'évenement (valeur premier id = 1)
+                    if(listType[idOfEvType] != undefined ) {
+                        return listType[idOfEvType].label ;
+                    } else {
+                        return "Aucun type attribué";
+                    }
+                };
+                // CUSTOM COLOR EVENT TYPE
+                scheduler.templates.event_class=function(start, end, event){
+                    var css = "";
+                    if(event.type) // if event has subject property then special class should be assigned
+                        css += "event_"+event.type;
+
+                    if(event.id == scheduler.getState().select_id){
+                        css += " selected";
+                    }
+                    return css; // default return
+                };
+
+
+                scheduler.form_blocks["my_editor"] = {
+                    render:function(sns) {
+                        var html =
+                            "<div class='dhx_cal_ltext row' style='' id='customY'>" +
+                             "<div class='col-md-12'>"+
+                             " <a href='#' data-toggle='modal' data-target='.bd-example-modal-lg'><i class='fa fa-plus-square-o' aria-hidden='true'></i> Formulaire Prospect / Client</a>"+
+                            "</div>" +
+                            "<div class='col-md-12'><b>Identité</b></div>" +
+                            "<span class='hidden'>Code contact&nbsp;<input type='hidden'><br/></span>"+
+                            "<span class='hidden'>Code user&nbsp;<input type='hidden'><br/></span>"+
+                            "<div class='col-md-12'><input type='hidden' name='form_code_contact' class='form-control' id='form_code_contact' disabled></div>" +
+                            "<div class='col-md-2'><input type='text' class='form-control ' name='form_contact_civ'   id='form_contact_civ'  placeholder='Civilité' disabled></div>" +
+                            "<div class='col-md-5'><input type='text' class='form-control ' name='form_contact_nom'   id='form_contact_nom'  placeholder='Nom' disabled></div>" +
+                            "<div class='col-md-5'><input type='text' class='form-control ' name='form_contact_prenom'   id='form_contact_prenom'  placeholder='Prénom' disabled></div>" +
+                            "<div class='col-md-12'><b>Adresse</b></div>" +
+                            "<div class='col-md-6'><input type='text' class='form-control ' name='form_contact_adr1'   id='form_contact_adr1'  placeholder='Adresse1' disabled></div>" +
+                            "<div class='col-md-6'><input type='text' class='form-control ' name='form_contact_cp'   id='form_contact_cp'  placeholder='CP' disabled></div>" +
+                            "<div class='col-md-6'><input type='text' class='form-control ' name='form_contact_adr2'   id='form_contact_adr2'  placeholder='Adresse2' disabled></div>" +
+                            "<div class='col-md-6'><input type='text' class='form-control ' name='form_contact_ville'   id='form_contact_ville'  placeholder='Ville' disabled></div>" +
+                            "<div class='col-md-6'><input type='text' class='form-control ' name='form_contact_adr3'   id='form_contact_adr3'  placeholder='Adresse3' disabled></div>" +
+                            "<div class='col-md-12'><b>Coordonnées</b></div>" +
+                            "<div class='col-md-12'><input type='text' class='form-control ' name='form_contact_mail'   id='form_contact_mail'  placeholder='Email' disabled></div>" +
+                            "<div class='col-md-4'><input type='text' class='form-control '  name='form_contact_tel1'   id='form_contact_tel1'  placeholder='Tel1' disabled></div>" +
+                            "<div class='col-md-4'><input type='text' class='form-control '  name='form_contact_tel2'   id='form_contact_tel2'  placeholder='Tel2' disabled></div>" +
+                            "<div class='col-md-4'><input type='text' class='form-control '  name='form_contact_tel3'   id='form_contact_tel3'  placeholder='Tel3' disabled></div>" +
+                            "</div>";
+                        return html;
+                    },
+                    // AFFICHAGE pour VISUALISER LE CONTACT
+                    set_value:function(node, value, ev) {
+                        var contact_id;
+                        var params;
+                        console.log(ev);
+                        if(ev.userId != undefined) {
+                            user_id = ev.userId;
+                        }
+
+                        /**
+                         * Si un event est deja rattaché a un contact defini l'id du contact comme etant celui de la table event
+                         * Sinon on prend la valeur de l'id selectionner dans la liste deroulante contact
+                         */
+                        if (value != undefined) {
+                            contact_id = value;
+
+                            if (ev.isCustomer == 1)
+                            {
+                                url = "<?php echo $this->getUrl('calendar/ClientDetails/Ajax'); ?>?";
+                                params = 'client_id=' + value;
+                            } else {
+                                url = "<?php echo $this->getUrl('calendar/ContactDetails/Ajax'); ?>?";
+                                params = 'contact_id=' + value;
+                            }
+                        } else {
+                            contact_id = parseInt(document.getElementsByName('contact_name')[0].value);
+                            url = "<?php echo $this->getUrl('calendar/ContactDetails/Ajax'); ?>?";
+                            params = 'contact_id=' + contact_id;
+                            if (!Number.isInteger(contact_id) ) {
+                                contact_id = parseInt(document.getElementsByName('client_name')[0].value);
+                                url = "<?php echo $this->getUrl('calendar/ClientDetails/Ajax'); ?>?";
+                                params = 'client_id=' + contact_id;
+                            }
+                        }
+                        if (contact_id == "NAN") { // Si le champs censé contenir l'id dela personne contient un valeur qui n'est pas un nombre
+                            clearCalendarContactForm();
+                        }
+
+                        if (contact_id != "") {
+                            var request = new XMLHttpRequest();
+                            request.open('GET', url+params, true);
+                            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            request.onload = function() {
+                                if (request.status >= 200 && request.status < 400) {
+                                    // Success!
+                                    var data = JSON.parse(request.responseText);
+
+                                    document.getElementById('form_code_contact').value   = data[0].id;
+                                    document.getElementById('form_contact_civ').value    = data[0].prefix;
+                                    document.getElementById('form_contact_nom').value    = data[0].firstname;
+                                    document.getElementById('form_contact_prenom').value = data[0].lastname;
+                                    document.getElementById('form_contact_adr1').value   = data[0].addr1;
+                                    document.getElementById('form_contact_cp').value     = data[0].zip_code;
+                                    document.getElementById('form_contact_adr2').value   = data[0].addr2;
+                                    document.getElementById('form_contact_ville').value  = data[0].city;
+                                    document.getElementById('form_contact_adr3').value   = data[0].addr3;
+                                    document.getElementById('form_contact_mail').value   = data[0].email;
+                                    document.getElementById('form_contact_tel1').value   = data[0].tel1;
+                                    document.getElementById('form_contact_tel2').value   = data[0].tel2;
+                                    document.getElementById('form_contact_tel3').value   = data[0].tel3;
+
+                                } else {
+                                    // We reached our target server, but it returned an error
+                                }
+                            };
+                            request.onerror = function() {
+                                // There was a connection error of some sort
+                            };
+                            request.send();
+                        } else {
+                            clearCalendarContactForm() // Si aucun contact ou client séléctionné (listes contact& client) alors on nvide les champs du popup calendar)
+                        }
+
+                        // TEST yVANE
+                        $('#attribuer_action').on('click',function(){
+                            console.log('test');
+                            var request = new XMLHttpRequest();
+                            request.open('GET', url+params, true);
+                            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            request.onload = function() {
+                                if (request.status >= 200 && request.status < 400) {
+                                    // Success!
+                                    var data = JSON.parse(request.responseText);
+
+                                    document.getElementById('form_code_contact').value   = document.getElementsByName('contact_name').value;
+
+                                } else {
+                                    // We reached our target server, but it returned an error
+                                }
+                            };
+                            request.onerror = function() {
+                                // There was a connection error of some sort
+                            };
+                            request.send();
+                        });
+                        // FIN TEST yVANE
+
+                        node.childNodes[2].firstElementChild.value;
+                        // Champs hidden contact_id du formulaire de création d'events
+                        node.childNodes[1].value = contact_id;
+                        // Champs hidden user_id du formulaire de création d'events
+                        node.childNodes[2].value = parseInt(document.getElementsByName('seller')[0].value);
+                        // Champs contact_name du formulaire de création d'events
+                        node.childNodes[4].value = "";
+
+                    },
+                    // ENREGISTREMENT
+                    get_value:function(node, ev){
+                        if ( '<?=$manager?>' == 1 ) {
+                            ev.isBinome = 1;
+                        } else {
+                            ev.isBinome = 0;
+                        }
+
+                        ev.userId = node.childNodes[2].value;
+                        if(!Number.isInteger(ev.userId)) {
+                            ev.userId = '<?=$user_id?>';
+                        }
+                        if (document.getElementsByName('contact_name')[0].value != "")
+                        {
+                            ev.isCustomer = 0;
+                        }
+                        if (document.getElementsByName('client_name')[0].value != "")
+                        {
+                            ev.isCustomer = 1;
+                        }
+                        ev.details = node.childNodes[4].value;
+                        if (document.getElementById('form_contact_nom').value != "" && document.getElementById('form_contact_prenom').value != "") {
+                            ev.text =  document.getElementById('form_contact_nom').value + " " +  document.getElementById('form_contact_prenom').value;
+                        }
+
+                        return node.childNodes[1].value;
+                    },
+
+                    focus:function(node){
+                        var a = node.childNodes[1];
+                        a.select();
+                        a.focus();
+                    }
+                };
+
+                //CREATE FORM
+                scheduler.config.lightbox.sections=[
+//                    {name:"title", height:46, map_to:"text", type:"textarea" },
+                    {name: "type", height: 40, map_to: "type", type: "select",
+                        options: scheduler.serverList("type")},
+                    {name:"contact", height:200, map_to:"contact", type:"my_editor"},
+                    {name:"description", height:100, map_to:"details", type:"textarea" },
+                    {name: "recurring", type: "recurring", map_to: "rec_type", button: "recurring"},
+                    {name: "time", height: 72, type: "time", map_to: "auto"},
+                ];
+
+                <?php if ($manager == false) : ?>
+                scheduler.config.lightbox.sections=[
+                    {name: "Qualif", height: 40, map_to: "qualif", type: "select",
+                        options: scheduler.serverList("qualif")},
+                // {name:"title", height:46, map_to:"text", type:"textarea" },
+                    {name: "type", height: 40, map_to: "type", type: "select",
+                        options: scheduler.serverList("type")},
+                    {name:"contact", height:200, map_to:"contact", type:"my_editor"},
+                    {name:"description", height:100, map_to:"details", type:"textarea" },
+                    {name: "recurring", type: "recurring", map_to: "rec_type", button: "recurring"},
+                    {name: "time", height: 72, type: "time", map_to: "auto"},
+                ];
+                <?php endif; ?>
+                // Date du jour
+                var dateNow = Date.now();
+                // ==================== CREATE SCHEDULER ==========================
+                scheduler.init('scheduler_here', new Date(dateNow) ,"week");
+                scheduler.setLoadMode("week");
+
+
+                <?php if ($manager == false): ?>
+                    scheduler.load("<?php echo $this->getUrl('calendar/Events/Ajax'); ?>?user_id=<?=$user_id?>");
+                    /**
+                     * RESTRICTIONS
+                     */
+                    // scheduler.config.drag_in = false;
+                    // scheduler.config.details_on_create=false;
+                    // scheduler.config.icons_select=["icon_details","icon_edit"]
+                <?php else: ?>
+                    //Ajout du boutton pour affecter le rendez vous d'une CBT a une autre.
+                    scheduler.config.buttons_left=["dhx_delete_btn","change_user_button"];
+                    scheduler.config.buttons_right=["dhx_save_btn","dhx_cancel_btn"];
+                    scheduler.locale.labels["change_user_button"] = "Changer de CBT";
+                    //Attribution de l'action a faire au clique sur le boutton que l'on viens de créer
+                    scheduler.attachEvent("onLightboxButton", function(button_id, node, e){
+                        if(button_id == "change_user_button") {
+                            var id = scheduler.getState().select_id;
+                            document.getElementById('hidden_ev').value = id;
+                            document.getElementById('changeCBT').style.visibility = "visible";
+                            document.getElementById('changeCBT').style.display= "block";
+
+                        }
+                    });
+                    scheduler.load("<?php echo $this->getUrl('calendar/Events/Ajax'); ?>?user_id");
+
+                <?php endif; ?>
+                scheduler.config.full_day = true;
+                scheduler.locale.labels.section_location="Location";
+                /**
+                 * Definir les droits au lancement de scheduler
+                 */
+                <?php if ($manager == false): ?>
+//                scheduler.attachEvent("onDblClick", function(id){
+//                    scheduler.config.readonly_form = true; // Pas le droits de modif au dblClick sur event present
+//                });
+//                scheduler.config.drag_move = false; // Pas le droit de déplacer un event
+                <?php endif; ?>
+                dp = new dataProcessor("<?php echo $this->getUrl('calendar/Events/Ajax'); ?>?user_id");
+                dp.enableDebug(true);
+                dp.init(scheduler);
+                dp.attachEvent("onAfterUpdateFinish", function(){
+
+                });
+
+                // CHERCHER EVENT QUI RENVERA LE BON ID
+                dp.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+                    var eventObj = scheduler.getEvent(tid);
+                    var event_id = tid;
+                    var state = action;
+                    var contact_id = eventObj.contact;
+                    getRdvInfos(eventObj.userId);
+
+                    var request = new XMLHttpRequest();
+                    request.open('POST', "<?php echo $this->getUrl('calendar/UpdateCmProfile/Ajax'); ?>", true);
+                    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    request.onload = function() {
+                        if (request.status >= 200 && request.status < 400) {
+
+                        } else {
+                            // We reached our target server, but it returned an error
+                        }
+                    };
+                    request.onerror = function() {
+                        // There was a connection error of some sort
+                    };
+                    request.send("event_id="+event_id+"&contact_id="+contact_id+"&action="+action);
+
+                    // Toujours retourner true dans les fonctions de dhtmlx Scheduler sinon bloque l'execution du script
+                    return true;
+                });
+
+            }
+            /**
+             * Efface les données du formulaire d'évenements du Scheduler
+             */
+            function clearCalendarContactForm() {
+                    document.getElementById('form_code_contact').value = "";
+                    document.getElementById('form_contact_civ').value = "";
+                    document.getElementById('form_contact_nom').value = "";
+                    document.getElementById('form_contact_prenom').value = "";
+                    document.getElementById('form_contact_adr1').value = "";
+                    document.getElementById('form_contact_cp').value = "";
+                    document.getElementById('form_contact_adr2').value = "";
+                    document.getElementById('form_contact_ville').value = "";
+                    document.getElementById('form_contact_adr3').value = "";
+                    document.getElementById('form_contact_mail').value = "";
+                    document.getElementById('form_contact_tel1').value = "";
+                    document.getElementById('form_contact_tel2').value = "";
+                    document.getElementById('form_contact_tel3').value = "";
+            }
+            /**
+             * Executer au lancement du scheduler affichages de differents input en fonction des droits
+             */
+            function doOnLoad() {
+                /**
+                 * Si le manager est conecter alors les 3 select (Vendeur, Contact, Clients)
+                 * Ne pointerons pas les memes fichiers serverFiltering et certaines listes deroulantes serons grisées
+                 */
+                <?php if ($manager == false): ?>
+                document.getElementById('scheduler_here').style.visibility = 'visible';
+                changeCalendar(<?=$user_id?>);
+                var formData = [
+                    {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 1200},
+                    {type: "combo", label: "Prospect", name: "contact_name", serverFiltering: '<?php echo $this->getUrl('calendar/Personnal/Ajax'); ?>', filterCache: true},
+                ];
+                myForm = new dhtmlXForm("my-select-contact", formData);
+
+                var formData2 = [
+                    {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 260},
+                    {type: "combo", label: "Vendeur", name: "seller" ,  serverFiltering: '<?php echo $this->getUrl('calendar/Seller/Ajax'); ?>', filterCache: true},
+                ];
+                myForm2 = new dhtmlXForm("my-select-seller", formData2);
+
+                myForm2.disableItem("seller"); // Désactive le choix des vendeurs
+                document.getElementsByName('seller')[0].value = '<?=$user_id?>';
+                var formClient = [
+                    {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 400},
+                    {type: "combo", label: "Clients", name: "client_name", serverFiltering: '<?php echo $this->getUrl('calendar/Client/Ajax'); ?>', filterCache: true},
+                ];
+                myForm3 = new dhtmlXForm("my-select-client", formClient);
+                <?php else: ?>
+                var formData = [
+                    {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 1200},
+                    {type: "combo", label: "Prospect", name: "contact_name", serverFiltering: '<?php echo $this->getUrl('calendar/Contact/Ajax'); ?>', filterCache: true},
+                ];
+                myForm = new dhtmlXForm("my-select-contact", formData);
+
+                var formData2 = [
+                    {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 260},
+                    {type: "combo", label: "Vendeur", name: "seller" ,  serverFiltering: '<?php echo $this->getUrl('calendar/Seller/Ajax'); ?>', filterCache: true},
+                ];
+                myForm2 = new dhtmlXForm("my-select-seller", formData2);
+
+                var formClient = [
+                    {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 400},
+                    {type: "combo", label: "Clients", name: "client_name", serverFiltering: '<?php echo $this->getUrl('calendar/Client/Ajax'); ?>?manager=true&user_id=', filterCache: true},
+                ];
+                myForm3 = new dhtmlXForm("my-select-client", formClient);
+
+
+                // Au choix du vendeur Clique sur le bouton séléctionner (Vendeur)
+                document.getElementById('seller_btn').addEventListener('click', function () {
+                    myForm3.unload(); // On detruit la configuration precedente
+                    user_id = document.getElementsByName('seller')[0].value;
+
+                    /**
+                     * Configuration du select
+                     */
+                    var formClient = [
+                        {type: "settings", position: "label-left", labelWidth: 80, inputWidth: 400},
+                        {type: "combo", label: "Clients", name: "client_name", serverFiltering: '<?php echo $this->getUrl('calendar/Client/Ajax'); ?>?manager=true&user_id='+user_id, filterCache: true},
+                    ];
+                    myForm3 = new dhtmlXForm("my-select-client", formClient); // On recreer le select Client avec les bons parametres serverside
+                });
+
+                <?php endif; ?>
+
+                var formNewCbt = [
+                    {type: "settings", position: "label-top", labelWidth: 80, inputWidth: 400},
+                    {type: "combo", label: "CBT", name: "new_cbt", serverFiltering: '<?php echo $this->getUrl('calendar/Seller/Ajax'); ?>?manager=true&user_id=', filterCache: true},
+                ];
+                myForm4 = new dhtmlXForm("new_cbt", formNewCbt);
+            }
+            /**
+             * Recharge les rendez-vous en fonctions de l'utilisateur
+             * DataProcessor et Affichage
+             */
+            function changeCalendar(user_id) {
+                if (user_id != null){
+                    var dateNow = Date.now();
+                    // UPDATE SCHEDULER
+                    scheduler.init('scheduler_here', new Date(dateNow) ,"week");
+                    dp.serverProcessor = ('<?php echo $this->getUrl('calendar/Events/Ajax'); ?>?user_id='+user_id);
+                    scheduler.clearAll();
+                    /**
+                     * RESTRICTIONS SI CE N'EST PAS UN MANAGER
+                     */
+                    <?php if ($manager == false): ?>
+                    // scheduler.config.drag_in = false; // On ne peut pas drag les events
+                    // scheduler.config.details_on_create=false; // On ne peut pas modifier les detail des events
+                    // scheduler.config.drag_resize= false; // On ne peut pas redimentionné les event (date ou creneau horaire plus ou mouns large)
+                    <?php endif; ?>
+                    /**
+                     * FIN RESTRICTIONS
+                     */
+                    getRdvInfos(user_id);
+                    scheduler.load('<?php echo $this->getUrl('calendar/Events/Ajax'); ?>?user_id='+user_id);
+                }
+            }
+
+            /**
+             * Reset et ferme le popup d'évènement qui s'ouvre au DblClique sur une date
+             */
+            function resetLightBox() {
+                scheduler.endLightbox(true, document.getElementsByClassName( 'dhx_cal_light_wide' )[0]);
+            }
+            /**
+             * Recupère les STATS RDV et les affiches dans infos CBT
+             */
+            function getRdvInfos(user_id) {
+                var request = new XMLHttpRequest();
+                request.open('POST', "<?php echo $this->getUrl('calendar/RdvDetails/Ajax'); ?>", true);
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                request.onload = function() {
+
+                    var response = JSON.parse(request.responseText);
+                    if (request.status >= 200 && request.status < 400) {
+                        document.getElementById('comptaRDV').innerHTML="";
+                        document.getElementById('comptaQualif').innerHTML="";
+                        // Grab an element
+                        var el = document.getElementById('comptaRDV'),
+                        // Make a new div
+                        elChild = document.createElement('div');
+                        // Give the new div some content
+                        elChild.innerHTML = "<span> Total rendez vous positionnés : <b> "+ response.total[0].total +"</b></span></br><span> Total rendez vous positionnés Binômes: <b>"+ response.binome[0].total +"</b></span></br><span> Restant a faire ce mois : <b>"+ response.aFaire[0].total +"</b></span>";
+                        // Jug it into the parent element
+                        el.appendChild(elChild);
+
+                        var el2 = document.getElementById('comptaQualif'),
+                        // Make a new div
+                        el2Child = document.createElement('div');
+                        // Give the new div some content
+                        el2Child.innerHTML = "<span> Ventes : <b>"+ response.vente[0].total +" | </b></span><span > Annulé :<b> "+ response.annule[0].total +" | </b></span><span > Pub : <b>"+ response.pub[0].total +" | </b></span><span > Reportés : <b>"+ response.report[0].total +" | </b></span><span > Absence : <b>"+ response.abs[0].total +" </b></span>";
+                        // Jug it into the parent element
+                        el2.appendChild(el2Child);
+
+                    } else {
+                        // We reached our target server, but it returned an error
+                    }
+                };
+                request.onerror = function() {
+                    // There was a connection error of some sort
+                };
+                request.send('user_id='+user_id);
+
+            }
+            /******************************************************************************************************************/
+            /******************************************* FIN DU SCRIPT DU SCHEDULER********************************************/
+            /******************************************************************************************************************/
+            $(document).ready(function(){
+
+                //Handles menu drop down
+                $('.dropdown-menu').find('form').click(function (e) {
+                    e.stopPropagation();
+                });
+
+                init();
+                doOnLoad();
+
+                $('#update_contact').hide();
+
+                $('#show-hide').on('click', function(){
+                    var btn=$(this);
+                    $('#contact_form ').slideToggle();
+                    if(btn[0].innerHTML == " - Cacher détails") {
+                        btn.empty();
+                        btn.append(' + Voir détails');
+                    } else {
+                        btn.empty();
+                        btn.append(' - Cacher détails');
+                    }
+                });
+
+                $('#save_contact,  #update_contact').on('click' , function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        url: "<?php echo $this->getUrl('calendar/Contact/Ajax'); ?>",
+                        type:'POST',
+                        data:
+                            {
+                                'action':            $(this).val(),
+                                'contact_id':        $('input[name="contact_name"]').val(),
+                                'contact_civ':       $('input[name="contact_civ"]').val(),
+                                'contact_nom':       $('input[name="contact_nom"]').val(),
+                                'contact_prenom':    $('input[name="contact_prenom"]').val(),
+                                'contact_mail':      $('input[name="contact_mail"]').val(),
+                                'contact_tel1':      $('input[name="contact_tel1"]').val(),
+                                'contact_tel2':      $('input[name="contact_tel2"]').val(),
+                                'contact_tel3':      $('input[name="contact_tel3"]').val(),
+                                'contact_adr1':      $('input[name="contact_adr1"]').val(),
+                                'contact_adr2':      $('input[name="contact_adr2"]').val(),
+                                'contact_adr3':      $('input[name="contact_adr3"]').val(),
+                                'contact_birthday':  $('input[name="contact_birthday"]').val(),
+                                'contact_cp':        $('input[name="contact_cp"]').val(),
+                                'country':           $('input[name="contact_pays"]').val(),
+                                'contact_ville':     $('input[name="contact_ville"]').val()
+                            },
+                        dataType:'json',
+                        success: function (response) {
+                            $('input[name="contact_name"]').prev('input').val(response[0].contact_id)
+                        },
+                        error:function (response) {
+
+                        }
+                    });
+                });
+
+                $('#seller_btn').on('click', function(){
+                    var user_id =  $('input[name="seller"]').val();
+                    if (user_id != "" || user_id != 0) {
+                        console.log(user_id)
+                        if (!Number(user_id))// Si la value de l'input seller est différente de l'id alors on stop l'importation de l'agenda pour eviter une erreur
+                        {
+                            alert('Une erreur lors de la séléction du vendeur, veuillez reséléctionner votre vendeur ...')
+                        } else {
+                            $('#waiting').hide(300);
+                            $("#scheduler_here").css('visibility', 'visible');
+                            $('#titlename').empty();
+                            $('#titlename').append($('input[name="seller"]').prev().val())
+                            changeCalendar(user_id); // On charge le calendrier en fonction de l'id de l'utilisateur
+                        }
+
+                    } else {
+                        $("#scheduler_here").css('visibility', 'none');
+                    }
+                });
+
+                $('#contact-btn').on('click', function () {
+                    $("#new_contact").attr('checked', 'checked');
+                    $("#new_contact").trigger('change')
+                    $('#contact-btn').hide()
+                    $('#client-btn').hide()
+
+                });
+
+                $("#new_contact").on('change', function () {
+                    var checkbox = $(this);
+                    var btn = $('#show-hide');
+
+                    if (checkbox.is(':checked')) {
+                        $('#contact_form').show();
+                        btn.empty();
+                        btn.append(' - Cacher détails');
+
+//                        $('#my-select-contact').hide();
+//                        $('#my-select-client').hide();
+//                        $('#contact-btn').hide()
+//                        $('#client-btn').hide()
+//                        $('#update_contact').hide();
+//                        $('#save_contact').show();
+
+                        $('#modal-contact').show();
+
+                        $(':input','#contact_form')
+                            .not(':button, :submit, :reset, :hidden')
+                            .val('')
+                            .removeAttr('checked')
+                            .removeAttr('selected');
+
+                        $(':input','.dhx_cal_light.dhx_cal_light_wide.dhx_cal_light_rec')
+                            .not(':button, :submit, :reset')
+                            .val('')
+                            .removeAttr('checked')
+                            .removeAttr('selected');
+
+                        /** Vider le formulaire prospect/client lors d'un nouveau client **/
+
+                        $('input[name="contact_name"]').empty();
+                        $('input[name="contact_name"]').val('');
+                        $('input[name="contact_name"]').prev().val('');
+
+                        $('input[name="contact_name"]').prev().find('option').remove();
+
+                        $('input[name="contact_name"]').prev().focus();
+                        $('input[name="contact_name"]').blur();
+
+                        /** Fin prospect/client lors d'un nouveau client **/
+
+
+                    } else {
+                        if(btn[0].innerHTML == ' + Voir détails' && checkbox.is(':checked')) {
+                            btn.empty();
+                            btn.append(' - Cacher détails');
+                        }
+                        $('#my-select-contact').show();
+                        $('#my-select-client').show();
+                        $('#contact-btn').show()
+                        $('#client-btn').show()
+                        $('#update_contact').show();
+                        $('#save_contact').hide();
+                        $('input[name="client_name"]').prev('input').trigger('blur');
+                        $('input[name="contact_name"]').prev('input').trigger('blur');
+
+                    }
+
+                });
+
+                /**
+                 * Requete pour recupérer les infos des clients magento ---------------------------
+                 */
+                $('#client-btn').on('click', function () {
+                    $('#modal-contact').show();
+
+                    var contactVal = $('input[name="contact_name"]').val();
+                    //-----------------------------------------------------------------
+                    /**
+                     * Effacer la valeur du Contact quand on choisis un Client
+                     */
+                    $('input[name="contact_name"]').prev().val('');
+                    $('input[name="contact_name"]').prev().blur()
+                    if (contactVal != "")
+                    {
+                        console.log('OK')
+                        $('input[name="contact_name"]').prev().css('border', '1px');
+                        $('input[name="contact_name"]').prev().css('border', 'solid');
+                        $('input[name="contact_name"]').prev().css('border', 'red');
+                    }
+                    //-----------------------------------------------------------------
+
+                    // Récupère l'id du client
+                    client_id = $('input[name="client_name"]').val();
+                    $.ajax({
+                        url: "<?php echo $this->getUrl('calendar/ClientDetails/Ajax'); ?>",
+                        type:'GET',
+                        data: {'client_id': client_id},
+                        dataType:'json',
+                        success: function (response) {
+
+                            $('input[name="contact_civ"]').val(response[0].prefix);
+                            $('input[name="contact_nom"]').val(response[0].firstname);
+                            $('input[name="contact_prenom"]').val(response[0].lastname);
+                            $('input[name="contact_adr1"]').val(response[0].addr1);
+                            $('input[name="contact_adr2"]').val(response[0].addr2);
+                            $('input[name="contact_adr3"]').val(response[0].addr3);
+
+                            $('input[name="contact_cp"]').val(response[0].zip_code);
+                            $('input[name="contact_ville"]').val(response[0].city);
+
+                            $('input[name="contact_tel1"]').val(response[0].tel1);
+                            $('input[name="contact_tel2"]').val(response[0].tel2);
+                            $('input[name="contact_tel3"]').val(response[0].tel3);
+                            $('input[name="contact_birthday"]').val(response[0].birthday);
+                            $('input[name="contact_mail"]').val(response[0].email);
+                            $('input[name="contact_pays"]').val(response[0].country);
+
+                            $('#update_contact').hide();
+                            $('#save_contact').hide();
+
+                        },
+                        error:function (response) {
+                            console.log(response)
+
+                            $('input[name="contact_civ"]').val("");
+                            $('input[name="contact_nom"]').val("");
+                            $('input[name="contact_prenom"]').val("");
+                            $('input[name="contact_adr1"]').val("");
+                            $('input[name="contact_adr2"]').val("");
+                            $('input[name="contact_adr3"]').val("");
+
+                            $('input[name="contact_cp"]').val("");
+                            $('input[name="contact_ville"]').val("");
+
+                            $('input[name="contact_tel1"]').val("");
+                            $('input[name="contact_tel2"]').val("");
+                            $('input[name="contact_tel3"]').val("");
+                            $('input[name="contact_birthday"]').val("");
+                            $('input[name="contact_mail"]').val("");
+                            $('input[name="contact_pays"]').val("");
+                        }
+                    });
+                });
+                /**
+                 * Requete pour recupérer les infos des contact ContactMaster ---------------------------
+                 */
+                $('input[name="contact_name"]').prev('input').blur(function () {
+                    $('#modal-contact').show();
+                    // Récupère l'id du contact
+                    contact_id = $('input[name="contact_name"]').val();
+                    // Requête ajax pour récupérer les data contact
+                    $.ajax({
+                        url: "<?php echo $this->getUrl('calendar/ContactDetails/Ajax'); ?>",
+                        type:'GET',
+                        data: {'contact_id': contact_id},
+                        dataType:'json',
+                        success: function (response) {
+
+                            $('input[name="contact_civ"]').val(response[0].prefix);
+                            $('input[name="contact_nom"]').val(response[0].firstname);
+                            $('input[name="contact_prenom"]').val(response[0].lastname);
+                            $('input[name="contact_adr1"]').val(response[0].addr1);
+                            $('input[name="contact_adr2"]').val(response[0].addr2);
+                            $('input[name="contact_adr3"]').val(response[0].addr3);
+
+                            $('input[name="contact_cp"]').val(response[0].zip_code);
+                            $('input[name="contact_ville"]').val(response[0].city);
+
+                            $('input[name="contact_tel1"]').val(response[0].tel1);
+                            $('input[name="contact_tel2"]').val(response[0].tel2);
+                            $('input[name="contact_tel3"]').val(response[0].tel3);
+                            $('input[name="contact_birthday"]').val(response[0].birthday);
+                            $('input[name="contact_mail"]').val(response[0].email);
+                            $('input[name="contact_pays"]').val(response[0].country);
+
+                            $('#update_contact').show();
+                            $('#save_contact').hide();
+
+                        },
+                        error:function (response) {
+
+                        }
+                    });
+                });
+            });
+
+
+            $('#changeCBT_close').on('click', function (e) {
+                e.preventDefault();
+                $("#changeCBT").hide();
+            });
+
+            $('#changeCBT_save').on('click', function (e) {
+                e.preventDefault();
+                resetLightBox();// On ferme la popup
+
+                var response = confirm('Etes vous sur d\'attribuer le rendez vous a la CBT séléctionner ?');
+                if (response == true) // On effectue la requete pour changer le rendez-vous
+                {
+                    event_id = $('#hidden_ev').val();
+                    new_cbt = $('input[name="new_cbt"]').val();
+
+                    $.ajax({
+                        url: '<?php echo $this->getUrl('calendar/ChangeEventCbt/Ajax') ?>',
+                        data: {'event_id': event_id, 'new_cbt': new_cbt},
+                        success: function (response) {
+                            if(response == false )
+                            {
+                                alert('Un rendez-vous est déjà en place sur l\'agenda de la CBT choisie. ' +
+                                    '\n Veuillez réorganiser l\'agenda cible avant d\'attribuer le RDV' )
+                            }
+                        },
+                        error: function (response) {
+                        },
+                    });
+                    changeCalendar(user_id); // On refresh le calendrier
+                }else {
+                    // Annulation du changement de CBT
+                }
+                $("#changeCBT").hide();
+            });
+
+        });
+
+</script>

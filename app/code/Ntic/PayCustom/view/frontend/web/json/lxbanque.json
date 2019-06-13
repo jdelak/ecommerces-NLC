@@ -1,0 +1,2961 @@
+
+{
+	"guichet":[
+		{
+			"code":"41629",
+			"nomBanque":"WESTLB AG"
+		},
+		{
+			"code":"40238",
+			"nomBanque":"VTB BANK (FRANCE) S.A."
+		},
+		{
+			"code":"15128",
+			"nomBanque":"VOLKSWAGEN BANK GMBH"
+		},
+		{
+			"code":"12558",
+			"nomBanque":"VFS FINANCE FRANCE"
+		},
+		{
+			"code":"15788",
+			"nomBanque":"VEOLIA P.P.P. FINANCE"
+		},
+		{
+			"code":"14800",
+			"nomBanque":"UNOFI CREDIT"
+		},
+		{
+			"code":"13020",
+			"nomBanque":"UNINCOFRA"
+		},
+		{
+			"code":"13390",
+			"nomBanque":"UNIGRAINS"
+		},
+		{
+			"code":"19570",
+			"nomBanque":"UNION FINANCIERE DE FRANCE BANQUE"
+		},
+		{
+			"code":"43899",
+			"nomBanque":"U.B.A.F."
+		},
+		{
+			"code":"16750",
+			"nomBanque":"UNIMAT"
+		},
+		{
+			"code":"18280",
+			"nomBanque":"UNIFERGIE"
+		},
+		{
+			"code":"13528",
+			"nomBanque":"UNICREDIT SPA"
+		},
+		{
+			"code":"11998",
+			"nomBanque":"UNICREDIT BANK AG"
+		},
+		{
+			"code":"13968",
+			"nomBanque":"UCB-ENTREPRISES"
+		},
+		{
+			"code":"11088",
+			"nomBanque":"UCB LOCABAIL IMMOBILIER"
+		},
+		{
+			"code":"18320",
+			"nomBanque":"UCB BAIL"
+		},
+		{
+			"code":"15928",
+			"nomBanque":"UBS LIMITED"
+		},
+		{
+			"code":"11999",
+			"nomBanque":"UBS (MONACO) S.A."
+		},
+		{
+			"code":"30758",
+			"nomBanque":"UBS (FRANCE) S.A."
+		},
+		{
+			"code":"12798",
+			"nomBanque":"UBS"
+		},
+		{
+			"code":"43849",
+			"nomBanque":"TUNISIAN FOREIGN BANK"
+		},
+		{
+			"code":"22910",
+			"nomBanque":"TRANSOLVER FINANCE S.A."
+		},
+		{
+			"code":"13878",
+			"nomBanque":"TOYOTA FRANCE FINANCEMENT"
+		},
+		{
+			"code":"10423",
+			"nomBanque":"THE ROYAL BANK OF SCOTLAND PLC"
+		},
+		{
+			"code":"18739",
+			"nomBanque":"THE ROYAL BANK OF SCOTLAND NV"
+		},
+		{
+			"code":"15258",
+			"nomBanque":"THE GOVERNOR AND COMPANY OF THE BANK OF IRELAND"
+		},
+		{
+			"code":"41249",
+			"nomBanque":"THE BANK OF TOKYO - MITSUBISHI UFJ LTD"
+		},
+		{
+			"code":"26310",
+			"nomBanque":"SYGMA BANQUE"
+		},
+		{
+			"code":"11238",
+			"nomBanque":"SWISSLIFE BANQUE PRIVEE"
+		},
+		{
+			"code":"14568",
+			"nomBanque":"SVENSKA HANDELSBANKEN AB"
+		},
+		{
+			"code":"15250",
+			"nomBanque":"SUMITOMO MITSUI BANKING CORPORATION EUROPE LIMITED"
+		},
+		{
+			"code":"12938",
+			"nomBanque":"SUD-OUEST BAIL"
+		},
+		{
+			"code":"11518",
+			"nomBanque":"STATE STREET BANQUE S.A."
+		},
+		{
+			"code":"18329",
+			"nomBanque":"STATE BANK OF INDIA"
+		},
+		{
+			"code":"14688",
+			"nomBanque":"STAR LEASE"
+		},
+		{
+			"code":"15918",
+			"nomBanque":"STANDARD CHARTERED BANK"
+		},
+		{
+			"code":"21619",
+			"nomBanque":"SOPHIA-BAIL"
+		},
+		{
+			"code":"14198",
+			"nomBanque":"SOGELEASE FRANCE"
+		},
+		{
+			"code":"15178",
+			"nomBanque":"SOGELEASE BDP"
+		},
+		{
+			"code":"19990",
+			"nomBanque":"SOGEFINERG"
+		},
+		{
+			"code":"12748",
+			"nomBanque":"SOGEFINANCEMENT"
+		},
+		{
+			"code":"19259",
+			"nomBanque":"SOGEFIMUR"
+		},
+		{
+			"code":"23930",
+			"nomBanque":"SOGAMA"
+		},
+		{
+			"code":"26269",
+			"nomBanque":"SOGAL"
+		},
+		{
+			"code":"12668",
+			"nomBanque":"SOFRAFI"
+		},
+		{
+			"code":"13248",
+			"nomBanque":"SOFRACEM"
+		},
+		{
+			"code":"12008",
+			"nomBanque":"SOFISCOP SUD-EST"
+		},
+		{
+			"code":"18650",
+			"nomBanque":"SOFISCOP"
+		},
+		{
+			"code":"15409",
+			"nomBanque":"SOFIRIF"
+		},
+		{
+			"code":"18230",
+			"nomBanque":"SOFIPROTEOL"
+		},
+		{
+			"code":"41539",
+			"nomBanque":"SOFINCO"
+		},
+		{
+			"code":"18780",
+			"nomBanque":"SOFID"
+		},
+		{
+			"code":"18809",
+			"nomBanque":"SOFICARTE"
+		},
+		{
+			"code":"12438",
+			"nomBanque":"SOFIAP"
+		},
+		{
+			"code":"19460",
+			"nomBanque":"SOFAX BANQUE"
+		},
+		{
+			"code":"10920",
+			"nomBanque":"SODELEM"
+		},
+		{
+			"code":"12280",
+			"nomBanque":"SOCRAM BANQUE"
+		},
+		{
+			"code":"10050",
+			"nomBanque":"SOREFI"
+		},
+		{
+			"code":"20019",
+			"nomBanque":"SOFINDI"
+		},
+		{
+			"code":"18890",
+			"nomBanque":"SOMAFI"
+		},
+		{
+			"code":"30077",
+			"nomBanque":"SOCIETE MARSEILLAISE DE CREDIT"
+		},
+		{
+			"code":"26679",
+			"nomBanque":"S.I.A.G.I."
+		},
+		{
+			"code":"18900",
+			"nomBanque":"SOCIETE GUADELOUPEENNE DE FINANCEMENT - SOGUAFI"
+		},
+		{
+			"code":"15968",
+			"nomBanque":"SOCIETE GENERALE SCF"
+		},
+		{
+			"code":"13769",
+			"nomBanque":"SOGEBAIL"
+		},
+		{
+			"code":"18079",
+			"nomBanque":"SOCIETE GENERALE DE BANQUE AUX ANTILLES"
+		},
+		{
+			"code":"18319",
+			"nomBanque":"SOCIETE GENERALE CALEDONIENNE DE BANQUE SGCB"
+		},
+		{
+			"code":"14869",
+			"nomBanque":"SOCIETE GENERALE ASSET MANAGEMENT BANQUE (SGAM BAN"
+		},
+		{
+			"code":"30003",
+			"nomBanque":"SOCIETE GENERALE"
+		},
+		{
+			"code":"19340",
+			"nomBanque":"SOCIETE FINANCIERE POUR L'EXPANSION DE LA DISTRIBU"
+		},
+		{
+			"code":"17439",
+			"nomBanque":"SOCIETE FINANCIERE POUR LE DEVELOPPEMENT DE LA REU"
+		},
+		{
+			"code":"12670",
+			"nomBanque":"SOCIETE FINANCIERE ET MOBILIERE"
+		},
+		{
+			"code":"14378",
+			"nomBanque":"SOCIETE FINANCIERE DU PORTE-MONNAIE ELECTRONIQUE I"
+		},
+		{
+			"code":"17580",
+			"nomBanque":"SOCIETE FINANCIERE DES PAYS DE L'ADOUR - SEBADOUR"
+		},
+		{
+			"code":"12828",
+			"nomBanque":"SOCIETE FINANCIERE DES ENTREPRISES DU GARD - SOFIG"
+		},
+		{
+			"code":"14928",
+			"nomBanque":"SOCIETE FINANCIERE DE PAIEMENTS"
+		},
+		{
+			"code":"21570",
+			"nomBanque":"SOCIETE FINANCIERE DE LA N.E.F."
+		},
+		{
+			"code":"14749",
+			"nomBanque":"SOCIETE FINANCIERE DE BANQUE - SOFIB"
+		},
+		{
+			"code":"15228",
+			"nomBanque":"SOCIETE FINANCIERE ANTILLES GUYANE - SOFIAG"
+		},
+		{
+			"code":"19870",
+			"nomBanque":"SOCIETE DES PAIEMENTS PASS - S2P"
+		},
+		{
+			"code":"10088",
+			"nomBanque":"SOCIETE DE PROMOTION ET DE PARTICIPATION POUR LA C"
+		},
+		{
+			"code":"13028",
+			"nomBanque":"SOCIETE DE GESTION DES FONDS DE GARANTIE D'OUTRE-M"
+		},
+		{
+			"code":"19560",
+			"nomBanque":"SOCIETE DE GARANTIE COOPERATIVE ET MUTUELLE DES IN"
+		},
+		{
+			"code":"12500",
+			"nomBanque":"SOCIETE DE FINANCEMENT DE LA MEUNERIE"
+		},
+		{
+			"code":"19189",
+			"nomBanque":"SOCIETE DE CREDIT A LA CONSOMMATION CAMIF - C2C"
+		},
+		{
+			"code":"20280",
+			"nomBanque":"SOCAF"
+		},
+		{
+			"code":"20380",
+			"nomBanque":"SOCIETE DE CAUTION MUTUELLE DES NEGOCIANTS EN CERE"
+		},
+		{
+			"code":"25609",
+			"nomBanque":"SOCAMETT"
+		},
+		{
+			"code":"17679",
+			"nomBanque":"S.B.E."
+		},
+		{
+			"code":"13220",
+			"nomBanque":"SOCOREC"
+		},
+		{
+			"code":"19479",
+			"nomBanque":"S.O.M.U.P.A.C.A."
+		},
+		{
+			"code":"12128",
+			"nomBanque":"SOCFIM"
+		},
+		{
+			"code":"17279",
+			"nomBanque":"SOCIETE CENTRALE DE CREDIT MARITIME MUTUEL"
+		},
+		{
+			"code":"10057",
+			"nomBanque":"SOCIETE BORDELAISE DE C.I.C."
+		},
+		{
+			"code":"19000",
+			"nomBanque":"INVESTIMO"
+		},
+		{
+			"code":"15610",
+			"nomBanque":"SAGEFI"
+		},
+		{
+			"code":"43629",
+			"nomBanque":"C.A.L.I.F."
+		},
+		{
+			"code":"60080",
+			"nomBanque":"SADE"
+		},
+		{
+			"code":"15618",
+			"nomBanque":"SNS PROPERTY FINANCE (SNSPF)"
+		},
+		{
+			"code":"11298",
+			"nomBanque":"SINOPIA FINANCIAL SERVICES"
+		},
+		{
+			"code":"14958",
+			"nomBanque":"SIEMENS FINANCIAL SERVICES SAS"
+		},
+		{
+			"code":"14228",
+			"nomBanque":"SGB FINANCE"
+		},
+		{
+			"code":"13368",
+			"nomBanque":"SG PRIVATE BANKING (MONACO)"
+		},
+		{
+			"code":"14328",
+			"nomBanque":"SEGESPAR FINANCE"
+		},
+		{
+			"code":"15728",
+			"nomBanque":"SEFIA"
+		},
+		{
+			"code":"11140",
+			"nomBanque":"SEDEF"
+		},
+		{
+			"code":"22840",
+			"nomBanque":"SCANIA FINANCE FRANCE"
+		},
+		{
+			"code":"15868",
+			"nomBanque":"SAXO BANQUE (FRANCE)"
+		},
+		{
+			"code":"13998",
+			"nomBanque":"SAME DEUTZ-FAHR FINANCE"
+		},
+		{
+			"code":"24850",
+			"nomBanque":"SAL.OPPENHEIM (FRANCE)"
+		},
+		{
+			"code":"15808",
+			"nomBanque":"SAL OPPENHEIM JR & CIE KGAA"
+		},
+		{
+			"code":"16130",
+			"nomBanque":"S.I.R.C.A.M."
+		},
+		{
+			"code":"11008",
+			"nomBanque":"S E B"
+		},
+		{
+			"code":"15908",
+			"nomBanque":"ROYAL BANK OF CANADA EUROPE LIMITED"
+		},
+		{
+			"code":"18669",
+			"nomBanque":"ROTHSCHILD ET COMPAGNIE BANQUE"
+		},
+		{
+			"code":"15708",
+			"nomBanque":"RIA FRANCE"
+		},
+		{
+			"code":"27910",
+			"nomBanque":"REUNIBAIL"
+		},
+		{
+			"code":"11188",
+			"nomBanque":"RCI BANQUE"
+		},
+		{
+			"code":"14288",
+			"nomBanque":"RBS FACTOR S.A."
+		},
+		{
+			"code":"15298",
+			"nomBanque":"RBC DEXIA INVESTOR SERVICES BANK FRANCE SA"
+		},
+		{
+			"code":"10218",
+			"nomBanque":"RABOBANK NEDERLAND - RABOBANK INTERNATIONAL"
+		},
+		{
+			"code":"43789",
+			"nomBanque":"QUILVEST BANQUE PRIVEE"
+		},
+		{
+			"code":"17919",
+			"nomBanque":"QATAR NATIONAL BANK"
+		},
+		{
+			"code":"15488",
+			"nomBanque":"PROJEO"
+		},
+		{
+			"code":"16298",
+			"nomBanque":"PROCAPITAL BANKING SERVICES"
+		},
+		{
+			"code":"15548",
+			"nomBanque":"PRIORIS"
+		},
+		{
+			"code":"13758",
+			"nomBanque":"PRETS ET SERVICES"
+		},
+		{
+			"code":"15068",
+			"nomBanque":"PICTET & CIE (EUROPE) SA"
+		},
+		{
+			"code":"15608",
+			"nomBanque":"PHILIPPINE NATIONAL BANK (EUROPE) PLC"
+		},
+		{
+			"code":"21349",
+			"nomBanque":"PARILEASE"
+		},
+		{
+			"code":"25790",
+			"nomBanque":"PARIFERGIE"
+		},
+		{
+			"code":"19389",
+			"nomBanque":"PARICOMI"
+		},
+		{
+			"code":"12568",
+			"nomBanque":"PARIBAS DERIVES GARANTIS S.N.C. (PDG)"
+		},
+		{
+			"code":"27589",
+			"nomBanque":"OUDART S.A."
+		},
+		{
+			"code":"19649",
+			"nomBanque":"OSEO GARANTIE REGIONS"
+		},
+		{
+			"code":"18190",
+			"nomBanque":"OSEO GARANTIE"
+		},
+		{
+			"code":"18359",
+			"nomBanque":"OSEO FINANCEMENT"
+		},
+		{
+			"code":"13880",
+			"nomBanque":"OSEO BRETAGNE"
+		},
+		{
+			"code":"15938",
+			"nomBanque":"ORANGE - BNP PARIBAS SERVICES"
+		},
+		{
+			"code":"45850",
+			"nomBanque":"ODDO ET CIE"
+		},
+		{
+			"code":"24280",
+			"nomBanque":"ODDO CORPORATE FINANCE"
+		},
+		{
+			"code":"19110",
+			"nomBanque":"OCEOR LEASE TAHITI"
+		},
+		{
+			"code":"19190",
+			"nomBanque":"OCEOR LEASE REUNION"
+		},
+		{
+			"code":"18730",
+			"nomBanque":"OCEOR LEASE NOUMEA"
+		},
+		{
+			"code":"15138",
+			"nomBanque":"OFINA"
+		},
+		{
+			"code":"15830",
+			"nomBanque":"NOVACREDIT"
+		},
+		{
+			"code":"14238",
+			"nomBanque":"NOUMEA CREDIT"
+		},
+		{
+			"code":"14018",
+			"nomBanque":"NORRSKEN FINANCE"
+		},
+		{
+			"code":"16870",
+			"nomBanque":"NORD FINANCEMENT"
+		},
+		{
+			"code":"27180",
+			"nomBanque":"NORBAIL-IMMOBILIER"
+		},
+		{
+			"code":"18429",
+			"nomBanque":"NORBAIL SOFERGIE"
+		},
+		{
+			"code":"12198",
+			"nomBanque":"NEWEDGE GROUP"
+		},
+		{
+			"code":"19239",
+			"nomBanque":"NATIXIS TRANSPORT FINANCE"
+		},
+		{
+			"code":"15930",
+			"nomBanque":"NATIXIS PAIEMENTS"
+		},
+		{
+			"code":"11128",
+			"nomBanque":"NATIXIS LEASE"
+		},
+		{
+			"code":"14948",
+			"nomBanque":"NATIXIS INTEREPARGNE"
+		},
+		{
+			"code":"16780",
+			"nomBanque":"NATIXIS FUNDING"
+		},
+		{
+			"code":"14768",
+			"nomBanque":"NATIXIS FINANCEMENT"
+		},
+		{
+			"code":"11138",
+			"nomBanque":"NATIXIS FACTOR"
+		},
+		{
+			"code":"19940",
+			"nomBanque":"NATIXIS ENERGECO"
+		},
+		{
+			"code":"11470",
+			"nomBanque":"NATIXIS COFICINE"
+		},
+		{
+			"code":"12749",
+			"nomBanque":"NATIXIS BAIL"
+		},
+		{
+			"code":"16278",
+			"nomBanque":"NATIXIS ASSET MANAGEMENT FINANCE"
+		},
+		{
+			"code":"30007",
+			"nomBanque":"NATIXIS"
+		},
+		{
+			"code":"14139",
+			"nomBanque":"NATIONAL BANK OF PAKISTAN"
+		},
+		{
+			"code":"41639",
+			"nomBanque":"NATIONAL BANK OF KUWAIT"
+		},
+		{
+			"code":"17989",
+			"nomBanque":"NATIONAL BANK OF ABU DHABI"
+		},
+		{
+			"code":"18439",
+			"nomBanque":"SOFERGIE"
+		},
+		{
+			"code":"18530",
+			"nomBanque":"NATIOCREDIMURS, SOCIETE EN NOM COLLECTIF"
+		},
+		{
+			"code":"17549",
+			"nomBanque":"NATIOCREDIBAIL"
+		},
+		{
+			"code":"15438",
+			"nomBanque":"MULTI ACCES BANQUE"
+		},
+		{
+			"code":"15638",
+			"nomBanque":"MONTE PASCHI MONACO S.A.M."
+		},
+		{
+			"code":"30478",
+			"nomBanque":"MONTE PASCHI BANQUE S.A."
+		},
+		{
+			"code":"15658",
+			"nomBanque":"MONEYGRAM FRANCE"
+		},
+		{
+			"code":"18750",
+			"nomBanque":"MONACREDIT"
+		},
+		{
+			"code":"14690",
+			"nomBanque":"MONABANQ."
+		},
+		{
+			"code":"18529",
+			"nomBanque":"MIZUHO CORPORATE BANK LIMITED PARIS BRANCH"
+		},
+		{
+			"code":"15078",
+			"nomBanque":"MFF"
+		},
+		{
+			"code":"10323",
+			"nomBanque":"MERRILL LYNCH INTERNATIONAL BANK LIMITED"
+		},
+		{
+			"code":"15920",
+			"nomBanque":"MERRILL LYNCH CAPITAL MARKETS (FRANCE) SAS"
+		},
+		{
+			"code":"10550",
+			"nomBanque":"MERCEDES-BENZ FINANCIAL SERVICES FRANCE S.A."
+		},
+		{
+			"code":"19139",
+			"nomBanque":"MENAFINANCE"
+		},
+		{
+			"code":"18789",
+			"nomBanque":"MEGA INTERNATIONAL COMMERCIAL BANK CO, LTD"
+		},
+		{
+			"code":"15148",
+			"nomBanque":"MEDIOBANCA - BANCA DI CREDITO FINANZIARIO S.P.A."
+		},
+		{
+			"code":"12249",
+			"nomBanque":"MEDICAPITAL BANK PLC"
+		},
+		{
+			"code":"12860",
+			"nomBanque":"MEDIATIS"
+		},
+		{
+			"code":"14478",
+			"nomBanque":"MARTIN MAUREL SELLA BANQUE PRIVEE - MONACO S.A.M."
+		},
+		{
+			"code":"15498",
+			"nomBanque":"MAN FINANCIAL SERVICES SAS"
+		},
+		{
+			"code":"15960",
+			"nomBanque":"MACSF FINANCEMENT"
+		},
+		{
+			"code":"10096",
+			"nomBanque":"LYONNAISE DE BANQUE"
+		},
+		{
+			"code":"13858",
+			"nomBanque":"LOISIRS FINANCE"
+		},
+		{
+			"code":"12549",
+			"nomBanque":"LOCINDUS S.A."
+		},
+		{
+			"code":"10800",
+			"nomBanque":"LOCAM - LOCATION AUTOMOBILES MATERIELS"
+		},
+		{
+			"code":"15528",
+			"nomBanque":"LLOYDS TSB BANK PLC"
+		},
+		{
+			"code":"21120",
+			"nomBanque":"LLOYDS TSB BANK PLC"
+		},
+		{
+			"code":"44449",
+			"nomBanque":"LIXXCREDIT"
+		},
+		{
+			"code":"13150",
+			"nomBanque":"LIXXBAIL"
+		},
+		{
+			"code":"14120",
+			"nomBanque":"LEGAL & GENERAL BANK (FRANCE)"
+		},
+		{
+			"code":"30748",
+			"nomBanque":"LAZARD FRERES BANQUE"
+		},
+		{
+			"code":"11230",
+			"nomBanque":"LASER COFINOGA"
+		},
+		{
+			"code":"19063",
+			"nomBanque":"LANDESBANK SAAR (SAARLB)"
+		},
+		{
+			"code":"16068",
+			"nomBanque":"LANDESBANK HESSEN-TH�RINGEN GIROZENTRALE (HELABA)"
+		},
+		{
+			"code":"42529",
+			"nomBanque":"LA COMPAGNIE FINANCIERE EDMOND DE ROTHSCHILD BANQU"
+		},
+		{
+			"code":"16178",
+			"nomBanque":"LA BANQUE POSTALE FINANCEMENT"
+		},
+		{
+			"code":"20041",
+			"nomBanque":"LA BANQUE POSTALE"
+		},
+		{
+			"code":"14989",
+			"nomBanque":"KOREA EXCHANGE BANK"
+		},
+		{
+			"code":"15378",
+			"nomBanque":"KOMATSU FINANCIAL FRANCE"
+		},
+		{
+			"code":"16028",
+			"nomBanque":"KEY EQUIPMENT FINANCE NORDIC AB"
+		},
+		{
+			"code":"19069",
+			"nomBanque":"KBL RICHELIEU BANQUE PRIVEE"
+		},
+		{
+			"code":"13338",
+			"nomBanque":"KBL MONACO PRIVATE BANKERS"
+		},
+		{
+			"code":"27800",
+			"nomBanque":"KBC BANK"
+		},
+		{
+			"code":"15428",
+			"nomBanque":"KBC BAIL IMMOBILIER FRANCE SAS"
+		},
+		{
+			"code":"14188",
+			"nomBanque":"KBC BAIL FRANCE"
+		},
+		{
+			"code":"15008",
+			"nomBanque":"JYSKE BANK A/S"
+		},
+		{
+			"code":"30628",
+			"nomBanque":"JPMORGAN CHASE BANK, NATIONAL ASSOCIATION"
+		},
+		{
+			"code":"14108",
+			"nomBanque":"JOHN DEERE CREDIT"
+		},
+		{
+			"code":"15458",
+			"nomBanque":"JOH. BERENBERG, GOSSLER & CO. KG"
+		},
+		{
+			"code":"12978",
+			"nomBanque":"JCB FINANCE"
+		},
+		{
+			"code":"13688",
+			"nomBanque":"ISBANK GMBH"
+		},
+		{
+			"code":"10128",
+			"nomBanque":"INTESA SANPAOLO SPA"
+		},
+		{
+			"code":"11490",
+			"nomBanque":"INTERFIMO"
+		},
+		{
+			"code":"11830",
+			"nomBanque":"INTER-COOP ( 2EME DU NOM)"
+		},
+		{
+			"code":"17070",
+			"nomBanque":"INTER EUROPE CONSEIL"
+		},
+		{
+			"code":"12818",
+			"nomBanque":"I.F.C.I.C."
+		},
+		{
+			"code":"15518",
+			"nomBanque":"ING REAL ESTATE FINANCE (FRANCE)"
+		},
+		{
+			"code":"11248",
+			"nomBanque":"ING LEASE FRANCE S.A."
+		},
+		{
+			"code":"14559",
+			"nomBanque":"ING DIRECT N.V."
+		},
+		{
+			"code":"30438",
+			"nomBanque":"ING BELGIUM SA, SUCCURSALE EN FRANCE"
+		},
+		{
+			"code":"17123",
+			"nomBanque":"IKB DEUTSCHE INDUSTRIEBANK AG"
+		},
+		{
+			"code":"13678",
+			"nomBanque":"IFN FINANCE"
+		},
+		{
+			"code":"13788",
+			"nomBanque":"IDIFINE"
+		},
+		{
+			"code":"16030",
+			"nomBanque":"IBM FRANCE FINANCEMENT"
+		},
+		{
+			"code":"16008",
+			"nomBanque":"HSH NORDBANK AG"
+		},
+		{
+			"code":"14408",
+			"nomBanque":"HSBC REAL ESTATE LEASING (FRANCE)"
+		},
+		{
+			"code":"18629",
+			"nomBanque":"HSBC PRIVATE BANK FRANCE"
+		},
+		{
+			"code":"13488",
+			"nomBanque":"HSBC PRIVATE BANK (MONACO) S.A."
+		},
+		{
+			"code":"14398",
+			"nomBanque":"HSBC LEASING (FRANCE)"
+		},
+		{
+			"code":"30056",
+			"nomBanque":"HSBC FRANCE"
+		},
+		{
+			"code":"13888",
+			"nomBanque":"HSBC FACTORING (FRANCE)"
+		},
+		{
+			"code":"11720",
+			"nomBanque":"HSBC EPARGNE ENTREPRISE (FRANCE)"
+		},
+		{
+			"code":"16058",
+			"nomBanque":"HSBC COVERED BONDS (FRANCE)"
+		},
+		{
+			"code":"18059",
+			"nomBanque":"HSBC BANK PLC"
+		},
+		{
+			"code":"15578",
+			"nomBanque":"HOIST KREDIT AB"
+		},
+		{
+			"code":"18289",
+			"nomBanque":"HABIB BANK LIMITED"
+		},
+		{
+			"code":"18520",
+			"nomBanque":"GROUPE SOFEMO"
+		},
+		{
+			"code":"18370",
+			"nomBanque":"GROUPAMA BANQUE (2EME DU NOM)"
+		},
+		{
+			"code":"14040",
+			"nomBanque":"GOLDMAN SACHS PARIS INC ET CIE"
+		},
+		{
+			"code":"17839",
+			"nomBanque":"GMAC BANQUE"
+		},
+		{
+			"code":"14848",
+			"nomBanque":"GENERAL ELECTRIC FINANCEMENT PACIFIQUE S.A.S."
+		},
+		{
+			"code":"19249",
+			"nomBanque":"GENEFIMMO"
+		},
+		{
+			"code":"17660",
+			"nomBanque":"GENEFIM"
+		},
+		{
+			"code":"28310",
+			"nomBanque":"GENECOMI"
+		},
+		{
+			"code":"16830",
+			"nomBanque":"GENECAL"
+		},
+		{
+			"code":"19269",
+			"nomBanque":"GENEBANQUE"
+		},
+		{
+			"code":"19519",
+			"nomBanque":"GEDEX DISTRIBUTION"
+		},
+		{
+			"code":"16208",
+			"nomBanque":"GE SCF"
+		},
+		{
+			"code":"42799",
+			"nomBanque":"GE MONEY BANK"
+		},
+		{
+			"code":"13580",
+			"nomBanque":"GE FACTOFRANCE"
+		},
+		{
+			"code":"15168",
+			"nomBanque":"GE CORPORATE FINANCE BANK S.A.S."
+		},
+		{
+			"code":"11818",
+			"nomBanque":"GE COMMERCIAL DISTRIBUTION FINANCE S.A."
+		},
+		{
+			"code":"13928",
+			"nomBanque":"GE CAPITAL FINANCEMENTS IMMOBILIERS D'ENTREPRISE"
+		},
+		{
+			"code":"10008",
+			"nomBanque":"GE CAPITAL EQUIPEMENT FINANCE"
+		},
+		{
+			"code":"15998",
+			"nomBanque":"GCE COVERED BONDS"
+		},
+		{
+			"code":"19339",
+			"nomBanque":"GCE BAIL"
+		},
+		{
+			"code":"16190",
+			"nomBanque":"FRUCTICOMI"
+		},
+		{
+			"code":"10820",
+			"nomBanque":"FRUCTIBAIL"
+		},
+		{
+			"code":"18689",
+			"nomBanque":"FRANSABANK FRANCE S.A."
+		},
+		{
+			"code":"16760",
+			"nomBanque":"FRANFINANCE"
+		},
+		{
+			"code":"17529",
+			"nomBanque":"FRANCETEL"
+		},
+		{
+			"code":"13158",
+			"nomBanque":"FRANCE ACTIVE GARANTIE FAG S.A."
+		},
+		{
+			"code":"14518",
+			"nomBanque":"FORTUNEO"
+		},
+		{
+			"code":"15558",
+			"nomBanque":"FORTIS MEDIACOM FINANCE"
+		},
+		{
+			"code":"21339",
+			"nomBanque":"FORTIS LEASE"
+		},
+		{
+			"code":"18053",
+			"nomBanque":"FORTIS INVESTMENT FINANCE"
+		},
+		{
+			"code":"15590",
+			"nomBanque":"FORTIS COMMERCIAL FINANCE S.A.S."
+		},
+		{
+			"code":"30488",
+			"nomBanque":"FORTIS BANQUE FRANCE"
+		},
+		{
+			"code":"45720",
+			"nomBanque":"FORTIS BANQUE"
+		},
+		{
+			"code":"16258",
+			"nomBanque":"FORTIS BANK (NEDERLAND) NV"
+		},
+		{
+			"code":"10930",
+			"nomBanque":"F.R.G.- NORD-PAS-DE-CALAIS"
+		},
+		{
+			"code":"28860",
+			"nomBanque":"FONCARIS"
+		},
+		{
+			"code":"14020",
+			"nomBanque":"FL AUTO"
+		},
+		{
+			"code":"13538",
+			"nomBanque":"FINIFAC"
+		},
+		{
+			"code":"16960",
+			"nomBanque":"FINAREF"
+		},
+		{
+			"code":"16839",
+			"nomBanque":"FINANCO"
+		},
+		{
+			"code":"12298",
+			"nomBanque":"FINANCIERE REGIONALE DE CREDIT IMMOBILIER DE BRETA"
+		},
+		{
+			"code":"14888",
+			"nomBanque":"FINANCIERE OCEOR"
+		},
+		{
+			"code":"10038",
+			"nomBanque":"FINANCIERE IMMOBILIERE CALYON"
+		},
+		{
+			"code":"13540",
+			"nomBanque":"FINANCIERE DU MARCHE SAINT-HONORE"
+		},
+		{
+			"code":"19169",
+			"nomBanque":"FINAMUR"
+		},
+		{
+			"code":"14008",
+			"nomBanque":"FIMIPAR"
+		},
+		{
+			"code":"16108",
+			"nomBanque":"FIDEURAM BANK (MONACO) SAM"
+		},
+		{
+			"code":"13038",
+			"nomBanque":"FIDEM"
+		},
+		{
+			"code":"15900",
+			"nomBanque":"FEDERAL FINANCE BANQUE"
+		},
+		{
+			"code":"12478",
+			"nomBanque":"FCE BANK PLC"
+		},
+		{
+			"code":"13400",
+			"nomBanque":"FC FRANCE"
+		},
+		{
+			"code":"15798",
+			"nomBanque":"FBN BANK (UK) LTD"
+		},
+		{
+			"code":"11978",
+			"nomBanque":"FACTOCIC"
+		},
+		{
+			"code":"10890",
+			"nomBanque":"FACTOBAIL"
+		},
+		{
+			"code":"14380",
+			"nomBanque":"FACET"
+		},
+		{
+			"code":"62108",
+			"nomBanque":"EXPANSO - LA SOCIETE POUR LE DEVELOPPEMENT REGIONA"
+		},
+		{
+			"code":"18209",
+			"nomBanque":"EXANE FINANCE"
+		},
+		{
+			"code":"17973",
+			"nomBanque":"EXANE DERIVATIVES"
+		},
+		{
+			"code":"13408",
+			"nomBanque":"EUROPEENNE DE CAUTIONNEMENT S.A."
+		},
+		{
+			"code":"17979",
+			"nomBanque":"EUROPE ARAB BANK PLC"
+		},
+		{
+			"code":"14206",
+			"nomBanque":"EUROPAY FRANCE"
+		},
+		{
+			"code":"15000",
+			"nomBanque":"EURONEXT PARIS S.A."
+		},
+		{
+			"code":"14148",
+			"nomBanque":"EUROHYPO AG"
+		},
+		{
+			"code":"16850",
+			"nomBanque":"EUROFACTOR"
+		},
+		{
+			"code":"12658",
+			"nomBanque":"EULER HERMES SFAC CREDIT"
+		},
+		{
+			"code":"13698",
+			"nomBanque":"ESTER FINANCE TITRISATION"
+		},
+		{
+			"code":"22970",
+			"nomBanque":"E.C.M."
+		},
+		{
+			"code":"42959",
+			"nomBanque":"ELECTRO BANQUE"
+		},
+		{
+			"code":"16198",
+			"nomBanque":"EFG BANQUE PRIVEE"
+		},
+		{
+			"code":"18759",
+			"nomBanque":"EFG BANK (MONACO)"
+		},
+		{
+			"code":"16048",
+			"nomBanque":"EBI SA"
+		},
+		{
+			"code":"15508",
+			"nomBanque":"DRESDNER BANK MONACO"
+		},
+		{
+			"code":"14998",
+			"nomBanque":"DOMOFINANCE"
+		},
+		{
+			"code":"15338",
+			"nomBanque":"DISPONIS"
+		},
+		{
+			"code":"10900",
+			"nomBanque":"DIFFUCO"
+		},
+		{
+			"code":"16000",
+			"nomBanque":"DIAC"
+		},
+		{
+			"code":"16038",
+			"nomBanque":"DEXIA PRIVATE BANK MONACO S.A.M."
+		},
+		{
+			"code":"14388",
+			"nomBanque":"DEXIA MUNICIPAL AGENCY"
+		},
+		{
+			"code":"14410",
+			"nomBanque":"DEXIA FLOBAIL"
+		},
+		{
+			"code":"17290",
+			"nomBanque":"DEXIA CREDIT LOCAL"
+		},
+		{
+			"code":"29450",
+			"nomBanque":"DEXIA CLF IMMO"
+		},
+		{
+			"code":"13148",
+			"nomBanque":"DEXIA CLF BANQUE"
+		},
+		{
+			"code":"23380",
+			"nomBanque":"DEXIA C.L.F. REGIONS BAIL"
+		},
+		{
+			"code":"14178",
+			"nomBanque":"DEXIA BAIL"
+		},
+		{
+			"code":"17863",
+			"nomBanque":"DEUTSCHE PFANDBRIEFBANK AG"
+		},
+		{
+			"code":"15648",
+			"nomBanque":"DEUTSCHE LEASING FRANCE"
+		},
+		{
+			"code":"17789",
+			"nomBanque":"DEUTSCHE BANK AG"
+		},
+		{
+			"code":"14918",
+			"nomBanque":"DEPFA BANK PLC"
+		},
+		{
+			"code":"11678",
+			"nomBanque":"DE LAGE LANDEN LEASING S.A.S."
+		},
+		{
+			"code":"14988",
+			"nomBanque":"CREFIDIS"
+		},
+		{
+			"code":"14758",
+			"nomBanque":"CREELIA"
+		},
+		{
+			"code":"13428",
+			"nomBanque":"CREDIT SUISSE AG"
+		},
+		{
+			"code":"14048",
+			"nomBanque":"CREDIT SUISSE (MONACO)"
+		},
+		{
+			"code":"18169",
+			"nomBanque":"CREDIT SUISSE (FRANCE)"
+		},
+		{
+			"code":"16088",
+			"nomBanque":"CREDIT MUTUEL ARKEA COVERED BONDS"
+		},
+		{
+			"code":"15589",
+			"nomBanque":"CREDIT MUTUEL ARKEA"
+		},
+		{
+			"code":"15549",
+			"nomBanque":"C.M.A.R. OCEAN"
+		},
+		{
+			"code":"16179",
+			"nomBanque":"CREDIT MUTUEL DE LOIRE-ATLANTIQUE ET DU CENTRE-OUE"
+		},
+		{
+			"code":"15208",
+			"nomBanque":"CREDIT MUNICIPAL DE PARIS"
+		},
+		{
+			"code":"12050",
+			"nomBanque":"CREDIT MODERNE OCEAN INDIEN"
+		},
+		{
+			"code":"19020",
+			"nomBanque":"CREDIT MODERNE ANTILLES GUYANE"
+		},
+		{
+			"code":"10160",
+			"nomBanque":"CREDIT MOBILIER DE MONACO"
+		},
+		{
+			"code":"30002",
+			"nomBanque":"CREDIT LYONNAIS"
+		},
+		{
+			"code":"19230",
+			"nomBanque":"CREDIT LOGEMENT"
+		},
+		{
+			"code":"15568",
+			"nomBanque":"CREDIT LIFT"
+		},
+		{
+			"code":"30066",
+			"nomBanque":"CIC"
+		},
+		{
+			"code":"30047",
+			"nomBanque":"CREDIT INDUSTRIEL DE L'OUEST"
+		},
+		{
+			"code":"12258",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE SUD OUEST"
+		},
+		{
+			"code":"12328",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE RHONE ALPES AUVERGNE"
+		},
+		{
+			"code":"12308",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE NORD"
+		},
+		{
+			"code":"12368",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE MEDITERRANEE"
+		},
+		{
+			"code":"18709",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE ILE DE FRANCE"
+		},
+		{
+			"code":"12398",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE CENTRE OUEST"
+		},
+		{
+			"code":"12338",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE CENTRE EST"
+		},
+		{
+			"code":"12348",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE BRETAGNE ATLANTIQUE"
+		},
+		{
+			"code":"12418",
+			"nomBanque":"CREDIT IMMOBILIER DE FRANCE - OUEST"
+		},
+		{
+			"code":"14448",
+			"nomBanque":"CFCAL-SCF"
+		},
+		{
+			"code":"15149",
+			"nomBanque":"CREDIT FONCIER ET COMMUNAL D'ALSACE ET DE LORRAINE"
+		},
+		{
+			"code":"12739",
+			"nomBanque":"CREDIT FONCIER DE MONACO"
+		},
+		{
+			"code":"43199",
+			"nomBanque":"CREDIT FONCIER DE FRANCE"
+		},
+		{
+			"code":"16640",
+			"nomBanque":"CREDIT FINANCIER LILLOIS"
+		},
+		{
+			"code":"19150",
+			"nomBanque":"CREDIT ET SERVICES FINANCIERS - CRESERFI"
+		},
+		{
+			"code":"30076",
+			"nomBanque":"CREDIT DU NORD"
+		},
+		{
+			"code":"11778",
+			"nomBanque":"CREDIT DU MAROC"
+		},
+		{
+			"code":"42559",
+			"nomBanque":"CREDIT COOPERATIF"
+		},
+		{
+			"code":"10638",
+			"nomBanque":"CREDIT COMMERCIAL DU SUD-OUEST"
+		},
+		{
+			"code":"16600",
+			"nomBanque":"CREDIT CALEDONIEN ET TAHITIEN CREDICAL"
+		},
+		{
+			"code":"30006",
+			"nomBanque":"CREDIT AGRICOLE S.A."
+		},
+		{
+			"code":"13210",
+			"nomBanque":"CREDIT AGRICOLE LEASING"
+		},
+		{
+			"code":"15898",
+			"nomBanque":"CREDIT AGRICOLE COVERED BONDS"
+		},
+		{
+			"code":"31489",
+			"nomBanque":"CREDIT AGRICOLE CORPORATE AND INVESTMENT BANK"
+		},
+		{
+			"code":"17510",
+			"nomBanque":"CREATIS"
+		},
+		{
+			"code":"15278",
+			"nomBanque":"CREALFI"
+		},
+		{
+			"code":"21670",
+			"nomBanque":"CP OR DEVISES"
+		},
+		{
+			"code":"14698",
+			"nomBanque":"COUTTS & CO (MONACO)"
+		},
+		{
+			"code":"18889",
+			"nomBanque":"CORTAL CONSORS"
+		},
+		{
+			"code":"18540",
+			"nomBanque":"CORSABAIL"
+		},
+		{
+			"code":"17479",
+			"nomBanque":"C.I.S.P.M."
+		},
+		{
+			"code":"15380",
+			"nomBanque":"CONSERVATEUR FINANCE"
+		},
+		{
+			"code":"16270",
+			"nomBanque":"COMPTOIR FINANCIER DE GARANTIE - CFG"
+		},
+		{
+			"code":"18610",
+			"nomBanque":"COMPAGNIE POUR LA LOCATION DE VEHICULES - CLV"
+		},
+		{
+			"code":"17569",
+			"nomBanque":"COMPAGNIE MONEGASQUE DE BANQUE"
+		},
+		{
+			"code":"19250",
+			"nomBanque":"COMPAGNIE GENERALE DE LOCATION D'EQUIPEMENTS"
+		},
+		{
+			"code":"13360",
+			"nomBanque":"COMPAGNIE GENERALE DE GARANTIE"
+		},
+		{
+			"code":"18189",
+			"nomBanque":"CREDIPAR"
+		},
+		{
+			"code":"17060",
+			"nomBanque":"C.G.A."
+		},
+		{
+			"code":"18930",
+			"nomBanque":"COFILIT"
+		},
+		{
+			"code":"26630",
+			"nomBanque":"COMPAGNIE FINANCIERE DE PARIS"
+		},
+		{
+			"code":"14588",
+			"nomBanque":"COMPAGNIE FINANCIERE DE BOURBON"
+		},
+		{
+			"code":"19850",
+			"nomBanque":"C.D.G.P."
+		},
+		{
+			"code":"30051",
+			"nomBanque":"COMPAGNIE DE FINANCEMENT FONCIER"
+		},
+		{
+			"code":"17869",
+			"nomBanque":"COMPAGNIE DE BANQUES INTERNATIONALES DE PARIS"
+		},
+		{
+			"code":"18179",
+			"nomBanque":"COMMERZBANK HOLDINGS FRANCE"
+		},
+		{
+			"code":"17629",
+			"nomBanque":"COMMERZBANK AG"
+		},
+		{
+			"code":"15858",
+			"nomBanque":"COINSTAR MONEY TRANSFER SAS"
+		},
+		{
+			"code":"14590",
+			"nomBanque":"COGERA SOCIETE ANONYME"
+		},
+		{
+			"code":"18000",
+			"nomBanque":"COFITEM-COFIMUR"
+		},
+		{
+			"code":"13728",
+			"nomBanque":"COFIPLAN S.A."
+		},
+		{
+			"code":"18660",
+			"nomBanque":"COFILOISIRS"
+		},
+		{
+			"code":"14940",
+			"nomBanque":"COFIDIS"
+		},
+		{
+			"code":"13128",
+			"nomBanque":"COFICA BAIL"
+		},
+		{
+			"code":"11790",
+			"nomBanque":"COFACREDIT"
+		},
+		{
+			"code":"15448",
+			"nomBanque":"CNH FINANCIAL SERVICES"
+		},
+		{
+			"code":"13838",
+			"nomBanque":"CNH CAPITAL EUROPE"
+		},
+		{
+			"code":"12110",
+			"nomBanque":"CMV MEDIFORCE"
+		},
+		{
+			"code":"50140",
+			"nomBanque":"CMP-BANQUE"
+		},
+		{
+			"code":"11600",
+			"nomBanque":"CMCIC LEASE"
+		},
+		{
+			"code":"17230",
+			"nomBanque":"CM-CIC LAVIOLETTE FINANCEMENT"
+		},
+		{
+			"code":"15848",
+			"nomBanque":"CM-CIC COVERED BONDS"
+		},
+		{
+			"code":"13070",
+			"nomBanque":"CM-CIC BAIL"
+		},
+		{
+			"code":"14218",
+			"nomBanque":"CLAAS FINANCIAL SERVICES"
+		},
+		{
+			"code":"15778",
+			"nomBanque":"CITIBANK, N.A."
+		},
+		{
+			"code":"11689",
+			"nomBanque":"CITIBANK INTERNATIONAL PLC - CITIGROUP"
+		},
+		{
+			"code":"11960",
+			"nomBanque":"CIT (FRANCE) S.A.S."
+		},
+		{
+			"code":"19930",
+			"nomBanque":"CINERGIE"
+		},
+		{
+			"code":"14658",
+			"nomBanque":"CIF EUROMORTGAGE"
+		},
+		{
+			"code":"16700",
+			"nomBanque":"CICOBAIL"
+		},
+		{
+			"code":"41199",
+			"nomBanque":"CIC IBERBANCO"
+		},
+		{
+			"code":"10918",
+			"nomBanque":"CHOLET DUPONT"
+		},
+		{
+			"code":"15628",
+			"nomBanque":"CHEBANCA SPA - MICOS"
+		},
+		{
+			"code":"13490",
+			"nomBanque":"CENTRAL EXPANSION"
+		},
+		{
+			"code":"16989",
+			"nomBanque":"CAVABANQUE"
+		},
+		{
+			"code":"20290",
+			"nomBanque":"CM-CIF"
+		},
+		{
+			"code":"12138",
+			"nomBanque":"CATERPILLAR FINANCE FRANCE S.A."
+		},
+		{
+			"code":"11307",
+			"nomBanque":"CASDEN BANQUE POPULAIRE"
+		},
+		{
+			"code":"14648",
+			"nomBanque":"CAPITOLE FINANCE - TOFINSO"
+		},
+		{
+			"code":"14798",
+			"nomBanque":"CAMEFI BANQUE"
+		},
+		{
+			"code":"12518",
+			"nomBanque":"KUTXA"
+		},
+		{
+			"code":"12619",
+			"nomBanque":"CAIXA GERAL DE DEPOSITOS S.A."
+		},
+		{
+			"code":"14828",
+			"nomBanque":"CAIXA GERAL DE DEPOSITOS"
+		},
+		{
+			"code":"11748",
+			"nomBanque":"CAIXA D'ESTALVIS DE CATALUNYA"
+		},
+		{
+			"code":"16248",
+			"nomBanque":"CAISSES D'EPARGNE PARTICIPATIONS"
+		},
+		{
+			"code":"13798",
+			"nomBanque":"CAISSE SOLIDAIRE"
+		},
+		{
+			"code":"17169",
+			"nomBanque":"CREDIT MARITIME MUTUEL DU LITTORAL DU SUD OUEST"
+		},
+		{
+			"code":"15358",
+			"nomBanque":"CREDIT MARITIME MUTUEL D'OUTRE MER"
+		},
+		{
+			"code":"15348",
+			"nomBanque":"CREDIT MARITIME MUTUEL DE LA REGION NORD"
+		},
+		{
+			"code":"17179",
+			"nomBanque":"CREDIT MARITIME MUTUEL DE LA MEDITERRANEE"
+		},
+		{
+			"code":"17149",
+			"nomBanque":"CREDIT MARITIME MUTUEL DE BRETAGNE-NORMANDIE"
+		},
+		{
+			"code":"17219",
+			"nomBanque":"CREDIT MARITIME MUTUEL ATLANTIQUE"
+		},
+		{
+			"code":"14406",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL VAL DE FRANCE"
+		},
+		{
+			"code":"13106",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL TOULOUSE 31"
+		},
+		{
+			"code":"17106",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL SUD-MEDITERRANEE"
+		},
+		{
+			"code":"13906",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL SUD RHONE-ALPES"
+		},
+		{
+			"code":"16906",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL PYRENEES-GASCOGNE"
+		},
+		{
+			"code":"19106",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL PROVENCE-COTE D'AZUR"
+		},
+		{
+			"code":"18306",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL NORMANDIE-SEINE"
+		},
+		{
+			"code":"11206",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL NORD MIDI-PYRENEES"
+		},
+		{
+			"code":"16706",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL NORD DE FRANCE"
+		},
+		{
+			"code":"14506",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL LOIRE - HAUTE-LOIRE"
+		},
+		{
+			"code":"10206",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DU NORD EST"
+		},
+		{
+			"code":"16006",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DU MORBIHAN"
+		},
+		{
+			"code":"13506",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DU LANGUEDOC"
+		},
+		{
+			"code":"12906",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DU FINISTERE"
+		},
+		{
+			"code":"19506",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DU CENTRE OUEST"
+		},
+		{
+			"code":"13606",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL D'ILLE-ET-VILAINE"
+		},
+		{
+			"code":"18106",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DES SAVOIE - CREDIT AGRICOL"
+		},
+		{
+			"code":"12206",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DES COTES-D'ARMOR"
+		},
+		{
+			"code":"18206",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE PARIS ET D'ILE-DE-FRANCE"
+		},
+		{
+			"code":"16606",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE NORMANDIE"
+		},
+		{
+			"code":"16106",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE LORRAINE"
+		},
+		{
+			"code":"17906",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE L'ANJOU ET DU MAINE"
+		},
+		{
+			"code":"19406",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE LA TOURAINE ET DU POITOU"
+		},
+		{
+			"code":"19906",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE LA REUNION"
+		},
+		{
+			"code":"19806",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE LA MARTINIQUE ET DE LA G"
+		},
+		{
+			"code":"14006",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE LA GUADELOUPE"
+		},
+		{
+			"code":"12006",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE LA CORSE"
+		},
+		{
+			"code":"12506",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE FRANCHE-COMTE"
+		},
+		{
+			"code":"11006",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE CHAMPAGNE-BOURGOGNE"
+		},
+		{
+			"code":"16806",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL DE CENTRE FRANCE"
+		},
+		{
+			"code":"13306",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL D'AQUITAINE"
+		},
+		{
+			"code":"11306",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL D'ALPES-PROVENCE"
+		},
+		{
+			"code":"12406",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL CHARENTE-PERIGORD"
+		},
+		{
+			"code":"11706",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL CHARENTE-MARITIME DEUX-SEVR"
+		},
+		{
+			"code":"17806",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL CENTRE-EST"
+		},
+		{
+			"code":"14806",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL CENTRE LOIRE"
+		},
+		{
+			"code":"18706",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL BRIE PICARDIE"
+		},
+		{
+			"code":"14706",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL ATLANTIQUE VENDEE"
+		},
+		{
+			"code":"17206",
+			"nomBanque":"CREDIT AGRICOLE MUTUEL ALSACE VOSGES"
+		},
+		{
+			"code":"26819",
+			"nomBanque":"CMGM"
+		},
+		{
+			"code":"15899",
+			"nomBanque":"CAISSE INTERFEDERALE DU CREDIT MUTUEL SUD EUROPE M"
+		},
+		{
+			"code":"18589",
+			"nomBanque":"CAISSE FRANCAISE DE DEVELOPPEMENT INDUSTRIEL - C.F"
+		},
+		{
+			"code":"15519",
+			"nomBanque":"CAISSE FEDERALE DU CREDIT MUTUEL OCEAN"
+		},
+		{
+			"code":"15629",
+			"nomBanque":"CAISSE FEDERALE DU CREDIT MUTUEL NORD EUROPE"
+		},
+		{
+			"code":"15489",
+			"nomBanque":"CAISSE FEDERALE DU CREDIT MUTUEL DE MAINE-ANJOU ET"
+		},
+		{
+			"code":"15829",
+			"nomBanque":"CAISSE FEDERALE DU CREDIT MUTUEL D'ANJOU"
+		},
+		{
+			"code":"10278",
+			"nomBanque":"CAISSE FEDERALE DU CREDIT MUTUEL CENTRE EST EUROPE"
+		},
+		{
+			"code":"16159",
+			"nomBanque":"CAISSE FEDERALE DU CREDIT MUTUEL ANTILLES-GUYANE"
+		},
+		{
+			"code":"15459",
+			"nomBanque":"CAISSE FEDERALE DE CREDIT MUTUEL DU CENTRE"
+		},
+		{
+			"code":"15959",
+			"nomBanque":"CAISSE FEDERALE DE CREDIT MUTUEL DE NORMANDIE"
+		},
+		{
+			"code":"15749",
+			"nomBanque":"CAISSE FEDERALE DE CREDIT MUTUEL DE LOIRE-ATLANTIQ"
+		},
+		{
+			"code":"11315",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE PROVENCE-ALPES-C"
+		},
+		{
+			"code":"11425",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE NORMANDIE"
+		},
+		{
+			"code":"16275",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE NORD FRANCE EURO"
+		},
+		{
+			"code":"14505",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE LOIRE-CENTRE"
+		},
+		{
+			"code":"14265",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE LOIRE DROME ARDE"
+		},
+		{
+			"code":"17515",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE ILE-DE-FRANCE"
+		},
+		{
+			"code":"13485",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DU LANGUEDOC ROU"
+		},
+		{
+			"code":"13825",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DE RHONE ALPES"
+		},
+		{
+			"code":"18025",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DE PICARDIE"
+		},
+		{
+			"code":"19825",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DE NOUVELLE-CALE"
+		},
+		{
+			"code":"13135",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DE MIDI-PYRENEES"
+		},
+		{
+			"code":"15135",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DE LORRAINE CHAM"
+		},
+		{
+			"code":"12135",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE DE BOURGOGNE FRA"
+		},
+		{
+			"code":"18715",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE D'AUVERGNE ET DU"
+		},
+		{
+			"code":"16705",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE D'ALSACE"
+		},
+		{
+			"code":"18315",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE COTE D'AZUR"
+		},
+		{
+			"code":"14445",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE BRETAGNE-PAYS DE"
+		},
+		{
+			"code":"13335",
+			"nomBanque":"CAISSE D'EPARGNE ET DE PREVOYANCE AQUITAINE POITOU"
+		},
+		{
+			"code":"14900",
+			"nomBanque":"CAISSE DE MUTUALISATION DES FINANCEMENTS - CAMUFI"
+		},
+		{
+			"code":"11190",
+			"nomBanque":"CAISSE DE GARANTIE DU LOGEMENT LOCATIF SOCIAL"
+		},
+		{
+			"code":"25709",
+			"nomBanque":"CAISSE DE GARANTIE DE L'IMMOBILIER"
+		},
+		{
+			"code":"60220",
+			"nomBanque":"CAISSE DE DEVELOPPEMENT DE LA CORSE"
+		},
+		{
+			"code":"11550",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE TOULOUSE"
+		},
+		{
+			"code":"17150",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE TOULON"
+		},
+		{
+			"code":"17100",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE STRASBOURG"
+		},
+		{
+			"code":"16100",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE ROUEN"
+		},
+		{
+			"code":"18450",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE ROUBAIX"
+		},
+		{
+			"code":"12420",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE REIMS"
+		},
+		{
+			"code":"17620",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE NIMES"
+		},
+		{
+			"code":"16200",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE NICE"
+		},
+		{
+			"code":"18470",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE NANTES"
+		},
+		{
+			"code":"18160",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE NANCY"
+		},
+		{
+			"code":"10140",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE MARSEILLE"
+		},
+		{
+			"code":"18050",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE LYON"
+		},
+		{
+			"code":"14078",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE LILLE"
+		},
+		{
+			"code":"28570",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE DIJON"
+		},
+		{
+			"code":"16170",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE BOULOGNE-SUR-MER"
+		},
+		{
+			"code":"16560",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL DE BORDEAUX"
+		},
+		{
+			"code":"18950",
+			"nomBanque":"CAISSE DE CREDIT MUNICIPAL D'AVIGNON"
+		},
+		{
+			"code":"17429",
+			"nomBanque":"CAISSE DE CREDIT AGRICOLE MUTUEL DE LA NOUVELLE-CA"
+		},
+		{
+			"code":"15449",
+			"nomBanque":"CAISSE DE BRETAGNE DE CREDIT MUTUEL AGRICOLE"
+		},
+		{
+			"code":"45539",
+			"nomBanque":"CAISSE CENTRALE DU CREDIT MUTUEL"
+		},
+		{
+			"code":"18609",
+			"nomBanque":"CAISSE CENTRALE DU CREDIT IMMOBILIER DE FRANCE-3CI"
+		},
+		{
+			"code":"15429",
+			"nomBanque":"CAISSE AGRICOLE CREDIT MUTUEL"
+		},
+		{
+			"code":"15988",
+			"nomBanque":"CAFINEO"
+		},
+		{
+			"code":"18129",
+			"nomBanque":"CACEIS BANK"
+		},
+		{
+			"code":"11380",
+			"nomBanque":"C.R.H. - CAISSE DE REFINANCEMENT DE L'HABITAT"
+		},
+		{
+			"code":"23779",
+			"nomBanque":"BYBLOS BANK EUROPE"
+		},
+		{
+			"code":"18590",
+			"nomBanque":"BULL FINANCE"
+		},
+		{
+			"code":"18049",
+			"nomBanque":"BSI-IFABANQUE SA"
+		},
+		{
+			"code":"11018",
+			"nomBanque":"BSI MONACO SAM"
+		},
+		{
+			"code":"14318",
+			"nomBanque":"BRED GESTION"
+		},
+		{
+			"code":"12779",
+			"nomBanque":"BRED COFILEASE"
+		},
+		{
+			"code":"10107",
+			"nomBanque":"BRED - BANQUE POPULAIRE"
+		},
+		{
+			"code":"11378",
+			"nomBanque":"BPN-BANCO PORTUGUES DE NEGOCIOS, SA"
+		},
+		{
+			"code":"16188",
+			"nomBanque":"BPCE"
+		},
+		{
+			"code":"40618",
+			"nomBanque":"BOURSORAMA"
+		},
+		{
+			"code":"21859",
+			"nomBanque":"BOURGOGNE GARANTIE"
+		},
+		{
+			"code":"11498",
+			"nomBanque":"BNP PARIBAS WEALTH MANAGEMENT MONACO"
+		},
+		{
+			"code":"40198",
+			"nomBanque":"BNP PARIBAS WEALTH MANAGEMENT"
+		},
+		{
+			"code":"41329",
+			"nomBanque":"BNP PARIBAS SECURITIES SERVICES"
+		},
+		{
+			"code":"41919",
+			"nomBanque":"BNP PARIBAS REUNION"
+		},
+		{
+			"code":"16078",
+			"nomBanque":"BNP PARIBAS PUBLIC SECTOR SCF"
+		},
+		{
+			"code":"18029",
+			"nomBanque":"BNP PARIBAS PERSONAL FINANCE"
+		},
+		{
+			"code":"17939",
+			"nomBanque":"BNP PARIBAS NOUVELLE-CALEDONIE"
+		},
+		{
+			"code":"13088",
+			"nomBanque":"BNP PARIBAS MARTINIQUE"
+		},
+		{
+			"code":"30958",
+			"nomBanque":"BNP PARIBAS LEASE GROUP"
+		},
+		{
+			"code":"15668",
+			"nomBanque":"BNP PARIBAS HOME LOAN COVERED BONDS"
+		},
+		{
+			"code":"11729",
+			"nomBanque":"BNP PARIBAS GUYANE"
+		},
+		{
+			"code":"13078",
+			"nomBanque":"BNP PARIBAS GUADELOUPE"
+		},
+		{
+			"code":"15408",
+			"nomBanque":"BNP PARIBAS FIN'AMS"
+		},
+		{
+			"code":"18020",
+			"nomBanque":"BNP PARIBAS FACTOR"
+		},
+		{
+			"code":"30004",
+			"nomBanque":"BNP PARIBAS"
+		},
+		{
+			"code":"14670",
+			"nomBanque":"BMW FINANCE"
+		},
+		{
+			"code":"17599",
+			"nomBanque":"BLOM BANK FRANCE"
+		},
+		{
+			"code":"15818",
+			"nomBanque":"BINCKBANK NV"
+		},
+		{
+			"code":"15218",
+			"nomBanque":"BIBBY FACTOR FRANCE"
+		},
+		{
+			"code":"16158",
+			"nomBanque":"BGFI INTERNATIONAL"
+		},
+		{
+			"code":"16218",
+			"nomBanque":"BFORBANK"
+		},
+		{
+			"code":"10108",
+			"nomBanque":"BAYERISCHE LANDESBANK"
+		},
+		{
+			"code":"16180",
+			"nomBanque":"BATIROC NORMANDIE"
+		},
+		{
+			"code":"13018",
+			"nomBanque":"BATIROC BRETAGNE - PAYS DE LOIRE"
+		},
+		{
+			"code":"16020",
+			"nomBanque":"BATIMAP"
+		},
+		{
+			"code":"18040",
+			"nomBanque":"BATIFRANC"
+		},
+		{
+			"code":"16050",
+			"nomBanque":"BATI LEASE"
+		},
+		{
+			"code":"24599",
+			"nomBanque":"BARCLAYS FRANCE"
+		},
+		{
+			"code":"12448",
+			"nomBanque":"BARCLAYS BANK PLC MONACO"
+		},
+		{
+			"code":"30588",
+			"nomBanque":"BARCLAYS BANK PLC"
+		},
+		{
+			"code":"19300",
+			"nomBanque":"BARCLAYS BAIL"
+		},
+		{
+			"code":"16238",
+			"nomBanque":"BANQUES POPULAIRES PARTICIPATIONS"
+		},
+		{
+			"code":"15958",
+			"nomBanque":"BANQUES POPULAIRES COVERED BONDS"
+		},
+		{
+			"code":"42649",
+			"nomBanque":"BANQUE TRAVELEX S.A."
+		},
+		{
+			"code":"30568",
+			"nomBanque":"BANQUE TRANSATLANTIQUE S.A."
+		},
+		{
+			"code":"11449",
+			"nomBanque":"BANQUE THEMIS"
+		},
+		{
+			"code":"10558",
+			"nomBanque":"BANQUE TARNEAUD"
+		},
+		{
+			"code":"13539",
+			"nomBanque":"BANQUE SOLFEA"
+		},
+		{
+			"code":"17469",
+			"nomBanque":"BANQUE SOCREDO"
+		},
+		{
+			"code":"30027",
+			"nomBanque":"BANQUE SCALBERT DUPONT - CIN"
+		},
+		{
+			"code":"17779",
+			"nomBanque":"BANQUE SBA"
+		},
+		{
+			"code":"13579",
+			"nomBanque":"BANQUE SAINT-OLIVE"
+		},
+		{
+			"code":"14608",
+			"nomBanque":"BANQUE SAFRA FRANCE SA"
+		},
+		{
+			"code":"14150",
+			"nomBanque":"BANQUE ROBECO"
+		},
+		{
+			"code":"10468",
+			"nomBanque":"BANQUE RHONE-ALPES - GROUPE CREDIT DU NORD"
+		},
+		{
+			"code":"17649",
+			"nomBanque":"BANQUE REVILLON"
+		},
+		{
+			"code":"13168",
+			"nomBanque":"BANQUE PSA FINANCE"
+		},
+		{
+			"code":"44319",
+			"nomBanque":"BANQUE PRIVEE EUROPEENNE"
+		},
+		{
+			"code":"18919",
+			"nomBanque":"BANQUE PRIVEE 1818"
+		},
+		{
+			"code":"11989",
+			"nomBanque":"BANQUE POUYANNE"
+		},
+		{
+			"code":"18707",
+			"nomBanque":"BANQUE POPULAIRE VAL DE FRANCE (2EME DU NOM)"
+		},
+		{
+			"code":"10207",
+			"nomBanque":"BANQUE POPULAIRE RIVES DE PARIS"
+		},
+		{
+			"code":"14607",
+			"nomBanque":"BANQUE POPULAIRE PROVENCALE ET CORSE"
+		},
+		{
+			"code":"17807",
+			"nomBanque":"BANQUE POPULAIRE OCCITANE"
+		},
+		{
+			"code":"14707",
+			"nomBanque":"BANQUE POPULAIRE LORRAINE CHAMPAGNE"
+		},
+		{
+			"code":"13907",
+			"nomBanque":"BANQUE POPULAIRE LOIRE ET LYONNAIS"
+		},
+		{
+			"code":"10907",
+			"nomBanque":"BANQUE POPULAIRE DU SUD-OUEST"
+		},
+		{
+			"code":"16607",
+			"nomBanque":"BANQUE POPULAIRE DU SUD"
+		},
+		{
+			"code":"13507",
+			"nomBanque":"BANQUE POPULAIRE DU NORD"
+		},
+		{
+			"code":"11907",
+			"nomBanque":"BANQUE POPULAIRE DU MASSIF CENTRAL"
+		},
+		{
+			"code":"16807",
+			"nomBanque":"BANQUE POPULAIRE DES ALPES"
+		},
+		{
+			"code":"16707",
+			"nomBanque":"BANQUE POPULAIRE DE L'OUEST"
+		},
+		{
+			"code":"17607",
+			"nomBanque":"BANQUE POPULAIRE D'ALSACE"
+		},
+		{
+			"code":"15607",
+			"nomBanque":"BANQUE POPULAIRE COTE D'AZUR"
+		},
+		{
+			"code":"13607",
+			"nomBanque":"BANQUE POPULAIRE CENTRE ATLANTIQUE (2EME DU NOM)"
+		},
+		{
+			"code":"10807",
+			"nomBanque":"BANQUE POPULAIRE BOURGOGNE FRANCHE-COMTE"
+		},
+		{
+			"code":"13807",
+			"nomBanque":"BANQUE POPULAIRE ATLANTIQUE"
+		},
+		{
+			"code":"13529",
+			"nomBanque":"BANQUE PELLETIER"
+		},
+		{
+			"code":"11468",
+			"nomBanque":"BANQUE PATRIMOINE ET IMMOBILIER (B.P.I.)"
+		},
+		{
+			"code":"16840",
+			"nomBanque":"BANQUE PASCHE MONACO SAM"
+		},
+		{
+			"code":"40978",
+			"nomBanque":"BANQUE PALATINE"
+		},
+		{
+			"code":"13489",
+			"nomBanque":"BANQUE NUGER"
+		},
+		{
+			"code":"19730",
+			"nomBanque":"BANQUE NOMURA FRANCE"
+		},
+		{
+			"code":"30788",
+			"nomBanque":"BANQUE NEUFLIZE OBC"
+		},
+		{
+			"code":"14898",
+			"nomBanque":"BANQUE NATIONALE DE PARIS INTERCONTINENTALE"
+		},
+		{
+			"code":"18879",
+			"nomBanque":"BANQUE MONETAIRE ET FINANCIERE - B.M.F."
+		},
+		{
+			"code":"18569",
+			"nomBanque":"BANQUE MISR"
+		},
+		{
+			"code":"17959",
+			"nomBanque":"BANQUE MICHEL INCHAUSPE - BAMI"
+		},
+		{
+			"code":"13379",
+			"nomBanque":"BANQUE MARZE"
+		},
+		{
+			"code":"13369",
+			"nomBanque":"BANQUE MARTIN - MAUREL"
+		},
+		{
+			"code":"21990",
+			"nomBanque":"BANQUE LEONARDO"
+		},
+		{
+			"code":"10228",
+			"nomBanque":"BANQUE LAYDERNIER"
+		},
+		{
+			"code":"13259",
+			"nomBanque":"BANQUE KOLB"
+		},
+		{
+			"code":"11438",
+			"nomBanque":"BANQUE JEAN-PHILIPPE HOTTINGUER ET CIE"
+		},
+		{
+			"code":"24349",
+			"nomBanque":"BANQUE J. SAFRA (MONACO)"
+		},
+		{
+			"code":"40398",
+			"nomBanque":"BRED"
+		},
+		{
+			"code":"18719",
+			"nomBanque":"B.F.C. OCEAN INDIEN"
+		},
+		{
+			"code":"18729",
+			"nomBanque":"B.F.C. ANTILLES-GUYANE"
+		},
+		{
+			"code":"41599",
+			"nomBanque":"BANQUE FRANCAISE"
+		},
+		{
+			"code":"13179",
+			"nomBanque":"BANQUE FIDUCIAL"
+		},
+		{
+			"code":"11808",
+			"nomBanque":"BANQUE FEDERATIVE DU CREDIT MUTUEL"
+		},
+		{
+			"code":"18869",
+			"nomBanque":"B.F.M."
+		},
+		{
+			"code":"43659",
+			"nomBanque":"BANQUE ESPIRITO SANTO ET DE LA VENETIE"
+		},
+		{
+			"code":"13149",
+			"nomBanque":"BANQUE EDEL SNC"
+		},
+		{
+			"code":"12939",
+			"nomBanque":"BANQUE DUPUY DE PARSEVAL"
+		},
+		{
+			"code":"14628",
+			"nomBanque":"BANQUE DU GROUPE CASINO"
+		},
+		{
+			"code":"11628",
+			"nomBanque":"BCMI"
+		},
+		{
+			"code":"30258",
+			"nomBanque":"BTP BANQUE"
+		},
+		{
+			"code":"19089",
+			"nomBanque":"BANQUE D'ORSAY"
+		},
+		{
+			"code":"44149",
+			"nomBanque":"BANQUE D'ESCOMPTE"
+		},
+		{
+			"code":"41839",
+			"nomBanque":"BANQUE DES ANTILLES FRANCAISES"
+		},
+		{
+			"code":"12879",
+			"nomBanque":"BANQUE DELUBAC ET CIE"
+		},
+		{
+			"code":"43030",
+			"nomBanque":"BANQUE DEGROOF & PHILIPPE"
+		},
+		{
+			"code":"11408",
+			"nomBanque":"BANQUE DE WALLIS ET FUTUNA"
+		},
+		{
+			"code":"13999",
+			"nomBanque":"BANQUE DE VIZILLE"
+		},
+		{
+			"code":"12239",
+			"nomBanque":"BANQUE DE TAHITI"
+		},
+		{
+			"code":"10548",
+			"nomBanque":"BANQUE DE SAVOIE"
+		},
+		{
+			"code":"11749",
+			"nomBanque":"BANQUE DE SAINT-PIERRE ET MIQUELON"
+		},
+		{
+			"code":"11210",
+			"nomBanque":"BANQUE DE REALISATIONS DE GESTION ET DE FINANCEMEN"
+		},
+		{
+			"code":"12149",
+			"nomBanque":"BANQUE DE POLYNESIE"
+		},
+		{
+			"code":"14889",
+			"nomBanque":"BANQUE DE NOUVELLE CALEDONIE"
+		},
+		{
+			"code":"17619",
+			"nomBanque":"BANQUE DE L'EUROPE MERIDIONALE - BEMO"
+		},
+		{
+			"code":"11899",
+			"nomBanque":"BANQUE DE L'ECONOMIE DU COMMERCE ET DE LA MONETIQU"
+		},
+		{
+			"code":"12169",
+			"nomBanque":"BANQUE DE LA REUNION"
+		},
+		{
+			"code":"43799",
+			"nomBanque":"BGPI"
+		},
+		{
+			"code":"11668",
+			"nomBanque":"BANQUE DE GESTION EDMOND DE ROTHSCHILD - MONACO"
+		},
+		{
+			"code":"40168",
+			"nomBanque":"BANQUE DE BRETAGNE"
+		},
+		{
+			"code":"10268",
+			"nomBanque":"BANQUE COURTOIS"
+		},
+		{
+			"code":"18829",
+			"nomBanque":"BCME"
+		},
+		{
+			"code":"13298",
+			"nomBanque":"BCMNE"
+		},
+		{
+			"code":"30087",
+			"nomBanque":"BANQUE CIC EST"
+		},
+		{
+			"code":"10188",
+			"nomBanque":"BANQUE CHALUS"
+		},
+		{
+			"code":"10178",
+			"nomBanque":"BANQUE CHAIX"
+		},
+		{
+			"code":"24659",
+			"nomBanque":"BANQUE CHABRIERES"
+		},
+		{
+			"code":"41439",
+			"nomBanque":"BANQUE CHAABI DU MAROC"
+		},
+		{
+			"code":"17519",
+			"nomBanque":"BANQUE CENTRALE DE COMPENSATION"
+		},
+		{
+			"code":"12468",
+			"nomBanque":"BANQUE CANTONALE DE GENEVE (FRANCE) S.A."
+		},
+		{
+			"code":"17499",
+			"nomBanque":"B.C.I."
+		},
+		{
+			"code":"12179",
+			"nomBanque":"BANQUE BIA"
+		},
+		{
+			"code":"12579",
+			"nomBanque":"BANQUE BCP"
+		},
+		{
+			"code":"10968",
+			"nomBanque":"BANQUE AIG"
+		},
+		{
+			"code":"12869",
+			"nomBanque":"BANQUE ACCORD"
+		},
+		{
+			"code":"17579",
+			"nomBanque":"BANK TEJARAT"
+		},
+		{
+			"code":"17799",
+			"nomBanque":"BANK SEPAH"
+		},
+		{
+			"code":"44269",
+			"nomBanque":"BANK SADERAT IRAN"
+		},
+		{
+			"code":"41239",
+			"nomBanque":"BANK POLSKA KASA OPIEKI SPOLKA AKCYJNA"
+		},
+		{
+			"code":"13648",
+			"nomBanque":"BANK OF SCOTLAND PLC"
+		},
+		{
+			"code":"14879",
+			"nomBanque":"BANK OF INDIA"
+		},
+		{
+			"code":"18769",
+			"nomBanque":"BANK OF CHINA LIMITED"
+		},
+		{
+			"code":"41219",
+			"nomBanque":"BANK OF AMERICA NATIONAL ASSOCIATION"
+		},
+		{
+			"code":"41259",
+			"nomBanque":"BANK MELLI IRAN"
+		},
+		{
+			"code":"14508",
+			"nomBanque":"BANK JULIUS BAER (MONACO) S.A.M."
+		},
+		{
+			"code":"18089",
+			"nomBanque":"BANK AUDI SARADAR FRANCE"
+		},
+		{
+			"code":"44729",
+			"nomBanque":"BANCO SANTANDER SA"
+		},
+		{
+			"code":"12508",
+			"nomBanque":"BANCO GUIPUZCOANO S.A."
+		},
+		{
+			"code":"41139",
+			"nomBanque":"BANCO DO BRASIL"
+		},
+		{
+			"code":"19229",
+			"nomBanque":"BANCO DE SABADELL"
+		},
+		{
+			"code":"12589",
+			"nomBanque":"BANCO BPI"
+		},
+		{
+			"code":"41189",
+			"nomBanque":"BANCO BILBAO VIZCAYA ARGENTARIA (BBVA)"
+		},
+		{
+			"code":"14818",
+			"nomBanque":"BANCA REGIONALE EUROPEA S.P.A."
+		},
+		{
+			"code":"14908",
+			"nomBanque":"BANCA POPOLARE DI SONDRIO (SUISSE)"
+		},
+		{
+			"code":"16098",
+			"nomBanque":"BANCA IFIS"
+		},
+		{
+			"code":"12088",
+			"nomBanque":"BANCA CARIGE S.P.A"
+		},
+		{
+			"code":"15970",
+			"nomBanque":"BAIL-ACTEA"
+		},
+		{
+			"code":"11078",
+			"nomBanque":"BAIL IMMO NORD"
+		},
+		{
+			"code":"15980",
+			"nomBanque":"BAIL ENTREPRISES"
+		},
+		{
+			"code":"18839",
+			"nomBanque":"B.F.T."
+		},
+		{
+			"code":"25080",
+			"nomBanque":"AXA BANQUE FINANCEMENT"
+		},
+		{
+			"code":"12548",
+			"nomBanque":"AXA BANQUE"
+		},
+		{
+			"code":"13558",
+			"nomBanque":"AUXIFIP"
+		},
+		{
+			"code":"23890",
+			"nomBanque":"ATTIJARIWAFA BANK EUROPE"
+		},
+		{
+			"code":"19399",
+			"nomBanque":"ANTIN-BAIL"
+		},
+		{
+			"code":"19530",
+			"nomBanque":"AMUNDI GROUP"
+		},
+		{
+			"code":"16820",
+			"nomBanque":"AMERICAN EXPRESS"
+		},
+		{
+			"code":"14578",
+			"nomBanque":"ALSOLIA"
+		},
+		{
+			"code":"16160",
+			"nomBanque":"ALSABAIL"
+		},
+		{
+			"code":"15318",
+			"nomBanque":"AIB CORPORATE BANKING FRANCE"
+		},
+		{
+			"code":"12240",
+			"nomBanque":"ALLIANZ BANQUE"
+		},
+		{
+			"code":"12489",
+			"nomBanque":"ALFABANQUE"
+		},
+		{
+			"code":"41829",
+			"nomBanque":"AL KHALIJI FRANCE"
+		},
+		{
+			"code":"13959",
+			"nomBanque":"AGRIFIGEST-ALMA"
+		},
+		{
+			"code":"45129",
+			"nomBanque":"AGENCE FRANCAISE DE DEVELOPPEMENT"
+		},
+		{
+			"code":"11938",
+			"nomBanque":"AGCO FINANCE SNC"
+		},
+		{
+			"code":"13279",
+			"nomBanque":"AFFINE"
+		},
+		{
+			"code":"18979",
+			"nomBanque":"ABC INTERNATIONAL BANK PLC"
+		},
+		{
+			"code":"18989",
+			"nomBanque":"AAREAL BANK FRANCE"
+		},
+		{
+			"code":"14738",
+			"nomBanque":"W-HA S.A."
+		},
+		{
+			"code":"10037",
+			"nomBanque":"CIAL LABROQUE"
+		},
+		{
+			"code":"15707",
+			"nomBanque":"BANQUE POPULAIRE NIMES COURBET"
+		},
+		{
+			"code":"16485",
+			"nomBanque":"CAISSE D'EPARGNE DES PAYS DE L'ADOUR"
+		},
+		{
+			"code":"30001",
+			"nomBanque":"BANQUE DE FRANCE"
+		},
+		{
+			"code":"10507",
+			"nomBanque":"BANQUE POPULAIRE BOE"
+		},
+		{
+			"code":"30041",
+			"nomBanque":"BANQUE POSTALE DE PARIS"
+		},
+		{
+			"code":"10011",
+			"nomBanque":"BANQUE POSTAL CAISSE NATIONALE EPARGNE"
+		},
+		{
+			"code":"37011",
+			"nomBanque":" ING BELGIQUE"
+		},
+		{
+			"code":"16598",
+			"nomBanque":"BANQUE CREE MANO PAR ODU"
+		}
+	]
+}

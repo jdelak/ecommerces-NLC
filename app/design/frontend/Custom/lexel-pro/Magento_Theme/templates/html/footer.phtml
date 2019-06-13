@@ -1,0 +1,78 @@
+
+<div class="footer-container">
+    
+    <div class="footer-2">
+        <div class="footer-inside row">
+            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">
+                <div class="liens-footer-content">
+                    <li><strong>LEXEL PARIS</strong></li>
+                    <li>17 Rue Saint Exupéry<br>34430 Saint Jean de Védas</li>
+                </div>
+            </div>
+            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">
+                <div class="liens-footer-content">
+                    <li><strong>A PROPOS</strong></li>
+                    <li><a href="https://lexel-paris.com/who">Qui sommes-nous</a></li>
+                    <li><a href="https://lexel-paris.com/conseil-beaute">Nos Conseils Beauté</a></li>
+                    <li><a href="https://lexel-paris.com/diagnostic">Diagnostic Beauté personnalisé</a></li>
+                    <li><a href="https://lexel-paris.com/recruit">Recrutement</a></li>
+                </div>
+            </div>
+            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">
+                <div class="liens-footer-content">
+                    <li><strong>SERVICES</strong></li>
+                    <li><a href="https://lexel-paris.com/paiement-securise">Paiement Sécurisé</a></li>
+                    <li><a href="https://lexel-paris.com/modalites-livraison">Modalités de livraison</a></li>
+                    <li><a href="https://lexel-paris.com/retours">Retours</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright text-center">
+        © Lexel Professionnel - 2018 |<a href="https://lexel-paris.com/conditions-generales-de-vente">Conditions générales de ventes</a>|<a href="https://lexel-paris.com/mentions-legales">Mentions légales</a>
+    </div>
+</div>
+
+<img src="<?php /* @escapeNotVerified */ echo $block->getLogoSrc() ?>"
+     alt="<?php /* @escapeNotVerified */ echo $block->getLogoAlt() ?>"
+    <?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+    <?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+/>
+
+<script>
+
+    // ###################### MODULE FACEBOOK #####################
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1555808424540454',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.11'
+        });
+        FB.AppEvents.logPageView();
+        
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    // ###################### FIN MODULE FACEBOOK ###################
+
+    require(['jquery'], function ($) {
+
+        $('a.fa-user-o').hover(
+            function(){
+                $(this).removeClass("fa-user-o");
+                $(this).addClass("fa-user");
+            },
+            function () {
+                $(this).removeClass("fa-user");
+                $(this).addClass("fa-user-o");
+            }
+
+        );
+    });
+</script>

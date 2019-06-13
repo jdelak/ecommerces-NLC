@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+	<module name="Ntic_Sponsor" setup_version="1.0.0"/>
+</config>
+
+<!--
+	################################################################
+	##################### 	   MODULE SPONSOR 		################
+	################################################################
+
+
+	Controller => save
+	ligne 108 variable main_contact_sponsor en dur !
+	rendre dynamique, une fois que la BDD contact sera alimenté !!
+
+	
+-->

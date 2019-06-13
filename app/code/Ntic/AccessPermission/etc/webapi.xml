@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="POST" url="/V1/ntic-accesspermission/accesspermission">
+		<service class="Ntic\AccessPermission\Api\AccessPermissionRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Ntic_AccessPermission::AccessPermission_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ntic-accesspermission/search">
+		<service class="Ntic\AccessPermission\Api\AccessPermissionRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Ntic_AccessPermission::AccessPermission_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ntic-accesspermission/:accesspermissionId">
+		<service class="Ntic\AccessPermission\Api\AccessPermissionRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Ntic_AccessPermission::AccessPermission_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/ntic-accesspermission/:accesspermissionId">
+		<service class="Ntic\AccessPermission\Api\AccessPermissionRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Ntic_AccessPermission::AccessPermission_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/ntic-accesspermission/:accesspermissionId">
+		<service class="Ntic\AccessPermission\Api\AccessPermissionRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Ntic_AccessPermission::AccessPermission_delete"/>
+		</resources>
+	</route>
+</routes>

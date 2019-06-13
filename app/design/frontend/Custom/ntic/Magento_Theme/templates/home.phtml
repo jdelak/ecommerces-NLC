@@ -1,0 +1,313 @@
+<?php
+$ntic_user              = $_SESSION['ntic_user'];
+$objectManager          = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager           = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$customerSession        = $objectManager->create('Magento\Customer\Model\Session');
+
+//Vérifie les rendez vous pas encore qualifier
+$checkRdvToQualif       = new \Ntic\Calendar\Helper\Qualification;
+$rdvToQualif = $checkRdvToQualif->MarkedAsQualified();
+
+
+if($customerSession->getCustomer()->getId() == $ntic_user) {
+    $customerRepository = $objectManager->create('\Magento\Customer\Api\CustomerRepositoryInterface');
+    $AccessPermission   = $objectManager->get('Ntic\AccessPermission\Model\AccessPermission')->getCollection();
+    $resource           = $objectManager->get('Magento\Framework\App\ResourceConnection');
+    $this->_cart        = $objectManager->get('\Magento\Checkout\Model\Cart');
+    $connection         = $resource->getConnection();
+    $userid             = $customerSession->getCustomer()->getId();
+    $groupId            = $customerRepository->getById($ntic_user)->getGroupId();
+    $storeId            = $storeManager->getStore()->getStoreId();
+    $thisPermission     = $AccessPermission->addFieldToFilter('store_id', ['eq' => $storeId])->addFieldToFilter('group_id', ['eq' => $groupId]);
+    $rules              = $thisPermission->getFirstItem()->getRules();
+    $rules              = explode("_", $rules);
+    $item2              = array();
+    // Si rdv affiche le boutton
+    if (count($rdvToQualif) > 0 ) {  ?>
+        <div class="row" id="rdvBtn"  style="position: absolute; width: 100%; height: 100%; top: 0; bottom: 0; z-index: 100; margin: 0 auto; margin-left: -20px; padding: 0">
+            <!-- Button trigger modal -->
+            <button id="btn-qualif" type="button" class="col-lg-12 btn btn-danger btn-lg"  style="position: absolute; width: 100%; height: 100%; top: 0; bottom: 0;" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-bell-o" aria-hidden="true">  Vous avez des RDV à qualifier !</i>
+            </button>
+        </div>
+    <?php } ?>
+    
+    <?php
+    function getYoutubeVideosFromPlaylist(){
+        try {
+            $content = @file_get_contents('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLAcsgdCOwh_-NnzWcJ9PQvu4zeq91Cj73&key=AIzaSyDgST2llROmepKH4Az7aEH3OlnBtBKF2Lc');
+            if($content === FALSE) return null; else return $content;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    $items = json_decode(getYoutubeVideosFromPlaylist());
+    $result_page = $items->pageInfo->totalResults;
+    foreach($items->items as $key => $item){
+        if($key> ($result_page-5)){
+            $item2[] = $item->snippet;
+        }
+    }
+    ?>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Qualification rendez-vous</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="dataTable">
+                        <thead>
+                        <tr>
+                            <!-- <td  class="text-center">event_id</td>-->
+                            <td  class="text-center">Nom Prénom</td>
+                            <td  class="text-center">Date</td>
+                            <td  class="text-center">Qualification</td>
+                        </tr>
+                        </thead>
+                        <tbody  class="text-center">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <?php
+        //var_dump(file_get_contents($block->getUrl('', ['_secure' => false]) . 'intranet/post/rss/'));
+        ?>
+    </div>
+    <div class="d-flex align-content-md-stretch flex-wrap" >
+        <?php if (in_array("bdc", $rules)) { ?>
+                <a class="col-lg-4 text-center" href="<?php echo $block->getUrl('customer-listing', ['_secure' => false]); ?>">
+                    <div class="bg bg-orange">
+                        <span class="fa fa-briefcase ico-bdc l-2" aria-hidden="true"></span>
+                        <div class="text-left">Bon de commande</div>
+                    </div>
+                </a>
+        <?php } ?>
+
+        <?php if (in_array("actu", $rules)) { ?>
+                <a class="col-lg-4 text-center"
+                   href="<?php echo $block->getUrl('intranet', ['_secure' => true]); ?>">
+                    <div class="bg bg-bleu">
+                        <span class="fa fa-newspaper-o ico-bdc" aria-hidden="true"></span>
+                        <div class="text-left">Intranet</div>
+                    </div>
+                </a>
+        <?php } ?>
+
+        <?php  if (in_array("calendar", $rules) ||in_array("manager-calendar", $rules)) { ?>
+
+                <a class="col-lg-2 text-center"
+                   href="<?php echo $block->getUrl('calendar', ['_secure' => true]); ?>">
+                    <div class="bg bg-bleu-f">
+                        <span class="fa fa-calendar ico-bdc" aria-hidden="true"></span>
+                        <div class="text-left">Agenda</div>
+                    </div>
+                </a>
+        <?php } ?>
+        <?php  if (in_array("mail", $rules)) { ?>
+            <a class="col-lg-2 text-center"
+               href="https://outlook.office365.com/owa/?path=/mail/inbox">
+                <div class="bg bg-vert">
+                    <span class="fa fa-envelope ico-bdc" aria-hidden="true"></span>
+                    <div class="text-left">Mail</div>
+                </div>
+            </a>
+        <?php } ?>
+
+        <?php if (in_array("etatdcom", $rules)) { ?>
+                <a class="col-lg-6 text-center"
+                   href="<?php echo $block->getUrl('etat-de-commission', ['_secure' => true]); ?>">Etat de com</a>
+        <?php } ?>
+
+        <?php if (in_array("video", $rules)) { ?>
+                <a class="col-lg-2 text-center" href="<?php echo $block->getUrl('video', ['_secure' => true]); ?>">
+                    <div class="bg bg-rose">
+                        <!--<img class="col-lg-12" src="<?php echo $item2[0]->thumbnails->medium->url ?>" alt="lexel 15-30"/>-->
+                        <span class="fa fa-video-camera ico-bdc" aria-hidden="true"></span>
+                        <div class="text-left">Vidéos</div>
+                    </div>
+                </a>
+        <?php } ?>
+
+        <?php if (in_array("archiveGesco", $rules)) { ?>
+                <a class="col-lg-2 text-center"
+                   href="<?php echo $block->getUrl('archivegesco', ['_secure' => true]); ?>">
+                    <div class="bg bg-violet">
+                        <span class="fa fa-archive ico-bdc" aria-hidden="true"></span>
+                        <div class="text-left">Archive Gesco</div>
+                    </div>
+                </a>
+        <?php } ?>
+        <a class="col-lg-4 text-center hide"
+           href="<?php echo $block->getUrl('conges', ['_secure' => true]); ?>">
+            <div class="bg bg-orange">
+                <span class="fa fa-paper-plane-o ico-bdc" aria-hidden="true"></span>
+                <div class="text-left">Congés</div>
+            </div>
+        </a>
+        <a class="col-lg-2 text-center hide"
+           href="">
+            <div class="bg bg-violet">
+                <span class="fa fa-stack-overflow ico-bdc" aria-hidden="true"></span>
+                <div class="text-left">Réappro</div>
+            </div>
+        </a>
+        <?php
+        $sql = "SELECT sales_order_item.order_id
+                FROM `sales_order` 
+                INNER JOIN sales_order_item 
+                ON sales_order_item.order_id = sales_order.entity_id 
+                WHERE `customer_id` = " .$userid." 
+                AND sales_order.created_at >= '".date('Y-m')."-01 00:00:00'
+                AND sku = 'DOTA'";
+        $check_dotation = $connection->fetchOne($sql);
+
+        $check_cart = null;
+        if($this->_cart->getQuote()->getId() ){
+            $sql2= "SELECT quote_item.item_id, quote_item.qty, quote_item.sku 
+                    FROM `quote` 
+                    INNER JOIN quote_item ON quote_item.quote_id = quote.entity_id
+                    WHERE `entity_id` = " .$this->_cart->getQuote()->getId(). " 
+                    AND quote_item.sku = 'DOTA'";
+            $check_cart = $connection->fetchOne($sql2);
+        }
+
+
+//        var_dump($check_cart);
+//        die();
+        ?>
+        <?php if($check_cart){ ?>
+            <a class="col-lg-2 text-center "
+               href="<?php echo $block->getUrl('checkout/cart/configure/id/'.$check_cart.'/product_id/16469', ['_secure' => true]); ?>">
+                <div class="bg bg-bleu">
+                    <span class="fa fa-gift ico-bdc" aria-hidden="true"></span>
+                    <div class="text-left">Dotation</div>
+                </div>
+            </a>
+        <?php }elseif(!$check_dotation){?>
+            <a class="col-lg-2 text-center "
+               href="<?php echo $block->getUrl('dotations', ['_secure' => true]); ?>">
+                <div class="bg bg-bleu">
+                    <span class="fa fa-gift ico-bdc" aria-hidden="true"></span>
+                    <div class="text-left">Dotation</div>
+                </div>
+            </a>
+
+        <?php }else{ ?>
+            <a class="col-lg-2 text-center"
+           href="<?php echo $block->getUrl('common/dotation/index/dotation/'.$check_dotation, ['_secure' => true]); ?>">
+                <div class="bg bg-bleu">
+                    <span class="fa fa-gift ico-bdc" aria-hidden="true"></span>
+                    <div class="text-left">Dotation <b>déjà enregistrée</b></div>
+                </div>
+            </a>
+        <?php } ?>
+        <a class="col-lg-4 text-center hide" href="">
+            <div class="bg bg-vert">
+                <span class="fa fa-line-chart ico-bdc" aria-hidden="true"></span>
+                <div class="text-left">Activité</div>
+            </div>
+        </a>
+    </div>
+
+<?php
+} else{ ?>
+<style>
+    .page-main {
+        background-color: white;
+    }
+</style>
+<?php
+    echo '<a href="sponsor" class="btn btn-lg btn-primary ">Parrainage</a>';
+}
+?>
+
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'datatable',
+            'bootstrap',
+        ],
+
+        function($) {
+            $(document).ready(function() {
+
+                var otable = $('#dataTable').dataTable({
+                    searching: false,
+                    ordering:  false,
+                    stateSave: true,
+                    "language": {
+                        "sProcessing": "Traitement en cours...",
+                        "sSearch": "Rechercher&nbsp;:",
+                        "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                        "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                        "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        "sInfoPostFix": "",
+                        "sLoadingRecords": "Chargement en cours...",
+                        "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+                        "oPaginate": {
+                            "sFirst": "Premier",
+                            "sPrevious": "Pr&eacute;c&eacute;dent",
+                            "sNext": "Suivant",
+                            "sLast": "Dernier"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                        }
+                    },
+                    ajax:"<?php echo $this->getUrl('calendar/getQualif/ajax'); ?>",
+                    "columns": [
+                        { "data": "name" },
+                        { "data": "end_date" },
+
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets":2,
+                            "data": null,
+                            "defaultContent":  '<button value="1" type="button" class="action-secondary setQualif">Vente</button> <button value="2" type="button" class="action-secondary setQualif">Annulation</button> <button value="3" type="button" class="action-secondary setQualif">Soins pub</button> <button value="4" type="button" class="action-secondary setQualif">Report</button> <button value="5" type="button" class="action-secondary setQualif">Absente</button>',
+                            "render" : function (data,row) {
+                                return '<button attr_event_id ="'+data.event_id+'" value ="2" type="button" class="action-secondary setQualif">Vente</button> <button attr_event_id ="'+data.event_id+'" value ="3" type="button" class="action-secondary setQualif">Annulation</button> <button attr_event_id ="'+data.event_id+'" value ="4" type="button" class="action-secondary setQualif">Soins pub</button> <button  attr_event_id ="'+data.event_id+'" value ="5" type="button" class="action-secondary setQualif">Report</button> <button  attr_event_id ="'+data.event_id+'" value ="6" type="button" class="action-secondary setQualif">Absente</button>';
+                            }
+                        },
+                    ],
+                });
+
+                $('#rdvBtn').on('click', function () {
+                    otable.DataTable().ajax.reload(); // Refresh les data du tableau
+                });
+
+                // Quand le tableau datatable est construit
+                $(otable).ready(function () {
+                    $(this).on('click', '.setQualif',  function () {
+                        var event_id = $(this).attr('attr_event_id'); // id de l'event
+                        var qualif_id = $(this).val(); // id de la qualification
+                        $.ajax({
+                            url:"<?php echo $this->getUrl('calendar/UpdateCmQualif/ajax'); ?>",
+                            data: {'event_id':event_id, 'qualif_id':qualif_id},
+                            success: function () {
+                                otable.DataTable().ajax.reload(); // Refresh les data du tableau
+                                if (otable.fnGetData().length == 1 ) {
+                                    $('#rdvBtn').hide();
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+        }
+    );
+</script>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="styles"/>
+	<head>
+		<css src="Ntic_Conges::css/datatable.css" />
+		<css src="Ntic_Conges::css/style.css" />
+		<css src="Ntic_Conges::css/bootstrap.css" />
+	</head>
+	<body>
+		<referenceContainer name="content">
+			<!--<uiComponent name="ntic_conges_conges_index"/>-->
+			<block class="Ntic\Conges\Block\Adminhtml\Index\Index" name="index.index" template="Ntic_Conges::index/index.phtml"/>
+		</referenceContainer>
+	</body>
+</page>

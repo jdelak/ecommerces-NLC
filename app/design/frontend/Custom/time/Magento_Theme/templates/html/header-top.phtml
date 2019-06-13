@@ -1,0 +1,81 @@
+
+<!-- HEADER => LOGO / LINK MORE -->
+<div class="header-wrapper hidden-xs">
+
+    <div class="header-logo">
+        <a href="http://time-nutrition.com">
+            <img src="<?php echo $this->getViewFileUrl('images/logo-time.png'); ?>" alt="logo time nutrition" />
+        </a>
+    </div>
+
+    <div class="link-more">
+       <div class="info-top">
+<!--            <i class="fa fa-phone-square" aria-hidden="true"></i>-->
+<!--            <p>-->
+<!--                <span class="green">-->
+<!--                    de 9h à 17h-->
+<!--                </span>-->
+<!--                <br>-->
+<!--                <a href="tel:0499136494">04 99 13 64 94</a>-->
+<!--            </p>-->
+        </div>
+        <div class="info-top">
+            <a href="http://fliphtml5.com/qhxy/qrnc" target="blank">
+            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+            <p>
+                <span class="green">
+                    TIME NEWS
+                </span>
+            </p>
+            </a>
+        </div>
+        <div class="info-top">
+            <a href="http://blog.time-nutrition.com/" target="_blank">
+                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                <p>
+                    <span class="green">
+                        LE BLOG
+                    </span>
+                </p>
+            </a>
+        </div>
+        
+
+    </div>
+</div>
+
+<div class="header-wrapper visible-xs">
+    <span data-action="toggle-nav" class="action nav-toggle"><span><?php /* @escapeNotVerified */ echo __('Toggle Nav') ?></span></span>
+
+    <div class="header-logo text-center">
+        <a href="http://futur.time-nutrition.com">
+            <img src="<?php echo $this->getViewFileUrl('images/logo-time.png'); ?>" alt="logo time nutrition" />
+        </a>
+    </div>
+    <!--
+    <div class="header-mobile-account">
+        <a href="<?php echo $block->getUrl('customer/account/', ['_secure' => true]);?>">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+        </a>
+    </div>
+    -->
+
+
+
+</div>
+<script>
+    require(['jquery'], function ($) {
+        $('.block-search').prependTo('.block-link');
+        /*
+         if($(window).width()<768){
+         $('#search').css('display','none');
+         $('.block-search.label').click(function(){
+         $('#search').toggle();
+         })
+
+         }*/
+
+
+    });
+</script>
+

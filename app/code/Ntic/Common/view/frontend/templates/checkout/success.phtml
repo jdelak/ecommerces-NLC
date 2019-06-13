@@ -1,0 +1,139 @@
+<?php /** @var $block \Ntic\Common\Block\Success */ ?>
+<div class="checkout-success">
+    <?php if ($block->getOrderId()):?>
+        <?php if ($block->getCanViewOrder()) :?>
+            <p><?php echo __('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeHtml($block->getViewOrderUrl()), $block->escapeHtml($block->getOrderId()))) ?></p>
+        <?php else: ?>
+            <p><?php echo __('Your order # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
+        <?php endif; ?>
+
+        <!-- BEGIN VENDOR_MODULE CUSTOM -->
+        <p>
+            <?php
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $order = $objectManager->get('Magento\Sales\Model\Order')
+                ->loadByIncrementId($block->getOrderId());
+            /*$session = $objectManager->get('\Magento\Customer\Model\Session')->getCustomer();*/
+            $renderer = $objectManager->get('Magento\Sales\Model\Order\Address\Renderer');
+            $billingInfo = $renderer->format($order->getBillingAddress(), 'html');
+            $shippingInfo = $renderer->format($order->getShippingAddress(), 'html');
+            if ($billingInfo != $shippingInfo) {
+                echo '<span>' . __('Billing Information') . ':</span><br> ';
+                echo $billingInfo;
+                echo '</p><p>';
+                echo '<span>' . __('Shipping Information') . ':</span><br> ';
+                echo $shippingInfo;
+            } else {
+                echo '<span>' . __('Billing & Shipping Information') . ':</span><br> ';
+                echo $billingInfo;
+            }
+            ?>
+        </p>
+
+        <?php $items = $order->getAllItems(); ?>
+
+        <table class="data table table-order-items" id="my-orders-table" summary="<?php /* @escapeNotVerified */ echo __('Items Ordered') ?>">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Items Ordered') ?></caption>
+            <thead>
+            <tr>
+                <th class="col name"><?php /* @escapeNotVerified */ echo __('Product Name') ?></th>
+                <th class="col sku"><?php /* @escapeNotVerified */ echo __('SKU') ?></th>
+                <th class="col price"><?php /* @escapeNotVerified */ echo __('Price') ?></th>
+                <th class="col qty"><?php /* @escapeNotVerified */ echo __('Qty') ?></th>
+                <th class="col subtotal"><?php /* @escapeNotVerified */ echo __('Subtotal') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($items as $item){ ?>
+                <tr>
+                    <td class="col name" data-th="Product Name">
+                        <?php echo $item->getName(); ?>
+                    </td>
+                    <td class="col sku" data-th="SKU">
+                        <?php echo $item->getSku(); ?>
+                    </td>
+                    <td class="col price" data-th="Price">
+                        <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($item->getPrice(),true,false); ?>
+                    </td>
+                    <td class="col qty" data-th="Qty">
+                        <?php echo $item->getQtyOrdered()*1; ?>
+                    </td>
+                    <td class="col subtotal" data-th="Subtotal">
+                        <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($item->getRowTotal(),true,false); ?>
+                    </td>
+                </tr>
+                <tr class="discount">
+                    <th colspan="4" class="mark" scope="row">
+                        Discount
+                    </th>
+                    <td class="amount" data-th="Discount">
+                        <?php
+                        if($order->getDiscountAmount() > 0 ){
+                            echo '- '. $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($order->getDiscountAmount(),true,false);
+                        }
+                        ?>
+                    </td>
+                </tr>
+
+
+                <?php
+                /*
+                 $lbox = array();
+                if($item->getSku() == ){
+                    $session->setGroupId("6")->save();
+
+                }
+                */
+            }?>
+            <tr class="subtotal">
+                <th colspan="4" class="mark" scope="row">
+                    <?php echo __('Subtotal'); ?>
+                </th>
+                <td class="amount" data-th="Subtotal">
+                    <?php echo $order->formatPrice($order->getSubTotal()); ?>
+                </td>
+            </tr>
+            <tr class="shipping">
+                <th colspan="4" class="mark" scope="row">
+                    <?php echo __('Shipping & Handling'); ?>
+                </th>
+                <td class="amount" data-th="Shipping & Handling">
+                    <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($order->getShippingAmount(),true,false); ?>
+                </td>
+            </tr>
+            <tr class="grand_total">
+                <th colspan="4" class="mark" scope="row">
+                    <strong><?php echo __('Grand Total'); ?></strong>
+                </th>
+                <td class="amount" data-th="Grand Total">
+                    <?php echo $order->formatPrice($order->getGrandTotal()); ?>
+                </td>
+            </tr>
+
+            </tbody>
+
+
+        </table>
+
+        <!-- END VENDOR_MODULE CUSTOM -->
+
+        <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details and tracking info.') ?></p>
+    <?php endif; ?>
+
+    <?php echo $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?php /* @escapeNotVerified */ echo $block->getUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Continue Shopping') ?></span></a>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        'Magento_Customer/js/customer-data'
+    ], function (customerData) {
+        var sections = ['cart'];
+        customerData.invalidate(sections);
+        customerData.reload(sections, true);
+    });
+</script>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_product = $block->getProduct() ?>
+<!-- Load Facebook SDK for JavaScript -->
+
+
+<div class="wdm-social-icons" data-role="wdm-social-icons">
+
+    <h4><?php echo __('RECOMMANDER CE PRODUIT')?></h4>
+
+    <!-- FACEBOOK -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($_product->getProductUrl());?>&t=<?php echo urlencode($_product->getName())?>" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Partager sur Facebook">
+        <img src="<?php echo $this->getViewFileUrl('images/logo-facebook.png'); ?>" alt="FaceBook time nutrition" width="32px">
+    </a>
+
+    <!-- TWITTER -->
+    <a href="http://twitter.com/home/?status=<?php echo urlencode($_product->getProductUrl());?>(<?php echo urlencode($_product->getName())?>)" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Partager sur Twitter">
+        <img src="<?php echo $this->getViewFileUrl('images/logo-twitter.png'); ?>" alt="Twitter time nutrition" width="32px">
+    </a>
+
+    <a href="https://plus.google.com/share?url=<?php echo urlencode($_product->getProductUrl());?>(<?php echo urlencode($_product->getName())?>)" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Partager sur Google+">
+        <img src="<?php echo $this->getViewFileUrl('images/logo-google.png'); ?>" alt="google+ time nutrition" width="32px">
+    </a>
+
+
+    <?php if ($block->canEmailToFriend()): ?>
+        <a href="<?php /* @escapeNotVerified */ echo $this->helper('Magento\Catalog\Helper\Product')->getEmailToFriendUrl($_product) ?>"
+           class="mailto friend">
+            <img src="<?php echo $this->getViewFileUrl('images/icon-mail.png'); ?>" alt="partager par mail time nutrition">
+        </a>
+    <?php endif; ?>
+
+</div>

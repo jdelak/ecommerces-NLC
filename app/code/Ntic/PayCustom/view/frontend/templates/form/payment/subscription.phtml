@@ -1,0 +1,429 @@
+<?php
+    // Get number day on the current month
+    $current_date  = date('d/m/Y');
+    $current_day   = date('d');
+    $current_month = date('m');
+    $current_year = date('Y');
+    $next_month     = date('m', strtotime("+1 month"));
+    $max_parcel     = 1;
+
+    // Crée une fausse date courrante
+    $fake_current_date = '01-'.$current_month.'-'.$current_year;
+
+    // Calcule max échéance
+    $number_package = 0;
+    $category_product = "";
+    if($block->getTypeOrder() == 'subscription') {
+        $max_parcel = 12 / (int) $block->getNumberPackage();
+        $number_package = $block->getNumberPackage();
+
+        // Categorie de produit
+        $category_product = $block->getCategoryProduct();
+    }
+    
+    // Total de la commande
+    /*if($category_product != 'carte club') {
+        $amount = $block->getGrandTotal() / $max_parcel;
+    } else {*/
+        $amount = $block->getGrandTotal();
+   // }
+?>
+
+<!-- SUBSCRIPTION -->
+<div class="row" id="payment-subscription">
+    <!-- Choose method payment -->
+    <div class="col-md-12">
+        <legend><?php echo __('Choose method payment'); ?></legend>
+    </div>
+    <div class="choose-method-payment">
+        <div class="text-center button-choose-payment">
+            <button class="btn btn-lg btn-primary subscription-button-payment" id="subscription-payment-mode-cb">CB</button>
+            <button class="btn btn-lg btn-primary subscription-button-payment" id="subscription-payment-mode-iban">IBAN</button>
+        </div>
+        <div class="no-validate-payment">
+            Aucun moyen de paiement choisie, Cliquez sur le boutton pour choisir un moyen de paiement
+        </div>
+        <div class="subscription-validate"></div>
+    </div>
+
+    <!-- LISTING DATE OF PAYMENT -->
+    <form class="" method="post" id="form-subscription" role="form" action="<?php echo $this->getUrl('*/*/submit'); ?>">
+        <!-- MODAL -->
+        <div class="row">
+            <?php
+            foreach($block->getListPaymentMethod() as $mode_payment) {
+                if($mode_payment != 'CHECK') {
+                    include ($block->getTemplateFile('Ntic_PayCustom::modal/'.strtolower($mode_payment).'.phtml'));
+                }
+            }
+            ?>
+        </div>
+        <div class="listing-date-payment-subscription">
+            <div class="col-md-12">
+                <legend><?php echo __('Listing date of payment'); ?></legend>
+            </div>
+            <!-- HANDLER PARCEL -->
+            <form class="" method="post" id="form-subscription" role="form" action="<?php echo $this->getUrl('*/*/submit'); ?>" >
+                <div class="div-subscription">
+                    <?php
+                        for ($i = 0; $i < $number_package; $i ++) {
+                            ?>
+                            <!-- PARENT -->
+                            <div class="block-parent-parcel col-md-12" id="parent-parcel-<?php echo $i ?>">
+                                <div class="header-parent">
+                                    <div class="title">
+                                        <?php
+                                            if ($i == 0) {
+                                                echo ($i + 1) .' er';
+                                            } else {
+                                                echo ($i + 1).' ème';
+                                            }
+                                        ?>
+                                        Colis
+                                    </div>
+                                    <?php
+                                        if($i == 0) {
+                                            ?>
+                                            <div class="message-delivery"></div>
+                                            <?php
+                                        }
+                                    ?>
+                                </div>
+                                <!-- CHILDREN -->
+                                <div class="block-children-parcel">
+                                    <div class="header-table border-left border-right">
+                                        <ul>
+                                            <li>Date</li>
+                                            <li>Mode de paiement</li>
+                                            <?php
+                                                if($category_product == 'lbox') {
+                                                    ?>
+                                                    <li>Pourcentage</li>
+                                                    <?php
+                                                }
+                                            ?>
+                                            <li>Montant</li>
+                                        </ul>
+                                    </div>
+                                    <div class="block-parcel">
+                                        <?php
+                                            for ($j = 0; $j < $max_parcel; $j ++) {
+                                                ?>
+                                                <div class="block-payment active-class" id="form-subscription-payment-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                    <div class="input-hidden-active-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                        <input type="hidden" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][is_active]" value="true">
+                                                    </div>
+                                                    <div class="block-table-data">
+                                                        <div class="div-button-add-remove">
+                                                            <?php
+                                                                if($j != 0 && $category_product == 'lbox') {
+                                                                    ?>
+                                                                    <div class="block-remove-payment" id="button-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                                        <button class="btn btn-lg btn-primary button-remove-payment">-</button>
+                                                                    </div>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                            <div class="block-add-subscription-payment" id="button-add-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                                <button class="btn btn-lg btn-primary button-add-subscription-payment">+</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="date-subscription text-center" id="date-subscription-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                            <?php
+                                                                if($j == 0 && $i == 0) {
+                                                                    $first_select_class = 'first-select-class';
+                                                                    $first_button_payment_class = 'first-button-payment-class';
+
+                                                                    $first_month_year = 'first-month-year';
+                                                                } else {
+                                                                    $first_select_class = '';
+                                                                    $first_button_payment_class = '';
+
+                                                                    $first_month_year = '';
+                                                                }
+                                                            ?>
+                                                            <select class="select-date <?php echo $first_select_class; ?>" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][date_parcel]">
+                                                                <?php
+                                                                    // Gestion des dates
+
+                                                                    // PARENT
+                                                                    $date_parent         = date("m-Y", strtotime($fake_current_date . " +" . (3 * $i) . " months"));
+                                                                    // Explode sur la date parent
+                                                                    $explode_date_parent = explode('-', $date_parent);
+                                                                    $month_parent        = date('m', strtotime($explode_date_parent[0]));
+                                                                    $fake_parent_date    = '01-'.$month_parent.'-'.$explode_date_parent[1];
+                                                                    $fake_parent_date_us = $explode_date_parent[1].'-'.$month_parent.'-01';
+
+                                                                    // Trouve les jours par mois
+                                                                    $last_day_parent     = date('t',strtotime($fake_current_date . " +" . (3 * $i) . " months"));
+
+                                                                    // CHILDREN
+                                                                    $date_children         = date('m-Y', strtotime($fake_current_date. ' + '.(3 * $i + $j).' month'));
+                                                                    // Explode sur la date enfant
+                                                                    $explode_date_children = explode('-', $date_children);
+                                                                    $month_children        = date('m', strtotime($explode_date_children[1]));
+
+                                                                    // Trouve les jours par mois
+                                                                    $last_day_children     = date('t', strtotime($fake_current_date. ' + '.(3 * $i + $j).' month'));
+
+                                                                    if($j != 0) {
+                                                                        for($k = 1; $k <= (int) $last_day_children; $k++) {
+                                                                            // Ajoute une class pour les last_day_children
+                                                                            if($k == $last_day_children) {
+                                                                                $last_day_class = "last-day";
+                                                                            } else {
+                                                                                $last_day_class = "";
+                                                                            }
+
+                                                                            // Vérif par rapport au jour courrant
+                                                                            if($k >= $current_day) {
+                                                                                $disabled = "";
+                                                                            } else {
+                                                                                $disabled = "disabled";
+                                                                            }
+
+                                                                            ?>
+                                                                            <option class="<?php echo $last_day_class; ?>" value="<?php echo sprintf("%02d",$k); ?>" <?php echo $disabled; ?>><?php echo sprintf("%02d",$k); ?></option>
+                                                                            <?php
+                                                                        }
+                                                                    } else {
+                                                                        for($k = 1; $k <= (int) $last_day_parent; $k++) {
+                                                                            // Ajoute une class pour les last_day_children
+                                                                            if($k == $last_day_children) {
+                                                                                $last_day_class = "last-day";
+                                                                            } else {
+                                                                                $last_day_class = "";
+                                                                            }
+
+                                                                            // Vérif par rapport au jour courrant
+                                                                            if($k >= $current_day) {
+                                                                                $disabled = "";
+                                                                            } else {
+                                                                                $disabled = "disabled";
+                                                                            }
+                                                                            ?>
+                                                                            <option class="<?php echo $last_day_class; ?>" value="<?php echo sprintf("%02d",$k); ?>" <?php echo $disabled; ?>><?php echo sprintf("%02d",$k); ?></option>
+                                                                            <?php
+                                                                        }
+                                                                    }
+                                                                ?>
+                                                            </select>
+                                                            <?php
+                                                                if($j != 0) {
+                                                                    ?>
+                                                                    <span><?php echo '/'.str_replace('-', '/', $date_children); ?></span>
+                                                                    <input type="hidden" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][month_year_parcel]" value="<?php echo $date_children;?>">
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                    <span class="<?php echo $first_month_year; ?>"><?php echo '/'.str_replace('-', '/', $date_parent); ?></span>
+                                                                    <input type="hidden" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][month_year_parcel]" value="<?php echo $date_parent;?>">
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                        </div>
+                                                        <?php
+                                                            if($j == 0) {
+                                                                $parent_class = "parent-class";
+                                                            } else {
+                                                                $parent_class = "";
+                                                            }
+                                                        ?>
+                                                        <div class="text-center button-choose-payment block-choose-payment-<?php echo $i; ?>-<?php echo $j; ?> <?php echo $parent_class; ?>" id="button-choose-payment-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                            <?php
+                                                                foreach($block->getListPaymentMethod() as $mode_payment) {
+                                                                    ?>
+                                                                    <label class="btn btn-lg btn-primary <?php echo $first_button_payment_class; ?>" id="<?php echo strtolower($mode_payment).'-'.$i.'-'.$j; ?>"><?php echo $mode_payment; ?></label>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                            <div class="input-hidden">
+                                                                <input type="hidden" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][mode_payment]" value="" >
+                                                            </div>
+                                                            <?php
+                                                                if($j == 0) {
+                                                                    ?>
+                                                                    <div class="input-hidden-shipping-date">
+                                                                        <input type="hidden" name="form_subscription[<?php echo $i; ?>][shipping_date]" value="" >
+                                                                    </div>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                        </div>
+                                                        <?php
+                                                            if($category_product == 'lbox') {
+                                                                ?>
+                                                                <div class="text-center choose-subscription-percentage">
+                                                                    <div class="lock-input">
+                                                                        <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <input type="number"
+                                                                           id="input-percentage-<?php echo $i; ?>-<?php echo $j; ?>"
+                                                                           name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][percentage]"
+                                                                           value="<?php echo number_format((100 / $max_parcel), 2, '.', ','); ?>">
+                                                                    <span>%</span>
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                        <div class="text-center block-subscription-price" id="div-price-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                            <?php echo number_format($amount, 2,  ',', ' '); ?> <span>€</span>
+                                                        </div>
+                                                        <div class="hidden-amount" id="hidden-amount-<?php echo $j; ?>">
+                                                            <input type="hidden" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][amount]" value="">
+                                                        </div>
+                                                    </div>
+                                                    <!-- FORM CHECK -->
+                                                    <div class="form-check" id="form-check-<?php echo $i; ?>-<?php echo $j; ?>">
+                                                        <h5>
+                                                            <?php
+                                                                if ($i == 0) {
+                                                                    echo 'Formulaire chèque - '.($i + 1).' er colis / échéance '.($j + 1);
+                                                                } else {
+                                                                    echo 'Formulaire chèque - '.($i + 1).' ème colis / échéance '.($j + 1);
+                                                                }
+                                                            ?>
+                                                        </h5>
+                                                        <div class="form-group check-number-field-<?php echo $i?>-<?php echo $j; ?>">
+                                                            <label class="col-sm-3 control-label" for="number-check">Number of check</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control number-check" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][check][number_check]" placeholder="Number of check">
+                                                                <span class="ifError"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group check-owner-field-<?php echo $i?>-<?php echo $j; ?>">
+                                                            <label class="col-sm-3 control-label" for="owner-check">Owner of check</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control owner-check" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][check][owner_check]" placeholder="Owner of check">
+                                                                <span class="ifError"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group check-name-bank-field-<?php echo $i?>-<?php echo $j; ?>">
+                                                            <label class="col-sm-3 control-label" for="name-bank">Name of your bank</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control name-bank" name="form_subscription[<?php echo $i; ?>][<?php echo $j; ?>][check][name_bank]" placeholder="Name of your bank">
+                                                                <span class="ifError"></span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Div erreur message -->
+                                                        <div class="error-message-<?php echo $i; ?>-<?php echo $j; ?>"></div>
+                                                        <button class="btn btn-lg btn-success btn-close-form-check" id="button-save-form-check-<?php echo $i; ?>-<?php echo $j; ?>"><?php echo __('Save'); ?></button>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                </div>
+                <!-- INPUT HIDDEN -->
+                <input type="hidden" name="type_order" value="<?php echo $block->getTypeOrder(); ?>" />
+                <input type="hidden" value="<?php echo isset($max_parcel) ? $max_parcel : ''; ?>" id="max-parcel">
+                <input type="hidden" value="<?php echo $category_product; ?>" id="category-product">
+                <!-- INPUT DETAILS -->
+                <?php
+                    $prepare_items = $block->getCurrentQuote();
+
+                    foreach($prepare_items as $key => $item) {
+                        ?>
+                        <input type="hidden" name="form_details[<?php echo $key; ?>][order_sku]"
+                               value="<?php echo $item['item_sku']; ?>"
+                        >
+                        <input type="hidden" name="form_details[<?php echo $key; ?>][order_price]"
+                               value="<?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($item['item_px'], true, false); ?>"
+                        >
+                        <input type="hidden" name="form_details[<?php echo $key; ?>][order_quantity]"
+                               value="<?php echo $item['item_qty'] * 1; ?>"
+                        >
+                        <input type="hidden" name="form_details[<?php echo $key; ?>][order_total]"
+                               value="<?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($item['item_row'], true, false); ?>"
+                        >
+                        <?php
+                    }
+                ?>
+            </form>
+            <div class="payment-btn">
+                <button type="button" class="btn-block btn-primary btn-lg" id="submit-form-subscription"><?php echo __('Pay'); ?></button>
+            </div>
+        </div>
+    </form>
+    <script>
+        require(['jquery'], function ($) {
+            var button              = $("#submit-form-multi");
+
+            $(".number-check").keyup(function(){
+                var parent = $(this).parent().parent();
+                var id = parent.attr('class').split(' ')[1];
+                var checkNumberField = $('.'+id);
+                var i = checkNumberField.attr('class').split(' ')[1].split('-')[3];
+                var j = checkNumberField.attr('class').split(' ')[1].split('-')[4];
+                var reg = new RegExp("[0-9]{2}","g");
+                if(!reg.test($("input[name='form_subscription["+i+"]["+j+"][check][number_check]']").val())){
+                    checkNumberField.removeClass('has-success');
+                    checkNumberField.addClass('has-error');
+                } else {
+                    checkNumberField.removeClass('has-error');
+                    checkNumberField.addClass('has-success');
+                }
+
+                // hasError();
+
+            });
+
+            $(".owner-check").keyup(function(){
+                var parent = $(this).parent().parent();
+                var id = parent.attr('class').split(' ')[1];
+                var ownerCheckField = $('.'+id);
+                var i = ownerCheckField.attr('class').split(' ')[1].split('-')[3];
+                var j = ownerCheckField.attr('class').split(' ')[1].split('-')[4];
+                var reg = new RegExp("[A-Za-z0-9]{2}","g");
+
+                if(!reg.test($("input[name='form_subscription["+i+"]["+j+"][check][owner_check]']").val())){
+                    ownerCheckField.removeClass('has-success');
+                    ownerCheckField.addClass('has-error');
+                } else {
+                    ownerCheckField.removeClass('has-error');
+                    ownerCheckField.addClass('has-success');
+                }
+
+                //hasError();
+
+            });
+
+            $(".name-bank").keyup(function(){
+                var parent = $(this).parent().parent();
+                var id = parent.attr('class').split(' ')[1];
+                var nameBankField = $('.'+id);
+                var i = nameBankField.attr('class').split(' ')[1].split('-')[4];
+                var j = nameBankField.attr('class').split(' ')[1].split('-')[5];
+                var reg = new RegExp("[A-Za-z0-9]{2}","g");
+
+                if(!reg.test($("input[name='form_subscription["+i+"]["+j+"][check][name_bank]']").val())){
+                    nameBankField.removeClass('has-success');
+                    nameBankField.addClass('has-error');
+                } else {
+                    nameBankField.removeClass('has-error');
+                    nameBankField.addClass('has-success');
+                }
+
+                //hasError();
+
+            });
+
+            // permet de désactiver le bouton de validation
+            /*function hasError(){
+             if($('.has-error').length || numberCheck.val()=='' || ownerCheck.val()==''|| nameBank.val()=='' ){
+             button.addClass('disabled');
+             } else {
+             button.removeClass('disabled');
+             }
+             }*/
+
+
+
+        });
+    </script>

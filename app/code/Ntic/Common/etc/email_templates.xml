@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="contact_lexel" label="Contact Lexel" file="contact.phtml" type="html" module="Ntic_Common" area="frontend"/>
+    <template id="contact_time" label="Contact Time" file="contact-time.phtml" type="html" module="Ntic_Common" area="frontend"/>
+</config>

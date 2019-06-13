@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<page layout="1column"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <head>
+        <css src="Ntic_PayCustom::css/pay.css" />
+        <link src="Ntic_PayCustom::js/cash.js" />
+        <link src="Ntic_PayCustom::js/multi.js" />
+        <link src="Ntic_PayCustom::js/subscription.js" />
+        <link src="Ntic_PayCustom::js/customize.js" />
+    </head>
+    <body>
+        <referenceBlock name="content">
+            <block class="Ntic\PayCustom\Block\Frontend\CustomPayment" cacheable="false" name="detail"     template="detail.phtml"></block>
+            <block class="Ntic\PayCustom\Block\Frontend\CustomPayment" cacheable="false" name="customizer" template="form/customize.phtml"></block>
+            <block class="Ntic\PayCustom\Block\Frontend\CustomPayment" cacheable="false" name="cash"  template="form/payment/cash.phtml"></block>
+            <block class="Ntic\PayCustom\Block\Frontend\CustomPayment" cacheable="false" name="multi" template="form/payment/multi.phtml"></block>
+            <block class="Ntic\PayCustom\Block\Frontend\CustomPayment" cacheable="false" name="subscription" template="form/payment/subscription.phtml"></block>
+        </referenceBlock>
+        <referenceContainer name="store.menu" remove="true"/>
+    </body>
+</page>

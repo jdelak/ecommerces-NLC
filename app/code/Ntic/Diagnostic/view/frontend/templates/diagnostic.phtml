@@ -1,0 +1,362 @@
+<?php
+
+//session_start();
+/**
+ * Configuration landing
+ */
+// Data Mail sended
+$mailCore                   = array();
+$mailCore['from']           = "alexandra@lexel-paris.com" ;
+$mailCore['from_name']      = "LEXEL PARIS";
+$mailCore['replyto']        = "alexandra@lexel-paris.com";
+$mailCore['replyto_name']   = "LEXEL PARIS";
+$mailCore['preheader']      = "Félicitation nous avons reçu votre inscription" ;
+$mailCore['subject']        = "Votre inscription pour gagner un soin visage a bien été enregistrée" ;
+$mailCore['img_logo']       = "http://img.mailinblue.com/1003971/images/rnb/original/575963508bc34eb8258b74f9.jpg";
+/**
+ * img lexel            http://img.mailinblue.com/1003971/images/rnb/original/575963508bc34eb8258b74f9.jpg
+ * img time nutrition   http://img.mailinblue.com/1003971/images/rnb/original/576128bc8bc34e232d8be66d.jpg?t=1470232355995
+ */
+$mailCore['message_html_from'] = "<p>Vous avez reçu une inscription<br>
+                                  Une nouvelle inscription pour gagner un soin visage a été enregistrée.</p>" ;
+$mailCore['message_html'] = "<p>Toute l'équipe de votre boutique Lexel Paris de Cagnes sur mer, vous remercie pour l’intérêt que vous lui portez !<br>
+Un email vous sera envoyé si vous faites parti des grands gagnants</p>" ;
+$mailCore['dear']           = "Bonjour";
+$mailCore['politesse']      = "A très bientôt !";
+$mailCore['signature']      = "L’équipe Lexel Paris";
+
+
+// Data formulaire html
+$largeur_input  = 'lg'; // large = 'lg' | normal = '' | small = 'sm' | xtra-small = 'xs'
+
+// RAJOUTER LES LIGNES QUE VOUS VOULEZ AVEC LE MEME MODELE OU DESACTIVER LES EN METTANT 'visible'=>0
+// LA GENERATION DES CHAMPS SERA AUTOMATIQUE
+// [ATTENTTION] L EMAIL EST OBLIGATOIRE
+$formulaire = array(
+
+    'civility'		=> ['type'=>'radio','required'=>0,'placeholder'=>'Civ','label'=>'Civ','value'=>['M','Mme'],'visible'=>0],
+    'last_name'		=> ['type'=>'text','required'=>1,'placeholder'=>'','label'=>'Votre nom*','visible'=>1, 'value'=>''],
+    'first_name'	=> ['type'=>'text','required'=>1,'placeholder'=>'','label'=>'Votre prénom*','visible'=>1, 'value'=>''],
+    'email2'		=> ['type'=>'email','required'=>1,'placeholder'=>'','label'=>'Votre adresse email*','visible'=>1, 'value'=>''],
+    'tel'			=> ['type'=>'text','required'=>0,'placeholder'=>'Téléphone*','label'=>'Téléphone','visible'=>0, 'value'=>''],
+    'tel2'			=> ['type'=>'text','required'=>0,'placeholder'=>'Téléphone','label'=>'Téléphone port','visible'=>0, 'value'=>''],
+    'tel3'			=> ['type'=>'text','required'=>0,'placeholder'=>'Téléphone','label'=>'Téléphone pro','visible'=>0, 'value'=>''],
+    'zip_code'		=> ['type'=>'text','required'=>0,'placeholder'=>'Code Postal*','label'=>'CP','visible'=>0, 'value'=>''],
+    'district'		=> ['type'=>'text','required'=>0,'placeholder'=>'Ville','label'=>'Ville','visible'=>0, 'value'=>''],
+    'country'		=> ['type'=>'text','required'=>0,'placeholder'=>'Pays','label'=>'Pays','visible'=>0, 'value'=>''],
+    'address1'		=> ['type'=>'text','required'=>0,'placeholder'=>'Addresse','label'=>'Adresse','visible'=>0, 'value'=>''],
+    'address2'		=> ['type'=>'text','required'=>0,'placeholder'=>'Addresse2','label'=>'Adresse2','visible'=>0, 'value'=>''],
+    'address3'		=> ['type'=>'text','required'=>0,'placeholder'=>'Addresse3','label'=>'Adresse3','visible'=>0, 'value'=>''],
+    'message'		=> ['type'=>'textarea','required'=>0,'placeholder'=>'Message','label'=>'Message','visible'=>0],
+    'email3'		=> ['type'=>'email','required'=>0,'placeholder'=>'Email de votre ami(e)*','label'=>'Email de votre ami(e)','visible'=>0, 'value'=>''],
+    'news'		    => ['type'=>'checkbox','required'=>0,'placeholder'=>'newsletter','label'=>['S\'inscrire à la Newsletter'],'value'=>['on'],'visible'=>1],
+    'gender'        => ['type'=>'radio2','required'=>0,'placeholder'=>'Gender','label'=>'Vous êtes','value'=>['Un homme','Une femme'],'visible'=>0],
+    'age'           => ['type'=>'radio2','required'=>0,'placeholder'=>'Age','label'=>'Vous avez?','value'=>['- de 20 ans','entre 20 ans et 40 ans', '+ de 40 ans'],'visible'=>1],
+    'wrinkles'      => ['type'=>'radio2','required'=>0,'placeholder'=>'Wrinkles','label'=>'Si vous en avez, quelle est la nature de vos rides?','value'=>["je n'en ai pas","j'ai quelques rides et ridules", "j'ai des rides d'expression installées", "j'ai des rides profondes"],'visible'=>1],
+    'skinproblems'  => ['type'=>'radio2','required'=>0,'placeholder'=>'Skinproblems','label'=>'Outre les effets du temps, quel est le principal problème de votre peau?','value'=>["Le dessèchement", "Le relâchement", "Les impuretés", "Je ne sais pas"],'visible'=>1],
+    'frequences'    => ['type'=>'radio2','required'=>0,'placeholder'=>'frequences','label'=>'A quelle fréquence vous nettoyez/démaquillez-vous le visage?','value'=>["Le matin et le soir", "Uniquement le matin", "Uniquement le soir", "Ni le matin ni le soir"],'visible'=>1],
+    'treatment'     => ['type'=>'radio2','required'=>0,'placeholder'=>'treatment','label'=>'Avez-vous déjà fait des cures de compléments alimentaires?','value'=>['Oui','Non'],'visible'=>1],
+    'cleaning'      => ['type'=>'radio2','required'=>0,'placeholder'=>'cleaning','label'=>'Quelle est votre préférence pour le nettoyage de votre visage?','value'=>["Un soin nettoyant moussant avec de l'eau, pour une sensation «nette» parfaite", "La douceur d'un lait et la fraicheur d'une lotion", "Les eaux démaquillantes en un seul geste", "je ne sais pas"],'visible'=>1],
+);
+
+
+// load Model
+require '/var/www/landing/_config/sender/landingModel.php';
+// load Controller
+require '/var/www/landing/_config/sender/landingController.php';
+// INIT
+$landingModel       = new landingModel();
+$landingController  = new landingController($landingModel);
+// ECOUTEUR POST
+$landingController->post($mailCore);
+?>
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+
+
+</head>
+<body>
+
+        <div class="col-md-12 h3 text-center">
+            <?php
+            if(!empty($landingController->getValid())) echo'<div class="alert alert-success">'.$landingController->getValid().'</div>';
+            elseif(!empty($landingController->getErrors())) echo'<div class="alert alert-danger">'.$landingController->getErrors().'</div>';
+            ?>
+        </div>
+        <div  class="row">
+            <?php
+            echo $landingModel->form($formulaire,$largeur_input);
+            ?>
+            <div id="etape0" class="row">
+                <div class="col-md-6">
+                    <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/diagnostic-accueil.jpg'); ?>" />
+                </div>
+                <div class="col-md-6">
+                    <h2>Innovation</h2>
+                    <h3>Réalisez votre <br/> diagnostic de peau<br/> personnalisé</h3>
+                    <div class="line"></div>
+                    <p>Réalisé par LEXEL Paris en association avec des esthéticiennes diplômées</p>
+                    <button type="button" class="btn-valide to-etape1"> > C'EST PARTI</button>
+                </div>
+            </div>
+            <div id="etape1" class="hide div-etape">
+                <div class="row">
+                    <div class="hidden-xs hidden-sm col-md-6">
+                        <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/woman-etape1.png'); ?>" />
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/logo.png'); ?>" height="155" width="185" />
+                        </div>
+
+                        <h2>Commencez votre diagnostic personnalisé</h2>
+                        <div>
+                            <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/diagnostic-sommaire.jpg'); ?>" />
+                        </div>
+                    </div>
+                </div>
+                <div class="div-button">
+                    <button type="button" class="etape next to-etape2">Etape <span>01 ></span></button>
+                </div>
+
+            </div>
+            <div id="etape2" class="hide div-etape">
+                <div class="titre">
+                    <h2>Votre profil</h2>
+                    <img class="logo-etape" src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/logo-profil.png'); ?>" height="78" width="78"/>
+                </div>
+                <div class="row">
+                    <div class="hidden-xs hidden-sm col-md-6 image-woman">
+                        <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/woman-etape2.png'); ?>" />
+                    </div>
+
+                    <div class="col-md-6 choix" >
+                        <div class="">
+
+
+                                <h3>Vous avez ?</h3>
+                                <div class="line line-etape1"></div>
+                                <div id="age" class="radio">
+
+                                </div>
+
+                        </div>
+                        <div>
+                            <h3>Si vous en avez, quelle est la nature de vos rides ?</h3>
+                            <div class="line line-etape1"></div>
+                            <div id="wrinkles" class="radio">
+
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Outre les effets du temps, quel est le principal problème de votre peau?</h3>
+                            <div class="line line-etape1"></div>
+                            <div id="skinproblems" class="radio">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-button">
+                    <button type="button" class="etape next to-etape3">Etape <span>02 ></span></button>
+                </div>
+            </div>
+            <div id="etape3" class="hide div-etape">
+                <div class="titre">
+                    <h2>Vos habitudes</h2>
+                    <img class="logo-etape" src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/logo-habitude.png'); ?>" height="78" width="78"/>
+                </div>
+                <div class="row">
+                    <div class="hidden-xs hidden-sm col-md-6 image-woman">
+                        <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/woman-etape3.png'); ?>" />
+                    </div>
+                    <div class="col-md-6 choix" >
+
+                        <div>
+                            <h3>A quelle fréquence vous nettoyez/démaquillez-vous le visage ?</h3>
+                            <div class="line line-etape2"></div>
+                            <div id="frequences" class="radio">
+
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Avez-vous déjà fait des cures de compléments alimentaires ?</h3>
+                            <div class="line line-etape2"></div>
+                            <div id="treatment" class="radio">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-button">
+                    <button type="button" class="etape back to-etape2">Etape <span>< 01</span> </button>
+                    <button type="button" class="etape next to-etape4">Etape <span>03 ></span></button>
+                </div>
+
+            </div>
+            <div id="etape4" class="hide div-etape">
+                <div class="titre">
+                    <h2>Vos préférences</h2>
+                    <img class="logo-etape" src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/logo-preference.png'); ?>" height="78" width="78"/>
+                </div>
+                <div class="row">
+                    <div class="hidden-xs hidden-sm col-md-6 image-woman">
+                        <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/woman-etape4.png'); ?>" />
+                    </div>
+                    <div class="col-md-6 choix" >
+                        <div class="row">
+                            <div>
+                                <h3>Quelle est votre preference pour le nettoyage de votre visage ?</h3>
+                                <div class="line line-etape3"></div>
+                                <div id="cleaning" class="radio">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-button">
+                    <button type="button" class="etape back to-etape3">Etape <span>< 02</span></button>
+                    <button type="button" class="etape next to-etape5">Etape <span>04 ></span></button>
+                </div>
+
+            </div>
+            <div id="etape5" class="row hide div-etape">
+                <div class="titre">
+                    <h2>Nos recommandations</h2>
+                    <img class="logo-etape" src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/logo-recommandation.png'); ?>" height="78" width="78"/>
+                </div>
+                <div class="row">
+                    <div class="hidden-xs hidden-sm col-md-6 image-woman">
+                        <img src="<?php echo $this->getViewFileUrl('Ntic_Diagnostic::images/woman-etape5.png'); ?>" />
+                    </div>
+                    <div class="col-md-6 choix">
+                        <div class="row">
+                            <div>
+                                <h3>Afin d'établir voitre diagnostic personnalisé <br/>veuillez renseigner:</h3>
+                                <div class="line line-etape4"></div>
+                                <div id="infos">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="valide">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-button">
+                    <button type="button" class="etape back to-etape4">Etape <span>< 03</span></button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+</body>
+
+
+<script type="application/javascript" rel="script">
+    require(['jquery'], function ($) {
+
+
+        $( document ).ready(function($) {
+            //$(".btn").html('Je gagne un soin en boutique !');
+
+            $("#validation").html('> VALIDER MON DIAGNOSTIC');
+            $('#validation').appendTo($('#valide'));
+            $('#form').prepend($('#etape0'));
+            $('#form').prepend($('#etape1'));
+            $('#form').prepend($('#etape2'));
+            $('#form').prepend($('#etape3'));
+            $('#form').prepend($('#etape4'));
+            $('#form').prepend($('#etape5'));
+            $('#skinproblems').prepend(document.querySelector('[aria-label="skinproblems"]'));
+            $('#wrinkles').prepend(document.querySelector('[aria-label="wrinkles"]'));
+            $('#age').prepend(document.querySelector('[aria-label="age"]'));
+            $('#gender').prepend(document.querySelector('[aria-label="gender"]'));
+            $('#frequences').prepend(document.querySelector('[aria-label="frequences"]'));
+            $('#treatment').prepend(document.querySelector('[aria-label="treatment"]'));
+            $('#cleaning').prepend(document.querySelector('[aria-label="cleaning"]'));
+            $('#infos').prepend($('.checkbox'));
+            $('#infos').prepend($("[name='email2']"));
+            $('#infos').prepend($("[for='email2']"));
+            $('#infos').prepend($("[name='first_name']"));
+            $('#infos').prepend($("[for='first_name']"));
+            $('#infos').prepend($("[name='last_name']"));
+            $('#infos').prepend($("[for='last_name']"));
+            $("[for='last_name']").removeClass("sr-only");
+            $("[for='first_name']").removeClass("sr-only");
+            $("[for='email2']").removeClass("sr-only");
+
+            $('#validation').addClass('btn-valide');
+
+            $('.form-group').remove();
+        });
+
+
+        $('#token').val('<?php echo $_SESSION['token'];?>')
+        // BUTTON RADIO
+        jQuery(".btn-group > .btn").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+
+        jQuery('.to-etape1').click(function(event){
+            $("#etape1").removeClass('hide');
+            $("#etape0").addClass('hide');
+
+        });
+
+        var url = $(location).attr('href');
+        if((url == "http://futur.lexel-paris.com/diagnostic/#etape1/") || (url == "http://lexel-paris.com/diagnostic/#etape1/")){
+            $("#etape1").removeClass('hide');
+            $("#etape0").addClass('hide');
+        }
+
+        jQuery('.to-etape2').click(function(event){
+            $("#etape2").removeClass('hide');
+            $("#etape1").addClass('hide');
+            $("#etape3").addClass('hide');
+
+        });
+
+        jQuery('.to-etape3').click(function(event){
+            $("#etape3").removeClass('hide');
+            $("#etape1").addClass('hide');
+            $("#etape2").addClass('hide');
+            $("#etape4").addClass('hide');
+
+        });
+
+        jQuery('.to-etape4').click(function(event){
+            $("#etape4").removeClass('hide');
+            $("#etape1").addClass('hide');
+            $("#etape3").addClass('hide');
+            $("#etape5").addClass('hide');
+
+        });
+
+        jQuery('.to-etape5').click(function(event){
+            $("#etape5").removeClass('hide');
+            $("#etape1").addClass('hide');
+            $("#etape4").addClass('hide');
+
+        });
+
+        jQuery("#validation").click(function(event){
+            $(this).closest("form").attr("action", document.location.origin+'/diagnostic/index/result');
+        });
+
+    });
+
+
+
+</script>
+</html>

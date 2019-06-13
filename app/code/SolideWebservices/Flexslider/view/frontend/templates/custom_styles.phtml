@@ -1,0 +1,97 @@
+<?php
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.2.0
+ * @link     https://solidewebservices.com
+ */
+$groupCollection = $this->_getCollection();
+if($groupCollection->getSize() > 0):
+?>
+<style type="text/css">
+<?php foreach ($groupCollection as $group) : ?>
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .sw-flexslider-direction-nav .sw-flexslider-prev:before,
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .sw-flexslider-direction-nav .sw-flexslider-next:before
+    {
+        color: <?php echo $block->escapeHtml($group['nav_color']) ?>;
+    }
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .sw-flexslider-control-paging li a
+    {
+        background-color: <?php echo $block->escapeHtml($group['pagination_color']) ?>;
+    }
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .sw-flexslider-control-paging li a:hover
+    {
+        background-color: <?php echo $block->escapeHtml($group['pagination_hover_color']) ?>;
+    }
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .sw-flexslider-control-paging li a.sw-flexslider-active
+    {
+        background-color: <?php echo $block->escapeHtml($group['pagination_active_color']) ?>;
+    }
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .loader-gutter
+    {
+        background-color: <?php echo $block->escapeHtml($group['loader_bgcolor']) ?>;
+    }
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .loader
+    {
+        background-color: <?php echo $block->escapeHtml($group['loader_color']) ?>;
+    }
+    .flexslider-<?php echo $block->escapeHtml($group['identifier']) ?> .slides .slider-title
+    {
+        background-color: <?php echo $block->escapeHtml($group['caption_bgcolor']) ?>;
+        color: <?php echo $block->escapeHtml($group['caption_textcolor']) ?>;
+    }
+<?php if ($group['theme']=='custom') {
+    echo $block->escapeHtml($group['custom_theme']);
+} ?>
+<?php if ($group['group_type']=='overlay') { ?>
+    .overlay-nav
+    {
+        <?php if ($group['overlay_position']=='right') {
+            echo 'right: 0';
+        } else {
+            echo 'left: 0';
+        } ?>;
+        background-color: <?php echo $block->escapeHtml($group['overlay_bgcolor']) ?>;
+    }
+    .overlay-nav .overlay-element h3,
+    .overlay-nav .overlay-element .overlay-arrow:before
+    {
+        color: <?php echo $block->escapeHtml($group['overlay_textcolor']) ?>;
+    }
+    .overlay-nav .overlay-element:hover,
+    .overlay-nav .sw-flexslider-active
+    {
+        background-color: <?php echo $block->escapeHtml($group['overlay_hovercolor']) ?>;
+    }
+<?php } ?>
+<?php if ($group['nav_size']=='bigger') { ?>
+    .bigger-nav-size .sw-flexslider .sw-flexslider-direction-nav .sw-flexslider-prev:before,
+    .bigger-nav-size .sw-flexslider .sw-flexslider-direction-nav .sw-flexslider-next:before
+    {
+        font-size: 34px;
+    }
+    .bigger-nav-size .sw-flexslider:hover .sw-flexslider-direction-nav .sw-flexslider-prev:before,
+    .bigger-nav-size .sw-flexslider:hover .sw-flexslider-direction-nav .sw-flexslider-next:before
+    {
+        font-size: 40px;
+    }
+<?php } ?>
+<?php if ($group['nav_size']=='biggest') { ?>
+    .biggest-nav-size .sw-flexslider .sw-flexslider-direction-nav .sw-flexslider-prev:before,
+    .biggest-nav-size .sw-flexslider .sw-flexslider-direction-nav .sw-flexslider-next:before
+    {
+        font-size: 54px;
+    }
+    .biggest-nav-size .sw-flexslider:hover .sw-flexslider-direction-nav .sw-flexslider-prev:before,
+    .biggest-nav-size .sw-flexslider:hover .sw-flexslider-direction-nav .sw-flexslider-next:before
+    {
+        font-size: 60px;
+    }
+<?php } ?>
+<?php endforeach; ?>
+</style>
+<?php endif; ?>

@@ -1,0 +1,10 @@
+{{template config_path="design/email/header_template" }}
+
+<p>Confirmation autorisation de Congès</p>
+<p> {{var message}} {{var customer_name}}</p>
+<p>{{var periode}} par le mananger</p>
+<p>
+    <a class="btn btn-success" href="{{var url}}?action=1&id={{var lastcongesId}}&token={{var token}}&rh=true">Accepter</a>
+    <a class="btn btn-danger" href="{{var url}}?action=0&id={{var lastcongesId}}&token={{var token}}&rh=true">Refuser</a>
+</p>
+

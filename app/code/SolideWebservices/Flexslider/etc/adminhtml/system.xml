@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.2.6
+ * @link     https://solidewebservices.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="solidewebservices" translate="label" sortOrder="400">
+			<label>Solide Webservices</label>
+		</tab>
+		<section id="flexslider" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Flexslider</label>
+			<tab>solidewebservices</tab>
+			<resource>SolideWebservices_Flexslider::config_flexslider</resource>
+			<group id="general" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General</label>
+                <comment>Extension Version 2.2.6</comment>
+				<field id="enabled" translate="label comment" type="select" sortOrder="101"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Extension</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_easing" translate="label comment" type="select" sortOrder="106"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Easing Library</label>
+					<comment><![CDATA[Disable this if your theme already loads the easing library and you experience issues.]]></comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="thumbnail_upload_width" translate="label comment" type="text" sortOrder="107"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Thumbnail Upload Width</label>
+					<comment><![CDATA[Set the width of the thumbnails created during upload. Thumbnails are used in carousels (default is 200).]]></comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+                    <validate>required-entry validate-number</validate>
+				</field>
+			</group>
+			<group id="advanced_settings" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Advanced Settings</label>
+				<field id="enable_selected_positions" translate="label comment" type="select" sortOrder="201"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Positions As Selected</label>
+					<comment><![CDATA[This enables the default positions which are used together with the selection of pages, categories and/or products in the slider group settings. Only disable this if you will be adding all your sliders through template tags, XML layout updates or the predefined slider positions which can be enabled below. This will reduce database queries to only the pages where you havent added any sliders.]]></comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_global_positions" translate="label comment" type="select" sortOrder="202"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Global Positions</label>
+					<comment><![CDATA[Enable this if you want to add sliders that will be shown on all pages of the selected position. This will add extra database queries on all pages.]]></comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_customer_positions" translate="label comment" type="select" sortOrder="203"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Customer Positions</label>
+					<comment><![CDATA[Only enable this if you want to be able to add sliders to the login and customer account pages. This will add extra database queries on these pages.]]></comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_checkout_positions" translate="label comment" type="select" sortOrder="204"  showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Checkout Positions</label>
+					<comment><![CDATA[Only enable this if you want to be able to add sliders to the checkout pages. This will add extra database queries on these pages.]]></comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

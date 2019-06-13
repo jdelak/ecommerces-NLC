@@ -1,0 +1,165 @@
+<?php
+    // Appel du block Gesco
+    $block = $block->getLayout()->createBlock('Ntic\ArchiveGesco\Block\Gesco');
+?>
+<div class="row">
+    <div class="customer-card-wrapper panel panel-default col-md-10 col-md-offset-1">
+        <div class="panel-heading">
+            <div class="customer-card-panel-title">
+                <h3 class="panel-title">FICHE CLIENT / <?php echo $block->indexData()['customer']['client_id']; ?></h3>
+                <a class="customer-card-link btn btn-info" href="<?php echo $this->getUrl(); ?>archivegesco">Retour</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="panel panel-default col-md-12">
+                        <div class="block-customer panel-body">
+                            <!-- CLIENT -->
+                            <div class="customer-data">
+                                <div class="customer-name">
+                                    <?php echo $block->indexData()['customer']['gender']; ?>
+                                    <span><?php echo $block->indexData()['customer']['lastname']; ?></span>
+                                    <?php echo $block->indexData()['customer']['firstname']; ?>
+                                </div>
+                                <hr class="customer-hr">
+                                <div class="more-data">
+                                    <div class="birthday">
+                                        <span class="customer-card-span">Date de naissance : </span><?php echo $block->dateFormat($block->indexData()['customer']['birthday']); ?>
+                                    </div>
+                                    <div class="created">
+                                        <span class="customer-card-span">Membre depuis : </span><?php echo $block->dateFormat($block->indexData()['customer']['created_date']); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CLIENT (ADDRESS) -->
+                            <div class="contact-data">
+                                <h4>Adresse(s) du client</h4>
+                                <hr class="customer-hr">
+                                <div class="address">
+                                    <?php echo !empty($block->indexData()['customer']['addr1']) ? $block->indexData()['customer']['addr1'] : ''; ?>
+                                    <br>
+                                    <?php echo !empty($block->indexData()['customer']['addr2']) ? $block->indexData()['customer']['addr2'] : ''; ?>
+                                    <br>
+                                    <?php echo !empty($block->indexData()['customer']['addr3']) ? $block->indexData()['customer']['addr3'] : ''; ?>
+                                </div>
+                                <div class="city customer-bold">
+                                    <?php echo $block->indexData()['customer']['zip_code']; ?>
+                                    <?php echo $block->indexData()['customer']['city']; ?>
+                                </div>
+                                <div class="phone">
+                                    <?php echo !empty($block->indexData()['customer']['tel1']) ? '<span>Tel : </span><a href="tel:'.$block->indexData()['customer']['tel1'].'">'.$block->indexData()['customer']['tel1'].'</a>' : ''; ?>
+                                    <br>
+                                    <?php echo !empty($block->indexData()['customer']['tel2']) ? '<span>Tel : </span><a href="tel:'.$block->indexData()['customer']['tel2'].'">'.$block->indexData()['customer']['tel2'].'</a>' : ''; ?>
+                                    <br>
+                                    <?php echo !empty($block->indexData()['customer']['fax']) ? '<span>Fax : </span>'.$block->indexData()['customer']['fax'] : ''; ?>
+                                    <br>
+                                    <?php echo !empty($block->indexData()['customer']['email']) ? '<span>E-mail : </span><a href="mailto:'.$block->indexData()['customer']['email'].'">'.$block->indexData()['customer']['email'].'</a>' : ''; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMMANDE -->
+                <div class="block-order flex-between">
+                    <!-- ABONNEMENT -->
+                    <div class="subscription-panel panel panel-success col-md-6">
+                        <div class="panel-heading flex-between">
+                            <h3 class="panel-title">Abonnement(s) du client</h3>
+                            <div class="total-order">Nombre total d'abonnement(s) : <span><?php echo count($block->indexData()['subscription']); ?></span></div>
+                        </div>
+                        <div class="panel-body">
+                            <?php
+                            if(!empty($block->indexData()['subscription'])) {
+                                ?>
+                                <div class="header-subscription">
+                                    <div class="row-header">
+                                        <div class="header-number-contract">Numéro<br> d'abonnement</div>
+                                        <div class="header-ref-contract">Référence<br> d'abonnement</div>
+                                        <div class="header-date-activated">Date de début</div>
+                                        <div class="header-date-end-subscription">Date de fin</div>
+                                    </div>
+                                </div>
+                                <?php
+                                foreach ($block->indexData()['subscription'] as $subscription) {
+                                    ?>
+                                    <div class="row-subscription">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="data-subscription">
+                                                    <div class="number-contract"><?php echo $subscription['number_contract']; ?></div>
+                                                    <div class="ref-contract"><?php echo $subscription['ref_contract']; ?></div>
+                                                    <div class="date-activated"><?php echo $block->dateFormat($subscription['date_activated']); ?></div>
+                                                    <div class="date-end-subscription"><?php echo $block->dateFormat($subscription['date_end_subscription']); ?></div>
+                                                    <div class="more-subscription-details">
+                                                        <a class="btn btn-primary" href="<?php echo $this->getUrl(); ?>archivegesco/subscriptioncard?id=<?php echo $block->indexData()['customer']['client_id']; ?>&subscription_id=<?php echo $subscription['number_contract']; ?>">
+                                                            + Détails
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <div class="no-subscription">Pas d'abonnement pour ce client</div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    
+                    <!-- COMMANDE SIMPLE -->
+                    <div class="simple-order-panel panel panel-info col-md-5">
+                        <div class="panel-heading flex-between">
+                            <h3 class="panel-title">Commande(s) du client</h3>
+                            <div class="total-order">Nombre total de commande(s) : <span><?php echo count($block->indexData()['order']); ?></span></div>
+                        </div>
+                        <div class="panel-body">
+                            <?php
+                                if(!empty($block->indexData()['order'])) {
+                                    ?>
+                                    <div class="header-order">
+                                        <div class="row-header">
+                                            <div class="header-order-number">Numéro<br> de la commande</div>
+                                            <div class="header-order-date">Date</div>
+                                            <div class="header-order-amount">Montant total</div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    foreach ($block->indexData()['order'] as $order) {
+                                        ?>
+                                        <div class="row-order-simple">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="data-order">
+                                                        <div class="order-number"><?php echo $order['order_id']; ?></div>
+                                                        <div class="order-date"><?php echo $block->dateFormat($order['order_date']); ?></div>
+                                                        <div class="amount-ttc"><?php echo str_replace('.', ',', $order['amount_ttc']); ?> €</div>
+                                                        <div class="more-order-details">
+                                                            <a class="btn btn-primary" href="<?php echo $this->getUrl(); ?>archivegesco/ordercard?id=<?php echo $block->indexData()['customer']['client_id']; ?>&order_id=<?php echo $order['order_id']; ?>">
+                                                                + Détails
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="no-order">Pas de commande pour ce client </div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

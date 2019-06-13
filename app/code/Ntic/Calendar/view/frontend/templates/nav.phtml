@@ -1,0 +1,72 @@
+<?php
+$block = $this->getLayout()->createBlock("Ntic\Calendar\Block\Contact\Edit");
+$manager = $block->checkPermission(); // Si c'est un manager => true
+$sellerName = $block->getName(); // Nom de la personne connecté
+$user_id = $block->getId(); // Id de la personne connecter => utile dans le cas ou $manager = false
+$sellerCode = $block->getSellerCode(); // Code vendeur de la personne connecter => utile dans le cas ou $manager = false
+//var_dump($manager);
+
+?>
+
+<nav class="navbar navbar-default ">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <span class="navbar-brand" style="margin-left: 8px">Agenda</span>
+        </div>
+        <div class="collapse navbar-collapse" id="top-navbar">
+            <ul class="nav navbar-nav">
+                <li>
+                        <div id="my-select-seller" ></div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#home"><i class="fa fa-plus"></i> Création</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-info"></i> Infos CBT <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="padding: 15px;min-width: 500px;">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12 text-center" style="margin-bottom: 25px">
+                                    <h2 id="titlename">
+                                        <?php if ($manager == false ): ?>
+                                            <h2><?= $sellerName ?></h2>
+                                        <?php endif; ?></h2>
+                                    <div id="comptaRDV">
+                                        <?php if ($manager == true ): ?>
+                                            VEUILLEZ SELECTIONNER UNE CBT
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="comptaQualif">
+                                        <?php if ($manager == true ): ?>
+                                            <div class="sk-cube-grid">
+                                                <div class="sk-cube sk-cube1"></div>
+                                                <div class="sk-cube sk-cube2"></div>
+                                                <div class="sk-cube sk-cube3"></div>
+                                                <div class="sk-cube sk-cube4"></div>
+                                                <div class="sk-cube sk-cube5"></div>
+                                                <div class="sk-cube sk-cube6"></div>
+                                                <div class="sk-cube sk-cube7"></div>
+                                                <div class="sk-cube sk-cube8"></div>
+                                                <div class="sk-cube sk-cube9"></div>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="/dist/scripts.min.js"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script src="//www.danstools.com/js/forum.js"></script>

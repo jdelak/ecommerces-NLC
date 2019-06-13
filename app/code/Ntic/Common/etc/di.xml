@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Checkout\Block\Onepage\Success" type="Ntic\Common\Block\Success"/>
+    <type name="Magento\Customer\Controller\Account\LoginPost">
+        <plugin name="AccountLoginPost"
+                type="Ntic\Common\Plugin\Customer\LoginPost"
+                sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="check_customer_group" sortOrder="2" type="Ntic\Common\Plugin\Customer\AccountManagement" />
+    </type>
+    <type name="\Magento\Customer\Model\ResourceModel\Address">
+        <plugin name="quote_address_fix_plugin"
+                type="Ntic\Common\Plugin\AddressPlugin"
+                sortOrder="3"
+                disabled="false"/>
+    </type>
+    <preference for="Magento\Contact\Controller\Index\Post" type="Ntic\Common\Controller\Index\Post" />
+</config>

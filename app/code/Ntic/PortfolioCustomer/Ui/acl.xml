@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Ntic_PortfolioCustomer::Portfolio_Customer" sortOrder="10" title="Portfolio_Customer">
+					<resource id="Ntic_PortfolioCustomer::Portfolio_Customer_save" sortOrder="10" title="Save Portfolio_Customer"/>
+					<resource id="Ntic_PortfolioCustomer::Portfolio_Customer_delete" sortOrder="20" title="Delete Portfolio_Customer"/>
+					<resource id="Ntic_PortfolioCustomer::Portfolio_Customer_update" sortOrder="30" title="Update Portfolio_Customer"/>
+					<resource id="Ntic_PortfolioCustomer::Portfolio_Customer_view" sortOrder="40" title="View Portfolio_Customer"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

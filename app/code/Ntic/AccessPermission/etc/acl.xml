@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Ntic_AccessPermission::AccessPermission" sortOrder="10" title="AccessPermission">
+					<resource id="Ntic_AccessPermission::AccessPermission_save" sortOrder="10" title="Save AccessPermission"/>
+					<resource id="Ntic_AccessPermission::AccessPermission_delete" sortOrder="20" title="Delete AccessPermission"/>
+					<resource id="Ntic_AccessPermission::AccessPermission_update" sortOrder="30" title="Update AccessPermission"/>
+					<resource id="Ntic_AccessPermission::AccessPermission_view" sortOrder="40" title="View AccessPermission"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

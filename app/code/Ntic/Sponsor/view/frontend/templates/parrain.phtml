@@ -1,0 +1,271 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+const PARAM_NAME_URL_ENCODED = 'uenc';
+
+$title = "parrainage";
+$description = "";
+$urlSubmit = $this->getUrl('*/*/Save');
+$urlDelete = $this->getUrl('*/*/Delete');
+$customerId = $block->getCustomerId();
+$godfather = $block->getGodfather();
+
+if(isset($_SESSION['message'])) {
+//    var_dump($_SESSION['message']);
+} else {
+    unset($_SESSION['message']);
+}
+
+use Magento\Framework\App\Action\Action;
+$_productCollection = $block->getProductGodfather();
+?>
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title><?php echo $title; ?></title>
+        <meta content="<?php echo $description; ?>" name="description">
+        <!--<link rel="stylesheet" href="css/styles.css">-->
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <link rel="manifest" href="img/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <?php
+                if(isset($_SESSION['message']['addSuccess'])) {
+                    ?>
+                    <div class="block-message message-success">
+                        <?php
+                            echo $_SESSION['message']['addSuccess'];
+                            unset($_SESSION['message']['addSuccess']);
+                        ?>
+                    </div>
+                    <?php
+                }
+
+                if(isset($_SESSION['message']['addError'])) {
+                    ?>
+                    <div class="block-message message-error">
+                        <?php
+                            echo $_SESSION['message']['addError'];
+                            unset($_SESSION['message']['addError']);
+                        ?>
+                    </div>
+                    <?php
+                }
+            ?>
+            <?php if( $_SESSION['gift_godfather'] > 0):?>
+            <div class="ventes" id="produit">
+                <table>
+                    <tr>
+                        <?php foreach ($_productCollection as $_product): ?>
+                            <td>
+                                <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                <?php $imageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($_product, 'product_page_image_large')->setImageFile($_product->getFile())->getUrl(); ?>
+                                <img src="<?php echo $imageUrl;?>" width="200" height="200" alt="<?php echo $_product->getName()?>"/>
+                                <br/>
+                                <?php echo $_product->getName()?>
+                                <form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+                                    <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+                                    <input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                    <?php echo $block->getBlockHtml('formkey')?>
+                                    <?php $storeManager = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Store\Model\StoreManagerInterface'); ?>
+                                    <button type="submit"
+                                            title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
+                                            class="action tocart primary">
+                                        <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                    </button>
+                                </form>
+                            </td>
+                        <?php endforeach;?>
+                    </tr>
+
+                </table>
+            </div>
+            <?php endif;?>
+            <div class="ventes" id="parrain">
+                <div id='parrainer'>
+                    <h2>Parrainer</h2>
+                    <form class="form-godfather" method="post" role="form" action="<?php echo $urlSubmit; ?>">
+                        <div class="wrapper-godfather">
+
+                            <input type="hidden" name="main_contact_sponsor"  value="<?php echo $customerId;?>"/>
+                            <input type="hidden" name="type_godfather"  value="godfather"/>
+                            <div class="block-godfather0">
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-lastname">Nom *</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="contact_0[lastname]" id="godfather-lastname_0" value="" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-firstname">Prénom *</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="contact_0[firstname]" id="godfather-firstname_0" value="" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-lastname">Ville</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="contact_0[city]" id="godfather-city_0" value=""/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-lastname">Code postal</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="contact_0[zip_code]" id="godfather-zip_code_0" value=""/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-lastname">Email</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="contact_0[email]" id="godfather-email_0" value=""/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-phone">Téléphone *</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="contact_0[phone]" id="godfather-phone_0" value="" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="godfather-params">Commentaire</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <textarea rows="2" cols="50"  name="contact_0[params]" id="godfather-params_0" class="form-control" ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="bn-add-godfather"  class="btn btn-warning right btn-lg" style=" margin:30px auto;">Ajouter</button>
+                        <div class="form-sponsor-submit">
+                            <input type="submit" class="btn btn-primary right btn-lg" value="Enregistrer">
+                        </div>
+                    </form>
+                </div>
+                <div class="row" id='btn-liste'>
+                    <h2>Mes parrainages</h2>
+                    <table>
+                        <?php foreach ($godfather as $value): ?>
+                            <tr>
+                                <td><label><?php echo $value['firstname']." ".$value['lastname']; ?></label></td><td><a href="<?php echo $urlDelete.'?id='.$value['id']; ?>" id="btn-del-godfather-<?php echo $value['id'];?>" class="btn btn-warning right btn-lg"><span class="glyphicon glyphicon-remove"></span></a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                    <hr>
+                </div>
+                <div id='list-godfather'>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var i = 0;
+    require(['jquery', 'jquery/ui'], function($) {
+        jQuery(document).ready(function(){
+            jQuery(".block-message").delay(2000).fadeOut('slow');
+        });
+
+        // Click on button "ajouter"
+        $('#bn-add-godfather').on('click', function () {
+            continuer = true;
+            var Ermail = /^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/;
+            var Ertel = /^0[123456789][\s-]?([0-9]{2}[\s-]?){4}$/;
+            var Ercp = /^\d{5}$/;
+            erreurs = "Veuillez remplir ou corriger les champs suivants :\n";
+            
+            if(!$("#godfather-lastname_"+i).val()){
+                erreurs = erreurs.concat("	- nom\n");
+                continuer = false;
+            }
+
+            if(!$("#godfather-firstname_"+i).val()){
+                erreurs = erreurs.concat("	- prénom\n");
+                continuer = false;
+            }
+
+            if(!$("#godfather-phone_"+i).val()){
+                erreurs = erreurs.concat("	- téléphone\n");
+                continuer = false;
+            }
+
+            if($("#godfather-phone_"+i).val() && !Ertel.test($("#godfather-phone_"+i).val())){
+                erreurs = erreurs.concat("	- téléphone (il doit commencer par 01, 02, 03, 04, 05, 06, 07, 08 ou 09 et contenir 10 chiffres)\n");
+                continuer = false;
+            }
+
+            if($("#godfather-zip_code_"+i).val() && !Ercp.test($("#godfather-zip_code_"+i).val())){
+                erreurs = erreurs.concat("	- code postal (5 chiffres)\n");
+                continuer = false;
+            }
+
+            if($("#godfather-email_"+i).val() && !Ermail.test($("#godfather-email_"+i).val())){
+                erreurs = erreurs.concat("	- email\n");
+                continuer = false;
+            }
+
+            if(continuer){
+                //$(".block-godfather"+i).hide();
+                i++;
+                duplicate(i);
+                //$(".block-godfather"+i).show();
+            } else{
+                alert(erreurs);
+            }
+        });
+
+        /*var form_child = $('.wrapper-godfather ').length;
+        console.log(form_child);*/
+
+        function duplicate(i){
+            var clone = $(".block-godfather0").clone(false);
+            clone.find("*[name]").map(function(index, el) {
+
+                el.name  = el.name.replace( "0", i);
+                //el.name = [el.name.slice(0, 7), i, el.name.slice(7)].join('');
+                el.id  = el.id.replace( "0", i);
+                return el
+            });
+            clone.attr("class", function() {
+                return 'block-godfather'+i
+            }).find("input:text").val("").end().appendTo(".wrapper-godfather");
+        }
+    });
+</script>

@@ -1,0 +1,152 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">ntic_certif_form.certif_form_data_source</item>
+			<item name="deps" xsi:type="string">ntic_certif_form.certif_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="config" xsi:type="array">
+			<item name="dataScope" xsi:type="string">data</item>
+			<item name="namespace" xsi:type="string">ntic_certif_form</item>
+		</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+		<item name="buttons" xsi:type="array">
+			<item name="back" xsi:type="string">Ntic\Pay\Block\Adminhtml\Certif\Edit\BackButton</item>
+			<item name="delete" xsi:type="string">Ntic\Pay\Block\Adminhtml\Certif\Edit\DeleteButton</item>
+			<item name="save" xsi:type="string">Ntic\Pay\Block\Adminhtml\Certif\Edit\SaveButton</item>
+			<item name="save_and_continue" xsi:type="string">Ntic\Pay\Block\Adminhtml\Certif\Edit\SaveAndContinueButton</item>
+		</item>
+	</argument>
+	<dataSource name="certif_form_data_source">
+		<argument name="dataProvider" xsi:type="configurableObject">
+			<argument name="class" xsi:type="string">Ntic\Pay\Model\Certif\DataProvider</argument>
+			<argument name="name" xsi:type="string">certif_form_data_source</argument>
+			<argument name="primaryFieldName" xsi:type="string">certif_id</argument>
+			<argument name="requestFieldName" xsi:type="string">certif_id</argument>
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="submit_url" path="*/*/save" xsi:type="url"/>
+				</item>
+			</argument>
+		</argument>
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+	</dataSource>
+	<fieldset name="General">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="label" xsi:type="string"/>
+			</item>
+		</argument>
+		<field name="shopId">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">shopId</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">Certif</item>
+					<item name="sortOrder" xsi:type="number">10</item>
+					<item name="dataScope" xsi:type="string">shopId</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="certTest">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">certTest</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">Certif</item>
+					<item name="sortOrder" xsi:type="number">20</item>
+					<item name="dataScope" xsi:type="string">certTest</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="certProd">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">certProd</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">Certif</item>
+					<item name="sortOrder" xsi:type="number">30</item>
+					<item name="dataScope" xsi:type="string">certProd</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="ctxMode">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">ctxMode</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">Certif</item>
+					<item name="sortOrder" xsi:type="number">40</item>
+					<item name="dataScope" xsi:type="string">ctxMode</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="wsdl">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">wsdl</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">Certif</item>
+					<item name="sortOrder" xsi:type="number">50</item>
+					<item name="dataScope" xsi:type="string">wsdl</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="ns">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">ns</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">Certif</item>
+					<item name="sortOrder" xsi:type="number">60</item>
+					<item name="dataScope" xsi:type="string">ns</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="store">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">int</item>
+					<item name="label" xsi:type="string" translate="true">Store View</item>
+					<item name="formElement" xsi:type="string">multiselect</item>
+					<item name="source" xsi:type="string">block</item>
+					<item name="dataScope" xsi:type="string">store_id</item>
+					<item name="default" xsi:type="string">0</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+	</fieldset>
+</form>

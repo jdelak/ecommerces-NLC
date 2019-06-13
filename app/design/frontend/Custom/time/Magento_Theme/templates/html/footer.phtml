@@ -1,0 +1,94 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+
+<div class="footer-container">
+
+    <div class="footer-2">
+        <div class="footer-inside row">
+            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">
+                <div class="liens-footer-content">
+                    <li><strong>TIME NUTRITION</strong></li>
+                    <li>17 Rue Saint Exupéry<br>34430 Saint Jean de Védas</li>
+                    <li><a href="<?php echo $block->getUrl('contact', ['_secure' => true]);?>" class="action primary">Nous contacter</a></li>
+                </div>
+            </div>
+            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">
+                <div class="liens-footer-content">
+                    <li><strong>NOTRE SOCIETE</strong></li>
+                    <li><a href="<?php echo $block->getUrl('histoire', ['_secure' => true]);?>">Histoire</a></li>
+                    <li><a href="<?php echo $block->getUrl('missions', ['_secure' => true]);?>">Missions</a></li>
+                    <li><a href="<?php echo $block->getUrl('engagement-qualite', ['_secure' => true]);?>">Engagement Qualité</a></li>
+                </div>
+            </div>
+<!--            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">-->
+<!--                <div class="liens-footer-content">-->
+<!--                    <li><strong>REJOIGNEZ NOUS</strong></li>-->
+<!--                    <li><a href="--><?php //echo $block->getUrl('recrutement', ['_secure' => true]);?><!--">Rejoignez nos équipes</a></li>-->
+<!--                    <li><a href="--><?php //echo $block->getUrl('devenez-distributeur', ['_secure' => true]);?><!--">Devenez distributeur</a></li>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="text-center col-xs-4 col-md-4 col-lg-4 liens-footer">
+                <div class="liens-footer-content">
+                    <li><strong>SERVICES</strong></li>
+                    <li><a href="<?php echo $block->getUrl('paiement-securise', ['_secure' => true]);?>">Paiement Sécurisé</a></li>
+                    <li><a href="<?php echo $block->getUrl('modalites-livraison', ['_secure' => true]);?>">Modalités de livraison</a></li>
+                    <li><a href="<?php echo $block->getUrl('retours', ['_secure' => true]);?>">Retours</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright text-center">
+        © TIME Nutrition - 2017 |<a href="<?php echo $block->getUrl('cgv', ['_secure' => true]);?>">Conditions générales de ventes</a>|<a href="<?php echo $block->getUrl('mentions-legales', ['_secure' => true]);?>">Mentions légales</a>
+    </div>
+</div>
+
+<img src="<?php /* @escapeNotVerified */ echo $block->getLogoSrc() ?>"
+     alt="<?php /* @escapeNotVerified */ echo $block->getLogoAlt() ?>"
+    <?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+    <?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+/>
+
+<script>
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '833296573496713',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.10'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    require(['jquery'], function ($) {
+
+        $('a.fa-user-o').hover(
+            function(){
+                $(this).removeClass("fa-user-o");
+                $(this).addClass("fa-user");
+            },
+            function () {
+                $(this).removeClass("fa-user");
+                $(this).addClass("fa-user-o");
+            }
+
+        );
+    });
+</script>

@@ -1,0 +1,265 @@
+<!-- IBAN -->
+<?php
+$iban = $block->getIban();
+$ibanPrefixe = substr($iban,0,4);
+$ibanEtab = substr($iban,4,5);
+$ibanGuichet = substr($iban,9,5);
+$ibanCompte = substr($iban,14,11);
+$ibanCle = substr($iban,25,2);
+
+?>
+<div class="form-horizontal step_mode_payment step_iban modali"  style="display:none">
+    <div class="col-md-10 col-md-offset-1 modal-payment modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Paiement IBAN</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-3 control-label">IBAN</label>
+                <div class="col-sm-9">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th><div class="iban-prefixe-field"><label class="iban-prefixe-field" for="owner">Préfixe</label></div></th>
+                            <th><div class="iban-etab-field"><label class="iban-etab-field" for="owner">Etab.</label></div></th>
+                            <th><div class="iban-guichet-field"><label class="iban-guichet-field" for="owner">Guichet</label></div></th>
+                            <th><div class="iban-compte-field"><label class="iban-compte-field" for="owner">Compte</label></div></th>
+                            <th><div class="iban-cle-field"><label class="iban-cle-field" for="owner">Clé</label></div></th>
+                        </tr>
+                        <tr>
+                            <td><div class="iban-prefixe-field"><input type="text" class="form-control iban-prefixe" name="iban[prefixe]" value="<?php echo $ibanPrefixe;?>"></div></td>
+                            <td><div class="iban-etab-field"><input type="text" class="form-control" name="iban[etab]" value="<?php echo $ibanEtab;?>"></div></td>
+                            <td><div class="iban-guichet-field"><input type="text" class="form-control" name="iban[guichet]" value="<?php echo $ibanGuichet;?>"></div></td>
+                            <td><div class="iban-compte-field"><input type="text" class="form-control" name="iban[compte]" value="<?php echo $ibanCompte;?>"></div></td>
+                            <td><div class="iban-cle-field"><input type="text" class="form-control" name="iban[cle]" value="<?php echo $ibanCle;?>"><span class="ifError"></span></div></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group iban-banque-field">
+                <label class="col-sm-3 control-label">Banque</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="iban[banque]">
+                    <span class="ifError"></span>
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label">Adresse1</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="iban[addr1]">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Adresse2</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="iban[addr2]">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Adresse3</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="iban[addr3]">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">CP</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="iban[cp]">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Ville</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="iban[ville]">
+                </div>
+            </div>-->
+        </div>
+        <div class="modal-footer">
+            <div class="submit-payment text-right" id="payment-iban">
+                <button type="button" class="btn btn-lg btn-default submit-iban"><?php echo __('Save'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require(['jquery'], function ($) {
+
+        var ibanPrefixe         = $(".iban-prefixe");
+        var ibanEtab            = $("input[name='iban[etab]']");
+        var ibanGuichet         = $("input[name='iban[guichet]']");
+        var ibanCompte          = $("input[name='iban[compte]']");
+        var ibanCle             = $("input[name='iban[cle]']");
+        var ibanBanque          = $("input[name='iban[banque]']");
+
+        var ibanPrefixeField    = $('.iban-prefixe-field');
+        var ibanEtabField       = $('.iban-etab-field');
+        var ibanGuichetField    = $('.iban-guichet-field');
+        var ibanCompteField     = $('.iban-compte-field');
+        var ibanCleField        = $('.iban-cle-field');
+        var ibanBanqueField     = $('.iban-banque-field');
+
+        var button              = $(".submit-iban");
+
+        ibanPrefixe.keyup(function(){
+            
+            ibanPrefixe.val(ibanPrefixe.val());
+            var bon = true;
+            var reg=new RegExp("[A-Za-z]{2}[0-9]{2}","g");
+            if(ibanPrefixe.val().length > 4){
+                bon = false;
+            }
+            if(!reg.test(ibanPrefixe.val())){
+                bon = false;
+            }
+            if(bon){
+                ibanPrefixeField.removeClass('has-error');
+                ibanPrefixeField.addClass('has-success');
+            } else {
+                ibanPrefixeField.removeClass('has-success');
+                ibanPrefixeField.addClass('has-error');
+            }
+        });
+
+        ibanEtab.keyup(function(){
+            var bon = true;
+            var reg=new RegExp("[0-9]{5}","g");
+            if(ibanEtab.val().length > 5){
+                bon = false;
+            }
+            if(!reg.test(ibanEtab.val())){
+                bon = false;
+            }
+            if(bon){
+                $.getJSON( '<?php echo $block->getViewFileUrl("Ntic_PayCustom::json/lxbanque.json"); ?>', function( data ) {
+                    $.each( data, function(val, banque) {
+                        for(element of banque){
+                            if(ibanEtab.val() == element.code){
+                                ibanEtabField.removeClass('has-error');
+                                ibanEtabField.addClass('has-success');
+                                break;
+                            } else {
+                                ibanEtabField.removeClass('has-success');
+                                ibanEtabField.addClass('has-error');
+                            }
+                        }
+                    });
+                });
+            } else {
+                ibanEtabField.removeClass('has-success');
+                ibanEtabField.addClass('has-error');
+            }
+        });
+
+        ibanGuichet.keyup(function(){
+            var bon = true;
+            var reg=new RegExp("[0-9]{5}","g");
+            if(ibanGuichet.val().length > 5){
+                bon = false;
+            }
+            if(!reg.test(ibanGuichet.val())){
+                bon = false;
+            }
+            if(bon){
+                ibanGuichetField.removeClass('has-error');
+                ibanGuichetField.addClass('has-success');
+            } else {
+                ibanGuichetField.removeClass('has-success');
+                ibanGuichetField.addClass('has-error');
+            }
+        });
+
+        ibanCompte.keyup(function(){
+            var bon = true;
+            var reg=new RegExp("[A-Za-z0-9]{11}","g");
+            if(ibanCompte.val().length > 11){
+                bon = false;
+            }
+            if(!reg.test(ibanCompte.val())){
+                bon = false;
+            }
+            if(bon){
+                ibanCompteField.removeClass('has-error');
+                ibanCompteField.addClass('has-success');
+            } else {
+                ibanCompteField.removeClass('has-success');
+                ibanCompteField.addClass('has-error');
+            }
+        });
+
+        ibanCle.keyup(function(){
+            var bon = true;
+            var reg=new RegExp("[0-9]{2}","g");
+            if(ibanCle.val().length > 2){
+                bon = false;
+            }
+            if(!reg.test(ibanCle.val())){
+                bon = false;
+            }
+            if(bon){
+                cle = ibanCle.val();
+                codeBanque = ibanEtab.val();
+                codeGuichet = ibanGuichet.val();
+                numCompte = replaceNumCompte(ibanCompte.val());
+                cleCalc = calculeCleRib(codeBanque,codeGuichet,numCompte.substring(0,6),numCompte.substring(6));
+                if(cleCalc < 10){
+                    cleCalc = '0' + cleCalc;
+                }
+                if(cle != cleCalc){
+                    ibanCleField.find("span").html("<?php echo __('Erreur calcule clé IBAN'); ?>");
+                    ibanCleField.removeClass('has-success');
+                    ibanCleField.addClass('has-error');
+                } else {
+                    ibanCleField.find("span").html("");
+                    ibanCleField.removeClass('has-error');
+                    ibanCleField.addClass('has-success');
+                }
+            } else {
+                ibanCleField.removeClass('has-success');
+                ibanCleField.addClass('has-error');
+            }
+        });
+
+
+        function calculeCleRib(b,g,d,c){
+            return (97 - ((89 * b + 15 * g + 76 * d + 3 * c) % 97));
+        }
+
+        function replaceNumCompte(str){
+            var array = {"A":"1", "B":"2", "C":"3", "D":"4", "E":"5", "F":"6", "G":"7", "H":"8", "I":"9", "J":"1", "K":"2", "L":"3", "M":"4", "N":"5", "O":"6", "P":"7", "Q":"8", "R":"9", "S":"2", "T":"3", "U":"4", "V":"5", "W":"6", "X":"7", "Y":"8", "Z":"9"};
+            for (var val in array) {
+                str = str.toUpperCase().split(val).join(array[val]);
+            }
+            return str;
+        }
+
+        ibanBanque.keyup(function(){
+            if(ibanBanque.val().length < 2) {
+                ibanBanqueField.find("span").html("<?php echo __('2 characters minimum required'); ?>");
+                ibanBanqueField.removeClass('has-success');
+                ibanBanqueField.addClass('has-error');
+            } else {
+                ibanBanqueField.find("span").html("");
+                ibanBanqueField.removeClass('has-error');
+                ibanBanqueField.addClass('has-success');
+            }
+
+            hasError();
+        });
+
+        // permet de désactiver le bouton de validation
+        function hasError(){
+            if($('.has-error').length){
+                button.addClass('disabled');
+            } else {
+                button.removeClass('disabled');
+                $('.cash-validate').show().css('display', 'flex').html('<div class="paiement-ok">CB <i class="fa fa-check" aria-hidden="true"></i></div>').addClass('flex-between').addClass('block-payment-ok');
+            }
+        }
+
+    });
+</script>

@@ -1,0 +1,10 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <head>
+        <css src="Ntic_Sponsor::css/sponsor_style.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ntic\Sponsor\Block\Sponsor" name="sponsor" template="parrain.phtml" />
+        </referenceContainer>
+    </body>
+</page>

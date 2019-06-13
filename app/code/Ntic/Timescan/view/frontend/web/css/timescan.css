@@ -1,0 +1,412 @@
+@font-face{
+    font-family:'bmhand';
+    src: url('../fonts/BMHand-Medium.ttf.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family:'isocpeur';
+    src: url('../fonts/ISOCPEUR.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.form-horizontal .control-label{
+    text-align: center;
+}
+
+.calculateur h2{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.calculateur .form-horizontal .form-group{
+    margin-bottom:5px;
+}
+
+.calculateur .form-control{
+    width: 250px;
+    border-radius: 0;
+    border: 2px solid #ccc;
+}
+
+.calculateur label{
+    color: #cad90e;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.calculateur .radio label{
+    color:#000;
+}
+
+.formulaire{
+
+}
+
+.fenetre{
+    min-height: 600px;
+}
+
+.calculateur .checkbox label, .radio label{
+    float:left;
+}
+
+.calc-title{
+
+}
+
+.calc-title small{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.calc-title h3{
+    color: #eb5089;
+    font-family: 'isocpeur';
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.sub-title-calc{
+    display: inline-block;
+    height: 130px;
+    vertical-align: middle;
+}
+
+.etape0{
+   background: url(../images/fond_etape0.jpg) no-repeat;
+}
+
+.etape1{
+    background: url(../images/fond_etape1.jpg) no-repeat;
+}
+
+.etape2{
+    background: url(../images/fond_etape2.jpg) no-repeat;
+}
+
+.etape3{
+    background: url(../images/fond_etape3.jpg) no-repeat;
+}
+
+.etape3 .form-horizontal .control-label{
+    text-align:left;
+}
+
+.etape4{
+    background: url(../images/fond_etape4.jpg) no-repeat;
+}
+
+.etape4 .form-horizontal .control-label{
+    text-align:left;
+
+}
+
+.etape4 .form-horizontal .checkbox label{
+    color:#000;
+}
+
+.etape5{
+    background: url(../images/fond_etape5.jpg) no-repeat;
+}
+
+.etape5 h3{
+    text-align: center;
+    font-size: 22px;
+    color: #eb5089;
+    font-weight: bold;
+}
+
+.img-etape1, .img-etape2{
+    margin:0 auto;
+    margin-top:-60px;
+}
+
+.bouton{
+    cursor: pointer;
+    text-align: center;
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    border-top: #d0d2d2 solid 3px;
+    color: #b4d139;
+    font-family: 'bmhand';
+    font-size: 32px;
+    float:right;
+}
+
+.bouton-calc{
+    float: none;
+    border: 2px solid #000;
+    border-radius: 0;
+    margin-top: 20px;
+    color: #000;
+    font-size: 19px;
+    padding: 25px 50px;
+}
+
+.label-rose{color:#eb5089;}
+
+.nav-tabs.calculateur li{
+    width:auto !important;
+}
+
+ul.nav-tabs li.active{
+    border-top-color:#97af03;
+}
+
+#page5 h1, #page6 h1, #page7 h1, #page8 h1, #page9 h1, #page10 h1{
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background-color:#FFF;
+}
+
+h1.jaune{
+    color: #fbbf16;
+}
+h1.rouge{
+    color: #e2001a;
+}
+h1.orange{
+    color: #ec7416;
+}
+h1.bleu{
+    color: #b8e1ee;
+}
+h1.vert{
+    color: #cfd612;
+}
+
+.left{
+    float:left !important;
+}
+
+.right{
+    float:right !important;
+}
+
+.titre-page-bilan{
+    background-color: #97AF03;
+}
+.titre-page-bilan h2{
+    font-size: 30px;
+    color: #FFFFFF;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.cadre-noir-light{
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.cadre-noir-light .cadre-noir-time-expertise{
+    padding-left: 130px;
+}
+.cadre-noir-light .cadre-noir-time-expertise .raw ul li{
+    list-style: square inside none;
+}
+.cadre-noir-light .cadre-noir-time-expertise .raw ul li ul li.liste{
+    margin-left:15px;
+    list-style: circle inside none
+;}
+.intro {
+    margin: 5px 0 0 0;
+}
+.intro .regle-imc{
+    width:341px;
+    margin: 0 0 0 210px;
+}
+.intro .trait-regle-imc{
+    width: 261px;
+    border: 1px solid #000000;
+    margin: 0 0 0 227px;
+}
+.intro .curseur-regle-imc{
+    width: 277px;
+    margin: -10px 0 0 227px;
+}
+.intro .curseur-regle-imc .texte-regle-imc{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.content-objectif-time {
+    font-size: 12px;
+    color: #000000;
+}
+.content-objectif-time .diagramme {
+    width: 380px;
+    padding: 0;
+    float: left;
+}
+.content-objectif-time .diagramme-detail {
+    width: 370px;
+    float: right;
+    margin-top: 10px;
+    border: 3px solid #000000;
+    padding: 0 0 1px 12px;
+}
+.content-objectif-time .diagramme-detail ul li {
+    margin: 10px 0 58px;
+}
+.content-objectif-time ul li .green-text-fonce{
+    color: #6f8102;
+}
+.content-objectif-time .diagramme-conclu{
+    padding: 5px;
+    float: right;
+    margin-top: 5px;
+    border: 3px solid #000000;
+    width: 551px;
+    margin-bottom: 15px;
+}
+
+#page3 ul li{
+    margin: 0 0 0 35px;
+    list-style: square outside none;
+}
+#page3 ul li{
+    margin-bottom: 3px;
+}
+#page3 .content-page-bilan{
+    font-size: 12px;
+    color: #000000;
+    padding: 15px 0;
+}
+#page3 .content-page-bilan ul{
+    margin-top: 12px;
+}
+#page3 .para-p-3-1-img{
+    float: left;
+    width: 63px;
+    height: 59px;
+}
+#page3 .para-p-3-1-texte {
+    float: left;
+    width: 685px;
+    margin-left: 10px;
+}
+
+#page4 .content-page-bilan .petit_titre{
+    padding: 8px 20px;
+    margin-right: 15px;
+    color:#fff;
+}
+#page4 .content-page-bilan .raw{
+    margin: 25px 0;
+}
+#page4 .content-page-bilan .raw .titre {
+    margin-bottom: 5px;
+}
+#page4 .content-page-bilan .raw .titre .vert{
+    color: #2d8829;
+    font-weight: bold;
+}
+#page4 .option-prod-payant-container .option .offre .description .liste .w350{
+    width:350px;
+}
+#page4 .option-prod-payant-container .option .offre .description .liste img{
+    float:right;
+    width:90px;
+    margin-top: -20px;
+}
+
+.content-page-bilan .bloc .raw  ul li.rond img{
+    width:80px;
+    float:right;
+}
+
+.content-page-bilan .tableau table tr td {
+    padding: 4px;
+}
+.content-page-bilan .tableau table tr td.border-all {
+    border: 1px solid #000000;
+}
+.content-page-bilan .tableau table tr td.border-semi {
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    width:570px;
+}
+.content-page-bilan .tableau table tr td.border-semi-last {
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    text-align: right; width:175px;
+}
+
+.content-page-bilan .intro .texte{
+    width: 630px;
+    padding-right: 5px;
+}
+.content-page-bilan .intro {
+    margin: 50px 0 30px;
+}
+.content-page-bilan .tableau table tr.fond-jaune-clair {
+    background-color: #feefc5;
+}
+.content-page-bilan .tableau table tr.fond-rouge-clair {
+    background-color: rgb(243, 192, 198);
+}
+.content-page-bilan .tableau table tr.fond-bleu-clair {
+    background-color: rgb(237, 247, 251);
+}
+.content-page-bilan .tableau table tr.fond-orange-clair {
+    background-color: rgb(250, 220, 197);
+}
+.content-page-bilan .tableau table tr td.fond-jaune {
+    background-color: #fbbf16;
+}
+.content-page-bilan .tableau table tr td.fond-rouge {
+    background-color: rgb(209, 2, 26);
+}
+.content-page-bilan .tableau table tr td.fond-orange {
+    background-color: rgb(236, 116, 22);
+}
+.content-page-bilan .tableau table tr td.fond-bleu {
+    background-color: rgb(184, 225, 238);
+}
+.content-page-bilan .bloc {
+    margin:25px 0 0 0
+}
+.content-page-bilan .bloc .raw {
+    margin:0 0 10px 0
+}
+.content-page-bilan .bloc .raw .texte ul li.valid {
+    margin-left: 20px;
+    margin-top: 5px;
+    padding-left: 20px;
+    list-style-type: none;
+    background-image: url(http://www.time-nutrition.com/votreTimeSilhouette/images/elements/puce-valid-v.jpg);
+    background-repeat: no-repeat;
+    background-position-y: 2px;
+}
+.content-page-bilan .bloc .raw .texte ul li.interdit {
+    margin-left: 20px;
+    margin-top: 5px;
+    padding-left: 20px;
+    list-style-type: none;
+    background-image: url(http://www.time-nutrition.com/votreTimeSilhouette/images/elements/puce-r.jpg);
+    background-repeat: no-repeat;
+    background-position-y: 2px;
+}
+.content-page-bilan .bloc .raw  ul li.rond {
+    list-style: disc outside none;
+    margin-left: 35px;
+    height: 70px;}
+.content-page-bilan .cadre{
+    border: 1px solid #000000;
+    padding:5px;
+}
+#page9 .content-page-bilan .cadre-vert-bottom{border: 1px solid #e9ec93; margin: 40px 0; padding: 15px 0; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;}
+#page9 .content-page-bilan img.puce-fleche{margin-right: 5px; margin-left: 20px; padding-top: 3px;}
+#page9 .content-page-bilan .enjoy{color: #cfd612; font-size: 27px; display: block; margin-top: 40px; margin-bottom: 40px; text-align: center;}
+

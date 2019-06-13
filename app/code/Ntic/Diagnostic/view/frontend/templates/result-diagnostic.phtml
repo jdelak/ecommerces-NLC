@@ -1,0 +1,126 @@
+<?php
+
+if($_POST && $_POST['age']){
+
+    $oM = \Magento\Framework\App\ObjectManager::getInstance();
+    $productObj = $oM->create('Magento\Catalog\Model\Product');
+    $skuArray = [];
+
+    if($_POST['age'] == '- 20 ans'){array_push($skuArray,'500','509','510','524');}
+    if($_POST['age'] == 'entre 20 ans et 40 ans'){array_push($skuArray,'535','538','542','543');}
+    if($_POST['age'] == '+ de 40 ans'){array_push($skuArray,'5300','5310','5311','5312','5313');}
+
+    if($_POST['wrinkles'] == 'j\'ai quelques rides et ridules'){array_push($skuArray,'509','538','539');}
+    if($_POST['wrinkles'] == 'j\'ai des rides d\'expression installées'){array_push($skuArray,'535','5410');}
+    if($_POST['wrinkles'] == 'j\'ai des rides profondes'){array_push($skuArray,'5300','5310','5311','5312','5313');}
+
+    if($_POST['skinproblems'] == 'Le dessèchement'){array_push($skuArray,'524','542','543','5311','5313');}
+    if($_POST['skinproblems'] == 'Le relâchement'){array_push($skuArray,'510','524','539','5312');}
+    if($_POST['skinproblems'] == 'Les impuretés'){array_push($skuArray,'536','524');}
+
+    if($_POST['frequences'] <> 'Ni le matin ni le soir'){array_push($skuArray,'509','5000');}
+
+    if($_POST['cleaning'] == 'Un soin nettoyant moussant avec de l\'eau, pour une sensation «nette» parfaite'){array_push($skuArray,'510','524');}
+    if($_POST['cleaning'] == 'La douceur d\'un lait et la fraicheur d\'une lotion'){array_push($skuArray,'509');}
+    if($_POST['cleaning'] == 'Les eaux démaquillantes en un seul geste'){array_push($skuArray,'5000');}
+
+
+    $skuArray = array_unique($skuArray);
+
+
+?>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="carousel carousel-showmanymoveone slide" id="itemslider">
+                    <div class="carousel-inner">
+
+                        <?php
+
+                        foreach($skuArray as $productSku){
+
+                        $productId = $productObj->getIdbySku($productSku);
+                        $product = $productObj->load((int)$productId);
+                        $listBlock = $oM->get('\Magento\Catalog\Block\Product\ListProduct');
+                        $addToCartUrl =  $listBlock->getAddToCartUrl($product);
+
+                        ?>
+                        <div class="item">
+                            <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+                                <a href="<?php echo $product->getProductUrl();?>">
+                                    <img width="225px" height="300px" src="<?php echo $block->getUrl('pub/media/catalog').'product'.$product->getImage();?>">
+                                </a>
+                                <div class="owl-carousel-item-title text-center">
+                                    <a class="product-item-link" href="<?php echo $product->getProductUrl();?>"><?php echo $product->getName();?></a>
+                                </div>
+                                <div class="owl-carousel-item-price text-center">
+                                    <?php echo number_format($product->getPrice(), '2', '.', ','). ' €'?>
+                                </div>
+                                <form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post">
+                                    <?php echo $block->getBlockHtml('formkey')?>
+                                    <div class="actions-primary">
+                                        <button type="submit" class="action tocart primary">
+                                            <span><?php echo __('Add to Cart');?></span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <?php } ?>
+
+                    </div>
+
+                    <div id="slider-control">
+                        <a class="left carousel-control" href="#itemslider" data-slide="prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                        <a class="right carousel-control" href="#itemslider" data-slide="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="application/javascript" rel="script">
+        require(['jquery','jquery.bootstrap'], function ($) {
+
+
+            $(document).ready(function(){
+
+                $('#itemslider').carousel({ interval: 3000 });
+
+                $(".carousel-showmanymoveone .item:first").addClass("active");
+
+                $('.carousel-showmanymoveone .item').each(function(){
+                    var itemToClone = $(this);
+
+
+                    for (var i=1;i<4;i++) {
+                        itemToClone = itemToClone.next();
+
+                        if (!itemToClone.length) {
+                            itemToClone = $(this).siblings(':first');
+                        }
+
+                        itemToClone.children(':first-child').clone()
+                            .addClass("cloneditem-"+(i))
+                            .appendTo($(this));
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+
+
+<?php
+
+}else{
+
+    echo "<h2>Vous devez d'abord finir le <a href=".$block->getUrl('diagnostic').">diagnostic beauté</a> avant d'avoir vos résultats !</h2>";
+}

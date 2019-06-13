@@ -1,0 +1,50 @@
+<?php
+$init_sellers = $block->listAllSeller();
+?>
+<fieldset class="admin__fieldset" >
+    <div class="admin__field ">
+        <div class="admin__field-label">
+            <label class="admin__field-label">
+                <span><?php echo __('Selected a Seller'); ?></span>
+            </label>
+        </div>
+        <div class="admin__field-control">
+            <select id="seller_id" name="store_id" title="Store" class=" required-entry _required select admin__control-select" >
+                <option value="0" selected="selected"><?php echo __('Select a seller') ?></option>
+                <?php if ( !empty($init_sellers) ): ?>
+                    <?php foreach ($init_sellers as $seller): ?>
+                        <?php  if (!isset($seller['seller_number'])): ?>
+                            <option class="choose" value="<?php echo $seller['entity_id'] ?>"><?php echo $seller['lastname'].' '.$seller['firstname']; ?></option>
+                        <?php else: ?>
+                            <option class="choose" value="<?php echo $seller['entity_id'] ?>"><?php echo $seller['lastname'].' '.$seller['firstname'].' ['.$seller['seller_number'].']'; ?></option>
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+
+            <select id="customers_status" name="customers_status" title="customers_status" class="required-entry _required select admin__control-select" >
+                <option class="choose" value="1">Affiliated</option>
+                <option class="choose" value="0">Not affiliated</option>
+            </select>
+        </div>
+    </div>
+</fieldset>
+    <div class="after_select">
+        <table id="exemple">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>Nom</td>
+                <td>Prenom</td>
+                <td>Customer email</td>
+                <td>Dislink</td>
+                <td>Link</td>
+
+            </tr>
+            </thead>
+            <tbody>
+                <!-- Ajax DataTables Requests           -->
+            </tbody>
+        </table>
+    </div>

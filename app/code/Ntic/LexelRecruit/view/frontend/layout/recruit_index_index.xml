@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Postuler chez Lexel Paris</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ntic\LexelRecruit\Block\Contact" name="recruit_form" template="Ntic_LexelRecruit::recruit.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Nous Rejoindre :</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

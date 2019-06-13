@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * This file is part of the Force Login module for Magento2.
+ *
+ * (c) bitExpert AG
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">portfolio_overview.portfolio_overview_data_source</item>
+            <item name="deps" xsi:type="string">portfolio_overview.portfolio_overview_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">portfolio_entry_columns</item>
+    </argument>
+
+
+
+
+
+
+
+
+</listing>

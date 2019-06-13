@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <head>
+        <css src="Ntic_Timescan::css/timescan.css" order="320" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ntic\Timescan\Block\Result" name="timescan_result" template="result-timescan.phtml" />
+        </referenceContainer>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Résultat de votre TimeScan :</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

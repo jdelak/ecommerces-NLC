@@ -1,0 +1,57 @@
+<!-- CASH -->
+<div class="row" id="payment-cash" class="cart-summary" style="display:none;">
+    <div class="col-md-12">
+        <legend><?php echo __('Payment detail') ?></legend>
+    </div>
+    <div class="header-table">
+        <ul>
+            <li>Date</li>
+            <li>Mode de paiement</li>
+            <li>Total</li>
+        </ul>
+    </div>
+    <div class="block-table-data">
+        <!-- DATE -->
+        <div class="cash-date text-center">
+            <h4><?php echo date('d/m/Y'); ?></h4>
+        </div>
+        <!-- METHOD PAIEMENT -->
+        <div class="choose-method-payment">
+            <div class="text-center button-choose-payment">
+                <button class="btn btn-lg btn-primary cash-button-payment" id="cash-payment-mode-cb">CB</button>
+                <button class="btn btn-lg btn-primary cash-button-payment" id="cash-payment-mode-check">CHECK</button>
+                <button class="btn btn-lg btn-primary cash-button-payment" id="cash-payment-mode-iban">IBAN</button>
+            </div>
+            <div class="no-validate-payment">
+                Aucun moyen de paiement choisie, Cliquez sur le boutton pour choisir un moyen de paiement
+            </div>
+            <div class="cash-validate" style="display: none;"></div>
+        </div>
+        <!-- TOTAL -->
+        <div class="block-total-price">
+            <div class="text-center total-price">
+                <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($block->getGrandTotal(), true, false); ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM  -->
+    <form class="" method="post" id="form-cash" role="form" action="<?php echo $this->getUrl('*/*/submit'); ?>">
+        <input type="hidden" name="method_payment" value="cash" class="fraction_simple" autocomplete="off" />
+        <input type="hidden" name="total_price" value="<?php echo $block->getGrandTotal(); ?>" />
+        <input type="hidden" name="type_order" value="<?php echo $block->getTypeOrder(); ?>" />
+        <input type="hidden" name="percentage_order" value="100">
+
+        <!-- MODAL -->
+        <div class="row">
+            <?php
+                foreach($block->getListPaymentMethod() as $mode_payment) {
+                    require_once($block->getTemplateFile('Ntic_PayCustom::modal/'.strtolower($mode_payment).'.phtml'));
+                }
+            ?>
+        </div>
+    </form>
+    <div class="payment-btn">
+        <button type="button" class="btn-block btn-primary btn-lg" id="submit-form-cash"><?php echo __('Pay'); ?></button>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see \Magento\Customer\Block\Form\Login
+ * @var $block \Magento\Customer\Block\Form\Login
+ */
+$_emailFieldConfig = $this->helper('Semaio\AdvancedLogin\Helper\Login')->getEmailFieldConfig();
+$blockImg  =  $this->getLayout()->createBlock('Magento\Theme\Block\Html\Header\Logo');
+
+?>
+
+<div class="row ">
+    <div class="col-md-4 col-md-offset-4 login-row">
+        <div class="text-center">
+            <div> <!-- class="customer-macaron-login" transforme en logo circulaire-->
+                <img src="<?php echo $blockImg->getLogoSrc(); ?>" width="auto" height="100px" />
+            </div>
+        </div>
+
+        <h1 class="text-center"><?php echo __('Connect') ?></h1>
+        <div class="block-customer-login">
+            <div class="block-content" aria-labelledby="block-customer-login-heading">
+                <form class="form form-login"
+                      action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>"
+                      method="post"
+                      id="login-form"
+                      data-mage-init='{"validation":{}}'>
+                    <?php echo $block->getBlockHtml('formkey'); ?>
+                    <fieldset class="fieldset login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                        <div class="field email required">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                                <input name="login[username]" placeholder="<?php /* @escapeNotVerified */ echo __($_emailFieldConfig['label']) ?>" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> aria-describedby="sizing-addon1" autocomplete="off"<?php endif; ?> id="email" type="<?php echo $_emailFieldConfig['type']?>" class="input-text form-control" title="<?php /* @escapeNotVerified */ echo __($_emailFieldConfig['label']) ?>" data-validate="<?php echo $_emailFieldConfig['data_validate']?>">
+                            </div>
+                        </div>
+                        <div class="field password required">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                                <input name="login[password]"  placeholder="<?php /* @escapeNotVerified */ echo __('Password') ?>" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text form-control" id="pass" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <?php echo $block->getChildHtml('form_additional_info'); ?>
+                        <div>
+                            <button type="submit" class="login btn-primary btn-block btn-lg" name="send" id="send2"><span><?php /* @escapeNotVerified */ echo __('Sign In') ?></span></button>
+                        </div>
+                        <div class="secondary text-center"><a class="action remind" href="<?php /* @escapeNotVerified */ echo $block->getForgotPasswordUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Forgot Your Password?') ?></span></a></div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Ntic\Conges\Api\CongesRepositoryInterface" type="Ntic\Conges\Model\CongesRepository"/>
+	<preference for="Ntic\Conges\Api\Data\CongesInterface" type="Ntic\Conges\Model\Conges"/>
+	<preference for="Ntic\Conges\Api\Data\CongesSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Ntic\Conges\Model\ResourceModel\Conges\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ntic_conges_conges</argument>
+			<argument name="resourceModel" xsi:type="string">Ntic\Conges\Model\ResourceModel\Conges\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="ntic_conges_conges_grid_data_source" xsi:type="string">Ntic\Conges\Model\ResourceModel\Conges\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

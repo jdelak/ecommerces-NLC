@@ -1,0 +1,49 @@
+<?php
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+?>
+
+<fieldset class="fieldset admin__fieldset " id="flexslider_code_information_fieldset">
+	<legend class="admin__legend legend">
+		<span><?php echo __('Information') ?></span>
+	</legend>
+	<p><?php echo sprintf(__('For more flexibility on where to place this slider group you can use a CMS template tag, template code or Layout XML code to add this slider group to any page or static block. The following template tags or XML code can be used to display the <strong>%s</strong> slider group in your webshop.'), $this->getGroup()->getTitle()) ?></p>
+	<p><?php echo sprintf(__('Instead of selecting a page or category to display the <strong>%s</strong> slider group you can copy one of the codes below and paste it into either the content editor of a CMS page or static block (for template tag), a template file (for template code) or a Layout XML file or a Custom Layout Update XML field of a CMS page or category (Layout XML code). You can change the reference name parameter to position the group where you want it to show in the CMS page or category. You can use the start_slide_id parameter to set the starting slide of the group. This only works when a slider group is not set to random.'), $this->getGroup()->getTitle()) ?></p>
+</fieldset>
+<fieldset class="fieldset admin__fieldset " id="flexslider_code_cms_fieldset">
+	<legend class="admin__legend legend">
+		<span><?php echo __('CMS Template Tag (content editor)') ?></span>
+	</legend>
+<textarea id="flexslider-cms-tag" rows="1" cols="150" onclick="this.focus();this.select()" readonly>
+&#123;&#123;block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_<?php echo $this->getGroup()->getIdentifier() ?>" template="SolideWebservices_Flexslider::flexslider.phtml" code="<?php echo $this->getGroup()->getIdentifier() ?>" start_slide_id="1"&#125;&#125;
+</textarea>
+</fieldset>
+<fieldset class="fieldset admin__fieldset " id="flexslider_code_template_fieldset">
+	<legend class="admin__legend legend">
+		<span><?php echo __('Template Code (template file)') ?></span>
+	</legend>
+<textarea id="flexslider-template-code" rows="1" cols="150" onclick="this.focus();this.select()" readonly>
+&#60;?php echo $this->getLayout()->createBlock('SolideWebservices\Flexslider\Block\Flexslider')->setTemplate('SolideWebservices_Flexslider::flexslider.phtml')->setCode('<?php echo $this->getGroup()->getIdentifier() ?>')->setStartSlideId('1')->toHtml(); ?&#62;
+</textarea>
+</fieldset>
+<fieldset class="fieldset admin__fieldset " id="flexslider_code_xml_fieldset">
+	<legend class="admin__legend legend">
+		<span><?php echo __('XML Code (layout xml code)') ?></span>
+	</legend>
+<textarea id="flexslider-xml-code" rows="6" cols="150" onclick="this.focus();this.select()" readonly>
+&lt;referenceContainer name="content"&gt;
+&lt;block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_<?php echo $this->getGroup()->getIdentifier() ?>" template="SolideWebservices_Flexslider::flexslider.phtml"&gt;
+&lt;action method="setCode"&gt;&lt;argument name="code" xsi:type="string"&gt;<?php echo $this->getGroup()->getIdentifier() ?>&lt;/argument&gt;&lt;/action&gt;
+&lt;action method="setStartSlideId"&gt;&lt;argument name="start_slide_id" xsi:type="string"&gt;1&lt;/argument&gt;&lt;/action&gt;
+&lt;/block&gt;
+&lt;/referenceContainer&gt;
+</textarea>
+</fieldset>

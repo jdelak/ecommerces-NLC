@@ -1,0 +1,26 @@
+.wrapper-godfather .row {
+    margin-bottom: 15px;
+}
+
+.form-sponsor-submit {
+    text-align: center;
+}
+
+.form-sponsor-submit input {
+    width: 30%;
+}
+
+.block-message {
+    padding: 10px 10px;
+    margin-top: 15px;
+    color: #FFF;
+}
+
+.message-success {
+    background-color: aquamarine;
+
+}
+
+.message-error {
+    background-color: crimson;
+}

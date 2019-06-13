@@ -1,0 +1,115 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    
+    <body>
+        <referenceBlock name="copyright" remove="true"/>
+        <!--<referenceBlock name="register-link" remove="true" />-->
+        <referenceBlock name="wish-list-link" remove="true" />
+        <!--<referenceBlock name="my-account-link" remove="true" />-->
+        <!--<referenceBlock name="logo" remove="true" />-->
+        <!--<referenceBlock name="top.links" remove="true" />-->
+        <!--<referenceBlock name="minicart" remove="true" />-->
+        <referenceBlock name="advanced-search-link" remove="true"/>
+        <referenceBlock name="register-link" remove="true"/>
+        <referenceBlock name="my-account-link">
+            <arguments>
+                <argument name="class" xsi:type="string">header-link fa fa-user-o</argument>
+                <argument name="label" xsi:type="string" translate="true"><null/></argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="authorization-link">
+            <arguments>
+                <argument name="class" xsi:type="string">header-link hidden-sm hidden-md hidden-lg</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="register-link">
+            <arguments>
+                <argument name="class" xsi:type="string">header-link</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="header.panel">
+            <container name="header-top-container" as="header-top-container" label="header-top container" htmlTag="div" htmlClass="header-top"/>
+            <container name="header-sub-panel" as="header-sub-panel" label="header sub panel" htmlTag="div" htmlClass="header-sub-panel"/>
+        </referenceContainer>
+        <referenceContainer name="header-top-container">
+            <container name="header-top-wrapper" as="header-top-wrapper" label="header-top wrapper" htmlTag="div" htmlClass="nav-wrapper" before="header-top"/>
+        </referenceContainer>
+        <referenceContainer name="header-top-wrapper">
+            <container name="header-input-search" as="header-input-search" label="header-input search" htmlTag="div" htmlClass="header-input-search"/>
+        </referenceContainer>
+        <referenceContainer name="header-sub-panel">
+            <block class="Magento\Framework\View\Element\Template" name="header-top" template="Magento_Theme::html/header-top.phtml" />
+            <container name="header-block-link" as="header-block-link" label="header-block link" htmlTag="div" htmlClass="block-link"/>
+        </referenceContainer>
+
+        <referenceContainer name="header-block-link">
+            <container name="header-mini-cart" as="header-mini-cart" label="header-mini cart" htmlTag="div" htmlClass="header-mini-cart"/>
+        </referenceContainer>
+        <move element="top.search" destination="header-input-search" before="-"/>
+        <move element="top.links" destination="header-block-link" before="-"/>
+        <move element="minicart" destination="header-mini-cart"/>
+        <move element="header-top-container" destination="header.panel" after="header-sub-panel"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceContainer name="footer-container">
+            <container name="before-footer" as="before-footer" label="Before Footer" htmlTag="div" htmlClass="before-footer-container" before="footer">
+                <block class="Magento\Framework\View\Element\Template" name="before-footer-lexel" template="Magento_Theme::html/before-footer.phtml" />
+            </container>
+            <container name="footer" as="footer" label="Page Footer" htmlTag="div" htmlClass="footer content">
+                <block class="Magento\Framework\View\Element\Template" name="footer-lexel" template="Magento_Theme::html/footer.phtml" />
+                <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" template="switch/stores.phtml"/>
+                <block class="Magento\Theme\Block\Html\Footer" name="copyright" template="html/copyright.phtml"/>
+            </container>
+        </referenceContainer>
+
+        <referenceBlock name="product.info.details">
+            <referenceBlock name="product.info.description">
+                <arguments>
+                    <argument name="priority" xsi:type="string">1</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="product.attributes">
+                <arguments>
+                    <argument name="priority" xsi:type="string">2</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="composition.tab">
+                <arguments>
+                    <argument name="priority" xsi:type="string">3</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="conseils.tab">
+                <arguments>
+                    <argument name="priority" xsi:type="string">4</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="resultat.tab">
+                <arguments>
+                    <argument name="priority" xsi:type="string">5</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="analyse.tab">
+                <arguments>
+                    <argument name="priority" xsi:type="string">6</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="duree.tab">
+                <arguments>
+                    <argument name="priority" xsi:type="string">7</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="reviews.tab">
+                <arguments>
+                    <argument name="priority" xsi:type="string">8</argument>
+                </arguments>
+            </referenceBlock>
+        </referenceBlock>
+
+        <referenceBlock name="catalog.leftnav" remove="true" />
+        <referenceBlock name="store.menu">
+            <block class="Ves\Megamenu\Block\Menu" name="catalog.topnav" template="Ves_Megamenu::topmenu.phtml" cacheable="false">
+                <arguments>
+                    <argument name="alias" xsi:type="string">menu-top2</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

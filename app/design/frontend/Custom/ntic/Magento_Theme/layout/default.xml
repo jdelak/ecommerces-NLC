@@ -1,0 +1,36 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/m2-theme-image.jpg</argument>
+                <argument name="logo_img_width" xsi:type="number">300</argument>
+                <argument name="logo_img_height" xsi:type="number">300</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="register-link" remove="false" />
+        <referenceBlock name="authorization-link" remove="false" />
+        <referenceBlock name="wish-list-link" remove="false" />
+        <referenceBlock name="my-account-link" remove="false" />
+        <referenceBlock name="top.links" remove="false" />
+        <referenceBlock name="header.panel.wrapper" remove="false" />
+
+        <referenceBlock name="top.search" remove="true"/>
+        <referenceBlock name="minicart" remove="true" />
+
+        <referenceContainer name="footer-container" remove="false"/>
+        <referenceContainer name="header.container">
+            <container name="header.containertwo" as="header_containertwo" label="Page Header Container"  htmlTag="header" htmlClass="header-mini-container" after="header.panel.wrapper"/>
+        </referenceContainer>
+        <referenceContainer name="header.containertwo">
+            <block class="Magento\Framework\View\Element\Template" name="header.mini.container" template="Magento_Theme::headerBDC.phtml" cacheable="false"  />
+        </referenceContainer>
+
+        <referenceBlock name="store.menu">
+            <block class="Ves\Megamenu\Block\Menu" name="catalog.topnav" template="Ves_Megamenu::topmenu.phtml" cacheable="false">
+                <arguments>
+                    <argument name="alias" xsi:type="string">menu-top3</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

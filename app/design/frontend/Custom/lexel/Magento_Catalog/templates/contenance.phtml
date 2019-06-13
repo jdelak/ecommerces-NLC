@@ -1,0 +1,8 @@
+<?php  $product = $block->getProduct(); ?>
+    <div class="contenance-box">
+<?php
+if($product->getData('contenance') != ''){
+    echo $product->getData('contenance');
+}
+?>
+    </div>

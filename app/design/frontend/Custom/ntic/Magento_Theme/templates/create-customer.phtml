@@ -1,0 +1,434 @@
+<?php
+//    ini_set('display_errors', 1);
+//    ini_set('display_startup_errors', 1);
+//    error_reporting(E_ALL);
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+    // Appel du block ContactMaster
+    $block = $block->getLayout()->createBlock('Ntic\Common\Block\ContactMaster');
+
+    // DEBUG
+//    var_dump($block->listRDV());
+//    var_dump($block->listLead());
+//    var_dump($block->listGodfather());
+?>
+
+<div class="row">
+    <legend><?php /* @escapeNotVerified */ echo __('Source du contact ?') ?></legend>
+    <div class="form-group text-center">
+        <div class="col-md-6 col-lg-6">
+            <button type="button" class="rdv btn btn-default" id="button-customer-calendar" data-toggle="modal" data-target="#modal-contact">RDV</button>
+        </div>
+        <?php
+            // SI c'est un SUPER_SELLER (landing)
+            if($customerSession->getCustomer()->getGroupId() == 5) {
+                ?>
+                <div class="col-md-4 col-lg-4">
+                    <button class="rdv btn btn-default" id="button-customer-landing" data-toggle="modal" data-target="#modal-contact2">Landing</button>
+                </div>
+                <?php
+            }
+        ?>
+        <div class="col-md-6 col-lg-6">
+            <button class="rdv btn btn-default" id="button-customer-parrainage" data-toggle="modal" data-target="#modal-contact3">Parrainage</button>
+        </div>
+    </div>
+
+    <form class="form-horizontal" method="post" action="<?php echo $block->getUrl('common/customer/save/', ['_secure' => true]);?>">
+        <legend><?php /* @escapeNotVerified */ echo __('Personal Information') ?></legend>
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Prefix') ?></label>
+            <div class="col-lg-8">
+                <select id="contact_prefix" name="prefix" class="form-control input-lg">
+                    <option value="Mlle">Mlle</option>
+                    <option value="Mme">Mme</option>
+                    <option value="M">M</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('FirstName') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_firstname" name="firstname" type="text" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Name') ?></label>
+            <div class="col-lg-8">
+                <input id="name" name="name" type="text" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Gender') ?></label>
+            <div class="col-lg-8">
+                <select id="contact_gender" name="gender" class="form-control input-lg">
+                    <option value="2"><?php /* @escapeNotVerified */ echo __('Female') ?></option>
+                    <option value="1"><?php /* @escapeNotVerified */ echo __('Male') ?></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Date of Birth') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_dob" name="dob" type="date" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <legend><?php /* @escapeNotVerified */ echo __('Address Information') ?></legend>
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Phone Number') ?></label>
+            <div class="col-lg-8">
+                <input id="phone" name="phone" type="text" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Address') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_address1" name="address1" type="text" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_address2" name="address2" type="text" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('City') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_city" name="ville" type="text" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_zipcode" name="zipcode" type="number" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <?php
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $countryCollectionFactory = $objectManager->get('\Magento\Directory\Model\ResourceModel\Country\CollectionFactory');
+            $collection = $countryCollectionFactory->create()->loadByStore();
+        ?>
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Country') ?></label>
+            <div class="col-lg-8">
+
+                <select id="contact_country" name="country" class="form-control input-lg">
+                    <?php
+                        foreach($collection as $country) {
+                            if($country->getId() == 'FR') {
+                                $selected = "selected=\"selected\"";
+                            } else {
+                                $selected = '';
+                            }
+                            ?>
+                            <option value="<?php echo $country->getId(); ?>" <?php echo $selected; ?>><?php echo $country->getName(); ?></option>
+                            <?php
+                        }
+                    ?>
+                </select>
+
+            </div>
+        </div>
+
+        <legend><?php /* @escapeNotVerified */ echo __('Sign-in Information') ?></legend>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><?php /* @escapeNotVerified */ echo __('Email') ?></label>
+            <div class="col-lg-8">
+                <input id="contact_email" name="email" type="email" class="form-control input-lg required">
+            </div>
+        </div>
+
+        <div class="form-group" data-mage-init='{"passwordStrengthIndicator": {}}'>
+            <label class="col-lg-4 control-label required"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
+            <div class="col-lg-8">
+                <input type="password" name="password" id="password"
+                       title="<?php /* @escapeNotVerified */ echo __('Password') ?>"
+                       class="form-control input-lg required"
+                       data-validate="{required:true, 'validate-customer-password':true}"
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label required"><span><?php /* @escapeNotVerified */ echo __('Confirm Password') ?></span></label>
+            <div class="col-lg-8">
+                <input type="password" name="password_confirmation" title="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>" id="password-confirmation" class="form-control input-lg" data-validate="{required:true, equalTo:'#password'}">
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <div class="col-lg-6">
+                <div class="secondary">
+                    <a class="btn btn-default" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Back') ?></span></a>
+                </div>
+            </div>
+
+            <input type="hidden" name="create-customer" value="1">
+
+            <div class="col-lg-6">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- RDV -->
+<div class="modal fade" id="modal-contact" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sélection du contact</h4>
+            </div>
+            <div class="modal-body">
+                <div class="contact_calendar" name="contact">
+                    <!-- button générer pour le jquery -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close-modal" data-dismiss="modal">Fermer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- LANDING -->
+<div class="modal fade" id="modal-contact2" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sélection du contact</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <select id="contact_landing" name="contact" class="form-control input-lg">
+                        <!-- option générer pour le jquery -->
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" id="landing" data-dismiss="modal" class="btn btn-primary">Valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- PARRAIN -->
+<div class="modal fade" id="modal-contact3" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sélection du contact</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group div_contact_godfather">
+                    <input type="text" name="autocomplete_godfather" id="autocomplete-godfather" placeholder="Chercher vos contact...">
+<!--                    <select id="contact_godfather" name="contact" class="form-control input-lg">-->
+<!--                        <!-- option générer pour le jquery -->
+<!--                    </select>-->
+                    <!-- Affiche le résultat de la recherche -->
+                    <div class="response-search"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close-modal" data-dismiss="modal">Fermer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    require(['jquery', 'jquery.bootstrap'], function ($) {
+        // LANDING
+        $('#landing').on('click', function(){
+            getClient($('#contact_landing option:selected',$('#modal-contact2')).val());
+        });
+
+        // CALENDAR
+        $('#button-customer-calendar').one('click', function() {
+            getCustomer('calendar', <?php echo $customerSession->getCustomer()->getId(); ?>, null);
+        });
+
+        $('.contact_calendar').on('click', function() {
+            getClient($(this).find('button').attr('id'));
+            $('.close-modal').trigger('click');
+        });
+
+        // GODFATHER
+
+        // TIMEOUT KEYPRESS
+        var keyup_timeout;
+        var timeout_delay = 200;
+        $('#autocomplete-godfather').keypress(function() {
+            if($(this).val().length >= 3) {
+                clearTimeout(keyup_timeout);
+
+                keyup_timeout = setTimeout(function() {
+                    getCustomer('godfather', null, $('#autocomplete-godfather').val());
+                }, timeout_delay);
+            } else {
+                $('.div_contact_godfather .response-search').hide();
+                $('.div_contact_godfather .response-search').html("&nbsp; Aucun contact ne correspond à la recherche");
+            }
+        });
+
+        $('.div_contact_godfather .response-search').on('click', function(){
+            getClient($(this).find('span').attr('id'));
+            $('.close-modal').trigger('click');
+        });
+
+        function getCustomer(get, id = null, post = null) {
+            if(id != null && post == null) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo $block->getUrl('common/contactmaster/ajax').'ajax.php?resource='; ?>" + get + "&seller_id=" + id,
+                    data: {get: get},
+                    dataType: 'json',
+                }).done(function(data) {
+                    console.log(data.success);
+                    // Condition si data vide
+                    if(data.success.length != 0) {
+                        for (var i = 0; i < data.success.length; i++) {
+                            // CALENDAR (RDV)
+                            if(get == 'calendar') {
+                                $('.contact_calendar').append("<button type='button' class='button-customer-calendar btn btn-primary' id='"+ data.success[i]['contact'] +"'>"+ data.success[i]['event_name'] +"</button>");
+                            }
+                        }
+                    } else {
+                        $('#contact_calendar').append("Aucun contact !");
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo $block->getUrl('common/contactmaster/ajax').'ajax.php?resource='; ?>" + get + "&search=" + post,
+                    data: {get: get},
+                    dataType: 'json',
+                }).done(function(data) {
+                    console.log(data.success);
+                    // Condition si data vide
+                    if(data.success.length != 0) {
+                        for (var i = 0; i < data.success.length; i++) {
+                            // LANDING
+                            if(get == 'landing') {
+                            }
+
+                            // PARRAIN (GODFATHER)
+                            if(get == 'godfather') {
+                                $('.div_contact_godfather .response-search').show();
+                                if(data.success[i]['lastname'] != undefined) {
+                                    $('.div_contact_godfather .response-search').html("<span id='"+ data.success[i]['contact_id'] +"'>"+ data.success[i]['lastname'].toUpperCase() +" " + data.success[i]['firstname'].toLowerCase() + "</span>");
+                                }
+                            }
+                        }
+                    } else {
+                        // LANDING
+                        if(get == 'landing') {
+                        }
+
+                        // PARRAIN (GODFATHER)
+                        if(get == 'godfather') {
+                            $('.div_contact_godfather .response-search').html("<span>Aucun contact dans les parrainages !</span>");
+                        }
+                    }
+
+                });
+            }
+        }
+
+        function getClient(id){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo $block->getUrl('common/contactmaster/ajax').'ajax.php?customer_id='; ?>" + id,
+                data: {id: id},
+                dataType: 'json',
+            })
+            .done(function(data){
+                console.log(data);
+                if(data != null){
+                    // TODO : faire des vérif sur les données vide / Si vide remplacer par " ."
+                    $('#name').val(data.success.lastname);
+                    $('#contact_firstname').val(data.success.firstname);
+                    $('#phone').val(data.success.tel1);
+                    $('#contact_email').val(data.success.email);
+
+                    // ADDR
+                    if(data.success.addr1 == null || data.success.addr1.length == 0) {
+                        var addr1 = ' .';
+                    } else {
+                        var addr1 = data.success.addr1;
+                    }
+                    if(data.success.addr2 == null || data.success.addr2.length == 0) {
+                        var addr2 = ' .';
+                    } else {
+                        var addr2 = data.success.addr2;
+                    }
+                    $('#contact_address1').val(addr1);
+                    $('#contact_address2').val(addr2);
+
+                    // ZIP CODE
+                    if (data.success.zip_code == null || data.success.zip_code.length == 0) {
+                        var zip_code = 0;
+                    } else {
+                        var zip_code = data.success.zip_code;
+                    }
+
+                    $('#contact_zipcode').val(zip_code);
+
+                    // CITY
+                    if(data.success.city == null || data.success.city.length == 0) {
+                        var city = ' .';
+                    } else {
+                        var city = data.success.city;
+                    }
+                    $('#contact_city').val(city);
+
+                    // COUNTRY
+                    if(data.success.country == null || data.success.country.length == 0) {
+                        var country = 'FR';
+                    } else {
+                        var country = data.success.country
+                    }
+                    $('#contact_country').val(country);
+
+                    // BIRTHDAY
+                    $('#contact_dob').val(data.success.birthday);
+
+                    // GENDER
+                    if(data.prefix == 'Mlle'){
+                        $('#contact_prefix').val('Mlle');
+                    } else if(data.prefix == 'M'){
+                        $('#contact_prefix').val('M');
+                    } else{
+                        $('#contact_prefix').val('Mme');
+                    }
+
+                    if(data.gender == 'Male'){
+                        $('#contact_gender').val('1');
+                    } else{
+                        $('#contact_gender').val('2');
+                    }
+                }
+            });
+        }
+    });
+</script>

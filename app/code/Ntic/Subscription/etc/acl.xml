@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Ntic_Subscription::Contract" sortOrder="10" title="Contract">
+					<resource id="Ntic_Subscription::Contract_save" sortOrder="10" title="Save Contract"/>
+					<resource id="Ntic_Subscription::Contract_delete" sortOrder="20" title="Delete Contract"/>
+					<resource id="Ntic_Subscription::Contract_update" sortOrder="30" title="Update Contract"/>
+					<resource id="Ntic_Subscription::Contract_view" sortOrder="40" title="View Contract"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

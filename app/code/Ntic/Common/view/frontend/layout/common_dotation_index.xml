@@ -1,0 +1,28 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <!--<head>
+        <css src="Ntic_Conges::css/style.css" />
+    </head>-->
+    <body>
+        <!-- FILS D'ARIANE -->
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Accueil</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Accueil</item>
+                    <item name="label" xsi:type="string">Accueil</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Dotation</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Dotation</item>
+                    <item name="label" xsi:type="string">Dotation</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Ntic\Common\Block\Dotation" name="dotation" template="Ntic_Common::dotation.phtml" />
+        </referenceContainer>
+    </body>
+</page>

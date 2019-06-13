@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route frontName="payment_manage" id="payment_manage">
+			<module before="Magento_Backend" name="Ntic_Pay"/>
+		</route>
+		<route frontName="ntic_pay" id="ntic_pay">
+			<module before="Magento_Backend" name="Ntic_Pay"/>
+		</route>
+	</router>
+</config>

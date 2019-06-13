@@ -1,0 +1,26 @@
+<?php
+$init_sellers = $block->listAllSeller();
+?>
+<fieldset class="admin__fieldset" >
+    <div class="admin__field ">
+        <div class="admin__field-label">
+            <label class="admin__field-label">
+                <span><?php echo __('Selected a Seller'); ?></span>
+            </label>
+        </div>
+        <div class="admin__field-control">
+            <select id="seller_id" name="store_id" title="Store" class=" required-entry _required select admin__control-select" >
+                <option value="0" selected="selected"><?php echo __('Select a seller') ?></option>
+                <?php foreach ($init_sellers as $seller): ?>
+                    <option class="choose" value="<?php echo $seller['entity_id'] ?>"><?php echo $seller['lastname'].' '.$seller['firstname'].' ['.$seller['seller_number'].']'; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="button" id="btn-seller" class="action-secondary">OK</button>
+        </div>
+    </div>
+</fieldset>
+    <div class="after_select">
+        <table id="exemple">
+
+        </table>
+    </div>

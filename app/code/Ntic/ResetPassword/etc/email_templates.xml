@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="reset_password_lexel" label="Reset Password Lexel" file="resetpassword.phtml" type="html" module="Ntic_ResetPassword" area="frontend"/>
+</config>

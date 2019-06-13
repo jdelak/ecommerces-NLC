@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Rouven Alexander Rieker
+ * See LICENSE.md bundled with this module for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Semaio_AdvancedLogin" setup_version="2.0.0">
+        <sequence>
+            <module name="Magento_Customer"/>
+            <module name="Magento_Store"/>
+        </sequence>
+    </module>
+</config>
+        <!--
+            ################################################################
+            ################## 	   MODULE ADVANCEDLOGIN  		####################
+            ################################################################
+
+            Permet de se connecter avec un seller number ou une adresse mail
+
+            ===		V1.0.0 		===
+            Modification 2017-03-23
+            "Semaio\AdvancedLogin\Model\Config\ConfigProvider.php"
+            On récupère le "LoginMode" en rapport avec le store ID
+            afin que la config puisse être modifiable sur chaque store view.
+            ATTENTION : LA config WEBSITE par défaut ne fonctionne pas,
+            il faut au minimum configurer la store view par défaut (uncheck Website Value) dans l'admin
+
+
+        -->

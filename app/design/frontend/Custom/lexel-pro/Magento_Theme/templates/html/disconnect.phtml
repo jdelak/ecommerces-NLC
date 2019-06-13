@@ -1,0 +1,8 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+if($customerSession->isLoggedIn()) { ?>
+<li class="header-link">
+    <a title="se déconnecter" class="fa fa-power-off" href="<?php echo $block->getUrl('customer/account/logout', ['_secure' => true]);?>"></a>
+</li>
+<?php } ?>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.2.7
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+	<module name="SolideWebservices_Flexslider" setup_version="2.2.7" />
+</config>

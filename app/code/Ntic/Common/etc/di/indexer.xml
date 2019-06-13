@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright Â© 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="customer_grid" view_id="code_client" class="Magento\Framework\Indexer\Action\Entity" primary="customer">
+        <fieldset name="customer" source="Magento\Customer\Model\ResourceModel\Customer\Collection"
+                  provider="Magento\Customer\Model\Indexer\AttributeProvider">
+            <field name="code_client_gesco" xsi:type="filterable" dataType="varchar"/>
+        </fieldset>
+    </indexer>
+</config>

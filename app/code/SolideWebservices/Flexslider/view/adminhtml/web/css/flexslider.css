@@ -1,0 +1,120 @@
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.1
+ * @link     https://solidewebservices.com
+ */
+
+@font-face {
+    font-family: 'arrows';
+    src: url('arrows.eot');
+    src: url('arrows.eot?iefix') format('eot'),
+        url('arrows.woff') format('woff'),
+        url('arrows.ttf') format('truetype'),
+        url('arrows.svg#svgWebfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.flexslider-tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    margin-left: 6px;
+}
+
+.flexslider-tooltip .tooltiptext {
+    width: 170px;
+    visibility: hidden;
+    background-color: rgba(50, 50, 50, 0.9);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    top: 26px;
+    left: 50%;
+    margin-left: -85px;
+    z-index: 1;
+}
+
+.flexslider-tooltip .tooltiptext:after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent rgba(50, 50, 50, 0.9) transparent;
+}
+
+.flexslider-tooltip .tooltiptext .arrow-example-row {
+    display: block;
+    margin: 2px 0;
+}
+
+.flexslider-tooltip .tooltiptext .arrow-example-row .arrow-label {
+    width: 100px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.flexslider-tooltip .tooltiptext .arrow-example-row .arrow-example-previous, .flexslider-tooltip .tooltiptext .arrow-example-row .arrow-example-next {
+    width: 30px;
+    display: inline-block;
+    font-size: 0px;
+}
+
+.flexslider-tooltip .tooltiptext .arrow-example-row .arrow-example-previous:before, .flexslider-tooltip .tooltiptext .arrow-example-row .arrow-example-next:before {
+    font-family: 'arrows';
+    font-size: 18px;
+}
+
+.flexslider-tooltip .tooltiptext .arrow-type-1 .arrow-example-previous:before { content: "\69"; }
+.flexslider-tooltip .tooltiptext .arrow-type-1 .arrow-example-next:before { content: "\6a"; }
+.flexslider-tooltip .tooltiptext .arrow-type-2 .arrow-example-previous:before { content: "\67"; }
+.flexslider-tooltip .tooltiptext .arrow-type-2 .arrow-example-next:before { content: "\68"; }
+.flexslider-tooltip .tooltiptext .arrow-type-3 .arrow-example-previous:before { content: "\6d"; }
+.flexslider-tooltip .tooltiptext .arrow-type-3 .arrow-example-next:before { content: "\6e"; }
+.flexslider-tooltip .tooltiptext .arrow-type-4 .arrow-example-previous:before { content: "\71"; }
+.flexslider-tooltip .tooltiptext .arrow-type-4 .arrow-example-next:before { content: "\72"; }
+.flexslider-tooltip .tooltiptext .arrow-type-5 .arrow-example-previous:before { content: "\77"; }
+.flexslider-tooltip .tooltiptext .arrow-type-5 .arrow-example-next:before { content: "\78"; }
+.flexslider-tooltip .tooltiptext .arrow-type-6 .arrow-example-previous:before { content: "\65"; }
+.flexslider-tooltip .tooltiptext .arrow-type-6 .arrow-example-next:before { content: "\66"; }
+.flexslider-tooltip .tooltiptext .arrow-type-7 .arrow-example-previous:before { content: "\61"; }
+.flexslider-tooltip .tooltiptext .arrow-type-7 .arrow-example-next:before { content: "\62"; }
+.flexslider-tooltip .tooltiptext .arrow-type-8 .arrow-example-previous:before { content: "\6f"; }
+.flexslider-tooltip .tooltiptext .arrow-type-8 .arrow-example-next:before { content: "\70"; }
+.flexslider-tooltip .tooltiptext .arrow-type-9 .arrow-example-previous:before { content: "\76"; }
+.flexslider-tooltip .tooltiptext .arrow-type-9 .arrow-example-next:before { content: "\75"; }
+.flexslider-tooltip .tooltiptext .arrow-type-10 .arrow-example-previous:before { content: "\33"; }
+.flexslider-tooltip .tooltiptext .arrow-type-10 .arrow-example-next:before { content: "\34"; }
+.flexslider-tooltip .tooltiptext .arrow-type-11 .arrow-example-previous:before { content: "\35"; }
+.flexslider-tooltip .tooltiptext .arrow-type-11 .arrow-example-next:before { content: "\36"; }
+.flexslider-tooltip .tooltiptext .arrow-type-12 .arrow-example-previous:before { content: "\37"; }
+.flexslider-tooltip .tooltiptext .arrow-type-12 .arrow-example-next:before { content: "\38"; }
+.flexslider-tooltip .tooltiptext .arrow-type-13 .arrow-example-previous:before { content: "\39"; }
+.flexslider-tooltip .tooltiptext .arrow-type-13 .arrow-example-next:before { content: "\30"; }
+.flexslider-tooltip .tooltiptext .arrow-type-14 .arrow-example-previous:before { content: "\31"; }
+.flexslider-tooltip .tooltiptext .arrow-type-14 .arrow-example-next:before { content: "\32"; }
+.flexslider-tooltip .tooltiptext .arrow-type-15 .arrow-example-previous:before { content: "\21"; }
+.flexslider-tooltip .tooltiptext .arrow-type-15 .arrow-example-next:before { content: "\23"; }
+.flexslider-tooltip .tooltiptext .arrow-type-16 .arrow-example-previous:before { content: "\64"; }
+.flexslider-tooltip .tooltiptext .arrow-type-16 .arrow-example-next:before { content: "\63"; }
+.flexslider-tooltip .tooltiptext .arrow-type-17 .arrow-example-previous:before { content: "\6b"; }
+.flexslider-tooltip .tooltiptext .arrow-type-17 .arrow-example-next:before { content: "\6c"; }
+.flexslider-tooltip .tooltiptext .arrow-type-18 .arrow-example-previous:before { content: "\74"; }
+.flexslider-tooltip .tooltiptext .arrow-type-18 .arrow-example-next:before { content: "\73"; }
+.flexslider-tooltip .tooltiptext .arrow-type-19 .arrow-example-previous:before { content: "\7a"; }
+.flexslider-tooltip .tooltiptext .arrow-type-19 .arrow-example-next:before { content: "\79"; }
+
+.flexslider-tooltip:hover .tooltiptext {
+    visibility: visible;
+}

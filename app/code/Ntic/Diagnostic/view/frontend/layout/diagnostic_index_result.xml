@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ntic_Diagnostic::css/owl.carousel.css" />
+        <css src="Ntic_Diagnostic::css/owl.theme.default.css" />
+        <css src="Ntic_Diagnostic::css/diagnostic-style.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ntic\Diagnostic\Block\Result" name="result_diagnostic" template="result-diagnostic.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Nos recommandations :</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

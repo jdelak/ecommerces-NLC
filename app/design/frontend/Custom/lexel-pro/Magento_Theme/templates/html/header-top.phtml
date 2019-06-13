@@ -1,0 +1,38 @@
+
+<!-- HEADER => LOGO / LINK MORE -->
+<div class="header-wrapper hidden-xs">
+    <div class="header-logo">
+        <a href="<?php echo $block->getUrl('', ['_secure' => true]);?>">
+            <img src="<?php echo $block->getLayout()->getBlock('logo')->getLogoSrc() ?>" alt="logo lexel paris" />
+        </a>
+    </div>
+
+    <div class="link-more">
+        
+        <a href="http://blog.lexel-paris.com/" target="_blank">
+            <div class="header-icons" id="header-blog"></div>
+            <p>blog</p>
+        </a>
+        <a href="https://lexel-paris.com/partenaires">
+            <div class="header-icons" id="header-presse"></div>
+            <p>Partenaires</p>
+        </a>
+        <a href="https://lexel-paris.com/who">
+            <div class="header-icons" id="header-logo"></div>
+            <p>La Marque</p>
+        </a>
+    </div>
+</div>
+
+<div class="header-wrapper visible-xs">
+    <span data-action="toggle-nav" class="action nav-toggle"><span><?php /* @escapeNotVerified */ echo __('Toggle Nav') ?></span></span>
+    <div class="header-logo text-center">
+        <a href="<?php echo $block->getUrl('', ['_secure' => true]); ?>">
+            <img src="<?php echo $this->getViewFileUrl('images/logo-lexel-paris.jpg'); ?>" alt="logo lexel paris" />
+        </a>
+    </div>
+</div>
+<script type="text/javascript">
+require(['jquery'], function ($) {$('.block-search').prependTo('.block-link');});
+</script>
+

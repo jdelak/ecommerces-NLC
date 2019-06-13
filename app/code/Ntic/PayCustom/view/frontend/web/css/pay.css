@@ -1,0 +1,545 @@
+.clear { clear: none; }
+
+.flex-around {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+}
+
+.flex-colomn {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.header.content,.page-title-wrapper{display:none}
+.page-header{padding-bottom: 0 !important}
+.transparent {
+    opacity: 0.2;
+}
+.ifError{
+    color:red;
+}
+.fieldset > .field:not(.choice) > .label{color:#000;}
+
+.fieldset > .field.choice .label, .fieldset > .fields > .field.choice .label{color:#000;}
+
+.fieldset > .field > .label, .fieldset > .fields > .field > .label{color:#000;}
+
+input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"]{
+    line-height: 1.3333333;
+    padding:10px 16px;
+    border-radius: 6px;
+    font-size:18px;
+    height:46px;
+}
+
+.minicart-wrapper .action.showcart:before{font-size: 40px;line-height: 30px;}
+
+.rdv{font-size: 30px;padding: 20px;}
+
+.label{color:#000 !important;}
+
+.label span{color:#000 !important;}
+
+select{height:42px;}
+
+.checkout-payment-method .ccard .type .select{width:250px;float:left;}
+
+.checkout-payment-method .ccard .cvv .input-text{width:80px;}
+
+.hidden-button {
+    display: none;
+}
+
+.form-horizontal .control-label {
+    width: 300px;
+}
+
+.modal-choose-payment {
+    margin: 0 auto;
+}
+
+.validate-payment {
+    display: none;
+}
+
+.no-validate-payment {
+    border: 1px solid transparent;
+    background-color: #d9edf7;
+    margin-left: 10px;
+    text-align: center;
+    padding: 10px 10px;
+    line-height: 25px;
+    font-size: 16px;
+    height: 46px;
+    color : #31708f;
+}
+
+.no-validate-payment:before {
+    content:'\25C4';
+}
+
+.paiement-ok {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+
+    border: 1px solid transparent;
+    background-color: #5cb85c;
+    text-align: center;
+    line-height: 37px;
+    padding: 2px 10px;
+    font-size: 22px;
+    height: 46px;
+    color : #FFF;
+    width: 120px;
+}
+
+.paiement-ok i {
+    line-height: 37px;
+    margin-left: 6px;
+}
+
+/*------------------------------ MODAL -----------------------------*/
+
+.modal-payment {
+    margin-top: 5%;
+}
+
+.modal-form {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.modal-header .close {
+    margin-top: -40px;
+}
+
+.close span {
+    font-size: 60px;
+}
+
+.error-cb, .error-check, .error-iban {
+    border: 1px solid red !important;
+}
+
+/*------------------------------ CACHE ROW CASH / MULTI / SUBSCRIPTION -----------------------------*/
+
+#payment-cash         { display: none; }
+#payment-multi        { display: none; }
+#payment-subscription { display: none; }
+
+.cash-validate-payment  { display: none;}
+.multi-validate-payment { display: none;}
+.multi-validate         { display: none;}
+.cash-validate          { display: none;}
+
+/*--------------------------- CASH --------------------------*/
+
+.payment-btn{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 30px 5px;
+    background: #ddd;
+    left: 0;
+}
+
+.payment-payment{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 30px 5px;
+    background: #ddd;
+    left: 0;
+}
+
+.modal-payment-mode{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #ddd;
+    width: 100%;
+    height: 100%;
+}
+
+.modali_content{
+    margin: 30px auto !important;
+    overflow-y: auto;
+    height: 92%;
+    width: 92% !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.header-table {
+    margin-bottom: 0 !important;
+}
+
+.header-table ul {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+
+    margin-bottom: 0 !important;
+    border: 1px solid #eeeeee;
+    text-transform: uppercase;
+    list-style-type: none;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.header-table ul li {
+
+}
+
+.block-table-data {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+    padding: 15px 10px;
+    height: 80px;
+}
+
+.cash-date {
+    width: 35%;
+}
+
+.block-total-price {
+    width: 33%;
+}
+
+.block-total-price .total-price {
+    margin-left: 50px;
+}
+
+.select-payment {
+    margin-bottom: 35px;
+    margin-top: 35px;
+}
+
+.total-price {
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.block-payment-ok {
+    width: 208px;
+}
+
+/*--------------------------- MULTI --------------------------*/
+
+/*---------- DROITS -----------*/
+.rank-button {
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+.multi-button-add-remove {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+
+    margin-top: 15px;
+    width: 10%;
+}
+
+.multi-button-add-remove button {
+    font-weight: bold;
+    line-height: 25px;
+    font-size: 40px;
+    height: 50px;
+    width: 50px;
+}
+
+.choose-active {
+    background-color: #5cb85c !important;
+}
+
+.listing-date-payment {
+    margin-top: 30px;
+}
+
+#payment-multi {
+    margin-bottom: 140px;
+}
+
+.button-add-payment {
+    font-size: 30px !important;
+    width: 6%;
+}
+
+.hidden-class {
+    display: none;
+}
+
+.choose-date-content {
+    font-weight: bold;
+    line-height: 50px;
+    font-size: 22px;
+}
+
+.select-date {
+    margin-left: -20px;
+}
+
+.next-month {
+    color: crimson;
+}
+
+.choose-percentage {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    position: relative;
+}
+
+.choose-percentage input {
+    text-align: center;
+    margin-left: 105px;
+    width: 30%;
+}
+
+.choose-percentage span {
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 25px;
+}
+
+.block-payment .date {
+    font-size: 18px;
+    width: 24%;
+}
+
+.block-payment .date input {
+    text-align: center;
+}
+
+.button-choose-payment {
+    width: 25%;
+}
+
+.div-parcel-choose-payment button {
+    height: 40px;
+    width: 50px;
+}
+
+.block-payment .div-parcel-choose-payment {
+    margin-top: -15px;
+    width: 25%;
+}
+
+.header-button-parcel {
+    font-weight: bold;
+    margin-left: 12px;
+}
+
+.block-payment .choose-percentage {
+    width: 16%;
+}
+
+.block-payment .block-price {
+    padding-left: 155px;
+    width: 25%;
+}
+
+.block-price {
+    padding-left: 40px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.lock-input {
+    position: absolute;
+    border-bottom: 1px solid #C2C2C2;
+    border-left: 1px solid #C2C2C2;
+    border-top: 1px solid #C2C2C2;
+    background-color: #337ab7;
+    font-weight: bold;
+    line-height: 46px;
+    cursor: pointer;
+    font-size: 25px;
+    height: 95%;
+    left: 87px;
+    width: 17%;
+    color: #FFF;
+}
+
+.form-check {
+    display: none;
+
+    border: 1px solid #eeeeee;
+    background-color: #FFF;
+    position: relative;
+    padding: 10px 25px;
+    height: 300px;
+    width: 100%;
+    top: -1px;
+}
+
+.form-check input {
+    margin-top: 10px;
+}
+
+.form-check label {
+    margin-top: 22px;
+}
+
+.form-check button {
+    margin-right: 15px;
+    margin-top: 30px;
+    float: right;
+}
+
+.choose-method-payment {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    width: 100%;
+}
+
+.lock-active input {
+    background-color: #eeeeee !important;
+    color: #808080 !important;
+    cursor: not-allowed;
+}
+
+/*--------------------------- SUBSCRIPTION --------------------------*/
+
+.block-remove-payment {
+    width: 50px;
+}
+
+.date-subscription {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    font-size: 18px;
+    width: 24%;
+}
+
+.date-subscription span {
+    margin-left: 10px;
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.date-subscription select {
+    width: 24%;
+}
+
+.div-button-add-remove button {
+    font-weight: bold;
+    line-height: 16px;
+    font-size: 25px;
+    height: 44px;
+    width: 50px;
+}
+
+#edit-select-date { display: none; }
+
+#payment-subscription {
+    margin-bottom: 140px;
+}
+
+.header-parent {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+
+    background-color: #5cb85c;
+    text-align: center;
+    padding: 10px 10px;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #FFF;
+}
+
+.block-payment .choose-subscription-percentage {
+    width: 25%;
+}
+
+.block-payment .block-subscription-price {
+    width: 25%;
+}
+
+.choose-subscription-percentage {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    position: relative;
+}
+
+.choose-subscription-percentage input {
+    text-align: center;
+    margin-left: 105px;
+    width: 30%;
+}
+
+.choose-subscription-percentage span {
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 25px;
+}
+
+.block-children-parcel {
+    border: 1px solid #5cb85c;
+}
+
+.header-parent .title {
+    margin-left: 15px;
+}
+
+.block-subscription-price {
+    padding-left: 40px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.div-button-add-remove {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+
+    width: 10%;
+}
+
+.block-add-subscription-payment {
+    display: none;
+}
+
+.add-active {
+    display: block;
+}

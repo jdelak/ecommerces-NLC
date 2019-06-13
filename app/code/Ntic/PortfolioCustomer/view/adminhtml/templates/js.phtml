@@ -1,0 +1,134 @@
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'datatable'
+        ],
+
+        function($) {
+            $(document).ready(function() {
+                /**
+                 * Init Vars
+                 */
+                var cond = "list_all_customers";
+                var $seller_id =0;
+                var $value=0;
+                var $customer_id;
+
+                // Cache la liste status affiliated / not affiliated
+                $('#customers_status').hide();
+
+                /*******************************************************/
+                /**         Datatable Configuration                   **/
+                /*******************************************************/
+                var table = $('#exemple').DataTable({
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "sAjaxSource": '<?php echo $this->getUrl('ntic_portfoliocustomer/PortfolioCustomer/Ajax'); ?>',
+                    "columnDefs": [
+                        {
+                        "targets":4,
+                        "data": null,
+                        "defaultContent":  '<button type="button" class="action-secondary dislink">Dislink</button>',
+                        visible: false
+                        },
+                        {
+                        "targets":5,
+                        "data": null,
+                        "defaultContent":  '<button type="button" class="action-secondary link">Link</button>',
+                        visible: false
+                        },
+                    ],
+
+                    "fnServerParams": function (aoData) {
+                        aoData.push({ "name": "action", "value": cond });
+                        aoData.push({ "name": "seller_id", "value": $seller_id });
+                        aoData.push({ "name": "customer_id", "value": $customer_id });
+                    }
+                });
+                /*******************************************************/
+                /**         End Of Datatable Configuration            **/
+                /*******************************************************/
+
+
+                /*******************************************************/
+                /** Traitement pour le post Ajax au change des listes **/
+                /*******************************************************/
+                $('#customers_status').on('change', function () {
+                    $value = $(this).val();
+                    $seller_id = $("#seller_id").val();
+                    if($value == 0) {
+                        cond = "list_free_customers";
+                        table.columns(4).visible(false);
+                        table.columns(5).visible(true);
+                    } else if($value == 1) {
+                        cond = "list_attached_customers";
+                        table.columns(4).visible(true);
+                        table.columns(5).visible(false);
+                    }
+                    $.ajax({
+                        url:'<?php echo $this->getUrl('ntic_portfoliocustomer/PortfolioCustomer/Ajax'); ?>',
+                        data:{'action':cond, 'customer_id': $customer_id, 'seller_id' : $seller_id },
+                        success: function () {
+                            table.ajax.reload(null, false);
+                        }
+                    });
+
+                });
+
+
+                $('#exemple tbody').on( 'click', 'button', function () {
+
+                        var data = table.row( $(this).parents('tr') ).data();
+                        $seller_id = $("#seller_id").val();
+                        $customer_id = data[0];
+                        if ($(this).hasClass('dislink')) {
+                            $.ajax({
+                                url:'<?php echo $this->getUrl('ntic_portfoliocustomer/PortfolioCustomer/Ajax'); ?>',
+                                data:{'action':'dislink', 'customer_id': $customer_id, 'seller_id' : $seller_id },
+                                success: function () {
+                                    table.ajax.reload(null, false);
+                                }
+                            });
+                        }if ($(this).hasClass('link')) {
+                            $.ajax({
+                                url:'<?php echo $this->getUrl('ntic_portfoliocustomer/PortfolioCustomer/Ajax'); ?>',
+                                data:{'action':'link', 'customer_id': $customer_id, 'seller_id' : $seller_id },
+                                success: function () {
+                                    table.ajax.reload(null, false);
+                                }
+                            });
+                        }
+
+                });
+                /**
+                 * Change seller action
+                 */
+                $("#seller_id").on('change', function () {
+                    $seller_id = $(this).val();
+                    $value =  $('#customers_status').val();
+                    
+                    if ($seller_id == 0) {
+                        cond = "list_all_customers";
+                        $('#customers_status').hide();
+                        table.columns(4).visible(false);
+                        table.columns(5).visible(false);
+                    } else {
+                        if($value == 0) {
+                            cond = "list_free_customers";
+                            table.columns(4).visible(false);
+                            table.columns(5).visible(true);
+                        } else if($value == 1) {
+                            cond = "list_attached_customers";
+                            table.columns(4).visible(true);
+                            table.columns(5).visible(false);
+                        }
+                         $('#customers_status').show();
+                    }
+                    table.ajax.reload(null, false);
+                });
+
+
+            });
+        });
+</script>

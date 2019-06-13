@@ -1,0 +1,107 @@
+<?php
+// INITIALISATION
+$objectManager              = \Magento\Framework\App\ObjectManager::getInstance();
+$urlInterface               = $objectManager->get('\Magento\Framework\UrlInterface');
+$customerSession            = $objectManager->create('Magento\Customer\Model\Session');
+$customerRepository         = $objectManager->create('\Magento\Customer\Api\CustomerRepositoryInterface');
+$deconnection_customer      = $urlInterface->getUrl('') . '?customerLogout';
+$deconnection_seller        = $urlInterface->getUrl('customer/account/logout');
+$storeManager               = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$AccessPermission           = $objectManager->get('Ntic\AccessPermission\Model\AccessPermission')->getCollection();
+$storeId                    = $storeManager->getStore()->getStoreId();
+$title                      = $objectManager->get('Magento\Framework\View\Page\Title');
+$cart                       = $objectManager->get('Magento\Checkout\Model\Cart');
+$nameV=$firstnameV=$lastnameV=$clientV=$clientButton=$venderButton=$firstnameC=$lastnameC='';
+
+
+if(isset($_SESSION['ntic_user'])){
+    // initialisation valeur du vendeur
+    $ntic_user      = $_SESSION['ntic_user'];
+    $groupId        = $customerRepository->getById($_SESSION['ntic_user'])->getGroupId();
+    $thisPermission = $AccessPermission->addFieldToFilter('store_id',['eq' => $storeId ])->addFieldToFilter('group_id',['eq' => $groupId ]);
+    $rules          = $thisPermission->getFirstItem()->getRules();
+    $rules          = explode("_", $rules);
+    $vender         = $objectManager->create('Magento\Customer\Api\CustomerRepositoryInterface')->getById($ntic_user);
+    $lastnameV      = ucfirst(strtolower($vender->getLastname()));
+    $firstnameV     = ucfirst(strtolower($vender->getFirstname()));
+    $venderButton   = "<a class='btn btn-lg btn-link btn-logout' href='".$deconnection_seller."'></a>";
+
+    // CUSTOMER DISCONNECTED
+    if(isset($_GET['customerLogout']) && ($customerSession->getCustomer()->getId() != $ntic_user)){
+        echo
+        '<script>
+        require([
+            "Magento_Customer/js/customer-data"
+        ], function (customerData) {
+            var sections = ["cart"];
+            customerData.invalidate(sections);
+            customerData.reload(sections, true);
+        });
+        </script>';
+        $cart->truncate()->save();
+        $session = $customerSession->loginById($ntic_user);
+
+
+    }
+
+    // WHEN TO CONNECTION AS CUSTOMER
+    if(isset($_POST['listing-customer']) && isset($_POST['selectbasic']) && $_POST['listing-customer'] == 1){
+        $customer = $objectManager->get('Magento\Customer\Model\Customer')->load($_POST['selectbasic']);
+        $session = $customerSession->loginById($customer->getId());
+        //récupère le group id du client sélectionné afin de prendre en compte les réductions catalogue
+       $_SESSION['customer_lx']['customer_group_id'] = $customer->getGroupId();
+
+    }
+
+    // DISPLAY CUSTOMER
+    if($customerSession->getCustomer()->getId() != $ntic_user){
+        $customer = $customerSession->getCustomer();
+        $firstnameC = ucfirst(strtolower($customer->getFirstname())) ;
+        $lastnameC  = ucfirst(strtolower($customer->getLastname())) ;
+        $clientButton = "<a class='btn btn-small btn-default' href='".$deconnection_customer."'>".__("Déconnexion")."</a>";
+        ?>
+        <script type="text/javascript">
+            require(["jquery"], function($){
+                // car je ne peut pas avec les layout mettre une condition
+                $(".block-search .block-content").show();
+                $(".minicart-wrapper").show();
+                $(".product-slider-wrapper").show();
+                $(".nav-sections-items").show();
+            });
+        </script>
+
+        <?php
+    }else{
+        $clientV='';
+
+    }
+}else{
+
+}
+?>
+<div class="col-xs-3 pull-right tools-right-top hidden-xs hidden-sm">
+    <div class="text-right">
+        <div class="col-xs-8">
+            <?php echo '<span class="hidden-xs vendeur-last">'. $lastnameV .'</span><br><span class="hidden-xs ">'. $firstnameV .'</span>'; ?>
+        </div>
+        <a href="<?php echo $deconnection_seller ; ?>" class="btn btn-lg btn-link btn-logout col-xs-4">
+            <i class="fa fa-power-off" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="part-customer">
+        <?php if($lastnameC!= NULL){ ?>
+        <div class="text-right">
+            <div class="col-xs-8">
+                <?php echo '<span class="hidden-xs vendeur-last">'. $lastnameC .'</span><br><span class="hidden-xs vendeur-first">'. $firstnameC .'</span>'; ?>
+
+            </div>
+            <a href="<?php echo $this->getUrl('customer/account'); ; ?>" class="btn btn-lg btn-link btn-logout text-right col-xs-2">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </a>
+            <a href="<?php echo $deconnection_customer ; ?>" class="btn btn-lg btn-link btn-logout col-xs-2">
+                <i class="fa fa-power-off" aria-hidden="true"></i>
+            </a>
+        </div>
+        <?php } ?>
+    </div>
+</div>

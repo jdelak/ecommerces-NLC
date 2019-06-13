@@ -1,0 +1,27 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$vender = $objectManager->create('Magento\Customer\Api\CustomerRepositoryInterface')->getById($_SESSION['seller_ntic']);
+$jsonDCOM = file_get_contents('http://dev.ws.ntic-web-digital.com/etat/?view_all_month');
+$options= json_decode($jsonDCOM);
+$seller_number = $vender->getCustomAttribute('seller_number')->getValue();
+
+?>
+<form action="#" method="POST">
+    <select name="month">
+        <?php foreach ($options as $option): ?>
+            <option value="<?php echo substr($option,-4); ?>"><?php echo $option; ?></option>
+        <?php endforeach ?>
+    </select>
+    <button class="btn btn-lg btn-block btn-primary" type="submit">Valider</button>
+</form>
+
+<?php
+if(isset($_POST['month'])){
+    $textEtatDCom = file_get_contents('http://dev.ws.ntic-web-digital.com/etat/?view_month='.$_POST['month'].'&seller='.$seller_number);
+    header( 'content-type: text/html; charset=utf-8' );
+    $textEtatDCom = utf8_encode($textEtatDCom);
+    echo '<pre class="text-center">'.$textEtatDCom.'</pre>';
+}
+?>
+
+

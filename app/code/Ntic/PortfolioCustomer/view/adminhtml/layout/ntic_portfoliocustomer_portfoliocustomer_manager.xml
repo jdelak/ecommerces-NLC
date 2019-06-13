@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <head>
+        <css src="Ntic_PortfolioCustomer::css/datatable.css" />
+        <css src="Ntic_PortfolioCustomer::css/hideCustomerStatus.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+
+            <block class="Ntic\PortfolioCustomer\Block\Adminhtml\Manager\Manage" name="ntic_portfolio_customer_manager" template="Ntic_PortfolioCustomer::manager.phtml" />
+        </referenceContainer>
+        <referenceContainer name="footer">
+            <block class="Ntic\PortfolioCustomer\Block\Adminhtml\Manager\Manage" template="Ntic_PortfolioCustomer::js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

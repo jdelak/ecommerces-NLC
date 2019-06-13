@@ -1,0 +1,31 @@
+
+<?php
+$attributes = $block->getAttribute('time');
+;?>
+<div class="row">
+    <form class="form-horizontal" method="post" action="<?php echo $block->getUrl('informationcustomer/followtime/save', ['_secure' => true]);?>">
+        <?php foreach($attributes as $value):?>
+            <?php $name = explode('time_', $value['name']);?>
+            <div class="form-group">
+                <label class="col-lg-4 control-label required"><?php echo $name[1]; ?></label>
+                <div class="col-lg-8">
+                    <?php if($value['type']!='textarea'): ?>
+                        <input id="<?php echo $name[1]; ?>" name="name[<?php echo $value['name']; ?>]" type="<?php echo $value['type'] ?>" class="form-control input-lg required">
+                    <?php else: ?>
+                        <textarea id="<?php echo $name[1]; ?>" name="name[<?php echo $value['name']; ?>]" class="form-control input-lg required"></textarea>
+                    <?php endif; ?>
+                    <input type="hidden" name="id[<?php echo $value['name']; ?>]" value="<?php echo $value['id']; ?>">
+                </div>
+            </div>
+        <?php endforeach;?>
+
+
+        <div class="form-group text-center">
+            <div class="col-lg-6">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

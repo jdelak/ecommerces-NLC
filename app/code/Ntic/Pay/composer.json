@@ -1,0 +1,21 @@
+{
+    "name": "ntic/module-pay",
+    "description": "payment fonctionnalit\u00e9",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "webmaster@lexel-paris.com",
+            "name": "ntic"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ntic\\Pay\\": ""
+        }
+    }
+}

@@ -1,0 +1,70 @@
+<?php /** @var $block \Ntic\PayCustom\Block\CustomPayment */ ?>
+<table class="data table-order-items" id="my-orders-table" summary="<?php /* @escapeNotVerified */ echo __('Items Ordered') ?>" style="display: none;">
+    <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Items Ordered') ?></caption>
+    <thead>
+    <tr>
+        <th class="col name bg-info"><?php echo __('Product Name') ?></th>
+        <th class="col sku bg-info"><?php echo __('SKU') ?></th>
+        <th class="col price bg-info"><?php echo __('Price') ?></th>
+        <th class="col qty bg-info"><?php echo __('Qty') ?></th>
+        <th class="col subtotal bg-info"><?php echo __('Subtotal') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $prepare_items = $block->getCurrentQuote2();
+
+    foreach($prepare_items as $item){ ?>
+        <tr>
+            <td class="col name" data-th="Product Name">
+                <?php // ?>
+            </td>
+            <td class="col sku" data-th="SKU">
+                <?php echo $item['item_sku']; ?>
+            </td>
+            <td class="col price" data-th="Price">
+                <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($item['item_px'],true,false); ?>
+            </td>
+            <td class="col qty" data-th="Qty">
+                <?php echo $item['item_qty']*1; ?>
+            </td>
+            <td class="col subtotal" data-th="Subtotal">
+                <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($item['item_row'],true,false); ?>
+            </td>
+        </tr>
+    <?php } ?>
+    <tr class="subtotal bg-info">
+        <th colspan="4" class="" scope="row">
+            <?php echo __('Subtotal'); ?>
+
+        </th>
+        <td class="amount" data-th="Subtotal">
+            <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($block->getCurrentTotal(),true,false); ?>
+        </td>
+    </tr>
+    <?php if($block->getShippingPrice()>0 && $block->getTypeOrder()!='subscription'){ ?>
+        <tr class="shipping bg-info">
+            <th colspan="4" class="" scope="row">
+                <?php echo __('Shipping & Handling'); ?>
+            </th>
+            <td class="amount" data-th="SHipping">
+                <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($block->getShippingPrice(),true,false); ?>
+            </td>
+        </tr>
+    <?php }?>
+    </tbody>
+</table>
+<div class="bg-primary mark">
+    <div class="text-center">
+        <div class="pull-left">
+            <a href="<?php echo $block->getUrl('checkout/cart', ['_secure' => true]);?>" class="btn btn-default"><?php echo __('Modify cart'); ?></a>
+        </div>
+        <div class="pull-right">
+            <a href="#" class="btn btn-default more">+</a>
+        </div>
+        <h3>
+            <?php echo __('Grand Total'); ?>
+            <b><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($block->getGrandTotal(),true,false); ?></b>
+        </h3>
+    </div>
+</div>

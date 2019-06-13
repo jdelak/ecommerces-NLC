@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route frontName="diagnostic" id="diagnostic">
+            <module name="Ntic_Diagnostic"/>
+        </route>
+        <route frontName="result_diagnostic" id="result_diagnostic">
+            <module name="Ntic_Diagnostic"/>
+        </route>
+    </router>
+</config>

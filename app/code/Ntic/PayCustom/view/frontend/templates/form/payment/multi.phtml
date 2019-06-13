@@ -1,0 +1,239 @@
+<?php
+    // Récup la date du courrante
+    $current_date  = date('d/m/Y');
+
+    // Explode fraction
+    $explode_fraction = explode('_', $block->checkFraction());
+    $max_parcel = end($explode_fraction);
+    $amount = str_replace(".", ",", $block->getGrandTotal() / 2);
+?>
+<!-- MULTI -->
+<div class="row" id="payment-multi">
+    <!-- DROIT POUR LA DEMO -->
+    <div class="rank-button">
+        <button class="btn btn-warning">DEMO DROITS</button>
+    </div>
+    <!-- Choose method payment -->
+    <div class="col-md-12">
+        <legend><?php echo __('Choose method payment'); ?></legend>
+    </div>
+    <div class="choose-method-payment">
+        <div class="text-center button-choose-payment">
+            <button class="btn btn-lg btn-primary multi-button-payment" id="multi-payment-mode-cb">CB</button>
+            <button class="btn btn-lg btn-primary multi-button-payment" id="multi-payment-mode-iban">IBAN</button>
+        </div>
+        <div class="no-validate-payment">
+            Aucun moyen de paiement choisie, Cliquez sur le boutton pour choisir un moyen de paiement
+        </div>
+        <div class="multi-validate"></div>
+    </div>
+    <!-- LISTING DATE OF PAYMENT -->
+    <div class="listing-date-payment">
+        <div class="col-md-12">
+            <legend><?php echo __('Listing date of payment'); ?></legend>
+        </div>
+        <!-- BLOCK PARCEL -->
+        <div class="block-parcel col-md-12">
+            <div class="form-multi">
+                <div class="header-table">
+                    <ul>
+                        <li>Date</li>
+                        <li>Mode de paiement</li>
+                        <li>Pourcentage</li>
+                        <li>Montant</li>
+                    </ul>
+                </div>
+                <form class="" method="post" id="form-multi" role="form" action="<?php echo $this->getUrl('*/*/submit'); ?>">
+                    <!-- MODAL -->
+                    <div class="row">
+                        <?php
+                            foreach($block->getListPaymentMethod() as $mode_payment) {
+                                if($mode_payment != 'CHECK') {
+                                    include ($block->getTemplateFile('Ntic_PayCustom::modal/'.strtolower($mode_payment).'.phtml'));
+                                }
+                            }
+                        ?>
+                    </div>
+                    <div class="block-parcel">
+                        <?php
+                            for ($i = 0; $i < $max_parcel; $i ++) {
+                                if($i > 1) {
+                                    $class = 'hidden-class';
+                                    $value = 'false';
+                                } else {
+                                    $class = 'active-class';
+                                    $value = 'true';
+                                }
+                                ?>
+                                <div class="block-payment <?php echo $class; ?>" id="form-payment_<?php echo $i; ?>">
+                                    <div class="input-hidden-active">
+                                        <input type="hidden" name="form_multi[<?php echo $i; ?>][is_active]" value="<?php echo $value; ?>">
+                                    </div>
+                                    <div class="block-table-data">
+                                        <div class="date text-center">
+                                            <?php
+                                                if($i != 0) {
+                                                    ?>
+                                                    <input type="text"  name="form_multi[<?php echo $i; ?>][date]" value="<?php echo date('d/m/Y',  strtotime("+".$i." month")); ?>">
+                                                    <?php
+                                                } else {
+                                                    echo $current_date;
+                                                    ?>
+                                                    <input type="hidden" name="form_multi[<?php echo $i; ?>][date]" value="<?php echo $current_date; ?>">
+                                                    <?php
+                                                }
+                                            ?>
+                                        </div>
+                                        <div class="text-center button-choose-payment block-choose-payment-<?php echo $i; ?>">
+                                            <?php
+                                                foreach($block->getListPaymentMethod() as $mode_payment) {
+                                                    ?>
+                                                     <label class="btn btn-lg btn-primary" id="<?php echo strtolower($mode_payment).'-'.$i; ?>"><?php echo $mode_payment; ?></label>
+<!--                                                    <button type="button" class="btn btn-default"></button>-->
+
+                                                    <?php
+                                                }
+                                            ?>
+                                            <div class="input-hidden">
+                                                <input type="hidden" name="form_multi[<?php echo $i; ?>][mode_payment]" value="" >
+                                            </div>
+                                        </div>
+                                        <div class="text-center choose-percentage">
+                                            <div class="lock-input">
+                                                <i class="fa fa-unlock" aria-hidden="true"></i>
+                                            </div>
+                                            <input type="number" id="input-percentage_<?php echo $i; ?>" name="form_multi[<?php echo $i; ?>][percentage]" value="50"> <span>%</span>
+                                        </div>
+                                        <div class="text-center block-price" id="div-price-<?php echo $i; ?>">
+                                            <?php echo $amount; ?> <span>€</span>
+                                        </div>
+                                        <div class="hidden-amount" id="hidden-amount-<?php echo $i; ?>">
+                                            <input type="hidden" name="form_multi[<?php echo $i; ?>][amount]" value="">
+                                        </div>
+                                    </div>
+                                    <!-- FORM CHECK -->
+                                    <div class="form-check" id="form-check-<?php echo $i; ?>">
+                                        <h5><?php echo 'Formulaire chèque - échéance '.($i + 1); ?></h5>
+                                        <div class="form-group check-number-field-<?php echo $i?>">
+                                            <label class="col-sm-3 control-label" for="number-check">Number of check</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control number-check" name="form_multi[<?php echo $i; ?>][check][number_check]" placeholder="Number of check">
+                                                <span class="ifError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group check-owner-field-<?php echo $i?>">
+                                            <label class="col-sm-3 control-label" for="owner-check">Owner of check</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control owner-check" name="form_multi[<?php echo $i; ?>][check][owner_check]" placeholder="Owner of check">
+                                                <span class="ifError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group check-name-bank-field-<?php echo $i?>">
+                                            <label class="col-sm-3 control-label" for="name-bank">Name of your bank</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control name-bank" name="form_multi[<?php echo $i; ?>][check][name_bank]" placeholder="Name of your bank">
+                                                <span class="ifError"></span>
+                                            </div>
+                                        </div>
+                                        <!-- Div erreur message -->
+                                        <div class="error-message-<?php echo $i; ?>"></div>
+                                        <button class="btn btn-lg btn-success btn-close-form-check"><?php echo __('Save'); ?></button>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                    </div>
+                    <!-- CHAMP CACHÉ -->
+                    <input type="hidden" name="method_payment" value="multi" class="fraction_simple" autocomplete="off" />
+                    <input type="hidden" name="type_order" value="<?php echo $block->getTypeOrder(); ?>" />
+                    <div class="multi-button-add-remove">
+                        <div class="block-remove-payment">
+                            <button class="btn btn-lg btn-primary multi-button-remove-payment">-</button>
+                        </div>
+                        <div class="block-add-payment">
+                            <button class="btn btn-lg btn-primary button-add-payment">+</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="payment-btn">
+                    <button type="button" class="btn-block btn-primary btn-lg" id="submit-form-multi"><?php echo __('Pay'); ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['jquery'], function ($) {
+        var button              = $("#submit-form-multi");
+
+        $(".number-check").keyup(function(){
+            var parent = $(this).parent().parent();
+            var id = parent.attr('class').split(' ')[1];
+            var checkNumberField = $('.'+id);
+            var i = checkNumberField.attr('class').split(' ')[1].split('-')[3];
+            var reg = new RegExp("[0-9]{2}","g");
+
+            if(!reg.test($("input[name='form_multi["+i+"][check][number_check]']").val())){
+                checkNumberField.removeClass('has-success');
+                checkNumberField.addClass('has-error');
+            } else {
+                checkNumberField.removeClass('has-error');
+                checkNumberField.addClass('has-success');
+            }
+
+           // hasError();
+
+        });
+
+        $(".owner-check").keyup(function(){
+            var parent = $(this).parent().parent();
+            var id = parent.attr('class').split(' ')[1];
+            var ownerCheckField = $('.'+id);
+            var i = ownerCheckField.attr('class').split(' ')[1].split('-')[3];
+            var reg = new RegExp("[A-Za-z0-9]{2}","g");
+
+            if(!reg.test($("input[name='form_multi["+i+"][check][owner_check]']").val())){
+                ownerCheckField.removeClass('has-success');
+                ownerCheckField.addClass('has-error');
+            } else {
+                ownerCheckField.removeClass('has-error');
+                ownerCheckField.addClass('has-success');
+            }
+
+            //hasError();
+
+        });
+
+        $(".name-bank").keyup(function(){
+            var parent = $(this).parent().parent();
+            var id = parent.attr('class').split(' ')[1];
+            var nameBankField = $('.'+id);
+            var i = nameBankField.attr('class').split(' ')[1].split('-')[4];
+            var reg = new RegExp("[A-Za-z0-9]{2}","g");
+
+            if(!reg.test($("input[name='form_multi["+i+"][check][name_bank]']").val())){
+                nameBankField.removeClass('has-success');
+                nameBankField.addClass('has-error');
+            } else {
+                nameBankField.removeClass('has-error');
+                nameBankField.addClass('has-success');
+            }
+
+            //hasError();
+
+        });
+
+        // permet de désactiver le bouton de validation
+        /*function hasError(){
+            if($('.has-error').length || numberCheck.val()=='' || ownerCheck.val()==''|| nameBank.val()=='' ){
+                button.addClass('disabled');
+            } else {
+                button.removeClass('disabled');
+            }
+        }*/
+
+
+
+    });
+</script>

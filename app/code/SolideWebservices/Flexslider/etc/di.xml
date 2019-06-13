@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SolideWebservices/Flexslider
+ *
+ * @category Magento2_Module
+ * @package  Flexslider
+ * @author   Solide Webservices <contact@solidewebservices.com>
+ * @license  https://opensource.org/licenses/OSL-3.0 Open Software License 3.0
+ * @version  2.1.2
+ * @link     https://solidewebservices.com
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+	<preference for="SolideWebservices\Flexslider\Api\Data\GroupInterface"
+        type="SolideWebservices\Flexslider\Model\Group" />
+	<preference for="SolideWebservices\Flexslider\Api\Data\SlideInterface"
+        type="SolideWebservices\Flexslider\Model\Slide" />
+	<preference for="SolideWebservices\Flexslider\Api\Data\GroupSearchResultsInterface"
+        type="Magento\Framework\Api\SearchResults" />
+	<preference for="SolideWebservices\Flexslider\Api\Data\SlideSearchResultsInterface"
+        type="Magento\Framework\Api\SearchResults" />
+	<preference for="SolideWebservices\Flexslider\Api\GroupRepositoryInterface"
+        type="SolideWebservices\Flexslider\Model\GroupRepository" />
+	<preference for="SolideWebservices\Flexslider\Api\SlideRepositoryInterface"
+        type="SolideWebservices\Flexslider\Model\SlideRepository" />
+
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="flexslider_group_listing_data_source" xsi:type="string">SolideWebservices\Flexslider\Model\ResourceModel\Group\Grid\Collection</item>
+				<item name="flexslider_slide_listing_data_source" xsi:type="string">SolideWebservices\Flexslider\Model\ResourceModel\Slide\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+    <type name="SolideWebservices\Flexslider\Model\ResourceModel\Group\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">solidewebservices_flexslider_group</argument>
+            <argument name="eventPrefix" xsi:type="string">flexslider_group_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">group_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">SolideWebservices\Flexslider\Model\ResourceModel\Group</argument>
+        </arguments>
+    </type>
+    <type name="SolideWebservices\Flexslider\Model\ResourceModel\Slide\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">solidewebservices_flexslider_slide</argument>
+            <argument name="eventPrefix" xsi:type="string">flexslider_slide_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">slide_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">SolideWebservices\Flexslider\Model\ResourceModel\Slide</argument>
+        </arguments>
+    </type>
+
+	<virtualType name="FlexsliderGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+		<arguments>
+			<argument name="appliers" xsi:type="array">
+				<item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+				<item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="GroupGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<arguments>
+			<argument name="collection" xsi:type="object" shared="false">SolideWebservices\Flexslider\Model\ResourceModel\Group\Collection</argument>
+			<argument name="filterPool" xsi:type="object" shared="false">FlexsliderGridFilterPool</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="SlideGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<arguments>
+			<argument name="collection" xsi:type="object" shared="false">SolideWebservices\Flexslider\Model\ResourceModel\Slide\Collection</argument>
+			<argument name="filterPool" xsi:type="object" shared="false">FlexsliderGridFilterPool</argument>
+		</arguments>
+	</virtualType>
+
+</config>

@@ -1,0 +1,235 @@
+@media screen and (max-width: 1300px){
+    .title-divider-home {
+        padding-bottom: 40px;
+        padding-top: 40px;
+    }
+
+    .panel {
+        border: none;
+    }
+
+    .nav-wrapper {
+        width: 100%;
+    }
+
+    .page-header {
+        border: none;
+    }
+
+    .real-navigation {
+        display: none !important;
+    }
+
+    .header-fixed {
+        border-bottom: 1px solid #eeeeee;
+        width: 100% !important;
+        background-color: #FFF;
+        padding-top: 5px;
+        position: fixed;
+        height: 180px;
+        z-index: 20;
+    }
+
+    .header-wrapper {
+        -webkit-justify-content: space-between;
+        justify-content: center;
+        flex-direction: column;
+
+        max-width: 100%;
+    }
+
+    .header-top {
+        background-color: #FFF;
+    }
+
+    .header-logo {
+        text-align: center;
+    }
+
+    .link-more {
+        width: 100%;
+        top: 125px;
+    }
+
+    .link-more a {
+        height: 62px;
+    }
+
+    .header-mobile-search {
+        display: none;
+    }
+
+    /*--------------------------------------------------------------------
+        MENU SHOP
+    --------------------------------------------------------------------*/
+    .mobile-icon-menu {
+        position: absolute;
+        margin-left: 20px;
+        display: block;
+        top: 47px;
+    }
+
+    .mobile-icon-menu-close {
+        border-bottom: 1px solid #eeeeee;
+        margin-left: 2px;
+        margin-top: 0px;
+    }
+
+    .mobile-icon-menu-close i {
+        border-right: 1px solid #eeeeee;
+        border-left: 1px solid #eeeeee;
+        color: #eeeeee !important;
+        padding: 4px 5px;
+    }
+
+    .item-fixed {
+        position: fixed;
+        z-index: 100;
+    }
+
+    .mobile-real-navigation-wrapper {
+        border-bottom: 1px solid #eeeeee;
+        border-right: 1px solid #eeeeee;
+        background-color: #FFF;
+        overflow-y: scroll;
+        position: fixed;
+        z-index: 100;
+        height: 85%;
+        width: 77%;
+        top: 36px;
+    }
+
+    .mobile-real-navigation {
+        background-color: #FFF;
+        padding: 0px 20px;
+        min-height: 440px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .mobile-real-navigation .level-top {
+        margin-top: 20px;
+    }
+
+    .mobile-real-navigation a {
+        display: block;
+        color: #575757;
+        width: 100%;
+    }
+
+    .parent .link-menu-0 {
+         border-bottom: 1px solid #575757;
+         display: block;
+         color: #575757;
+         width: 100%;
+    }
+
+    .parent .link-menu-0:after {
+        float: right;
+        content: "►";
+    }
+
+    .submenu_0 {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+
+        position: relative !important;
+        padding: 0px 0px !important;
+        background-color: #FFF;
+        text-align: left;
+        width: 400px;
+        height: 100%;
+        top: 10px;
+    }
+
+    .submenu_0 .parent .link-menu-1 {
+        border-bottom: 1px solid #575757;
+        display: block;
+        color: #575757;
+        width: 100%;
+    }
+
+    .submenu_0 .parent .link-menu-1:after {
+        float: right;
+        content: "►";
+    }
+
+    .level1 {
+        margin-bottom: 5px;
+    }
+
+
+    .submenu_1 {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+
+        position: relative !important;
+        padding: 10px 10px !important;
+        box-shadow: none !important;
+        background-color: #FFF;
+        margin-bottom: 15px;
+        text-align: left;
+        height: 100%;
+        width: 340px;
+        top: 10px;
+    }
+
+    .level2 a {
+        margin-top: 0px;
+    }
+
+    /*--------------------------- CART ---------------------------*/
+
+    .cart-summary {
+        width: 100%;
+        z-index: 10;
+    }
+
+    .abs-shopping-cart-items-desktop, .block-cart-failed, .cart-container .form-cart, .cart-container .cart-gift-item {
+        width: 100%;
+    }
+
+    /*----------------------- ADVANTAGES -------------------------*/
+
+    .footeron-part {
+        margin-top: 30px;
+    }
+
+    .fotorama__wrap {
+        height: 320px !important;
+    }
+
+    /*----------------------- NEWSLETTER -------------------------*/
+
+    .title-newsletter {
+        margin-bottom: 20px;
+    }
+
+    .form-newsletter {
+        display: -webkit-flex !important;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex !important;
+
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    /*----------------------- FOOTER -------------------------*/
+
+    .page-footer {
+        padding-bottom: 15px;
+    }
+
+    .footer-inside {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+}

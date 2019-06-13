@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Ntic_Pay::Certif" sortOrder="10" title="Certif">
+					<resource id="Ntic_Pay::Certif_save" sortOrder="10" title="Save Certif"/>
+					<resource id="Ntic_Pay::Certif_delete" sortOrder="20" title="Delete Certif"/>
+					<resource id="Ntic_Pay::Certif_update" sortOrder="30" title="Update Certif"/>
+					<resource id="Ntic_Pay::Certif_view" sortOrder="40" title="View Certif"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

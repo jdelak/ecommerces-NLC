@@ -1,0 +1,233 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php
+    $_product = $block->getProduct();
+?>
+<?php if ($_product->isSaleable() && $block->hasOptions()): ?>
+<div id="bundleSummary"
+     class="block-bundle-summary"
+     data-mage-init='{"sticky":{"container": ".product-add-form"}}'>
+    <div class="title">
+        <strong><?php /* @escapeNotVerified */ echo __('Your Customization'); ?></strong>
+    </div>
+    <div class="content">
+        <div class="bundle-info">
+            <?php echo $block->getImage($_product, 'bundled_product_customization_page')->toHtml(); ?>
+            <div class="product-details">
+                <strong class="product name"><?php echo $block->escapeHtml($_product->getName()) ?></strong>
+                <?php if ($_product->getIsSalable()): ?>
+                    <p class="available stock" title="<?php /* @escapeNotVerified */ echo __('Availability') ?>">
+                        <span><?php /* @escapeNotVerified */ echo __('In stock') ?></span>
+                    </p>
+                <?php else: ?>
+                    <p class="unavailable stock" title="<?php /* @escapeNotVerified */ echo __('Availability') ?>">
+                        <span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span>
+                    </p>
+                <?php endif; ?>
+                <?php echo $block->getChildHtml('', true);?>
+            </div>
+        </div>
+        <div class="bundle-summary">
+            <strong class="subtitle"><?php /* @escapeNotVerified */ echo __('Summary'); ?></strong>
+            <div id="bundle-summary" data-container="product-summary">
+                <ul data-mage-init='{"productSummary": []}' class="bundle items"></ul>
+                <script data-template="bundle-summary" type="text/x-magento-template">
+                    <li>
+                        <strong class="label"><%- data._label_ %>:</strong>
+                        <div data-container="options"></div>
+                    </li>
+                </script>
+                <script data-template="bundle-option" type="text/x-magento-template">
+                    <div><?php /* @escapeNotVerified */ echo __('%1 x %2', '<%- data._quantity_ %>', '<%- data._label_ %>') ?></div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".product-add-form": {
+            "slide": {
+                "slideSpeed": 1500,
+                "slideSelector": "#bundle-slide",
+                "slideBackSelector": ".action.customization.back",
+                "bundleProductSelector": "#bundleProduct",
+                "bundleOptionsContainer": ".product-add-form"
+                <?php if ($block->isStartCustomization()): ?>
+                ,"autostart": true
+                <?php endif;?>
+            }
+        }
+    }
+</script>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+var_dump($_product->getCategoryIds());
+if($category->getName() == 'CURES'){ ?>
+    <script>
+        require(['jquery'],function($){
+            $( document ).ready(function() {
+                var $qty=[];
+                var $radio=[];
+                var $checkboxId =[];
+                var $checkboxIdSelector =[];
+                var $labels=[];
+                var $prodCat =[];
+                var $maxQty=[];
+
+                // Cache les boutons radio correspondant.
+                $(".field .choice").find('span:contains("Aucun")').parent().parent().hide();
+                // Cache les prix
+                $(".price-notice").hide();
+
+                // Cache les labels en gras dans le bundleSummary de droite (ajout panier)
+                console.log($("#bundle-summary").find('ul').children('li').text());
+
+                $($(".qty-holder").children(".control").children("input.qty")).each(function (index) {
+                    $qty[index] = $(this);
+                    $label =$(this).parent().parent().parent().parent().parent().children('label');
+                    $radio[index] = $(this).parent().parent().prev('div').prev('div').children('input:radio');
+                    $label.hide();
+                    $radio[index].hide();
+
+                    $labelTxt = $label.text();
+
+                    // On récupère la quantité max du produit défini dans l'admin (SYNCHRONISEUR_TIME SILHOUETTE T*9 => *9 est la quantité)
+                    $maxQtyPerCat = $labelTxt.indexOf('*');
+                    $maxQty.push(parseInt($labelTxt.substr($maxQtyPerCat+1)));
+    //    console.log($maxQty);
+                    // On récupère l'option du produit défini dans l'admin (SYNCHRONISEUR_TIME SILHOUETTE T*9 => SYNCHRONISEUR_ est l'option)
+                    $beforeUnderscore = $labelTxt.indexOf('_');
+                    $labelTxt = $labelTxt.substr(0, $beforeUnderscore);
+                    $labels.push($labelTxt);
+    //    console.log($labels);
+
+                    $checkboxId[index] = $qty[index].attr('id').replace('-qty-input', '');
+                    $checkboxIdSelector.push($checkboxId[index]+'-'+$radio[index].val());
+
+                    $("#"+$checkboxIdSelector[index]).change(function () {
+                        if(!$prodCat[$labels[index]]) {
+                            $prodCat[$labels[index]] =[];
+                            $prodCat[$labels[index]]['total'] = $maxQty[index];
+                            $prodCat[$labels[index]][index]=$qty[index].val();
+                        }else {
+                            $prodCat[$labels[index]][index]=$qty[index].val();
+                        }
+                        $element = $qty[index].attr('id');
+                        $("#"+$element).focus();
+
+                    });
+
+                    $($qty[index]).blur( function () {
+
+                        if(!$prodCat[$labels[index]]) {
+                            $prodCat[$labels[index]] =[];
+                            $prodCat[$labels[index]]['total'] = $maxQty[index];
+                            $prodCat[$labels[index]][index]=$(this).val();
+                        }else {
+                            $prodCat[$labels[index]][index]=$(this).val();
+                        }
+
+                        // Récupère le checkbox correspondant grace a l'id
+                        $checkboxId[index] = $qty[index].attr('id').replace('-qty-input', '');
+                        if ($qty[index].val() === "0" || $qty[index].val() === "") {
+                            $prodCat[$labels[index]][index]= "0";
+                            $('#'+$checkboxId[index]).click();
+                            $('#'+$checkboxId[index]).attr('checked', 'checked');
+                        }else {
+                            $prodCat[$labels[index]][index]=$(this).val();
+                            $('#'+$checkboxId[index]).removeAttr('checked');
+                            $element = $qty[index].attr('id');
+                            $("#"+$element).focus();
+                        }
+
+                        //fonction qte total par categorie
+                        var $reset = totalQty($prodCat[$labels[index]],$maxQty[index]);
+
+                        if ($reset == false) {
+                            $prodCat[$labels[index]][index] = 0;
+                            $qty[index].val('0');
+                            $qty[index].trigger('change');
+                            $qty[index].trigger('reset');
+                            $element = $qty[index].attr('id');
+                            $("#"+$element).blur();
+                            $("#"+$element).trigger('focusout');
+                        }
+                        $("#bundle-summary").find('ul').children('li:eq('+index+')').find('strong.label').empty();
+                        $("#bundle-summary").find('ul').children('li:eq('+index+')').find('strong.label').append( $prodCat[$labels[index]][index] + ' produits sur '+ $maxQty[index]);
+
+
+    //                    if ($prodCat[$labels[index]][index] > $maxQty[index]){
+    //                        alert('Vous avez trop de produits '+$prodCat[$labels[index]][index]+' / ' +$maxQty[index]);
+    //                        $prodCat[$labels[index]][index] = 0;
+    //                        $qty[index].val('0');
+    //                        $qty[index].trigger('change');
+    //                        $qty[index].trigger('reset');
+    //
+    //                        $element = $qty[index].attr('id');
+    //                        $("#"+$element).blur();
+    //                        $("#"+$element).trigger('focusout');
+    //                    }
+    //
+                    });
+                });
+                /**
+                 * Clique sur les boutons plus et moins
+                 */
+                $(".lower").each(function () {
+                    $(this).on('click', function () {
+                        $input=$(this).next('input');
+                        $val = parseInt($(this).next('input').val());
+                        $val --;
+                        if ($val <= 0) {
+                            $(this).hide()
+                        }
+                        $input.val($val);
+                        $input.trigger('change');
+                        $input.blur();
+
+                    });
+                });
+                $(".more").each(function () {
+                    $(this).on('click', function () {
+                        $input=$(this).prev('input');
+                        $val = parseInt($(this).prev('input').val());
+                        $val ++;
+                        if ($val > 0) {
+                            $input.parent().parent().parent().children(":eq(1)").find('input:radio').click();
+                            $input.prev('.lower').show()
+                        }
+                        $input.val($val);
+                        $input.trigger('change');
+                        $input.blur();
+                    });
+                });
+            });
+        });
+    function totalQty($cat, $total){
+        $filterCat=$cat.filter(function(i){ return i != null; });
+        var sum = 0;
+        for (var i = 0; i < $filterCat.length; i++) {
+            if ($filterCat[i] != "" || $filterCat[i]!= null || $filterCat[i] != 'undefined' || typeof $filterCat[i] == 'number' ) {
+                sum += parseInt($filterCat[i]);
+            }
+        }
+        if (sum > $total) {
+            alert("Trop de produits dans la catégorie " + sum + " / " + $total);
+            return false;
+        }
+    }
+    </script>
+<?php } ?>
+<?php endif; ?>
+
+
